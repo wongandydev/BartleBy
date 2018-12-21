@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A01168CD21CD5F430006C6BD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A01168CC21CD5F430006C6BD /* GoogleService-Info.plist */; };
 		A028098021CD325F009D7730 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A028097F21CD325F009D7730 /* Signup.storyboard */; };
 		A028098221CD3682009D7730 /* SignupSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A028098121CD3682009D7730 /* SignupSetupViewController.swift */; };
 		A028098721CD4F64009D7730 /* AddNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A028098621CD4F64009D7730 /* AddNotesViewController.swift */; };
 		A02B7AC921CC3D850062DDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B7AC821CC3D850062DDC5 /* AppDelegate.swift */; };
 		A02B7ACB21CC3D850062DDC5 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B7ACA21CC3D850062DDC5 /* NotesViewController.swift */; };
 		A02B7ACE21CC3D850062DDC5 /* LoggedIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02B7ACC21CC3D850062DDC5 /* LoggedIn.storyboard */; };
-		A02B7AD121CC3D850062DDC5 /* NoNameYet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A02B7ACF21CC3D850062DDC5 /* NoNameYet.xcdatamodeld */; };
+		A02B7AD121CC3D850062DDC5 /* BartleBy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A02B7ACF21CC3D850062DDC5 /* BartleBy.xcdatamodeld */; };
 		A02B7AD321CC3D860062DDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A02B7AD221CC3D860062DDC5 /* Assets.xcassets */; };
 		A02B7AD621CC3D860062DDC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02B7AD421CC3D860062DDC5 /* LaunchScreen.storyboard */; };
-		A02B7AE121CC3D870062DDC5 /* NoNameYetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B7AE021CC3D870062DDC5 /* NoNameYetTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,10 +30,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A01168C921CD5E570006C6BD /* BartleBy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BartleBy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A01168CA21CD5E570006C6BD /* BartleByTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BartleByTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A01168CC21CD5F430006C6BD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A028097F21CD325F009D7730 /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		A028098121CD3682009D7730 /* SignupSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupSetupViewController.swift; sourceTree = "<group>"; };
 		A028098621CD4F64009D7730 /* AddNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesViewController.swift; sourceTree = "<group>"; };
-		A02B7AC521CC3D850062DDC5 /* NoNameYet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoNameYet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A02B7AC821CC3D850062DDC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A02B7ACA21CC3D850062DDC5 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		A02B7ACD21CC3D850062DDC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LoggedIn.storyboard; sourceTree = "<group>"; };
@@ -41,9 +43,6 @@
 		A02B7AD221CC3D860062DDC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A02B7AD521CC3D860062DDC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A02B7AD721CC3D860062DDC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A02B7ADC21CC3D870062DDC5 /* NoNameYetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoNameYetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A02B7AE021CC3D870062DDC5 /* NoNameYetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNameYetTests.swift; sourceTree = "<group>"; };
-		A02B7AE221CC3D870062DDC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +63,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A01168CB21CD5E5E0006C6BD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Products;
+			sourceTree = "<group>";
+		};
 		A028098321CD368B009D7730 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -77,22 +83,14 @@
 		A02B7ABC21CC3D850062DDC5 = {
 			isa = PBXGroup;
 			children = (
-				A02B7AC721CC3D850062DDC5 /* NoNameYet */,
-				A02B7ADF21CC3D870062DDC5 /* NoNameYetTests */,
-				A02B7AC621CC3D850062DDC5 /* Products */,
+				A02B7AC721CC3D850062DDC5 /* BartleBy */,
+				A01168CB21CD5E5E0006C6BD /* Products */,
+				A01168C921CD5E570006C6BD /* BartleBy.app */,
+				A01168CA21CD5E570006C6BD /* BartleByTests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
-		A02B7AC621CC3D850062DDC5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A02B7AC521CC3D850062DDC5 /* NoNameYet.app */,
-				A02B7ADC21CC3D870062DDC5 /* NoNameYetTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		A02B7AC721CC3D850062DDC5 /* NoNameYet */ = {
+		A02B7AC721CC3D850062DDC5 /* BartleBy */ = {
 			isa = PBXGroup;
 			children = (
 				A02B7AC821CC3D850062DDC5 /* AppDelegate.swift */,
@@ -102,26 +100,18 @@
 				A02B7AD221CC3D860062DDC5 /* Assets.xcassets */,
 				A02B7AD421CC3D860062DDC5 /* LaunchScreen.storyboard */,
 				A02B7AD721CC3D860062DDC5 /* Info.plist */,
-				A02B7ACF21CC3D850062DDC5 /* NoNameYet.xcdatamodeld */,
+				A02B7ACF21CC3D850062DDC5 /* BartleBy.xcdatamodeld */,
+				A01168CC21CD5F430006C6BD /* GoogleService-Info.plist */,
 			);
-			path = NoNameYet;
-			sourceTree = "<group>";
-		};
-		A02B7ADF21CC3D870062DDC5 /* NoNameYetTests */ = {
-			isa = PBXGroup;
-			children = (
-				A02B7AE021CC3D870062DDC5 /* NoNameYetTests.swift */,
-				A02B7AE221CC3D870062DDC5 /* Info.plist */,
-			);
-			path = NoNameYetTests;
+			path = BartleBy;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A02B7AC421CC3D850062DDC5 /* NoNameYet */ = {
+		A02B7AC421CC3D850062DDC5 /* BartleBy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A02B7AE521CC3D870062DDC5 /* Build configuration list for PBXNativeTarget "NoNameYet" */;
+			buildConfigurationList = A02B7AE521CC3D870062DDC5 /* Build configuration list for PBXNativeTarget "BartleBy" */;
 			buildPhases = (
 				A02B7AC121CC3D850062DDC5 /* Sources */,
 				A02B7AC221CC3D850062DDC5 /* Frameworks */,
@@ -131,14 +121,14 @@
 			);
 			dependencies = (
 			);
-			name = NoNameYet;
+			name = BartleBy;
 			productName = NoNameYet;
-			productReference = A02B7AC521CC3D850062DDC5 /* NoNameYet.app */;
+			productReference = A01168C921CD5E570006C6BD /* BartleBy.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A02B7ADB21CC3D870062DDC5 /* NoNameYetTests */ = {
+		A02B7ADB21CC3D870062DDC5 /* BartleByTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A02B7AE821CC3D870062DDC5 /* Build configuration list for PBXNativeTarget "NoNameYetTests" */;
+			buildConfigurationList = A02B7AE821CC3D870062DDC5 /* Build configuration list for PBXNativeTarget "BartleByTests" */;
 			buildPhases = (
 				A02B7AD821CC3D870062DDC5 /* Sources */,
 				A02B7AD921CC3D870062DDC5 /* Frameworks */,
@@ -149,9 +139,9 @@
 			dependencies = (
 				A02B7ADE21CC3D870062DDC5 /* PBXTargetDependency */,
 			);
-			name = NoNameYetTests;
+			name = BartleByTests;
 			productName = NoNameYetTests;
-			productReference = A02B7ADC21CC3D870062DDC5 /* NoNameYetTests.xctest */;
+			productReference = A01168CA21CD5E570006C6BD /* BartleByTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -173,7 +163,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A02B7AC021CC3D850062DDC5 /* Build configuration list for PBXProject "NoNameYet" */;
+			buildConfigurationList = A02B7AC021CC3D850062DDC5 /* Build configuration list for PBXProject "BartleBy" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -182,12 +172,12 @@
 				Base,
 			);
 			mainGroup = A02B7ABC21CC3D850062DDC5;
-			productRefGroup = A02B7AC621CC3D850062DDC5 /* Products */;
+			productRefGroup = A02B7ABC21CC3D850062DDC5;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A02B7AC421CC3D850062DDC5 /* NoNameYet */,
-				A02B7ADB21CC3D870062DDC5 /* NoNameYetTests */,
+				A02B7AC421CC3D850062DDC5 /* BartleBy */,
+				A02B7ADB21CC3D870062DDC5 /* BartleByTests */,
 			);
 		};
 /* End PBXProject section */
@@ -199,6 +189,7 @@
 			files = (
 				A02B7AD621CC3D860062DDC5 /* LaunchScreen.storyboard in Resources */,
 				A02B7AD321CC3D860062DDC5 /* Assets.xcassets in Resources */,
+				A01168CD21CD5F430006C6BD /* GoogleService-Info.plist in Resources */,
 				A028098021CD325F009D7730 /* Signup.storyboard in Resources */,
 				A02B7ACE21CC3D850062DDC5 /* LoggedIn.storyboard in Resources */,
 			);
@@ -220,7 +211,7 @@
 			files = (
 				A028098221CD3682009D7730 /* SignupSetupViewController.swift in Sources */,
 				A028098721CD4F64009D7730 /* AddNotesViewController.swift in Sources */,
-				A02B7AD121CC3D850062DDC5 /* NoNameYet.xcdatamodeld in Sources */,
+				A02B7AD121CC3D850062DDC5 /* BartleBy.xcdatamodeld in Sources */,
 				A02B7ACB21CC3D850062DDC5 /* NotesViewController.swift in Sources */,
 				A02B7AC921CC3D850062DDC5 /* AppDelegate.swift in Sources */,
 			);
@@ -230,7 +221,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A02B7AE121CC3D870062DDC5 /* NoNameYetTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,7 +229,7 @@
 /* Begin PBXTargetDependency section */
 		A02B7ADE21CC3D870062DDC5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A02B7AC421CC3D850062DDC5 /* NoNameYet */;
+			target = A02B7AC421CC3D850062DDC5 /* BartleBy */;
 			targetProxy = A02B7ADD21CC3D870062DDC5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -386,12 +376,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CBB4HB269Q;
-				INFOPLIST_FILE = NoNameYet/Info.plist;
+				INFOPLIST_FILE = BartleBy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = andywong.NoNameYet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andywong.BartleBy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -404,12 +394,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CBB4HB269Q;
-				INFOPLIST_FILE = NoNameYet/Info.plist;
+				INFOPLIST_FILE = BartleBy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = andywong.NoNameYet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andywong.BartleBy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -433,7 +423,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NoNameYet.app/NoNameYet";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BartleBy.temp_caseinsensitive_rename.app/BartleBy.temp_caseinsensitive_rename";
 			};
 			name = Debug;
 		};
@@ -454,14 +444,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NoNameYet.app/NoNameYet";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BartleBy.temp_caseinsensitive_rename.app/BartleBy.temp_caseinsensitive_rename";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A02B7AC021CC3D850062DDC5 /* Build configuration list for PBXProject "NoNameYet" */ = {
+		A02B7AC021CC3D850062DDC5 /* Build configuration list for PBXProject "BartleBy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A02B7AE321CC3D870062DDC5 /* Debug */,
@@ -470,7 +460,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A02B7AE521CC3D870062DDC5 /* Build configuration list for PBXNativeTarget "NoNameYet" */ = {
+		A02B7AE521CC3D870062DDC5 /* Build configuration list for PBXNativeTarget "BartleBy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A02B7AE621CC3D870062DDC5 /* Debug */,
@@ -479,7 +469,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A02B7AE821CC3D870062DDC5 /* Build configuration list for PBXNativeTarget "NoNameYetTests" */ = {
+		A02B7AE821CC3D870062DDC5 /* Build configuration list for PBXNativeTarget "BartleByTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A02B7AE921CC3D870062DDC5 /* Debug */,
@@ -491,13 +481,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		A02B7ACF21CC3D850062DDC5 /* NoNameYet.xcdatamodeld */ = {
+		A02B7ACF21CC3D850062DDC5 /* BartleBy.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				A02B7AD021CC3D850062DDC5 /* NoNameYet.xcdatamodel */,
 			);
 			currentVersion = A02B7AD021CC3D850062DDC5 /* NoNameYet.xcdatamodel */;
-			path = NoNameYet.xcdatamodeld;
+			path = BartleBy.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
