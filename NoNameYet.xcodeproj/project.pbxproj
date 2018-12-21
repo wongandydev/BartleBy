@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		A028098021CD325F009D7730 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A028097F21CD325F009D7730 /* Signup.storyboard */; };
 		A028098221CD3682009D7730 /* SignupSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A028098121CD3682009D7730 /* SignupSetupViewController.swift */; };
-		A028098521CD3740009D7730 /* LoggedInTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A028098421CD3740009D7730 /* LoggedInTabBarController.swift */; };
+		A028098721CD4F64009D7730 /* AddNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A028098621CD4F64009D7730 /* AddNotesViewController.swift */; };
 		A02B7AC921CC3D850062DDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B7AC821CC3D850062DDC5 /* AppDelegate.swift */; };
-		A02B7ACB21CC3D850062DDC5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B7ACA21CC3D850062DDC5 /* ViewController.swift */; };
+		A02B7ACB21CC3D850062DDC5 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B7ACA21CC3D850062DDC5 /* NotesViewController.swift */; };
 		A02B7ACE21CC3D850062DDC5 /* LoggedIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02B7ACC21CC3D850062DDC5 /* LoggedIn.storyboard */; };
 		A02B7AD121CC3D850062DDC5 /* NoNameYet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A02B7ACF21CC3D850062DDC5 /* NoNameYet.xcdatamodeld */; };
 		A02B7AD321CC3D860062DDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A02B7AD221CC3D860062DDC5 /* Assets.xcassets */; };
@@ -32,10 +32,10 @@
 /* Begin PBXFileReference section */
 		A028097F21CD325F009D7730 /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		A028098121CD3682009D7730 /* SignupSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupSetupViewController.swift; sourceTree = "<group>"; };
-		A028098421CD3740009D7730 /* LoggedInTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInTabBarController.swift; sourceTree = "<group>"; };
+		A028098621CD4F64009D7730 /* AddNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesViewController.swift; sourceTree = "<group>"; };
 		A02B7AC521CC3D850062DDC5 /* NoNameYet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoNameYet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A02B7AC821CC3D850062DDC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A02B7ACA21CC3D850062DDC5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A02B7ACA21CC3D850062DDC5 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		A02B7ACD21CC3D850062DDC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LoggedIn.storyboard; sourceTree = "<group>"; };
 		A02B7AD021CC3D850062DDC5 /* NoNameYet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoNameYet.xcdatamodel; sourceTree = "<group>"; };
 		A02B7AD221CC3D860062DDC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -68,8 +68,8 @@
 			isa = PBXGroup;
 			children = (
 				A028098121CD3682009D7730 /* SignupSetupViewController.swift */,
-				A028098421CD3740009D7730 /* LoggedInTabBarController.swift */,
-				A02B7ACA21CC3D850062DDC5 /* ViewController.swift */,
+				A02B7ACA21CC3D850062DDC5 /* NotesViewController.swift */,
+				A028098621CD4F64009D7730 /* AddNotesViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -219,9 +219,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A028098221CD3682009D7730 /* SignupSetupViewController.swift in Sources */,
+				A028098721CD4F64009D7730 /* AddNotesViewController.swift in Sources */,
 				A02B7AD121CC3D850062DDC5 /* NoNameYet.xcdatamodeld in Sources */,
-				A02B7ACB21CC3D850062DDC5 /* ViewController.swift in Sources */,
-				A028098521CD3740009D7730 /* LoggedInTabBarController.swift in Sources */,
+				A02B7ACB21CC3D850062DDC5 /* NotesViewController.swift in Sources */,
 				A02B7AC921CC3D850062DDC5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

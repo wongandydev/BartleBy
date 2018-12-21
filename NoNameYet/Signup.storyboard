@@ -115,7 +115,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GKb-Yx-8AG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-484" y="808"/>
+            <point key="canvasLocation" x="6" y="808"/>
         </scene>
         <!--Signup Setup View Controller-->
         <scene sceneID="CKp-HW-MeK">
@@ -146,7 +146,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5kL-9M-l3V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="420" y="807"/>
+            <point key="canvasLocation" x="788" y="808"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
