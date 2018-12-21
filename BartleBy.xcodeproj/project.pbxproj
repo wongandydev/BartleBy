@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58106AB1ED1F486ED95E696D /* Pods_BartleBy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DDEC138380194BBB597051C /* Pods_BartleBy.framework */; };
 		A01168CD21CD5F430006C6BD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A01168CC21CD5F430006C6BD /* GoogleService-Info.plist */; };
 		A028098021CD325F009D7730 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A028097F21CD325F009D7730 /* Signup.storyboard */; };
 		A028098221CD3682009D7730 /* SignupSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A028098121CD3682009D7730 /* SignupSetupViewController.swift */; };
@@ -17,6 +18,7 @@
 		A02B7AD121CC3D850062DDC5 /* BartleBy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A02B7ACF21CC3D850062DDC5 /* BartleBy.xcdatamodeld */; };
 		A02B7AD321CC3D860062DDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A02B7AD221CC3D860062DDC5 /* Assets.xcassets */; };
 		A02B7AD621CC3D860062DDC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02B7AD421CC3D860062DDC5 /* LaunchScreen.storyboard */; };
+		FB75EDAC51C0BD817E5E797C /* Pods_BartleByTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0D12FD63FBB4FE915440E78 /* Pods_BartleByTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +32,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2DDEC138380194BBB597051C /* Pods_BartleBy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BartleBy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		49C1DF721E2BD6199B8B0ED4 /* Pods-BartleBy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BartleBy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BartleBy/Pods-BartleBy.debug.xcconfig"; sourceTree = "<group>"; };
+		97FA5647C05217C409FED24A /* Pods-BartleByTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BartleByTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BartleByTests/Pods-BartleByTests.release.xcconfig"; sourceTree = "<group>"; };
 		A01168C921CD5E570006C6BD /* BartleBy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BartleBy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01168CA21CD5E570006C6BD /* BartleByTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BartleByTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01168CC21CD5F430006C6BD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -43,6 +48,9 @@
 		A02B7AD221CC3D860062DDC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A02B7AD521CC3D860062DDC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A02B7AD721CC3D860062DDC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B034D82B61B7DFFED3FB50AC /* Pods-BartleBy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BartleBy.release.xcconfig"; path = "Pods/Target Support Files/Pods-BartleBy/Pods-BartleBy.release.xcconfig"; sourceTree = "<group>"; };
+		BE1E757C524CB564CF4A02FB /* Pods-BartleByTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BartleByTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BartleByTests/Pods-BartleByTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E0D12FD63FBB4FE915440E78 /* Pods_BartleByTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BartleByTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58106AB1ED1F486ED95E696D /* Pods_BartleBy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,12 +66,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB75EDAC51C0BD817E5E797C /* Pods_BartleByTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F7697F79CFF87A50DF7A506 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				49C1DF721E2BD6199B8B0ED4 /* Pods-BartleBy.debug.xcconfig */,
+				B034D82B61B7DFFED3FB50AC /* Pods-BartleBy.release.xcconfig */,
+				BE1E757C524CB564CF4A02FB /* Pods-BartleByTests.debug.xcconfig */,
+				97FA5647C05217C409FED24A /* Pods-BartleByTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A01168CB21CD5E5E0006C6BD /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +108,8 @@
 				A01168CB21CD5E5E0006C6BD /* Products */,
 				A01168C921CD5E570006C6BD /* BartleBy.app */,
 				A01168CA21CD5E570006C6BD /* BartleByTests.xctest */,
+				7F7697F79CFF87A50DF7A506 /* Pods */,
+				F8216DBF80D1D4424F7FB002 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,6 +129,15 @@
 			path = BartleBy;
 			sourceTree = "<group>";
 		};
+		F8216DBF80D1D4424F7FB002 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2DDEC138380194BBB597051C /* Pods_BartleBy.framework */,
+				E0D12FD63FBB4FE915440E78 /* Pods_BartleByTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -113,9 +145,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A02B7AE521CC3D870062DDC5 /* Build configuration list for PBXNativeTarget "BartleBy" */;
 			buildPhases = (
+				4D2139D2424B5AF0748ADBFA /* [CP] Check Pods Manifest.lock */,
 				A02B7AC121CC3D850062DDC5 /* Sources */,
 				A02B7AC221CC3D850062DDC5 /* Frameworks */,
 				A02B7AC321CC3D850062DDC5 /* Resources */,
+				D628A4820A764986FF26D17B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,6 +164,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A02B7AE821CC3D870062DDC5 /* Build configuration list for PBXNativeTarget "BartleByTests" */;
 			buildPhases = (
+				7F59FE7580DAE4A2AF51105F /* [CP] Check Pods Manifest.lock */,
 				A02B7AD821CC3D870062DDC5 /* Sources */,
 				A02B7AD921CC3D870062DDC5 /* Frameworks */,
 				A02B7ADA21CC3D870062DDC5 /* Resources */,
@@ -203,6 +238,79 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4D2139D2424B5AF0748ADBFA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BartleBy-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7F59FE7580DAE4A2AF51105F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BartleByTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D628A4820A764986FF26D17B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BartleBy/Pods-BartleBy-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BartleBy/Pods-BartleBy-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A02B7AC121CC3D850062DDC5 /* Sources */ = {
@@ -372,6 +480,7 @@
 		};
 		A02B7AE621CC3D870062DDC5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49C1DF721E2BD6199B8B0ED4 /* Pods-BartleBy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -390,6 +499,7 @@
 		};
 		A02B7AE721CC3D870062DDC5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B034D82B61B7DFFED3FB50AC /* Pods-BartleBy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -408,6 +518,7 @@
 		};
 		A02B7AE921CC3D870062DDC5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE1E757C524CB564CF4A02FB /* Pods-BartleByTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -429,6 +540,7 @@
 		};
 		A02B7AEA21CC3D870062DDC5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 97FA5647C05217C409FED24A /* Pods-BartleByTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

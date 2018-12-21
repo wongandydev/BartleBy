@@ -1,0 +1,6 @@
+framework module Pods_BartleBy {
+  umbrella header "Pods-BartleBy-umbrella.h"
+
+  export *
+  module * { export * }
+}
