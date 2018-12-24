@@ -49,23 +49,49 @@
         <!--Notes View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <viewController id="BYZ-38-t0r" customClass="NotesViewController" customModule="NoNameYet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="NotesViewController" customModule="BartleBy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qAk-1F-ZQF">
-                                <rect key="frame" x="0.0" y="2.6666666666666856" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="noteCell" rowHeight="83" id="AGV-9H-aWz" customClass="NoteCell" customModule="BartleBy" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="83"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AGV-9H-aWz" id="Oz7-OO-CmG">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="82.666666666666671"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Note was created" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J8F-tN-toc">
+                                                    <rect key="frame" x="20" y="31" width="374" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="J8F-tN-toc" firstAttribute="centerY" secondItem="Oz7-OO-CmG" secondAttribute="centerY" id="93m-gN-0kp"/>
+                                                <constraint firstItem="J8F-tN-toc" firstAttribute="top" secondItem="Oz7-OO-CmG" secondAttribute="topMargin" constant="20" id="ITH-lP-WCT"/>
+                                                <constraint firstItem="J8F-tN-toc" firstAttribute="leading" secondItem="Oz7-OO-CmG" secondAttribute="leadingMargin" id="XIQ-df-atZ"/>
+                                                <constraint firstItem="J8F-tN-toc" firstAttribute="trailing" secondItem="Oz7-OO-CmG" secondAttribute="trailingMargin" id="c3e-h5-tzd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="J8F-tN-toc" id="g6P-5l-wox"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="qAk-1F-ZQF" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="I89-4Y-HyG"/>
-                            <constraint firstItem="qAk-1F-ZQF" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="KdN-ke-T34"/>
-                            <constraint firstItem="qAk-1F-ZQF" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="NUF-j5-mCY"/>
-                            <constraint firstItem="qAk-1F-ZQF" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="uug-zI-U55"/>
+                            <constraint firstItem="qAk-1F-ZQF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="3SS-hV-coh"/>
+                            <constraint firstItem="qAk-1F-ZQF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="4ry-yv-7fM"/>
+                            <constraint firstAttribute="trailing" secondItem="qAk-1F-ZQF" secondAttribute="trailing" id="ENi-0k-3wF"/>
+                            <constraint firstItem="qAk-1F-ZQF" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="hvk-a5-AbV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -74,13 +100,14 @@
                         <outlet property="notesTableView" destination="qAk-1F-ZQF" id="fV3-Sb-jbV"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="156" y="-420.44334975369458"/>
+            <point key="canvasLocation" x="155.07246376811597" y="-420.53571428571428"/>
         </scene>
         <!--Add Notes View Controller-->
         <scene sceneID="jpc-gy-eOA">
             <objects>
-                <viewController storyboardIdentifier="AddNotesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jox-Fy-49C" customClass="AddNotesViewController" customModule="NoNameYet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddNotesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jox-Fy-49C" customClass="AddNotesViewController" customModule="BartleBy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xak-KK-MrC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

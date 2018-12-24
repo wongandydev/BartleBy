@@ -18,6 +18,9 @@
 		A02B7AD121CC3D850062DDC5 /* BartleBy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A02B7ACF21CC3D850062DDC5 /* BartleBy.xcdatamodeld */; };
 		A02B7AD321CC3D860062DDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A02B7AD221CC3D860062DDC5 /* Assets.xcassets */; };
 		A02B7AD621CC3D860062DDC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02B7AD421CC3D860062DDC5 /* LaunchScreen.storyboard */; };
+		A0E7AA6321D0678E001A76C0 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7AA6221D0678E001A76C0 /* Note.swift */; };
+		A0E7AA6521D06914001A76C0 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7AA6421D06914001A76C0 /* NoteCell.swift */; };
+		A0E7AA6921D06DD5001A76C0 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7AA6821D06DD5001A76C0 /* Helper.swift */; };
 		FB75EDAC51C0BD817E5E797C /* Pods_BartleByTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0D12FD63FBB4FE915440E78 /* Pods_BartleByTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +51,9 @@
 		A02B7AD221CC3D860062DDC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A02B7AD521CC3D860062DDC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A02B7AD721CC3D860062DDC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0E7AA6221D0678E001A76C0 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		A0E7AA6421D06914001A76C0 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
+		A0E7AA6821D06DD5001A76C0 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		B034D82B61B7DFFED3FB50AC /* Pods-BartleBy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BartleBy.release.xcconfig"; path = "Pods/Target Support Files/Pods-BartleBy/Pods-BartleBy.release.xcconfig"; sourceTree = "<group>"; };
 		BE1E757C524CB564CF4A02FB /* Pods-BartleByTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BartleByTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BartleByTests/Pods-BartleByTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E0D12FD63FBB4FE915440E78 /* Pods_BartleByTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BartleByTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,10 +122,13 @@
 		A02B7AC721CC3D850062DDC5 /* BartleBy */ = {
 			isa = PBXGroup;
 			children = (
+				A0E7AA6821D06DD5001A76C0 /* Helper.swift */,
 				A02B7AC821CC3D850062DDC5 /* AppDelegate.swift */,
 				A028098321CD368B009D7730 /* ViewControllers */,
 				A02B7ACC21CC3D850062DDC5 /* LoggedIn.storyboard */,
+				A0E7AA6421D06914001A76C0 /* NoteCell.swift */,
 				A028097F21CD325F009D7730 /* Signup.storyboard */,
+				A0E7AA6221D0678E001A76C0 /* Note.swift */,
 				A02B7AD221CC3D860062DDC5 /* Assets.xcassets */,
 				A02B7AD421CC3D860062DDC5 /* LaunchScreen.storyboard */,
 				A02B7AD721CC3D860062DDC5 /* Info.plist */,
@@ -322,6 +331,9 @@
 				A02B7AD121CC3D850062DDC5 /* BartleBy.xcdatamodeld in Sources */,
 				A02B7ACB21CC3D850062DDC5 /* NotesViewController.swift in Sources */,
 				A02B7AC921CC3D850062DDC5 /* AppDelegate.swift in Sources */,
+				A0E7AA6521D06914001A76C0 /* NoteCell.swift in Sources */,
+				A0E7AA6321D0678E001A76C0 /* Note.swift in Sources */,
+				A0E7AA6921D06DD5001A76C0 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
