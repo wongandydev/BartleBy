@@ -9,14 +9,12 @@
 import UIKit
 
 class Note: NSObject {
-    var date: String
     var note: String
     var dateCreated: String
     var id: String
     var templateType: String
     
-    init(date: String, note: String, dateCreated: String, id: String, templateType: String) {
-        self.date = date
+    init(note: String, dateCreated: String, id: String, templateType: String) {
         self.note = note
         self.dateCreated = dateCreated
         self.id = id
