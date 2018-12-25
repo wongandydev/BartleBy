@@ -9,7 +9,7 @@
 import Firebase
 import UIKit
 
-class AddNotesViewController: UIViewController {
+class AddViewNotesViewController: UIViewController {
     @IBOutlet weak var beforeButton: UIButton!
     @IBOutlet weak var nextDoneButton: UIButton!
     @IBOutlet weak var questionLabel: UILabel!
@@ -25,7 +25,7 @@ class AddNotesViewController: UIViewController {
         
         
         nextDoneButton.setTitle("Next", for: .normal)
-        questionLabel.text = "\(currentNumber)) What are you Grateful for?"
+        questionLabel.text = "\(currentNumber)) What are you grateful for?"
         answerTextView.text = notes[0].note
     }
     
@@ -33,6 +33,7 @@ class AddNotesViewController: UIViewController {
         saveNotes(note: self.answerTextView.text, dateCreated: Helper.sharedInstance.getCurrentDate(), id: (ref?.childByAutoId().key)!)
         
         if nextDoneButton.titleLabel?.text == "Done" {
+            compileNotes()
             self.dismiss(animated: true, completion: nil)
         } else {
             nextQuestion()
@@ -42,26 +43,60 @@ class AddNotesViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    var ref: DatabaseReference?
+    var ref: DatabaseReference!
     
+    let userUID = UIDevice.current.identifierForVendor?.uuidString
     var currentNumber = 1
     var numberOfQuestions = 3
+    var newNote: Bool = false
     var templateType: Template = Template(option: .grateful)
-    var notes: [Note] = [] {
-        didSet {
-            // Save to Firebase just incase
-            print("\(notes[0].id) + \(notes[0].note) + \(notes[0].dateCreated) + \(notes[0].templateType)")
-        }
-    }
+    var notes: [Note] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(notes)
         ref = Database.database().reference()
+        answerTextView.contentInset = UIEdgeInsets(top: 20, left: 10, bottom: 0, right: 10)
+        
+        if newNote {
+            setupQuestions()
+        } else {
+            readNote()
+        }
+        
         answerTextView.delegate = self
-        setupQuestions()
+        
         addKeyboardDoneButton()
     }
     
+    func compileNotes(){
+        var compiledNote = ""
+        
+        for note in 0...notes.count-1 {
+            compiledNote+="\(note+1)) \(notes[note].note) \n"
+        }
+        
+        if newNote {
+            self.ref.child("notes/\(notes[notes.count-1].id)").setValue(["note": compiledNote,
+                                                                       "dateCreated": notes[notes.count-1].dateCreated,
+                                                                       "id": notes[notes.count-1].id,
+                                                                       "templateType": notes[notes.count-1].templateType])
+
+            self.ref.child("users/\(userUID!)/notes/\(notes[notes.count-1].id)").setValue(["note": compiledNote,
+                                                                                         "dateCreated": notes[notes.count-1].dateCreated,
+                                                                                         "id": notes[notes.count-1].id,
+                                                                                         "templateType": notes[notes.count-1].templateType])
+        }
+    }
+
+    func readNote() {
+        answerTextView.text = notes[0].note
+        questionLabel.text = "On \(notes[0].dateCreated.components(separatedBy: " ")[0]) you wrote..."
+        
+        beforeButton.isHidden = true
+        nextDoneButton.isHidden = true
+        cancelButton.setTitle("Go Back", for: .normal)
+    }
     
     func addKeyboardDoneButton() {
         let toolbar:UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0,  width: self.view.frame.size.width, height: 30))
@@ -86,10 +121,8 @@ class AddNotesViewController: UIViewController {
         }
         
         answerTextView.text = "Enter Note"
+        answerTextView.textColor = .gray
         questionLabel.text = "\(currentNumber)) What are you grateful for?"
-        
-        
-        
     }
     
     
@@ -100,7 +133,7 @@ class AddNotesViewController: UIViewController {
         
         answerTextView.text = "Enter Note"
         answerTextView.textColor = .gray
-        answerTextView.contentInset = UIEdgeInsets(top: 20, left: 10, bottom: 0, right: 10)
+
         
         if numberOfQuestions > 1 {
             nextDoneButton.setTitle("Next", for: .normal)
@@ -114,7 +147,7 @@ class AddNotesViewController: UIViewController {
     }
 }
 
-extension AddNotesViewController: UITextViewDelegate {
+extension AddViewNotesViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == .gray {
             textView.text = ""
