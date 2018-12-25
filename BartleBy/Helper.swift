@@ -10,12 +10,12 @@ import UIKit
 
 class Helper {
     static let sharedInstance = Helper()
-    func getCurrentDate() -> Date {
+    func getCurrentDate() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yy' 'hh:mm:ss a"
         dateFormatter.timeZone = NSTimeZone.system
         
-        return dateFormatter.date(from: dateFormatter.string(from: Date())) ?? Date()
+        return dateFormatter.string(from: Date()) ?? "Did not get date"
     }
     
     func dateToString(date: Date) -> String {
