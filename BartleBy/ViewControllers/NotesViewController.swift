@@ -13,7 +13,8 @@ class NotesViewController: UIViewController {
     
     @IBOutlet weak var notesTableView: UITableView!
     
-    let userUID = UIDevice.current.identifierForVendor?.uuidString
+    private let refreshControl = UIRefreshControl()
+    private let userUID = UIDevice.current.identifierForVendor?.uuidString
     var firebaseDatabase: DatabaseReference!
     
     var notes: [Note] = [] {
@@ -26,11 +27,22 @@ class NotesViewController: UIViewController {
         super.viewDidLoad()
         firebaseDatabase = Database.database().reference()
         // Do any additional setup after loading the view, typically from a nib.
+        notesTableView.delegate = self
+        notesTableView.dataSource = self
+        
         self.navigationItem.title = "BartleBy"
-        addButton()
+        
+        if #available(iOS 10.0, *) {
+            notesTableView.refreshControl = refreshControl
+        } else {
+            notesTableView.addSubview(refreshControl)
+        }
+        
+        refreshControl.addTarget(self, action: #selector(refreshNoteData), for: .valueChanged)
+        
         loginUser()
-//        writeNotes()
         readNotes()
+        addButton()
     }
     
     func addButton() {
@@ -49,7 +61,12 @@ class NotesViewController: UIViewController {
             if let userData = snapshot.value as? [String: AnyObject]{
                 if let notes = userData["notes"] as? [String: AnyObject]{
                     for note in notes {
-                        print(note.key)
+                        if let value = note.value as? [String: AnyObject],
+                            let answerNote = value["note"] as? String,
+                            let dateCreated = value["dateCreated"] as? String,
+                            let templateType = value["templateType"] as? String{
+                                self.notes.append(Note(note: answerNote, dateCreated: dateCreated, id: note.key, templateType: templateType))
+                        }
                     }
                 }
             }
@@ -59,8 +76,8 @@ class NotesViewController: UIViewController {
     
     func writeNotes() {
         let noteID = firebaseDatabase.childByAutoId().key
-        self.firebaseDatabase.child("notes/\(noteID)").setValue(["date": Helper.sharedInstance.dateToString(date: Date()), "note": "testidfasdfng it out"])
-        self.firebaseDatabase.child("users/\(userUID!)/notes/\(noteID)").setValue(["date": Helper.sharedInstance.dateToString(date: Date()), "note": "testsdafasdfing it out"])
+        self.firebaseDatabase.child("notes/\(noteID)").setValue(["id": firebaseDatabase.childByAutoId().key,"dateCreated": Helper.sharedInstance.getCurrentDate(), "note": "testsdafasdfing it out", "templateType": "grateful"])
+        self.firebaseDatabase.child("users/\(userUID!)/notes/\(noteID!)").setValue(["id": firebaseDatabase.childByAutoId().key,"dateCreated": Helper.sharedInstance.getCurrentDate(), "note": "testsdafasdfing it out", "templateType": "grateful"])
     }
     
     
@@ -69,11 +86,21 @@ class NotesViewController: UIViewController {
     }
     
     @objc func addNote() {
-        if let addNoteViewController = storyboard?.instantiateViewController(withIdentifier: "AddNotesViewController") as? UIViewController {
-            self.present(addNoteViewController, animated: true, completion: nil)
+        if notes[notes.count - 1].dateCreated.components(separatedBy: " ")[0] != Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0] {
+            if let addNoteViewController = storyboard?.instantiateViewController(withIdentifier: "AddViewNotesViewController") as? AddViewNotesViewController {
+                addNoteViewController.newNote = true
+                self.present(addNoteViewController, animated: true, completion: nil)
+            }
+        } else {
+            
         }
     }
     
+    @objc func refreshNoteData() {
+        notes = []
+        readNotes()
+        self.refreshControl.endRefreshing()
+    }
     
 }
 
@@ -83,11 +110,17 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("here")
         let cell = tableView.dequeueReusableCell(withIdentifier: "noteCell", for: indexPath) as! NoteCell
-        cell.dateLabel.text = "Testing Date"
+        cell.dateLabel.text = notes[indexPath.row].dateCreated.components(separatedBy: " ")[0]
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let viewNoteViewController = storyboard?.instantiateViewController(withIdentifier: "AddViewNotesViewController") as? AddViewNotesViewController{
+            viewNoteViewController.notes = [notes[indexPath.row]]
+            self.present(viewNoteViewController, animated: true, completion: nil)
+        }
+    }
 }
 
