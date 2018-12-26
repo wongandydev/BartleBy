@@ -1,0 +1,14 @@
+//
+//  File.swift
+//  BartleBy
+//
+//  Created by Andy Wong on 12/25/18.
+//  Copyright © 2018 Andy Wong. All rights reserved.
+//
+
+import UIKit
+
+class OptionCell: UITableViewCell {
+    @IBOutlet weak var optionLabel: UILabel!
+    
+}
