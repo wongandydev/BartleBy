@@ -10,6 +10,7 @@ import UIKit
 
 class Helper {
     static let sharedInstance = Helper()
+    
     func getCurrentDate() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yy' 'hh:mm:ss a"
@@ -22,6 +23,28 @@ class Helper {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yy' 'hh:mm:ss a"
         dateFormatter.timeZone = NSTimeZone.system
+        
+        return dateFormatter.string(from: date)
+    }
+    
+    func stringToDate(date: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm a"
+        dateFormatter.timeZone = NSTimeZone.system
+        
+        return dateFormatter.date(from: date) ?? Date()
+    }
+    
+    func convertAMto24(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        
+        return dateFormatter.string(from: date)
+    }
+    
+    func convert24toAM(date: Date) -> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm a"
         
         return dateFormatter.string(from: date)
     }
