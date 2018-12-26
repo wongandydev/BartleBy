@@ -40,7 +40,11 @@ class AddViewNotesViewController: UIViewController {
         }
     }
     @IBAction func cancelButtonTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        if cancelButton.titleLabel?.text == "I want to work on this later."{
+            alertLeaveMessage(title: "WAIT!!!", message: "Are you sure you want to do this later? All your progress will not be saved!")
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     var ref: DatabaseReference!
@@ -48,6 +52,7 @@ class AddViewNotesViewController: UIViewController {
     let userUID = UIDevice.current.identifierForVendor?.uuidString
     var currentNumber = 1
     var numberOfQuestions = 3
+    var sameDay: Bool = true
     var newNote: Bool = false
     var templateType: Template = Template(option: .grateful)
     var notes: [Note] = []
@@ -57,6 +62,7 @@ class AddViewNotesViewController: UIViewController {
         print(notes)
         ref = Database.database().reference()
         answerTextView.contentInset = UIEdgeInsets(top: 20, left: 10, bottom: 0, right: 10)
+        cancelButton.setTitle("I want to work on this later.", for: .normal)
         
         if newNote {
             setupQuestions()
@@ -91,7 +97,10 @@ class AddViewNotesViewController: UIViewController {
 
     func readNote() {
         answerTextView.text = notes[0].note
+        answerTextView.isEditable = sameDay
+//        answerTextView.isSelectable = false
         questionLabel.text = "On \(notes[0].dateCreated.components(separatedBy: " ")[0]) you wrote..."
+        
         
         beforeButton.isHidden = true
         nextDoneButton.isHidden = true
@@ -144,6 +153,25 @@ class AddViewNotesViewController: UIViewController {
     
     func saveNotes(note: String, dateCreated: String, id: String) {
         notes.append(Note(note: note, dateCreated: dateCreated, id: id, templateType: String(templateType.option.rawValue)))
+    }
+    
+    func alertLeaveMessage(title: String, message: String) {
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+        blurView.frame = self.view.frame
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: { action in
+            blurView.removeFromSuperview()
+            self.dismiss(animated: true, completion: nil)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            blurView.removeFromSuperview()
+        }))
+        
+        self.view.addSubview(blurView)
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 
