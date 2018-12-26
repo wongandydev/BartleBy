@@ -26,7 +26,7 @@ class NotesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         firebaseDatabase = Database.database().reference()
-        // Do any additional setup after loading the view, typically from a nib.
+        
         notesTableView.delegate = self
         notesTableView.dataSource = self
         
@@ -72,27 +72,19 @@ class NotesViewController: UIViewController {
             }
         })
     }
-    
-    
-    func writeNotes() {
-        let noteID = firebaseDatabase.childByAutoId().key
-        self.firebaseDatabase.child("notes/\(noteID)").setValue(["id": firebaseDatabase.childByAutoId().key,"dateCreated": Helper.sharedInstance.getCurrentDate(), "note": "testsdafasdfing it out", "templateType": "grateful"])
-        self.firebaseDatabase.child("users/\(userUID!)/notes/\(noteID!)").setValue(["id": firebaseDatabase.childByAutoId().key,"dateCreated": Helper.sharedInstance.getCurrentDate(), "note": "testsdafasdfing it out", "templateType": "grateful"])
-    }
-    
-    
+
     func loginUser() {
         self.firebaseDatabase.child("users/\(userUID!)/lastLogin").setValue(Helper.sharedInstance.dateToString(date: Date()))
     }
     
     @objc func addNote() {
-        if notes[notes.count - 1].dateCreated.components(separatedBy: " ")[0] != Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0] {
+        if notes == [] || notes[notes.count - 1].dateCreated.components(separatedBy: " ")[0] != Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0] {
             if let addNoteViewController = storyboard?.instantiateViewController(withIdentifier: "AddViewNotesViewController") as? AddViewNotesViewController {
                 addNoteViewController.newNote = true
                 self.present(addNoteViewController, animated: true, completion: nil)
             }
         } else {
-            
+            alertMessage(title: "Already written note today", message: "Hi, it is great you want to keep writing today. But you already did today. Come back tomorrow to write again!")
         }
     }
     
@@ -119,8 +111,25 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let viewNoteViewController = storyboard?.instantiateViewController(withIdentifier: "AddViewNotesViewController") as? AddViewNotesViewController{
             viewNoteViewController.notes = [notes[indexPath.row]]
+            viewNoteViewController.sameDay = notes[notes.count - 1].dateCreated.components(separatedBy: " ")[0] == Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0]
             self.present(viewNoteViewController, animated: true, completion: nil)
         }
+        self.notesTableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
+extension UIViewController {
+    func alertMessage(title: String, message: String) {
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+        blurView.frame = self.view.frame
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: { action in
+            blurView.removeFromSuperview()
+        }))
+        
+        self.view.addSubview(blurView)
+        self.present(alertController, animated: true, completion: nil)
+    }
+}
