@@ -19,20 +19,18 @@ class AddViewNotesViewController: UIViewController {
     @IBAction func beforeButtonTapped(_ sender: Any) {
         currentNumber -= 1
 
-        if currentNumber == 1 {
+        if currentNumber == 0 {
             beforeButton.isEnabled = false
         }
         
-        
         nextDoneButton.setTitle("Next", for: .normal)
-        questionLabel.text = "\(currentNumber)) What are you grateful for?"
-        answerTextView.text = notes[0].note
+        questionLabel.text = "\(currentNumber + 1)) What are you grateful for?"
+        answerTextView.text = notes[currentNumber].note
     }
     
     @IBAction func nextDoneButtonTapped(_ sender: Any) {
-        saveNotes(note: self.answerTextView.text, dateCreated: Helper.sharedInstance.getCurrentDate(), id: (ref?.childByAutoId().key)!)
-        
         if nextDoneButton.titleLabel?.text == "Done" {
+            saveNotes(note: self.answerTextView.text, dateCreated: Helper.sharedInstance.getCurrentDate(), id: (ref?.childByAutoId().key)!)
             compileNotes()
             self.dismiss(animated: true, completion: nil)
         } else {
@@ -43,6 +41,10 @@ class AddViewNotesViewController: UIViewController {
         if cancelButton.titleLabel?.text == "I want to work on this later."{
             alertLeaveMessage(title: "WAIT!!!", message: "Are you sure you want to do this later? All your progress will not be saved!")
         } else {
+            if notes[0].note != answerTextView.text {
+                notes[0].note = answerTextView.text
+                compileNotes()
+            }
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -50,8 +52,9 @@ class AddViewNotesViewController: UIViewController {
     var ref: DatabaseReference!
     
     let userUID = UIDevice.current.identifierForVendor?.uuidString
-    var currentNumber = 1
-    var numberOfQuestions = 3
+    var currentNumber = 0
+    var numberOfQuestions = 0
+    var numberOfMinutes = 0
     var sameDay: Bool = true
     var newNote: Bool = false
     var templateType: Template = Template(option: .grateful)
@@ -63,23 +66,63 @@ class AddViewNotesViewController: UIViewController {
         ref = Database.database().reference()
         answerTextView.contentInset = UIEdgeInsets(top: 20, left: 10, bottom: 0, right: 10)
         cancelButton.setTitle("I want to work on this later.", for: .normal)
-        
-        if newNote {
-            setupQuestions()
-        } else {
-            readNote()
-        }
-        
         answerTextView.delegate = self
-        
         addKeyboardDoneButton()
+        
+        getTemplateType(completion: { templateType in
+            if templateType == Template.Option.grateful.rawValue {
+                self.templateType = Template(option: .grateful)
+            } else {
+                self.templateType = Template(option: .freeWrite)
+            }
+            
+            if self.newNote {
+                self.getSelectedNumber(completion: { selectedNumber in
+                    if self.templateType.option == Template.Option.grateful {
+                        self.numberOfQuestions = selectedNumber
+                    } else {
+                        self.numberOfMinutes = selectedNumber
+                    }
+                    self.setupQuestions()
+                })
+            } else {
+                self.readNote()
+            }
+        })
+        
+    }
+    
+    func getSelectedNumber(completion: @escaping (Int) -> Void) {
+        ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateNumber").observe(DataEventType.value , andPreviousSiblingKeyWith: { (snapshot, error) in
+            if let templateNumber = snapshot.value as? Int{
+                completion(templateNumber)
+            } else {
+                completion(1)
+            }
+        })
+        
+    }
+    
+    func getTemplateType(completion: @escaping (String) -> Void) {
+        ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateType").observe(DataEventType.value , andPreviousSiblingKeyWith: { (snapshot, error) in
+            if let templateType = snapshot.value as? String{
+                completion(templateType)
+            } else {
+                completion(Template.Option.grateful.rawValue)
+            }
+        })
+        
     }
     
     func compileNotes(){
         var compiledNote = ""
         
-        for note in 0...notes.count-1 {
-            compiledNote+="\(note+1)) \(notes[note].note) \n"
+        if templateType.option == Template.Option.grateful {
+            for note in 0...notes.count-1 {
+                compiledNote+="\(note+1)) \(notes[note].note) \n"
+            }
+        } else {
+            compiledNote = notes[notes.count - 1].note
         }
         
         if newNote {
@@ -92,15 +135,23 @@ class AddViewNotesViewController: UIViewController {
                                                                                          "dateCreated": notes[notes.count-1].dateCreated,
                                                                                          "id": notes[notes.count-1].id,
                                                                                          "templateType": notes[notes.count-1].templateType])
+        } else {
+            self.ref.child("notes/\(notes[notes.count-1].id)").setValue(["note": notes[notes.count-1].note,
+                                                                         "dateCreated": notes[notes.count-1].dateCreated,
+                                                                         "id": notes[notes.count-1].id,
+                                                                         "templateType": notes[notes.count-1].templateType])
+            
+            self.ref.child("users/\(userUID!)/notes/\(notes[notes.count-1].id)").setValue(["note": notes[notes.count-1].note,
+                                                                                           "dateCreated": notes[notes.count-1].dateCreated,
+                                                                                           "id": notes[notes.count-1].id,
+                                                                                           "templateType": notes[notes.count-1].templateType])
         }
     }
 
     func readNote() {
         answerTextView.text = notes[0].note
         answerTextView.isEditable = sameDay
-//        answerTextView.isSelectable = false
         questionLabel.text = "On \(notes[0].dateCreated.components(separatedBy: " ")[0]) you wrote..."
-        
         
         beforeButton.isHidden = true
         nextDoneButton.isHidden = true
@@ -123,27 +174,35 @@ class AddViewNotesViewController: UIViewController {
     
     func nextQuestion() {
         beforeButton.isEnabled = true
+        
+        notes.indices.contains(currentNumber) ? notes[currentNumber].note = answerTextView.text : saveNotes(note: self.answerTextView.text, dateCreated: Helper.sharedInstance.getCurrentDate(), id: (ref?.childByAutoId().key)!)
+        
         currentNumber+=1
         
-        if (currentNumber) == numberOfQuestions {
+        if (currentNumber + 1) == numberOfQuestions {
             nextDoneButton.setTitle("Done", for: .normal)
         }
         
-        answerTextView.text = "Enter Note"
+        answerTextView.text = notes.indices.contains(currentNumber) ? notes[currentNumber].note : "Enter Note"
         answerTextView.textColor = .gray
-        questionLabel.text = "\(currentNumber)) What are you grateful for?"
+        questionLabel.text = "\(currentNumber + 1)) What are you grateful for?"
     }
     
     
     
     func setupQuestions(){
         beforeButton.isEnabled = false
-        questionLabel.text = "\(currentNumber)) What are you grateful for?"
+        
+        if templateType.option == Template.Option.grateful {
+            questionLabel.text = "\(currentNumber + 1)) What are you grateful for?"
+        } else {
+            questionLabel.text = "Free Write for \(numberOfMinutes) minutes"
+            beforeButton.isHidden = true
+        }
         
         answerTextView.text = "Enter Note"
         answerTextView.textColor = .gray
 
-        
         if numberOfQuestions > 1 {
             nextDoneButton.setTitle("Next", for: .normal)
         } else {
