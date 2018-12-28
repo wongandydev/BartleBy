@@ -20,10 +20,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        let unc = UNUserNotificationCenter.current()
-        unc.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-            
+       
+        let userUID = UIDevice.current.identifierForVendor?.uuidString
+        UserDefaults.standard.set(userUID, forKey: "userUID")
+        Database.database().reference().child("users/\(userUID!)/lastLogin").setValue(Helper.sharedInstance.dateToString(date: Date()))
+        
+        let userNotificationCenter = UNUserNotificationCenter.current()
+            userNotificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
         }
+        
         return true
     }
 
