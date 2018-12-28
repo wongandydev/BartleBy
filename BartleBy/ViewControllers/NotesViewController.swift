@@ -39,10 +39,12 @@ class NotesViewController: UIViewController {
         }
         
         refreshControl.addTarget(self, action: #selector(refreshNoteData), for: .valueChanged)
-        
-        loginUser()
-        readNotes()
         addButton()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        readNotes()
     }
     
     func addButton() {
@@ -57,6 +59,7 @@ class NotesViewController: UIViewController {
     }
 
     func readNotes() {
+        self.notes.removeAll()
         firebaseDatabase.child("users/\(userUID!)").observe(DataEventType.value , andPreviousSiblingKeyWith: { (snapshot, error) in
             if let userData = snapshot.value as? [String: AnyObject]{
                 if let notes = userData["notes"] as? [String: AnyObject]{
@@ -73,9 +76,6 @@ class NotesViewController: UIViewController {
         })
     }
 
-    func loginUser() {
-        self.firebaseDatabase.child("users/\(userUID!)/lastLogin").setValue(Helper.sharedInstance.dateToString(date: Date()))
-    }
     
     @objc func addNote() {
         if notes == [] || notes[notes.count - 1].dateCreated.components(separatedBy: " ")[0] != Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0] {
@@ -102,7 +102,6 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("here")
         let cell = tableView.dequeueReusableCell(withIdentifier: "noteCell", for: indexPath) as! NoteCell
         cell.dateLabel.text = notes[indexPath.row].dateCreated.components(separatedBy: " ")[0]
         return cell
@@ -111,7 +110,7 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let viewNoteViewController = storyboard?.instantiateViewController(withIdentifier: "AddViewNotesViewController") as? AddViewNotesViewController{
             viewNoteViewController.notes = [notes[indexPath.row]]
-            viewNoteViewController.sameDay = notes[notes.count - 1].dateCreated.components(separatedBy: " ")[0] == Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0]
+            viewNoteViewController.sameDay = notes[indexPath.row].dateCreated.components(separatedBy: " ")[0] == Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0]
             self.present(viewNoteViewController, animated: true, completion: nil)
         }
         self.notesTableView.deselectRow(at: indexPath, animated: true)
