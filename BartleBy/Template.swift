@@ -19,4 +19,8 @@ class Template {
     init(option: Option) {
         self.option = option
     }
+    
+    static func == (lhs: Template, rhs: Template) -> Bool{
+        return lhs == rhs
+    }
 }
