@@ -34,11 +34,19 @@ class OptionViewController: UIViewController {
         
         optionsTableView.delegate = self
         optionsTableView.dataSource = self
+        usernameLabel.text = "No Preferred Name"
         
-        setUsername(username: "testing")
-        
+        getUsername()
         readOptions()
         addEditButton()
+    }
+    
+    func getUsername(){
+        ref.child("users/\(userUID!)/username").observe(DataEventType.value , andPreviousSiblingKeyWith: { (snapshot, error) in
+            if let username = snapshot.value as? String{
+                self.usernameLabel.text = username
+            }
+        })
     }
     
     func readOptions(){
@@ -64,7 +72,7 @@ class OptionViewController: UIViewController {
         let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
         blurView.frame = self.view.frame
     
-        let alertController = UIAlertController(title: "Edit username", message: "Enter a new username", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Edit username", message: "Enter a new username. This user name is really a name you prefer to place on this app to be known as, No one will know about it but you. Just to maek this app a bit more personal", preferredStyle: .alert)
     
 
         alertController.addTextField(configurationHandler: {(textField) in
@@ -88,6 +96,7 @@ class OptionViewController: UIViewController {
     
     func setUsername(username:String) {
         self.ref.child("users/\(userUID!)/username").setValue(username)
+        getUsername()
     }
 }
 
@@ -106,7 +115,7 @@ extension OptionViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
             case 0:
-                performSegue(withIdentifier: "gotoconfigVC", sender: nil)
+                performSegue(withIdentifier: "gotoConfigVC", sender: nil)
             case 1:
                 performSegue(withIdentifier: "gotoNotificationVC", sender: nil)
             case 2:
@@ -116,6 +125,8 @@ extension OptionViewController: UITableViewDelegate, UITableViewDataSource{
             default:
                 print("defaulted")
         }
+        
+        self.optionsTableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
