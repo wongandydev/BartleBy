@@ -23,6 +23,8 @@
 		A0C7D5B021D27943003EC195 /* OptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C7D5AF21D27943003EC195 /* OptionCell.swift */; };
 		A0C7D5B221D316F4003EC195 /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C7D5B121D316F4003EC195 /* ConfigViewController.swift */; };
 		A0C7D5B421D31A9F003EC195 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C7D5B321D31A9F003EC195 /* NotificationViewController.swift */; };
+		A0D138A421D3F9370021F424 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D138A321D3F9370021F424 /* HelpViewController.swift */; };
+		A0D138A621D3FA7A0021F424 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D138A521D3FA7A0021F424 /* AboutViewController.swift */; };
 		A0E7AA6321D0678E001A76C0 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7AA6221D0678E001A76C0 /* Note.swift */; };
 		A0E7AA6521D06914001A76C0 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7AA6421D06914001A76C0 /* NoteCell.swift */; };
 		A0E7AA6921D06DD5001A76C0 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7AA6821D06DD5001A76C0 /* Helper.swift */; };
@@ -61,6 +63,8 @@
 		A0C7D5AF21D27943003EC195 /* OptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCell.swift; sourceTree = "<group>"; };
 		A0C7D5B121D316F4003EC195 /* ConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
 		A0C7D5B321D31A9F003EC195 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		A0D138A321D3F9370021F424 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		A0D138A521D3FA7A0021F424 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		A0E7AA6221D0678E001A76C0 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		A0E7AA6421D06914001A76C0 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		A0E7AA6821D06DD5001A76C0 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 				A0C7D5AD21D1B345003EC195 /* OptionViewController.swift */,
 				A0C7D5B121D316F4003EC195 /* ConfigViewController.swift */,
 				A0C7D5B321D31A9F003EC195 /* NotificationViewController.swift */,
+				A0D138A521D3FA7A0021F424 /* AboutViewController.swift */,
+				A0D138A321D3F9370021F424 /* HelpViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -344,10 +350,12 @@
 				A028098221CD3682009D7730 /* SignupSetupViewController.swift in Sources */,
 				A0C7D5AE21D1B345003EC195 /* OptionViewController.swift in Sources */,
 				A0C7D5B221D316F4003EC195 /* ConfigViewController.swift in Sources */,
+				A0D138A621D3FA7A0021F424 /* AboutViewController.swift in Sources */,
 				A028098721CD4F64009D7730 /* AddViewNotesViewController.swift in Sources */,
 				A02B7AD121CC3D850062DDC5 /* BartleBy.xcdatamodeld in Sources */,
 				A0C7D5AA21D135EB003EC195 /* Template.swift in Sources */,
 				A02B7ACB21CC3D850062DDC5 /* NotesViewController.swift in Sources */,
+				A0D138A421D3F9370021F424 /* HelpViewController.swift in Sources */,
 				A02B7AC921CC3D850062DDC5 /* AppDelegate.swift in Sources */,
 				A0E7AA6521D06914001A76C0 /* NoteCell.swift in Sources */,
 				A0C7D5B421D31A9F003EC195 /* NotificationViewController.swift in Sources */,
