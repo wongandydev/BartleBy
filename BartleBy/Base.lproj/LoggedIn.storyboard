@@ -275,7 +275,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WWJ-0W-CRY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="153.62318840579712" y="305.35714285714283"/>
+            <point key="canvasLocation" x="-1272" y="1209"/>
         </scene>
         <!--Options-->
         <scene sceneID="0gV-pY-pl5">
@@ -353,9 +353,10 @@
                         <outlet property="optionsTableView" destination="JhW-IZ-NjU" id="8pA-82-J5B"/>
                         <outlet property="statsUIView" destination="dat-LH-Inx" id="5xE-3P-UjQ"/>
                         <outlet property="usernameLabel" destination="B3s-sk-CoE" id="luP-ND-Kjz"/>
-                        <segue destination="XsW-Gf-hIg" kind="show" identifier="gotoconfigVC" id="NWs-A9-NRM"/>
-                        <segue destination="N5F-6l-GBM" kind="show" identifier="gotoHelpVC" id="6xw-mS-bNm"/>
                         <segue destination="ijP-wa-WDb" kind="show" identifier="gotoNotificationVC" id="bnB-fO-t4L"/>
+                        <segue destination="7Qx-XR-rBw" kind="show" identifier="gotoConfigVC" id="tER-C4-ji4"/>
+                        <segue destination="Cii-N1-5hm" kind="show" identifier="gotoAboutVC" id="aTS-pv-Fbk"/>
+                        <segue destination="3H6-rW-K7h" kind="show" identifier="gotoHelpVC" id="mwE-hb-E9d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYX-hp-1E5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -369,19 +370,102 @@
                     <view key="view" contentMode="scaleToFill" id="UJW-Rh-azh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="43" translatesAutoresizingMaskIntoConstraints="NO" id="pnY-N9-7D7">
+                                <rect key="frame" x="47" y="152.00000000000003" width="320" height="451.66666666666674"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="79" translatesAutoresizingMaskIntoConstraints="NO" id="coK-TE-GZK">
+                                        <rect key="frame" x="6" y="0.0" width="308" height="130.66666666666666"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What template would you like to use?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nOC-4E-zeQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="308" height="23.666666666666668"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ms2-u6-b6j">
+                                                <rect key="frame" x="76.666666666666657" y="102.66666666666666" width="155" height="29"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="155" id="PxL-u2-4g7"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="Grateful"/>
+                                                    <segment title="Free Write"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="optionSegmentChanged:" destination="7Qx-XR-rBw" eventType="valueChanged" id="Yy5-Hc-5TE"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="ms2-u6-b6j" firstAttribute="centerX" secondItem="coK-TE-GZK" secondAttribute="centerX" id="GPC-IO-Dvm"/>
+                                        </constraints>
+                                    </stackView>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QVG-Cq-2uq">
+                                        <rect key="frame" x="1" y="173.66666666666669" width="318" height="216"/>
+                                    </pickerView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3ph-7e-WRE">
+                                        <rect key="frame" x="28.333333333333343" y="432.66666666666663" width="263.66666666666663" height="19"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I want to write" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GAz-nF-8wi">
+                                                <rect key="frame" x="0.0" y="0.0" width="80" height="19"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="80" id="a2b-qV-7TY"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1232" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sep-3U-HYc">
+                                                <rect key="frame" x="88.000000000000014" y="0.0" width="39.999999999999986" height="19"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="19" id="duF-b2-eqS"/>
+                                                    <constraint firstAttribute="width" constant="40" id="t8B-4U-gu2"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="19"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="things I am grateful for" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOJ-uU-UIt">
+                                                <rect key="frame" x="136" y="0.0" width="127.66666666666669" height="19"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="QVG-Cq-2uq" firstAttribute="leading" secondItem="pnY-N9-7D7" secondAttribute="leading" constant="1" id="BWc-0M-SeM"/>
+                                    <constraint firstItem="coK-TE-GZK" firstAttribute="leading" secondItem="pnY-N9-7D7" secondAttribute="leading" constant="6" id="T7I-Cj-r7g"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pnY-N9-7D7" firstAttribute="leading" secondItem="t4f-pu-OCZ" secondAttribute="leading" constant="47" id="4Fw-Pv-SFx"/>
+                            <constraint firstItem="pnY-N9-7D7" firstAttribute="top" secondItem="t4f-pu-OCZ" secondAttribute="top" constant="108" id="bp8-ta-oSp"/>
+                            <constraint firstItem="pnY-N9-7D7" firstAttribute="centerX" secondItem="UJW-Rh-azh" secondAttribute="centerX" id="uBJ-Gk-dk2"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="t4f-pu-OCZ"/>
                     </view>
                     <navigationItem key="navigationItem" id="jGP-tf-dhf"/>
+                    <connections>
+                        <outlet property="numberLabel" destination="sep-3U-HYc" id="uDj-dq-9aj"/>
+                        <outlet property="numberPicker" destination="QVG-Cq-2uq" id="QDy-38-LRk"/>
+                        <outlet property="optionSegmentControl" destination="ms2-u6-b6j" id="Wsv-jM-EEt"/>
+                        <outlet property="typeLabel" destination="NOJ-uU-UIt" id="cpY-Us-aiH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vEm-BA-twT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="155" y="1184"/>
+            <point key="canvasLocation" x="-584.05797101449275" y="1209.375"/>
         </scene>
         <!--Help View Controller-->
         <scene sceneID="KsJ-cK-NLF">
             <objects>
-                <viewController id="3H6-rW-K7h" customClass="HelpViewController" sceneMemberID="viewController">
+                <viewController id="3H6-rW-K7h" customClass="HelpViewController" customModule="BartleBy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HxA-jM-9y4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -392,39 +476,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sjh-pY-GBd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1967" y="1083"/>
+            <point key="canvasLocation" x="922" y="1209"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="lJv-YK-njx">
+        <!--About View Controller-->
+        <scene sceneID="Y1S-oD-2D8">
             <objects>
-                <navigationController id="XsW-Gf-hIg" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fJa-pk-vzV">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="7Qx-XR-rBw" kind="relationship" relationship="rootViewController" id="vTA-zU-uya"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jwu-He-Uns" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Cii-N1-5hm" customClass="AboutViewController" customModule="BartleBy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="drx-Ak-pNM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="lgy-Mb-cal"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Tgj-Va-94z"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zoy-LC-hlR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-584" y="1184"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="uNo-UB-kqt">
-            <objects>
-                <navigationController id="N5F-6l-GBM" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ayX-SV-7SH">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="3H6-rW-K7h" kind="relationship" relationship="rootViewController" id="cmw-P0-dWa"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TVg-Bd-buM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1200" y="1083"/>
+            <point key="canvasLocation" x="155" y="1209"/>
         </scene>
     </scenes>
 </document>
