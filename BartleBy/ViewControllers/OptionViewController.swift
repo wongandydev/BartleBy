@@ -31,9 +31,9 @@ class OptionViewController: UIViewController {
         super.viewDidLoad()
         ref = Database.database().reference()
         
-        
         optionsTableView.delegate = self
         optionsTableView.dataSource = self
+        optionsTableView.tableFooterView = UIView()
         usernameLabel.text = "No Preferred Name"
         
         getUsername()
@@ -41,8 +41,14 @@ class OptionViewController: UIViewController {
         addEditButton()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.transparentNavBar()
+        
+    }
+    
     func getUsername(){
-        ref.child("users/\(userUID!)/username").observe(DataEventType.value , andPreviousSiblingKeyWith: { (snapshot, error) in
+        ref.child("users/\(userUID!)/username").observeSingleEvent(of: .value , with: { snapshot in
             if let username = snapshot.value as? String{
                 self.usernameLabel.text = username
             }
@@ -50,7 +56,7 @@ class OptionViewController: UIViewController {
     }
     
     func readOptions(){
-        ref.child("options").observe(DataEventType.value , andPreviousSiblingKeyWith: { (snapshot, error) in
+        ref.child("options").observeSingleEvent(of:.value , with: { snapshot in
             if let options = snapshot.value as? [String]{
                 for option in options {
                     self.options.append(option)
@@ -60,7 +66,7 @@ class OptionViewController: UIViewController {
     }
     
     func addEditButton() {
-        let editButton = UIButton(frame: CGRect(x: (self.view.frame.width/2) - 30, y: 120, width: 60, height: 35))
+        let editButton = UIButton(frame: CGRect(x: (self.view.frame.width/2) - 30, y: 150, width: 60, height: 35))
         editButton.backgroundColor = .red
         editButton.layer.cornerRadius = 15
         editButton.setTitle("Edit", for: .normal)
@@ -119,8 +125,10 @@ extension OptionViewController: UITableViewDelegate, UITableViewDataSource{
             case 1:
                 performSegue(withIdentifier: "gotoNotificationVC", sender: nil)
             case 2:
-               performSegue(withIdentifier: "gotoHelpVC", sender: nil)
+                performSegue(withIdentifier: "gotoStatsVC", sender: nil)
             case 3:
+                performSegue(withIdentifier: "gotoHelpVC", sender: nil)
+            case 4:
                 performSegue(withIdentifier: "gotoAboutVC", sender: nil)
             default:
                 print("defaulted")
