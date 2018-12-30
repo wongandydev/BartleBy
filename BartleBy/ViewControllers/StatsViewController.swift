@@ -6,4 +6,12 @@
 //  Copyright © 2018 Andy Wong. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class StatsViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        cancelButton(title: "Go Back", color: .red)
+    }
+}

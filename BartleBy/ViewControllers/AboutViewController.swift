@@ -11,19 +11,6 @@ import UIKit
 class AboutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        cancelButton()
-    }
-    
-    func cancelButton() {
-        let cancelButton = UIButton(frame: CGRect(x: 0, y: self.view.frame.height-94, width: self.view.frame.width, height: 64))
-        cancelButton.setTitle("Cancel", for: .normal)
-        cancelButton.backgroundColor = .red
-        cancelButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
-        
-        self.view.addSubview(cancelButton)
-    }
-    
-    @objc func dismissVC() {
-        self.dismiss(animated: true, completion: nil)
+        cancelButton(title: "Cancel", color: .red)
     }
 }
