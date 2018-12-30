@@ -32,6 +32,7 @@ class AddViewNotesViewController: UIViewController {
         if nextDoneButton.titleLabel?.text == "Done" {
             saveNotes(note: self.answerTextView.text, dateCreated: Helper.sharedInstance.getCurrentDate(), id: (ref?.childByAutoId().key)!)
             compileNotes()
+            timer?.invalidate()
             self.dismiss(animated: true, completion: nil)
         } else {
             nextQuestion()
@@ -39,7 +40,7 @@ class AddViewNotesViewController: UIViewController {
     }
     @IBAction func cancelButtonTapped(_ sender: Any) {
         if cancelButton.titleLabel?.text == "I want to work on this later."{
-            alertLeaveMessage(title: "WAIT!!!", message: "Are you sure you want to do this later? All your progress will not be saved!")
+            alertLeaveMessage(title: "WAIT!!!", message: "Are you sure you want to do this later? All your progress will not be saved!", cancel: true)
         } else {
             if notes[0].note != answerTextView.text {
                 notes[0].note = answerTextView.text
@@ -59,10 +60,13 @@ class AddViewNotesViewController: UIViewController {
     var newNote: Bool = false
     var templateType: Template = Template(option: .grateful)
     var notes: [Note] = []
+    var seconds: Int = 0
+    var timer: Timer?
+    var handle: UInt!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(notes)
+
         ref = Database.database().reference()
         answerTextView.contentInset = UIEdgeInsets(top: 20, left: 10, bottom: 0, right: 10)
         cancelButton.setTitle("I want to work on this later.", for: .normal)
@@ -82,6 +86,7 @@ class AddViewNotesViewController: UIViewController {
                         self.numberOfQuestions = selectedNumber
                     } else {
                         self.numberOfMinutes = selectedNumber
+                        self.seconds = selectedNumber * 60
                     }
                     self.setupQuestions()
                 })
@@ -89,22 +94,22 @@ class AddViewNotesViewController: UIViewController {
                 self.readNote()
             }
         })
-        
     }
-    
+
     func getSelectedNumber(completion: @escaping (Int) -> Void) {
-        ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateNumber").observe(DataEventType.value , andPreviousSiblingKeyWith: { (snapshot, error) in
+        ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateNumber").observeSingleEvent(of: .value, with: { snapshot in
             if let templateNumber = snapshot.value as? Int{
                 completion(templateNumber)
             } else {
                 completion(1)
             }
         })
+
         
     }
     
     func getTemplateType(completion: @escaping (String) -> Void) {
-        ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateType").observe(DataEventType.value , andPreviousSiblingKeyWith: { (snapshot, error) in
+        ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateType").observeSingleEvent(of: .value , with: { snapshot in
             if let templateType = snapshot.value as? String{
                 completion(templateType)
             } else {
@@ -150,7 +155,7 @@ class AddViewNotesViewController: UIViewController {
 
     func readNote() {
         answerTextView.text = notes[0].note
-        answerTextView.isEditable = sameDay
+        answerTextView.isEditable = false
         questionLabel.text = "On \(notes[0].dateCreated.components(separatedBy: " ")[0]) you wrote..."
         
         beforeButton.isHidden = true
@@ -188,7 +193,21 @@ class AddViewNotesViewController: UIViewController {
         questionLabel.text = "\(currentNumber + 1)) What are you grateful for?"
     }
     
+    func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+    }
     
+    @objc func updateTimer() {
+        print(seconds)
+        if seconds < 1 {
+            timer?.invalidate()
+            alertLeaveMessage(title: "Times up!", message: "Time is up for your free write! You can no longer edit this message!", cancel: false)
+            saveNotes(note: answerTextView.text, dateCreated: Helper.sharedInstance.getCurrentDate(), id: ref.childByAutoId().key!)
+            compileNotes()
+        } else {
+            seconds-=1
+        }
+    }
     
     func setupQuestions(){
         beforeButton.isEnabled = false
@@ -197,9 +216,10 @@ class AddViewNotesViewController: UIViewController {
             questionLabel.text = "\(currentNumber + 1)) What are you grateful for?"
         } else {
             questionLabel.text = "Free Write for \(numberOfMinutes) minutes"
+            startTimer()
             beforeButton.isHidden = true
         }
-        
+    
         answerTextView.text = "Enter Note"
         answerTextView.textColor = .gray
 
@@ -214,7 +234,7 @@ class AddViewNotesViewController: UIViewController {
         notes.append(Note(note: note, dateCreated: dateCreated, id: id, templateType: String(templateType.option.rawValue)))
     }
     
-    func alertLeaveMessage(title: String, message: String) {
+    func alertLeaveMessage(title: String, message: String, cancel: Bool) {
         let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
         blurView.frame = self.view.frame
         
@@ -225,9 +245,11 @@ class AddViewNotesViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }))
         
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-            blurView.removeFromSuperview()
-        }))
+        if cancel {
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                blurView.removeFromSuperview()
+            }))
+        }
         
         self.view.addSubview(blurView)
         self.present(alertController, animated: true, completion: nil)
