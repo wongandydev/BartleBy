@@ -35,11 +35,11 @@ class NotificationViewController: UIViewController {
         notificationCenter.add(request)
         UserDefaults.standard.set(Helper.sharedInstance.convert24toAM(date: changeNotifcationDatePicker.date), forKey: "notificationSetting")
         currentNotificationSettingLabel.text = UserDefaults.standard.object(forKey: "notificationSetting") as! String
-        cancelButton.setTitle("Done", for: .normal)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     let notificationCenter = UNUserNotificationCenter.current()
