@@ -6,4 +6,12 @@
 //  Copyright © 2018 Andy Wong. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+extension UINavigationController {
+    func transparentNavBar() {
+        self.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationBar.shadowImage = UIImage()
+        self.navigationBar.isTranslucent = true
+    }
+}
