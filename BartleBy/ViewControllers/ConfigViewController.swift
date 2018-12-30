@@ -19,7 +19,7 @@ class ConfigViewController: UIViewController {
         setTypeLabel()
     }
     var ref: DatabaseReference!
-    var number: [Int] = Array(0...1000)
+    var number: [Int] = Array(1...1000)
     var selectedNumber: Int = 0
     
     override func viewDidLoad() {
@@ -32,7 +32,7 @@ class ConfigViewController: UIViewController {
         
         getSelectedNumber(completion: { number in
             self.selectedNumber = number
-            self.numberPicker.selectRow(number, inComponent: 0, animated: true)
+            self.numberPicker.selectRow(number-1, inComponent: 0, animated: true)
             self.numberLabel.text = String(number)
         })
         
@@ -48,13 +48,18 @@ class ConfigViewController: UIViewController {
     
         
         saveButton()
-        cancelButton()
+        cancelButton(title: "Cancel", color: .red)
     }
     
     func setTypeLabel() {
         switch  optionSegmentControl.selectedSegmentIndex {
         case 0:
-            typeLabel.text = "things I am grateful for"
+            if numberPicker.selectedRow(inComponent: 0) < 1 {
+                typeLabel.text = "thing I am grateful for"
+            } else {
+                typeLabel.text = "things I am grateful for"
+            }
+            
         case 1:
             typeLabel.text = "minutes of free write"
         default:
@@ -62,12 +67,8 @@ class ConfigViewController: UIViewController {
         }
     }
     
-    func setTemplateType(type: String) {
-        self.ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateType").setValue(type)
-    }
-    
     func getTemplateType(completion: @escaping (String) -> Void) {
-        ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateType").observe(DataEventType.value , andPreviousSiblingKeyWith: { (snapshot, error) in
+        ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateType").observeSingleEvent(of: .value , with: { snapshot in
             if let templateType = snapshot.value as? String{
                 completion(templateType)
             } else {
@@ -79,7 +80,7 @@ class ConfigViewController: UIViewController {
     }
     
     func getSelectedNumber(completion: @escaping (Int) -> Void) {
-        ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateNumber").observe(DataEventType.value , andPreviousSiblingKeyWith: { (snapshot, error) in
+        ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateNumber").observeSingleEvent(of: DataEventType.value , with: { snapshot in
             if let templateNumber = snapshot.value as? Int{
                 completion(templateNumber)
             } else {
@@ -94,22 +95,17 @@ class ConfigViewController: UIViewController {
         self.ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateNumber").setValue(number)
     }
     
+    func setTemplateType(type: String) {
+        self.ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateType").setValue(type)
+    }
+    
     func saveButton() {
-        let saveButton = UIButton(frame: CGRect(x: 0, y: self.view.frame.height-164, width: self.view.frame.width, height: 64))
+        let saveButton = UIButton(frame: CGRect(x: 0, y: self.view.frame.height-214, width: self.view.frame.width, height: 64))
         saveButton.setTitle("Save", for: .normal)
         saveButton.backgroundColor =  UIColor(red:0.18, green:1.00, blue:0.44, alpha:1.0)
         saveButton.addTarget(self, action: #selector(saveNewTemplateSettings), for: .touchUpInside)
         
         self.view.addSubview(saveButton)
-    }
-    
-    func cancelButton() {
-        let cancelButton = UIButton(frame: CGRect(x: 0, y: self.view.frame.height-94, width: self.view.frame.width, height: 64))
-        cancelButton.setTitle("Cancel", for: .normal)
-        cancelButton.backgroundColor = .red
-        cancelButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
-        
-        self.view.addSubview(cancelButton)
     }
     
     @objc func saveNewTemplateSettings() {
@@ -122,10 +118,6 @@ class ConfigViewController: UIViewController {
             default:
                 break
         }
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @objc func dismissVC() {
         self.dismiss(animated: true, completion: nil)
     }
 }
