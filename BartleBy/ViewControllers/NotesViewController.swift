@@ -29,6 +29,7 @@ class NotesViewController: UIViewController {
         
         notesTableView.delegate = self
         notesTableView.dataSource = self
+        notesTableView.tableFooterView = UIView()
         
         self.navigationItem.title = "BartleBy"
         
@@ -59,8 +60,8 @@ class NotesViewController: UIViewController {
     }
 
     func readNotes() {
-        self.notes.removeAll()
-        firebaseDatabase.child("users/\(userUID!)").observe(DataEventType.value , andPreviousSiblingKeyWith: { (snapshot, error) in
+        firebaseDatabase.child("users/\(userUID!)").observe(.value , with: { snapshot in
+            self.notes.removeAll()
             if let userData = snapshot.value as? [String: AnyObject]{
                 if let notes = userData["notes"] as? [String: AnyObject]{
                     for note in notes {
@@ -114,21 +115,5 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
             self.present(viewNoteViewController, animated: true, completion: nil)
         }
         self.notesTableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
-extension UIViewController {
-    func alertMessage(title: String, message: String) {
-        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
-        blurView.frame = self.view.frame
-        
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: { action in
-            blurView.removeFromSuperview()
-        }))
-        
-        self.view.addSubview(blurView)
-        self.present(alertController, animated: true, completion: nil)
     }
 }
