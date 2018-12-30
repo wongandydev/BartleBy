@@ -61,7 +61,11 @@ class ConfigViewController: UIViewController {
             }
             
         case 1:
-            typeLabel.text = "minutes of free write"
+            if numberPicker.selectedRow(inComponent: 0) < 1 {
+                typeLabel.text = "minute of free write"
+            } else {
+                typeLabel.text = "minutes of free write"
+            }
         default:
             break
         }
@@ -138,6 +142,7 @@ extension ConfigViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedNumber = number[row]
         numberLabel.text = String(number[row])
+        setTypeLabel()
     }
     
     
