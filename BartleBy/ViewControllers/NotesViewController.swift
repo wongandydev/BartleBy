@@ -19,6 +19,13 @@ class NotesViewController: UIViewController {
     
     var notes: [Note] = [] {
         didSet {
+            notes.sort(by: { (note1, note2) in
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MM/dd/yy' 'hh:mm:ss a"
+                dateFormatter.timeZone = NSTimeZone.system
+
+                return dateFormatter.date(from: note1.dateCreated)! > dateFormatter.date(from: note2.dateCreated)!
+            })
             self.notesTableView.reloadData()
         }
     }
