@@ -122,7 +122,7 @@ class ConfigViewController: UIViewController {
             default:
                 break
         }
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
