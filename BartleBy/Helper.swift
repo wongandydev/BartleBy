@@ -27,6 +27,14 @@ class Helper {
         return dateFormatter.string(from: date)
     }
     
+    func stringToDate(date: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yy'"
+        dateFormatter.timeZone = NSTimeZone.system
+        
+        return dateFormatter.date(from: date) ?? Date()
+    }
+    
     func stringToTime(time: String) -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm a"
