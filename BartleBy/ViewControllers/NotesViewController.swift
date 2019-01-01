@@ -48,12 +48,55 @@ class NotesViewController: UIViewController {
         
         refreshControl.addTarget(self, action: #selector(refreshNoteData), for: .valueChanged)
         addButton()
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         readNotes()
     }
+    
+    func setStats() {
+        let totalNotes = notes.count
+        let today = Helper.sharedInstance.stringToDate(date: Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0])
+        let latestNote = Helper.sharedInstance.stringToDate(date: self.notes[0].dateCreated.components(separatedBy: " ")[0])
+        var currentStreak = 0
+
+        if totalNotes > 0 {
+            let diffFromTodayToLastNote: Int = Calendar.current.dateComponents([.day], from: today, to: latestNote).day ?? 0
+            if diffFromTodayToLastNote < -1 {
+                currentStreak = 0
+                print("has been \(abs(diffFromTodayToLastNote)) days since last note")
+            } else {
+                currentStreak += 1
+                for noteIndex in 0...totalNotes - 2{
+                    print(noteIndex)
+                    let firstDate = Helper.sharedInstance.stringToDate(date: self.notes[noteIndex].dateCreated.components(separatedBy: " ")[0])
+                    let secondDate = Helper.sharedInstance.stringToDate(date: self.notes[noteIndex + 1].dateCreated.components(separatedBy: " ")[0])
+                    print(firstDate)
+                    print(secondDate)
+                    
+                    let difference = Calendar.current.dateComponents([.day], from: firstDate, to: secondDate).day ?? 0
+                    print("diff\(difference)")
+                    if  difference < -1 {
+                        print("here")
+                        break
+                    } else {
+                        currentStreak += 1
+                    }
+                    print("new\(currentStreak)")
+                }
+            }
+        } else {
+            currentStreak = 0
+        }
+        
+        print("currentStreak\(currentStreak)")
+        
+        self.firebaseDatabase.child("users/\(self.userUID!)/stats").setValue(["streak": currentStreak, "totalNotes": totalNotes])
+
+    }
+    
     
     func addButton() {
         let addButton = UIButton(frame: CGRect(x: self.view.frame.width - 70, y: self.view.frame.height - 150, width: 60, height: 60))
@@ -67,7 +110,7 @@ class NotesViewController: UIViewController {
     }
 
     func readNotes() {
-        firebaseDatabase.child("users/\(userUID!)").observe(.value , with: { snapshot in
+        firebaseDatabase.child("users/\(userUID!)").observeSingleEvent(of: .value , with: { snapshot in
             self.notes.removeAll()
             if let userData = snapshot.value as? [String: AnyObject]{
                 if let notes = userData["notes"] as? [String: AnyObject]{
@@ -79,8 +122,10 @@ class NotesViewController: UIViewController {
                                 self.notes.append(Note(note: answerNote, dateCreated: dateCreated, id: note.key, templateType: templateType))
                         }
                     }
+                   
                 }
             }
+            self.setStats()
         })
     }
 
