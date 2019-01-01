@@ -14,4 +14,8 @@ class StatsViewController: UIViewController {
         
         cancelButton(title: "Go Back", color: .red)
     }
+    
+    func getStats() {
+        
+    }
 }
