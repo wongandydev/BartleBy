@@ -23,6 +23,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        
         let userUID = UIDevice.current.identifierForVendor?.uuidString
         UserDefaults.standard.set(userUID, forKey: "userUID")
+        
+        if !UserDefaults.standard.bool(forKey: "isFirstLaunch") {
+            //sign up user with default\
+            Database.database().reference().child("users/\(userUID!)/stats/streak").setValue(0)
+            Database.database().reference().child("users/\(userUID!)/stats/totalNotes").setValue(0)
+            Database.database().reference().child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateNumber").setValue(5)
+            Database.database().reference().child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateType").setValue(Template.Option.grateful.rawValue)
+            
+            UserDefaults.standard.set(true, forKey: "isFirstLaunch")
+            UserDefaults.standard.synchronize()
+        }
+        
         Database.database().reference().child("users/\(userUID!)/lastLogin").setValue(Helper.sharedInstance.dateToString(date: Date()))
         
         let userNotificationCenter = UNUserNotificationCenter.current()
