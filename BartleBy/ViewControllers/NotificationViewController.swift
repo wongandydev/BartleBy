@@ -29,7 +29,7 @@ class NotificationViewController: UIViewController {
         date.hour = Int(setTime.components(separatedBy: ":")[0])
         date.minute = Int(setTime.components(separatedBy: ":")[1])
 
-        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: false)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         notificationCenter.removeAllPendingNotificationRequests()
         notificationCenter.add(request)
