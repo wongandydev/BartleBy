@@ -104,8 +104,6 @@ class AddViewNotesViewController: UIViewController {
                 completion(1)
             }
         })
-
-        
     }
     
     func getTemplateType(completion: @escaping (String) -> Void) {
