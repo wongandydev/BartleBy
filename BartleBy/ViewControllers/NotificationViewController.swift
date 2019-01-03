@@ -34,7 +34,7 @@ class NotificationViewController: UIViewController {
         notificationCenter.removeAllPendingNotificationRequests()
         notificationCenter.add(request)
         UserDefaults.standard.set(Helper.sharedInstance.convert24toAM(date: changeNotifcationDatePicker.date), forKey: "notificationSetting")
-        currentNotificationSettingLabel.text = UserDefaults.standard.object(forKey: "notificationSetting") as! String
+        currentNotificationSettingLabel.text = UserDefaults.standard.object(forKey: "notificationSetting") as? String
         self.navigationController?.popViewController(animated: true)
     }
     
