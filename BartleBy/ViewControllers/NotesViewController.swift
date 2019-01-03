@@ -62,36 +62,32 @@ class NotesViewController: UIViewController {
         let latestNote = Helper.sharedInstance.stringToDate(date: self.notes[0].dateCreated.components(separatedBy: " ")[0])
         var currentStreak = 0
 
-        if totalNotes > 0 {
+        if totalNotes > 1 {
             let diffFromTodayToLastNote: Int = Calendar.current.dateComponents([.day], from: today, to: latestNote).day ?? 0
             if diffFromTodayToLastNote < -1 {
                 currentStreak = 0
-                print("has been \(abs(diffFromTodayToLastNote)) days since last note")
             } else {
                 currentStreak += 1
                 for noteIndex in 0...totalNotes - 2{
-                    print(noteIndex)
                     let firstDate = Helper.sharedInstance.stringToDate(date: self.notes[noteIndex].dateCreated.components(separatedBy: " ")[0])
                     let secondDate = Helper.sharedInstance.stringToDate(date: self.notes[noteIndex + 1].dateCreated.components(separatedBy: " ")[0])
-                    print(firstDate)
-                    print(secondDate)
                     
                     let difference = Calendar.current.dateComponents([.day], from: firstDate, to: secondDate).day ?? 0
-                    print("diff\(difference)")
                     if  difference < -1 {
-                        print("here")
                         break
                     } else {
                         currentStreak += 1
                     }
-                    print("new\(currentStreak)")
                 }
             }
         } else {
-            currentStreak = 0
+            if Calendar.current.dateComponents([.day], from: today, to: latestNote).day ?? 0 < -1 || totalNotes == 0{
+                currentStreak = 0
+            } else {
+                currentStreak = abs(Calendar.current.dateComponents([.day], from: today, to: latestNote).day ?? 0)
+            }
+            
         }
-        
-        print("currentStreak\(currentStreak)")
         
         self.firebaseDatabase.child("users/\(self.userUID!)/stats").setValue(["streak": currentStreak, "totalNotes": totalNotes])
 
