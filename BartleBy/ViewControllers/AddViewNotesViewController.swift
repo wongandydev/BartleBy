@@ -94,6 +94,23 @@ class AddViewNotesViewController: UIViewController {
                 self.readNote()
             }
         })
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+//            self.view.frame.origin.y = -keyboardFrame.cgRectValue.height+50
+            self.answerTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.cgRectValue.height, right: 0);
+            self.answerTextView.scrollIndicatorInsets = self.answerTextView.contentInset;
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+//        self.view.frame.origin.y = 0
+        self.answerTextView.contentInset = .zero;
+        self.answerTextView.scrollIndicatorInsets = .zero;
     }
 
     func getSelectedNumber(completion: @escaping (Int) -> Void) {
