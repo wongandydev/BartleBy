@@ -15,7 +15,7 @@ class NotesViewController: UIViewController {
     
     private let refreshControl = UIRefreshControl()
     private let userUID = UIDevice.current.identifierForVendor?.uuidString
-    var firebaseDatabase: DatabaseReference!
+    var ref: DatabaseReference!
     
     var notes: [Note] = [] {
         didSet {
@@ -32,7 +32,7 @@ class NotesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        firebaseDatabase = Database.database().reference()
+        ref = Database.database().reference()
         
         notesTableView.delegate = self
         notesTableView.dataSource = self
@@ -48,6 +48,8 @@ class NotesViewController: UIViewController {
         
         refreshControl.addTarget(self, action: #selector(refreshNoteData), for: .valueChanged)
         addButton()
+        
+        
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -89,7 +91,7 @@ class NotesViewController: UIViewController {
             
         }
         
-        self.firebaseDatabase.child("users/\(self.userUID!)/stats").setValue(["streak": currentStreak, "totalNotes": totalNotes])
+        self.ref.child("users/\(self.userUID!)/stats").setValue(["streak": currentStreak, "totalNotes": totalNotes])
 
     }
     
@@ -106,7 +108,7 @@ class NotesViewController: UIViewController {
     }
 
     func readNotes() {
-        firebaseDatabase.child("users/\(userUID!)").observeSingleEvent(of: .value , with: { snapshot in
+        ref.child("users/\(userUID!)").observeSingleEvent(of: .value , with: { snapshot in
             self.notes.removeAll()
             if let userData = snapshot.value as? [String: AnyObject]{
                 if let notes = userData["notes"] as? [String: AnyObject]{

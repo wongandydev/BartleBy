@@ -102,7 +102,7 @@ class AddViewNotesViewController: UIViewController {
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
 //            self.view.frame.origin.y = -keyboardFrame.cgRectValue.height+50
-            self.answerTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.cgRectValue.height, right: 0);
+            self.answerTextView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: keyboardFrame.cgRectValue.height, right: 10);
             self.answerTextView.scrollIndicatorInsets = self.answerTextView.contentInset;
         }
     }

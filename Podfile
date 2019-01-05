@@ -7,8 +7,8 @@ target 'BartleBy' do
 
   # Pods for BartleBy
 
-pod 'Firebase/Core'
-pod 'Firebase/Database'
+	pod 'Firebase/Core'
+	pod 'Firebase/Database'
 
   target 'BartleByTests' do
     inherit! :search_paths

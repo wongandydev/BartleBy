@@ -16,7 +16,7 @@ class Helper {
         dateFormatter.dateFormat = "MM/dd/yy' 'hh:mm:ss a"
         dateFormatter.timeZone = NSTimeZone.system
         
-        return dateFormatter.string(from: Date()) ?? "Did not get date"
+        return dateFormatter.string(from: Date()) 
     }
     
     func dateToString(date: Date) -> String {

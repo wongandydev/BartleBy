@@ -37,6 +37,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DKW-N3-c6C">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="0.0" blue="0.1748579502" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="1Fu-3N-IRU"/>
@@ -192,7 +193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dxP-vK-OIF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1394.2028985507247" y="-418.52678571428572"/>
+            <point key="canvasLocation" x="1203" y="-419"/>
         </scene>
         <!--Notification View Controller-->
         <scene sceneID="o9p-kK-FZx">
@@ -381,6 +382,7 @@
                                                     <segment title="Grateful"/>
                                                     <segment title="Free Write"/>
                                                 </segments>
+                                                <color key="tintColor" red="1" green="0.0" blue="0.1748579502" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <action selector="optionSegmentChanged:" destination="7Qx-XR-rBw" eventType="valueChanged" id="Yy5-Hc-5TE"/>
                                                 </connections>
@@ -462,14 +464,124 @@
                     <view key="view" contentMode="scaleToFill" id="HxA-jM-9y4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="4UE-xX-FMe" userLabel="Full Stack View">
+                                <rect key="frame" x="0.0" y="275.33333333333326" width="414" height="345.66666666666674"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hFK-rZ-xsS" userLabel="Everything but button StackView">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="285.66666666666669"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="uT9-5W-dUX">
+                                                <rect key="frame" x="57.333333333333343" y="0.0" width="299.66666666666663" height="285.66666666666669"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="PET-4e-hhx" userLabel="BTW Question + FAQ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="299.66666666666669" height="115.66666666666667"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dGk-pA-5s7" userLabel="FAQ Stack View">
+                                                                <rect key="frame" x="97" y="0.0" width="105.66666666666669" height="46.333333333333336"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qK2-YE-wLo">
+                                                                        <rect key="frame" x="20" y="0.0" width="65.666666666666671" height="20.333333333333332"/>
+                                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Answer" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tX0-oG-p2W">
+                                                                        <rect key="frame" x="20" y="28.333333333333371" width="65.666666666666671" height="18"/>
+                                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="tX0-oG-p2W" firstAttribute="width" secondItem="dGk-pA-5s7" secondAttribute="width" constant="-40" id="Nd8-4E-BaC"/>
+                                                                    <constraint firstItem="qK2-YE-wLo" firstAttribute="width" secondItem="dGk-pA-5s7" secondAttribute="width" constant="-40" id="d6t-iT-BkJ"/>
+                                                                </constraints>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fcO-tJ-XOq" userLabel="Question Stack View">
+                                                                <rect key="frame" x="0.0" y="96.333333333333371" width="299.66666666666669" height="19.333333333333329"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Something else? Submit the form below!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHx-sd-cWE">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="299.66666666666669" height="19.333333333333332"/>
+                                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Vlv-Lu-auw" userLabel="Form Stack View">
+                                                        <rect key="frame" x="19" y="135.66666666666669" width="261.66666666666669" height="150"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZAs-sR-1tZ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="261.66666666666669" height="150"/>
+                                                                <subviews>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aJp-ys-t08">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="261.66666666666669" height="30"/>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email you like to get response sent to" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QTY-0K-H2w">
+                                                                        <rect key="frame" x="0.0" y="40" width="261.66666666666669" height="30"/>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Subject" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l7s-ob-pP3">
+                                                                        <rect key="frame" x="0.0" y="80" width="261.66666666666669" height="30"/>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DuX-BG-s2M">
+                                                                        <rect key="frame" x="0.0" y="120" width="261.66666666666669" height="30"/>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lgm-aW-hVm">
+                                        <rect key="frame" x="0.0" y="315.66666666666669" width="414" height="30"/>
+                                        <state key="normal" title="Send Button"/>
+                                        <connections>
+                                            <action selector="submitFormButtonTapped:" destination="3H6-rW-K7h" eventType="touchUpInside" id="db6-Er-dKZ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="4UE-xX-FMe" firstAttribute="centerY" secondItem="HxA-jM-9y4" secondAttribute="centerY" id="AJg-nQ-wUx"/>
+                            <constraint firstItem="4UE-xX-FMe" firstAttribute="centerX" secondItem="w9I-tt-oq6" secondAttribute="centerX" id="XIe-nG-WnY"/>
+                            <constraint firstAttribute="trailing" secondItem="4UE-xX-FMe" secondAttribute="trailing" id="XN8-5t-YXe"/>
+                            <constraint firstItem="4UE-xX-FMe" firstAttribute="leading" secondItem="HxA-jM-9y4" secondAttribute="leading" id="aoo-Yr-ikM"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="w9I-tt-oq6"/>
                     </view>
                     <navigationItem key="navigationItem" id="A36-sm-3gu"/>
+                    <connections>
+                        <outlet property="answerLabel" destination="tX0-oG-p2W" id="a3g-VA-cMq"/>
+                        <outlet property="emailTextField" destination="QTY-0K-H2w" id="5Ai-Dy-qre"/>
+                        <outlet property="messageTextField" destination="DuX-BG-s2M" id="HFf-gG-7gV"/>
+                        <outlet property="nameTextField" destination="aJp-ys-t08" id="RsE-0a-cfG"/>
+                        <outlet property="questionLabel" destination="qK2-YE-wLo" id="iHE-Op-xXA"/>
+                        <outlet property="subjectTexfField" destination="l7s-ob-pP3" id="QR3-FX-Emv"/>
+                        <outlet property="submitFormButton" destination="Lgm-aW-hVm" id="7FX-yn-r4l"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sjh-pY-GBd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="774" y="1209"/>
+            <point key="canvasLocation" x="773.91304347826087" y="1208.7053571428571"/>
         </scene>
         <!--About View Controller-->
         <scene sceneID="Y1S-oD-2D8">
@@ -560,14 +672,15 @@
             </objects>
             <point key="canvasLocation" x="93" y="1209"/>
         </scene>
-        <!--Item-->
+        <!--Options-->
         <scene sceneID="No9-Oi-x6Q">
             <objects>
                 <navigationController id="pFW-ug-AVw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="taT-cc-Ffa"/>
+                    <tabBarItem key="tabBarItem" title="Options" id="taT-cc-Ffa"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LyO-Id-584">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="0.0" blue="0.1748579502" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="gAq-Hp-7EC" kind="relationship" relationship="rootViewController" id="LdT-dC-KFq"/>
