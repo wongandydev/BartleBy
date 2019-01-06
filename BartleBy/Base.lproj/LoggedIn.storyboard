@@ -465,17 +465,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="4UE-xX-FMe" userLabel="Full Stack View">
-                                <rect key="frame" x="0.0" y="275.33333333333326" width="414" height="345.66666666666674"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4UE-xX-FMe" userLabel="Full Stack View">
+                                <rect key="frame" x="0.0" y="223.66666666666666" width="414" height="448.66666666666674"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hFK-rZ-xsS" userLabel="Everything but button StackView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="285.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="373.66666666666669"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="uT9-5W-dUX">
-                                                <rect key="frame" x="57.333333333333343" y="0.0" width="299.66666666666663" height="285.66666666666669"/>
+                                                <rect key="frame" x="54.333333333333343" y="0.0" width="305.66666666666663" height="373.66666666666669"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="PET-4e-hhx" userLabel="BTW Question + FAQ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="299.66666666666669" height="115.66666666666667"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="PET-4e-hhx" userLabel="BTW Question + FAQ">
+                                                        <rect key="frame" x="3" y="0.0" width="299.66666666666669" height="105.66666666666667"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dGk-pA-5s7" userLabel="FAQ Stack View">
                                                                 <rect key="frame" x="97" y="0.0" width="105.66666666666669" height="46.333333333333336"/>
@@ -487,7 +487,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Answer" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tX0-oG-p2W">
-                                                                        <rect key="frame" x="20" y="28.333333333333371" width="65.666666666666671" height="18"/>
+                                                                        <rect key="frame" x="20" y="28.333333333333343" width="65.666666666666671" height="18"/>
                                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -499,7 +499,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fcO-tJ-XOq" userLabel="Question Stack View">
-                                                                <rect key="frame" x="0.0" y="96.333333333333371" width="299.66666666666669" height="19.333333333333329"/>
+                                                                <rect key="frame" x="0.0" y="86.333333333333343" width="299.66666666666669" height="19.333333333333329"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Something else? Submit the form below!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHx-sd-cWE">
                                                                         <rect key="frame" x="0.0" y="0.0" width="299.66666666666669" height="19.333333333333332"/>
@@ -512,35 +512,38 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Vlv-Lu-auw" userLabel="Form Stack View">
-                                                        <rect key="frame" x="19" y="135.66666666666669" width="261.66666666666669" height="150"/>
+                                                        <rect key="frame" x="0.0" y="125.66666666666666" width="305.66666666666669" height="247.99999999999997"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZAs-sR-1tZ">
-                                                                <rect key="frame" x="0.0" y="0.0" width="261.66666666666669" height="150"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="305.66666666666669" height="248"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aJp-ys-t08">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="261.66666666666669" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="305.66666666666669" height="30"/>
                                                                         <nil key="textColor"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email you like to get response sent to" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QTY-0K-H2w">
-                                                                        <rect key="frame" x="0.0" y="40" width="261.66666666666669" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="40" width="305.66666666666669" height="30"/>
                                                                         <nil key="textColor"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Subject" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l7s-ob-pP3">
-                                                                        <rect key="frame" x="0.0" y="80" width="261.66666666666669" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="80" width="305.66666666666669" height="30"/>
                                                                         <nil key="textColor"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DuX-BG-s2M">
-                                                                        <rect key="frame" x="0.0" y="120" width="261.66666666666669" height="30"/>
-                                                                        <nil key="textColor"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <textInputTraits key="textInputTraits"/>
-                                                                    </textField>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xMk-lI-pmA" userLabel="Message Text View">
+                                                                        <rect key="frame" x="0.0" y="120" width="305.66666666666669" height="128"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="128" id="aT0-5N-HTy"/>
+                                                                        </constraints>
+                                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                    </textView>
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
@@ -550,8 +553,14 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lgm-aW-hVm">
-                                        <rect key="frame" x="0.0" y="315.66666666666669" width="414" height="30"/>
-                                        <state key="normal" title="Send Button"/>
+                                        <rect key="frame" x="0.0" y="383.66666666666674" width="414" height="65"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="65" id="KIS-Ds-dgA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <state key="normal" title="Send Message">
+                                            <color key="titleColor" red="0.17685621900000001" green="1" blue="0.44498165950000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="submitFormButtonTapped:" destination="3H6-rW-K7h" eventType="touchUpInside" id="db6-Er-dKZ"/>
                                         </connections>
@@ -572,7 +581,7 @@
                     <connections>
                         <outlet property="answerLabel" destination="tX0-oG-p2W" id="a3g-VA-cMq"/>
                         <outlet property="emailTextField" destination="QTY-0K-H2w" id="5Ai-Dy-qre"/>
-                        <outlet property="messageTextField" destination="DuX-BG-s2M" id="HFf-gG-7gV"/>
+                        <outlet property="messageTextView" destination="xMk-lI-pmA" id="Fj2-wn-3yo"/>
                         <outlet property="nameTextField" destination="aJp-ys-t08" id="RsE-0a-cfG"/>
                         <outlet property="questionLabel" destination="qK2-YE-wLo" id="iHE-Op-xXA"/>
                         <outlet property="subjectTexfField" destination="l7s-ob-pP3" id="QR3-FX-Emv"/>
