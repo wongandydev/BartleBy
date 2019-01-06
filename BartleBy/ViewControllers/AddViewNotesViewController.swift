@@ -204,7 +204,7 @@ class AddViewNotesViewController: UIViewController {
         }
         
         answerTextView.text = notes.indices.contains(currentNumber) ? notes[currentNumber].note : "Enter Note"
-        answerTextView.textColor = .gray
+        answerTextView.textColor = .placeholderGray
         questionLabel.text = "\(currentNumber + 1)) What are you grateful for?"
     }
     
@@ -236,7 +236,7 @@ class AddViewNotesViewController: UIViewController {
         }
     
         answerTextView.text = "Enter Note"
-        answerTextView.textColor = .gray
+        answerTextView.textColor = .placeholderGray
 
         if numberOfQuestions > 1 {
             nextDoneButton.setTitle("Next", for: .normal)
@@ -273,7 +273,7 @@ class AddViewNotesViewController: UIViewController {
 
 extension AddViewNotesViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == .gray {
+        if textView.textColor == .placeholderGray {
             textView.text = ""
             textView.textColor = .black
         }
