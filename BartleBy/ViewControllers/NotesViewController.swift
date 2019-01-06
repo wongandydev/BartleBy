@@ -61,7 +61,7 @@ class NotesViewController: UIViewController {
     func setStats() {
         let totalNotes = notes.count
         let today = Helper.sharedInstance.stringToDate(date: Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0])
-        let latestNote = Helper.sharedInstance.stringToDate(date: self.notes[0].dateCreated.components(separatedBy: " ")[0])
+        let latestNote = totalNotes > 1 ? Helper.sharedInstance.stringToDate(date: self.notes[0].dateCreated.components(separatedBy: " ")[0]): Date()
         var currentStreak = 0
 
         if totalNotes > 1 {
