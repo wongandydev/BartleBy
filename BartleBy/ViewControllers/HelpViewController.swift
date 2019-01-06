@@ -10,7 +10,7 @@ import UIKit
 import MessageUI
 import Firebase
 
-class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate, UITextFieldDelegate {
+class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate, UITextFieldDelegate{
     var ref: DatabaseReference!
     
     @IBOutlet weak var questionLabel: UILabel!
@@ -18,7 +18,7 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var subjectTexfField: UITextField!
-    @IBOutlet weak var messageTextField: UITextField!
+    @IBOutlet weak var messageTextView: UITextView!
     @IBOutlet weak var submitFormButton: UIButton!
     @IBAction func submitFormButtonTapped(_ sender: Any) {
         sendContactForm()
@@ -34,9 +34,11 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
         nameTextField.delegate = self
         emailTextField.delegate = self
         subjectTexfField.delegate = self
-        messageTextField.delegate = self
+        messageTextView.delegate = self
         
+        setupTextView()
         getHelpInformation()
+        addKeyboardDoneButton()
         cancelButton(title: "Cancel", color: .red)
     }
     
@@ -51,17 +53,42 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
                 self.view.frame.origin.y = 0
     }
     
+    
+    func setupTextView() {
+        messageTextView.textColor = .placeholderGray
+        messageTextView.text = "Enter Message"
+        messageTextView.layer.borderColor = UIColor.lightGray.cgColor
+        messageTextView.layer.cornerRadius = 7
+        messageTextView.layer.borderWidth = 0.3
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
         return true
     }
     
+    func addKeyboardDoneButton() {
+        let toolbar:UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0,  width: self.view.frame.size.width, height: 30))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneButtonAction))
+        toolbar.setItems([flexSpace, doneButton], animated: false)
+        toolbar.sizeToFit()
+        nameTextField.inputAccessoryView = toolbar
+        emailTextField.inputAccessoryView = toolbar
+        subjectTexfField.inputAccessoryView = toolbar
+        messageTextView.inputAccessoryView = toolbar
+    }
+    
+    @objc func doneButtonAction() {
+        self.view.endEditing(true)
+    }
+    
     func sendContactForm() {
         ref.child("messages/\(ref.childByAutoId().key!)").setValue(["email":"\(emailTextField.text!)",
-                                                                        "name":"\(nameTextField.text!)",
-                                                                        "subject":"\(subjectTexfField.text!)",
-                                                                        "message":"\(messageTextField.text!)"],
+                                                                    "name":"\(nameTextField.text!)",
+                                                                    "subject":"\(subjectTexfField.text!)",
+                                                                    "message":"\(messageTextView.text!)"],
                                        withCompletionBlock: { error, ref in
                                         if error != nil {
                                             self.alertMessage(title: "Error", message: "There was an error sending  your message. Please try again. \(error?.localizedDescription)")
@@ -88,4 +115,25 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
             }
         })
     }
+}
+
+extension HelpViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == .placeholderGray {
+            textView.textColor = .black
+            textView.text = ""
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text == "" {
+            textView.textColor = .placeholderGray
+            textView.text = "Enter Message"
+        }
+    }
+}
+
+
+extension UIColor {
+    static var placeholderGray = UIColor(red: 178/225, green: 178/225, blue: 178/225, alpha: 1.0)
 }
