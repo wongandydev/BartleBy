@@ -85,22 +85,32 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
     }
     
     func sendContactForm() {
-        ref.child("messages/\(ref.childByAutoId().key!)").setValue(["email":"\(emailTextField.text!)",
-                                                                    "name":"\(nameTextField.text!)",
-                                                                    "subject":"\(subjectTexfField.text!)",
-                                                                    "message":"\(messageTextView.text!)"],
-                                       withCompletionBlock: { error, ref in
-                                        if error != nil {
-                                            self.alertMessage(title: "Error", message: "There was an error sending  your message. Please try again. \(error?.localizedDescription)")
-                                        } else {
-                                            self.alertMessage(title: "Sucess", message: "Your message has sucessful been sent. We will try our best to get back to you as soon as possible.")
-                                            self.submitFormButton.isEnabled = false
-                                        }
-                                        })
-
+        
+        if emailTextField.text!.isEmpty {
+            alertMessage(title: "Missing Email", message: "You forgot to enter a email! Without one we can't reply to your message!")
+        } else if messageTextView.text == "Enter Message" {
+            alertMessage(title: "Missing message", message: "You forgot to tell us what your question is!")
+        } else if !isValidEmail(email: emailTextField.text!){
+            alertMessage(title: "Error", message: "Your email was not valid. Please check again.")
+        } else {
+            ref.child("messages/\(ref.childByAutoId().key!)").setValue(["email":"\(emailTextField.text!)", "name":"\(nameTextField.text!)","subject":"\(subjectTexfField.text!)","message":"\(messageTextView.text!)"],
+                   withCompletionBlock: { error, ref in
+                    if error != nil {
+                        self.alertMessage(title: "Error", message: "There was an error sending  your message. Please try again. \(error?.localizedDescription)")
+                    } else {
+                        self.alertMessage(title: "Sucess", message: "Your message has sucessful been sent. We will try our best to get back to you as soon as possible.")
+                        self.submitFormButton.isEnabled = false
+                    }
+            })
+        }
     }
     
-
+    func isValidEmail(email:String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: email)
+    }
     
     func getHelpInformation() {
         ref.child("documents").observe(.value, with: { snapshot in
