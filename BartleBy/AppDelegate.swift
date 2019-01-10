@@ -20,7 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-       
+        GADMobileAds.configure(withApplicationID: Helper.sharedInstance.valueForKey(key: "GoogleADMobAppID"))
+        
         let userUID = UIDevice.current.identifierForVendor?.uuidString
         UserDefaults.standard.set(userUID, forKey: "userUID")
         

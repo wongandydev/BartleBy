@@ -14,6 +14,9 @@ class ConfigViewController: UIViewController {
     @IBOutlet weak var numberPicker: UIPickerView!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        saveNewTemplateSettings()
+    }
     
     @IBAction func optionSegmentChanged(_ sender: Any) {
         setTypeLabel()
@@ -45,10 +48,6 @@ class ConfigViewController: UIViewController {
             
             self.setTypeLabel()
         })
-    
-        
-        saveButton()
-        cancelButton(title: "Cancel", color: .red)
     }
     
     func setTypeLabel() {
@@ -102,17 +101,8 @@ class ConfigViewController: UIViewController {
     func setTemplateType(type: String) {
         self.ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateType").setValue(type)
     }
-    
-    func saveButton() {
-        let saveButton = UIButton(frame: CGRect(x: 0, y: self.view.frame.height-214, width: self.view.frame.width, height: 64))
-        saveButton.setTitle("Save", for: .normal)
-        saveButton.backgroundColor =  UIColor(red:0.18, green:1.00, blue:0.44, alpha:1.0)
-        saveButton.addTarget(self, action: #selector(saveNewTemplateSettings), for: .touchUpInside)
-        
-        self.view.addSubview(saveButton)
-    }
-    
-    @objc func saveNewTemplateSettings() {
+
+    func saveNewTemplateSettings() {
         setSelectedNumber(number: selectedNumber)
         switch  optionSegmentControl.selectedSegmentIndex {
             case 0:

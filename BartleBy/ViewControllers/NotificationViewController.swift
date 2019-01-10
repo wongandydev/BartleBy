@@ -11,7 +11,7 @@ import UserNotifications
 
 class NotificationViewController: UIViewController {
     
-    @IBOutlet weak var cancelButton: UIButton!
+//    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var currentNotificationSettingLabel: UILabel!
     @IBOutlet weak var changeNotifcationDatePicker: UIDatePicker!
     @IBOutlet weak var saveButton: UIButton!
@@ -38,9 +38,9 @@ class NotificationViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func cancelButtonTapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
+//    @IBAction func cancelButtonTapped(_ sender: Any) {
+//        self.navigationController?.popViewController(animated: true)
+//    }
     
     let notificationCenter = UNUserNotificationCenter.current()
     

@@ -9,6 +9,7 @@ target 'BartleBy' do
 
 	pod 'Firebase/Core'
 	pod 'Firebase/Database'
+	pod 'Firebase/AdMob'
 
   target 'BartleByTests' do
     inherit! :search_paths

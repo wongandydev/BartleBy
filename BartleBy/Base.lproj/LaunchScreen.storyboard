@@ -18,17 +18,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BartleBy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eoB-Nb-vu7">
-                                <rect key="frame" x="131.5" y="316" width="112" height="35"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="29"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VSX-UU-waR">
+                                <rect key="frame" x="105" y="308" width="164.5" height="51"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bartle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eoB-Nb-vu7">
+                                        <rect key="frame" x="0.0" y="1.5" width="106.5" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon" translatesAutoresizingMaskIntoConstraints="NO" id="dA2-mX-OWH">
+                                        <rect key="frame" x="114.5" y="0.5" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="5gA-cA-7FD"/>
+                                            <constraint firstAttribute="height" constant="50" id="QRS-b7-omf"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.1748579502" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="eoB-Nb-vu7" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="SiK-iF-UEs"/>
-                            <constraint firstItem="eoB-Nb-vu7" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="XPP-P9-KGY"/>
+                            <constraint firstItem="VSX-UU-waR" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="304-gw-vCg"/>
+                            <constraint firstItem="VSX-UU-waR" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="TDf-Vu-XjA"/>
+                            <constraint firstItem="VSX-UU-waR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="288" id="pd7-2F-2gG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -38,4 +51,7 @@
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Icon" width="512" height="512"/>
+    </resources>
 </document>

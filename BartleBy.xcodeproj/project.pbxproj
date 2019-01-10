@@ -12,6 +12,7 @@
 		A028098021CD325F009D7730 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A028097F21CD325F009D7730 /* Signup.storyboard */; };
 		A028098221CD3682009D7730 /* SignupSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A028098121CD3682009D7730 /* SignupSetupViewController.swift */; };
 		A028098721CD4F64009D7730 /* AddViewNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A028098621CD4F64009D7730 /* AddViewNotesViewController.swift */; };
+		A02B114421E6444100CE4A2F /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = A02B114321E6444100CE4A2F /* keys.plist */; };
 		A02B7AC921CC3D850062DDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B7AC821CC3D850062DDC5 /* AppDelegate.swift */; };
 		A02B7ACB21CC3D850062DDC5 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B7ACA21CC3D850062DDC5 /* NotesViewController.swift */; };
 		A02B7ACE21CC3D850062DDC5 /* LoggedIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02B7ACC21CC3D850062DDC5 /* LoggedIn.storyboard */; };
@@ -54,6 +55,8 @@
 		A028097F21CD325F009D7730 /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		A028098121CD3682009D7730 /* SignupSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupSetupViewController.swift; sourceTree = "<group>"; };
 		A028098621CD4F64009D7730 /* AddViewNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewNotesViewController.swift; sourceTree = "<group>"; };
+		A02B114321E6444100CE4A2F /* keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
+		A02B114521E662C200CE4A2F /* BartleBy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BartleBy.entitlements; sourceTree = "<group>"; };
 		A02B7AC821CC3D850062DDC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A02B7ACA21CC3D850062DDC5 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		A02B7ACD21CC3D850062DDC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LoggedIn.storyboard; sourceTree = "<group>"; };
@@ -148,6 +151,7 @@
 		A02B7AC721CC3D850062DDC5 /* BartleBy */ = {
 			isa = PBXGroup;
 			children = (
+				A02B114521E662C200CE4A2F /* BartleBy.entitlements */,
 				A0E7AA6821D06DD5001A76C0 /* Helper.swift */,
 				A0C7D5A921D135EB003EC195 /* Template.swift */,
 				A02B7AC821CC3D850062DDC5 /* AppDelegate.swift */,
@@ -164,6 +168,7 @@
 				A02B7AD721CC3D860062DDC5 /* Info.plist */,
 				A02B7ACF21CC3D850062DDC5 /* BartleBy.xcdatamodeld */,
 				A01168CC21CD5F430006C6BD /* GoogleService-Info.plist */,
+				A02B114321E6444100CE4A2F /* keys.plist */,
 			);
 			path = BartleBy;
 			sourceTree = "<group>";
@@ -230,6 +235,11 @@
 				TargetAttributes = {
 					A02B7AC421CC3D850062DDC5 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.DataProtection = {
+								enabled = 0;
+							};
+						};
 					};
 					A02B7ADB21CC3D870062DDC5 = {
 						CreatedOnToolsVersion = 10.1;
@@ -263,6 +273,7 @@
 			files = (
 				A02B7AD621CC3D860062DDC5 /* LaunchScreen.storyboard in Resources */,
 				A02B7AD321CC3D860062DDC5 /* Assets.xcassets in Resources */,
+				A02B114421E6444100CE4A2F /* keys.plist in Resources */,
 				A01168CD21CD5F430006C6BD /* GoogleService-Info.plist in Resources */,
 				A028098021CD325F009D7730 /* Signup.storyboard in Resources */,
 				A02B7ACE21CC3D850062DDC5 /* LoggedIn.storyboard in Resources */,

@@ -39,7 +39,7 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
         setupTextView()
         getHelpInformation()
         addKeyboardDoneButton()
-        cancelButton(title: "Cancel", color: .red)
+//        cancelButton(title: "Cancel", color: .red)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -56,7 +56,7 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
     
     func setupTextView() {
         messageTextView.textColor = .placeholderGray
-        messageTextView.text = "Enter Message"
+        messageTextView.text = "Enter Message*"
         messageTextView.layer.borderColor = UIColor.lightGray.cgColor
         messageTextView.layer.cornerRadius = 7
         messageTextView.layer.borderWidth = 0.3
@@ -85,10 +85,9 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
     }
     
     func sendContactForm() {
-        
         if emailTextField.text!.isEmpty {
             alertMessage(title: "Missing Email", message: "You forgot to enter a email! Without one we can't reply to your message!")
-        } else if messageTextView.text == "Enter Message" {
+        } else if messageTextView.textColor == .placeholderGray {
             alertMessage(title: "Missing message", message: "You forgot to tell us what your question is!")
         } else if !isValidEmail(email: emailTextField.text!){
             alertMessage(title: "Error", message: "Your email was not valid. Please check again.")
@@ -98,8 +97,7 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
                     if error != nil {
                         self.alertMessage(title: "Error", message: "There was an error sending  your message. Please try again. \(error?.localizedDescription)")
                     } else {
-                        self.alertMessage(title: "Sucess", message: "Your message has sucessful been sent. We will try our best to get back to you as soon as possible.")
-                        self.submitFormButton.isEnabled = false
+                        self.submitFormMessage(title: "Sucess", message: "Your message has sucessful been sent. We will try our best to get back to you as soon as possible.")
                     }
             })
         }
@@ -125,6 +123,21 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
             }
         })
     }
+    
+    func submitFormMessage(title: String, message: String) {
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+        blurView.frame = self.view.frame
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: { action in
+            blurView.removeFromSuperview()
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        self.view.addSubview(blurView)
+        self.present(alertController, animated: true, completion: nil)
+    }
 }
 
 extension HelpViewController: UITextViewDelegate {
@@ -138,7 +151,7 @@ extension HelpViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text == "" {
             textView.textColor = .placeholderGray
-            textView.text = "Enter Message"
+            textView.text = "Enter Message*"
         }
     }
 }

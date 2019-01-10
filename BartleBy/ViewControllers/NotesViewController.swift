@@ -8,13 +8,16 @@
 
 import UIKit
 import Firebase
+import GoogleMobileAds
 
 class NotesViewController: UIViewController {
     
     @IBOutlet weak var notesTableView: UITableView!
+    @IBOutlet weak var bannerAdView: GADBannerView!
     
     private let refreshControl = UIRefreshControl()
     private let userUID = UIDevice.current.identifierForVendor?.uuidString
+    
     var ref: DatabaseReference!
     
     var notes: [Note] = [] {
@@ -48,14 +51,21 @@ class NotesViewController: UIViewController {
         
         refreshControl.addTarget(self, action: #selector(refreshNoteData), for: .valueChanged)
         addButton()
-        
-        
-        
+        setupBannerAd()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         readNotes()
+    }
+    
+    func setupBannerAd() {
+        self.bannerAdView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        self.bannerAdView.rootViewController = self;
+        let request = GADRequest()
+        request.testDevices = [kGADSimulatorID]
+        bannerAdView.load(request)
     }
     
     func setStats() {
@@ -100,7 +110,9 @@ class NotesViewController: UIViewController {
         let addButton = UIButton(frame: CGRect(x: self.view.frame.width - 70, y: self.view.frame.height - 150, width: 60, height: 60))
         addButton.layer.cornerRadius = 30
         addButton.backgroundColor = .red
-        addButton.setTitle("Add", for: .normal)
+//        addButton.setTitle("Add", for: .norm\al)
+        addButton.setImage(UIImage(named: "plus"), for: .normal)
+        addButton.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
         addButton.titleLabel?.textColor = .white
         addButton.addTarget(self, action: #selector(addNote), for: .touchUpInside)
         
@@ -165,5 +177,9 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
             self.present(viewNoteViewController, animated: true, completion: nil)
         }
         self.notesTableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 83
     }
 }

@@ -14,7 +14,7 @@ class OptionViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var optionsTableView: UITableView!
     @IBOutlet weak var editButton: UIButton!
-    
+    @IBOutlet weak var bannerAdView: GADBannerView!
     @IBAction func editButtonTapped(_ sender: Any) {
     
     }
@@ -39,12 +39,21 @@ class OptionViewController: UIViewController {
         getUsername()
         readOptions()
         addEditButton()
+        setupBannerAd()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.transparentNavBar()
         
+    }
+    
+    func setupBannerAd() {
+        self.bannerAdView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        self.bannerAdView.rootViewController = self;
+        let request = GADRequest()
+        request.testDevices = [kGADSimulatorID]
+        bannerAdView.load(request)
     }
     
     func getUsername(){

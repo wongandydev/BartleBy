@@ -22,7 +22,7 @@ class StatsViewController: UIViewController {
         ref = Database.database().reference()
         getStats()
         
-        cancelButton(title: "Go Back", color: .red)
+//        cancelButton(title: "Go Back", color: .red)
     }
     
     func getStats() {

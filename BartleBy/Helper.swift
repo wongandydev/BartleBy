@@ -56,4 +56,16 @@ class Helper {
         
         return dateFormatter.string(from: date)
     }
+    
+    func valueForKey(key: String) -> String {
+        var returnValue: String = ""
+        
+        if let filePath = Bundle.main.path(forResource: "keys", ofType: "plist") as? String,
+            let plist = NSDictionary(contentsOfFile: filePath),
+            let value = plist.object(forKey: key) as? String {
+                returnValue = value
+        }
+        
+        return returnValue
+    }
 }

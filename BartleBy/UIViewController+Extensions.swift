@@ -24,7 +24,7 @@ extension UIViewController {
     }
     
     func cancelButton(title: String, color: UIColor) {
-        let cancelButton = UIButton(frame: CGRect(x: 0, y: self.view.frame.height-144, width: self.view.frame.width, height: 64))
+        let cancelButton = UIButton(frame: CGRect(x: 0, y: self.view.frame.height-164, width: self.view.frame.width, height: 64))
         cancelButton.setTitle(title, for: .normal)
         cancelButton.backgroundColor = color
         cancelButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)

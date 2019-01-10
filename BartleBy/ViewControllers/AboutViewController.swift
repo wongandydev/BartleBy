@@ -24,7 +24,7 @@ class AboutViewController: UIViewController {
         
         getAboutText()
         
-        cancelButton(title: "Go Back", color: .red)
+//        cancelButton(title: "Go Back", color: .red)
     }
     
     func getAboutText() {

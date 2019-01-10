@@ -36,5 +36,7 @@
 	<string>1:182576673818:ios:40b881c69c17d0ff</string>
 	<key>DATABASE_URL</key>
 	<string>https://birdlebee.firebaseio.com</string>
+	<key>ADMOB_APP_ID</key>
+	<string>ca-app-pub-4388758752901980~7535010360</string>
 </dict>
 </plist>
