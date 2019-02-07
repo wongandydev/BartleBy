@@ -10,32 +10,38 @@ import UIKit
 import Firebase
 
 class OptionViewController: UIViewController {
-    @IBOutlet weak var statsUIView: UIView!
-    @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var optionsTableView: UITableView!
-    @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var bannerAdView: GADBannerView!
-    @IBAction func editButtonTapped(_ sender: Any) {
-    
-    }
     private let userUID = UIDevice.current.identifierForVendor?.uuidString
     
     var options: [String] = [] {
         didSet {
-            self.optionsTableView.reloadData()
+//            self.optionsTableView.reloadData()
         }
     }
+    
+    let usernameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "No Preferred Name Set"
+        label.textAlignment = .center
+        label.font = UIFont(name: "HelveticaNeue-Light", size: 17.0)
+        return label
+    }()
+    
     var ref: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
         
-        optionsTableView.delegate = self
-        optionsTableView.dataSource = self
-        optionsTableView.tableFooterView = UIView()
-        usernameLabel.text = "No Preferred Name"
+        usernameLabel.frame = CGRect(x: 10, y: 100, width: view.frame.width - 20, height: 35)
+        view.addSubview(usernameLabel)
         
+//        optionsTableView.delegate = self
+//        optionsTableView.dataSource = self
+//        optionsTableView.tableFooterView = UIView()
+//        optionsTableView.separatorStyle = .none
+        
+//        usernameLabel.text = "No Preferred Name"
         getUsername()
         readOptions()
         addEditButton()
@@ -58,8 +64,8 @@ class OptionViewController: UIViewController {
     
     func getUsername(){
         ref.child("users/\(userUID!)/username").observeSingleEvent(of: .value , with: { snapshot in
-            if let username = snapshot.value as? String{
-                self.usernameLabel.text = username
+            if let serverUsername = snapshot.value as? String {
+                self.usernameLabel.text = serverUsername
             }
         })
     }
@@ -123,6 +129,8 @@ extension OptionViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "optionCell") as! OptionCell
         cell.optionLabel.text = options[indexPath.row]
+        cell.layer.cornerRadius = 5
+        cell.layer.borderWidth = 1
         
         return cell
     }
@@ -143,7 +151,7 @@ extension OptionViewController: UITableViewDelegate, UITableViewDataSource{
                 print("defaulted")
         }
         
-        self.optionsTableView.deselectRow(at: indexPath, animated: true)
+//        self.optionsTableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
