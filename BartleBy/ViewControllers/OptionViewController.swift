@@ -15,7 +15,7 @@ class OptionViewController: UIViewController {
     
     var options: [String] = [] {
         didSet {
-//            self.optionsTableView.reloadData()
+            self.optionsCollectionView.reloadData()
         }
     }
     
@@ -27,6 +27,17 @@ class OptionViewController: UIViewController {
         return label
     }()
     
+    let optionsCollectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+        
+        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 200, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 354), collectionViewLayout: flowLayout)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "optionCell")
+        collectionView.backgroundColor = .clear
+        
+        return collectionView
+    }()
+    
     var ref: DatabaseReference!
     
     override func viewDidLoad() {
@@ -36,14 +47,14 @@ class OptionViewController: UIViewController {
         usernameLabel.frame = CGRect(x: 10, y: 100, width: view.frame.width - 20, height: 35)
         view.addSubview(usernameLabel)
         
-//        optionsTableView.delegate = self
-//        optionsTableView.dataSource = self
-//        optionsTableView.tableFooterView = UIView()
-//        optionsTableView.separatorStyle = .none
         
-//        usernameLabel.text = "No Preferred Name"
-        getUsername()
+        optionsCollectionView.delegate = self
+        optionsCollectionView.dataSource = self
+        view.addSubview(optionsCollectionView)
+
         readOptions()
+//        addOptionsCollectionView()
+        getUsername()
         addEditButton()
         setupBannerAd()
     }
@@ -121,21 +132,29 @@ class OptionViewController: UIViewController {
     }
 }
 
-extension OptionViewController: UITableViewDelegate, UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension OptionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return options.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "optionCell") as! OptionCell
-        cell.optionLabel.text = options[indexPath.row]
-        cell.layer.cornerRadius = 5
-        cell.layer.borderWidth = 1
-        
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "optionCell", for: indexPath)
+//        //Create Lavel
+        let label: UILabel = {
+            let aLabel = UILabel()
+            aLabel.frame = CGRect(x: 10, y: cell.layer.frame.height/2 - 30, width: cell.layer.frame.width - 10, height: cell.layer.frame.height)
+            return aLabel
+        }()
+
+        label.text = options[indexPath.row]
+        cell.addSubview(label)
+        cell.layer.cornerRadius = 15
+        cell.backgroundColor = .gray
+
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.row {
             case 0:
                 performSegue(withIdentifier: "gotoConfigVC", sender: nil)
@@ -150,11 +169,12 @@ extension OptionViewController: UITableViewDelegate, UITableViewDataSource{
             default:
                 print("defaulted")
         }
-        
-//        self.optionsTableView.deselectRow(at: indexPath, animated: true)
+
+        self.optionsCollectionView.deselectItem(at: indexPath, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width - 30, height: 60)
     }
+    
 }
