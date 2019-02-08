@@ -15,6 +15,13 @@ class NotificationViewController: UIViewController {
     @IBOutlet weak var currentNotificationSettingLabel: UILabel!
     @IBOutlet weak var changeNotifcationDatePicker: UIDatePicker!
     @IBOutlet weak var saveButton: UIButton!
+    @IBAction func resetBarButtonItemTapped(_ sender: Any) {
+        notificationCenter.removeAllPendingNotificationRequests()
+        currentNotificationSettingLabel.text = "No Notifcation"
+        UserDefaults.standard.removeObject(forKey: "notificationSetting")
+        UserDefaults.standard.synchronize()
+        self.navigationController?.popViewController(animated: true)
+    }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         let content = UNMutableNotificationContent()
