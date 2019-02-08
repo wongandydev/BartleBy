@@ -31,7 +31,7 @@ class StatsViewController: UIViewController {
                 if let streak = stat["streak"] as? Int {
                     if let totalNotes = stat["totalNotes"] as? Int {
                         self.streakNumberLabel.text = String(streak)
-                        self.totalNotesLabel.text = String(totalNotes)
+                        self.totalNumberLabel.text = String(totalNotes)
                         
                         if streak > 1 {
                             self.totalDaysLabel.text = "days in a row"
