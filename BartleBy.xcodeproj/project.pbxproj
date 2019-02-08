@@ -24,7 +24,6 @@
 		A0A6EDD021D86FD100637C91 /* NavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6EDCF21D86FD100637C91 /* NavigationController+Extension.swift */; };
 		A0C7D5AA21D135EB003EC195 /* Template.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C7D5A921D135EB003EC195 /* Template.swift */; };
 		A0C7D5AE21D1B345003EC195 /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C7D5AD21D1B345003EC195 /* OptionViewController.swift */; };
-		A0C7D5B021D27943003EC195 /* OptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C7D5AF21D27943003EC195 /* OptionCell.swift */; };
 		A0C7D5B221D316F4003EC195 /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C7D5B121D316F4003EC195 /* ConfigViewController.swift */; };
 		A0C7D5B421D31A9F003EC195 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C7D5B321D31A9F003EC195 /* NotificationViewController.swift */; };
 		A0D138A421D3F9370021F424 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D138A321D3F9370021F424 /* HelpViewController.swift */; };
@@ -69,7 +68,6 @@
 		A0A6EDCF21D86FD100637C91 /* NavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationController+Extension.swift"; sourceTree = "<group>"; };
 		A0C7D5A921D135EB003EC195 /* Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template.swift; sourceTree = "<group>"; };
 		A0C7D5AD21D1B345003EC195 /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
-		A0C7D5AF21D27943003EC195 /* OptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCell.swift; sourceTree = "<group>"; };
 		A0C7D5B121D316F4003EC195 /* ConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
 		A0C7D5B321D31A9F003EC195 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		A0D138A321D3F9370021F424 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
@@ -161,7 +159,6 @@
 				A02B7ACC21CC3D850062DDC5 /* LoggedIn.storyboard */,
 				A0E7AA6421D06914001A76C0 /* NoteCell.swift */,
 				A028097F21CD325F009D7730 /* Signup.storyboard */,
-				A0C7D5AF21D27943003EC195 /* OptionCell.swift */,
 				A0E7AA6221D0678E001A76C0 /* Note.swift */,
 				A02B7AD221CC3D860062DDC5 /* Assets.xcassets */,
 				A02B7AD421CC3D860062DDC5 /* LaunchScreen.storyboard */,
@@ -383,7 +380,6 @@
 				A0A6EDD021D86FD100637C91 /* NavigationController+Extension.swift in Sources */,
 				A0C7D5B421D31A9F003EC195 /* NotificationViewController.swift in Sources */,
 				A0E7AA6321D0678E001A76C0 /* Note.swift in Sources */,
-				A0C7D5B021D27943003EC195 /* OptionCell.swift in Sources */,
 				A0E7AA6921D06DD5001A76C0 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -546,6 +542,7 @@
 			baseConfigurationReference = 49C1DF721E2BD6199B8B0ED4 /* Pods-BartleBy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CBB4HB269Q;
 				INFOPLIST_FILE = BartleBy/Info.plist;
@@ -555,6 +552,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.andywong.BartleBy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -565,6 +563,7 @@
 			baseConfigurationReference = B034D82B61B7DFFED3FB50AC /* Pods-BartleBy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CBB4HB269Q;
 				INFOPLIST_FILE = BartleBy/Info.plist;
@@ -574,6 +573,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.andywong.BartleBy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
