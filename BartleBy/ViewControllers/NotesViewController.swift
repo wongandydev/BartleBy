@@ -96,7 +96,7 @@ class NotesViewController: UIViewController {
             if Calendar.current.dateComponents([.day], from: today, to: latestNote).day ?? 0 < -1 || totalNotes == 0{
                 currentStreak = 0
             } else {
-                currentStreak = abs(Calendar.current.dateComponents([.day], from: today, to: latestNote).day ?? 0)
+                currentStreak = abs(Calendar.current.dateComponents([.day], from: today, to: latestNote).day ?? 0) + 1
             }
             
         }
