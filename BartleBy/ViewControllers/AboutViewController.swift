@@ -12,25 +12,30 @@ import Firebase
 class AboutViewController: UIViewController {
     var ref: DatabaseReference!
     
-    @IBOutlet weak var aboutTextView: UITextView!
+    let aTextView: UITextView = {
+        let textView = UITextView()
+        textView.contentInset = UIEdgeInsets(top: 10, left: 5, bottom: 65, right: 5)
+        textView.scrollIndicatorInsets = textView.contentInset
+        textView.setContentOffset(.zero, animated: false)
+        textView.font = UIFont(name: "HelveticaNeue-Light", size: 18)
+        textView.isEditable = false
+        textView.isSelectable = false
+        return textView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
         
-        aboutTextView.contentInset = UIEdgeInsets(top: 10, left: 20, bottom: 65, right: 20)
-        aboutTextView.scrollIndicatorInsets = self.aboutTextView.contentInset
-        aboutTextView.setContentOffset(.zero, animated: false)
-        
+        aTextView.frame = CGRect(x: 0, y: navigationController?.navigationBar.layer.frame.height ?? 200, width: view.frame.width, height: view.frame.height)
+        view.addSubview(aTextView)
         getAboutText()
-        
-//        cancelButton(title: "Go Back", color: .red)
     }
     
     func getAboutText() {
         ref.child("documents/about").observe(.value, with: {snapshot in
             if let value = snapshot.value as? [ String] {
-                self.aboutTextView.text = value.first
+                self.aTextView.text = value.first
             }
         })
     }

@@ -148,8 +148,15 @@ extension OptionViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
         label.text = options[indexPath.row]
         cell.addSubview(label)
-        cell.layer.cornerRadius = 15
-        cell.backgroundColor = .gray
+        cell.layer.masksToBounds = false
+        cell.layer.cornerRadius = 5
+        cell.contentView.layer.masksToBounds = true
+        cell.layer.shadowColor = UIColor.lightGray.cgColor
+        cell.layer.shadowOffset = CGSize(width: 0, height: 2)
+        cell.layer.shadowOpacity = 1
+        cell.layer.shadowRadius = 5
+        cell.backgroundColor = .white
+        
 
         return cell
     }
@@ -176,5 +183,4 @@ extension OptionViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width - 30, height: 60)
     }
-    
 }

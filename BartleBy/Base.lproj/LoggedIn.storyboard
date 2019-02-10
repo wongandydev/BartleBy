@@ -592,28 +592,10 @@
                     <view key="view" contentMode="scaleToFill" id="drx-Ak-pNM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="KYP-eS-WPI">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="KYP-eS-WPI" firstAttribute="top" secondItem="lgy-Mb-cal" secondAttribute="top" id="U9e-QA-5RH"/>
-                            <constraint firstAttribute="trailing" secondItem="KYP-eS-WPI" secondAttribute="trailing" id="ZsQ-aU-W3J"/>
-                            <constraint firstItem="KYP-eS-WPI" firstAttribute="width" secondItem="drx-Ak-pNM" secondAttribute="width" id="a6f-i3-cjb"/>
-                            <constraint firstItem="KYP-eS-WPI" firstAttribute="bottom" secondItem="lgy-Mb-cal" secondAttribute="bottom" id="puM-Ft-Ng7"/>
-                            <constraint firstItem="KYP-eS-WPI" firstAttribute="leading" secondItem="drx-Ak-pNM" secondAttribute="leading" id="xLy-an-3p7"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="lgy-Mb-cal"/>
                     </view>
                     <navigationItem key="navigationItem" id="Tgj-Va-94z"/>
-                    <connections>
-                        <outlet property="aboutTextView" destination="KYP-eS-WPI" id="nOf-S7-U4q"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zoy-LC-hlR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

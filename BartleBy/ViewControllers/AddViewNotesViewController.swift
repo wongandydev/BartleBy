@@ -30,10 +30,15 @@ class AddViewNotesViewController: UIViewController {
     
     @IBAction func nextDoneButtonTapped(_ sender: Any) {
         if nextDoneButton.titleLabel?.text == "Done" {
-            saveNotes(note: self.answerTextView.text, dateCreated: Helper.sharedInstance.getCurrentDate(), id: (ref?.childByAutoId().key)!)
-            compileNotes()
-            timer?.invalidate()
-            self.dismiss(animated: true, completion: nil)
+            if self.answerTextView.text != "" && self.answerTextView.text != "Enter Note" {
+                saveNotes(note: self.answerTextView.text, dateCreated: Helper.sharedInstance.getCurrentDate(), id: (ref?.childByAutoId().key)!)
+                compileNotes()
+                timer?.invalidate()
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                alertMessage(title: "Empty Note", message: "Your note is empty!")
+            }
+            
         } else {
             nextQuestion()
         }
@@ -195,7 +200,7 @@ class AddViewNotesViewController: UIViewController {
     func nextQuestion() {
         beforeButton.isEnabled = true
         
-        notes.indices.contains(currentNumber) ? notes[currentNumber].note = answerTextView.text : saveNotes(note: self.answerTextView.text, dateCreated: Helper.sharedInstance.getCurrentDate(), id: (ref?.childByAutoId().key)!)
+        notes.indices.contains(currentNumber) ? notes[currentNumber].note = answerTextView.text : saveNotes(note: self.answerTextView.text == "Enter Note" ? "" : self.answerTextView.text, dateCreated: Helper.sharedInstance.getCurrentDate(), id: (ref?.childByAutoId().key)!)
         
         currentNumber+=1
         
