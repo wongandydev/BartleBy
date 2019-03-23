@@ -32,7 +32,7 @@ extension UIViewController {
         }()
         
         let messageLabel: UILabel = {
-            let label = UILabel(frame: CGRect(x: 0, y: titleLabel.center.y + 30, width: alertView.frame.width, height: 50))
+            let label = UILabel(frame: CGRect(x: 10, y: titleLabel.center.y + 30, width: alertView.frame.width-20, height: 70))
             label.textAlignment = .center
             label.font = UIFont(name: "HelveticaNeue-Light", size: 15)
             label.numberOfLines = 5

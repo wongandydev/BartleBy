@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Firebase
 import UserNotifications
+import Mixpanel
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -41,6 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let userNotificationCenter = UNUserNotificationCenter.current()
             userNotificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
         }
+        
+        Mixpanel.initialize(token: "7fefd65f0da68515af4a5ffb099eb1d8")
         
         return true
     }

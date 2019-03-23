@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import GoogleMobileAds
+import Mixpanel
 
 class NotesViewController: UIViewController {
     
@@ -141,13 +142,15 @@ class NotesViewController: UIViewController {
 
     
     @objc func addNote() {
-        if notes == [] || notes[notes.count - 1].dateCreated.components(separatedBy: " ")[0] != Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0] {
+        if notes == [] || notes[0].dateCreated.components(separatedBy: " ")[0] != Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0] {
             if let addNoteViewController = storyboard?.instantiateViewController(withIdentifier: "AddViewNotesViewController") as? AddViewNotesViewController {
                 addNoteViewController.newNote = true
+                Mixpanel.mainInstance().track(event: "User created new note")
                 self.present(addNoteViewController, animated: true, completion: nil)
             }
         } else {
             alertMessage(title: "Already written note today", message: "Hi, it is great you want to keep writing today. But you already did today. Come back tomorrow to write again!")
+            Mixpanel.mainInstance().track(event: "User attempt to create another note")
         }
     }
     

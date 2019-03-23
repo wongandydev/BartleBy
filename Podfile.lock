@@ -54,6 +54,9 @@ PODS:
   - GoogleUtilities/UserDefaults (5.3.6):
     - GoogleUtilities/Logger
   - leveldb-library (1.20)
+  - Mixpanel-swift (2.5.5):
+    - Mixpanel-swift/Complete (= 2.5.5)
+  - Mixpanel-swift/Complete (2.5.5)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -64,6 +67,7 @@ DEPENDENCIES:
   - Firebase/AdMob
   - Firebase/Core
   - Firebase/Database
+  - Mixpanel-swift
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -76,6 +80,7 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUtilities
     - leveldb-library
+    - Mixpanel-swift
     - nanopb
 
 SPEC CHECKSUMS:
@@ -88,8 +93,9 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
   GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  Mixpanel-swift: 92fd02942ef4bf5a1bd0630a88223a417b8c8b39
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
 
-PODFILE CHECKSUM: 449155c4db38227e372f6d72c5b55f0e6cbfafb8
+PODFILE CHECKSUM: 5c432e70c32a6a872bbbf48cdba1429d4258e1dd
 
 COCOAPODS: 1.5.3

@@ -17,12 +17,16 @@ class StatsViewController: UIViewController {
     @IBOutlet weak var totalNotesLabel: UILabel!
     @IBOutlet weak var totalDaysLabel: UILabel!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        ref = Database.database().reference()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         getStats()
         
-//        cancelButton(title: "Go Back", color: .red)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
     }
     
     func getStats() {
