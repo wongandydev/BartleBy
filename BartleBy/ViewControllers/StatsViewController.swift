@@ -27,6 +27,8 @@ class StatsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        ref = Database.database().reference()
     }
     
     func getStats() {

@@ -57,7 +57,7 @@ class Helper {
         return dateFormatter.string(from: date)
     }
     
-    func valueForKey(key: String) -> String {
+    static func valueForKey(key: String) -> String {
         var returnValue: String = ""
         
         if let filePath = Bundle.main.path(forResource: "keys", ofType: "plist") as? String,
@@ -69,3 +69,4 @@ class Helper {
         return returnValue
     }
 }
+

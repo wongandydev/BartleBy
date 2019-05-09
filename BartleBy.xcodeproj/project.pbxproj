@@ -20,6 +20,7 @@
 		A02B7AD321CC3D860062DDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A02B7AD221CC3D860062DDC5 /* Assets.xcassets */; };
 		A02B7AD621CC3D860062DDC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02B7AD421CC3D860062DDC5 /* LaunchScreen.storyboard */; };
 		A03752DC220DB4D200A784CC /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03752DB220DB4D200A784CC /* UIColor+Extension.swift */; };
+		A0A4E4462283CCE800069310 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4E4452283CCE800069310 /* Constants.swift */; };
 		A0A6EDCC21D672D700637C91 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6EDCB21D672D700637C91 /* StatsViewController.swift */; };
 		A0A6EDCE21D6737100637C91 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6EDCD21D6737100637C91 /* UIViewController+Extensions.swift */; };
 		A0A6EDD021D86FD100637C91 /* NavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6EDCF21D86FD100637C91 /* NavigationController+Extension.swift */; };
@@ -65,6 +66,7 @@
 		A02B7AD521CC3D860062DDC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A02B7AD721CC3D860062DDC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A03752DB220DB4D200A784CC /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		A0A4E4452283CCE800069310 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A0A6EDCB21D672D700637C91 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		A0A6EDCD21D6737100637C91 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		A0A6EDCF21D86FD100637C91 /* NavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationController+Extension.swift"; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				A02B7ACF21CC3D850062DDC5 /* BartleBy.xcdatamodeld */,
 				A01168CC21CD5F430006C6BD /* GoogleService-Info.plist */,
 				A02B114321E6444100CE4A2F /* keys.plist */,
+				A0A4E4452283CCE800069310 /* Constants.swift */,
 				A03752DB220DB4D200A784CC /* UIColor+Extension.swift */,
 			);
 			path = BartleBy;
@@ -370,6 +373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A028098221CD3682009D7730 /* SignupSetupViewController.swift in Sources */,
+				A0A4E4462283CCE800069310 /* Constants.swift in Sources */,
 				A0C7D5AE21D1B345003EC195 /* OptionViewController.swift in Sources */,
 				A0A6EDCC21D672D700637C91 /* StatsViewController.swift in Sources */,
 				A03752DC220DB4D200A784CC /* UIColor+Extension.swift in Sources */,
