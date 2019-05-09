@@ -9,5 +9,5 @@
 import Foundation
 
 class Constants {
-    static var inDevelopment = true
+    static var inDevelopment = false
 }
