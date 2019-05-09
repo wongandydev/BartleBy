@@ -90,27 +90,46 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
         self.view.endEditing(true)
     }
     
-    func sendContactForm() {
-        if emailTextField.text!.isEmpty {
-            alertMessage(title: "Missing Email", message: "You forgot to enter a email! Without one we can't reply to your message!")
-        } else if messageTextView.textColor == .placeholderGray {
-            alertMessage(title: "Missing message", message: "You forgot to tell us what your question is!")
-        } else if !isValidEmail(email: emailTextField.text!){
-            alertMessage(title: "Error", message: "Your email was not valid. Please check again.")
-        } else {
+    private func sendContactForm() {
+        
+        var errors: [String] = []
+        
+        if !emailTextField.text!.isEmpty && messageTextView.textColor != .placeholderGray && isValidEmail(email: emailTextField.text!) && !nameTextField.text!.isEmpty {
             ref.child("messages/\(ref.childByAutoId().key!)").setValue(["email":"\(emailTextField.text!)", "name":"\(nameTextField.text!)","subject":"\(subjectTexfField.text!)","message":"\(messageTextView.text!)"],
                    withCompletionBlock: { error, ref in
                     if error != nil {
                         self.alertMessage(title: "Error", message: "There was an error sending  your message. Please try again. \(error?.localizedDescription)")
                     } else {
-                        self.submitFormMessage(title: "Sucess", message: "Your message has sucessful been sent. We will try our best to get back to you as soon as possible.")
+                        self.submitFormMessage(title: "Sucess", message: "Your message has sucessfully been sent. We will try our best to get back to you as soon as possible.")
                     }
             })
+        } else {
+        
+            if emailTextField.text!.isEmpty {
+                errors.append(" - You forgot to enter an email! Please provide one so we can get back to you!")
+            }
+            
+            if messageTextView.textColor == .placeholderGray {
+                errors.append(" - You forgot to tell us what you need help with!")
+            }
+            
+            if !isValidEmail(email: emailTextField.text!) {
+                errors.append(" - Your email is not valid. Please try again.")
+            }
+            
+            if nameTextField.text!.isEmpty {
+                errors.append(" - You forgot to enter your name! We would like to know our users. Please enter a name. if you are not comfortable at all, just write \"no name\"")
+            }
+        }
+        
+        if !errors.isEmpty {
+            let message = errors.map { String($0) }
+            self.alertMessage(title: "Error", message: message.joined(separator: "\n"))
         }
     }
     
     func isValidEmail(email:String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailRegEx = "\\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+(?:[A-Z]{2}|asia|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|travel)\\b)\\Z"
         
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: email)

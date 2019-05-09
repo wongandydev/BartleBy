@@ -10,11 +10,11 @@ import UIKit
 
 extension UIViewController {
     func alertMessage(title: String, message: String) {
-        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
         blurView.frame = self.view.frame
         blurView.tag = 124
         
-        let alertView = UIView(frame: CGRect(x: 20, y: self.view.frame.height/3, width: self.view.frame.width/1.2, height: self.view.frame.height/4))
+        let alertView = UIView(frame: CGRect(x: 20, y: self.view.frame.height/3, width: self.view.frame.width/1.2, height: 300))
         alertView.center.x = view.center.x
         alertView.center.y = view.center.y
         alertView.layer.cornerRadius = 10
@@ -32,10 +32,10 @@ extension UIViewController {
         }()
         
         let messageLabel: UILabel = {
-            let label = UILabel(frame: CGRect(x: 10, y: titleLabel.center.y + 30, width: alertView.frame.width-20, height: 70))
+            let label = UILabel(frame: CGRect(x: 10, y: titleLabel.center.y + 30, width: alertView.frame.width-20, height: 170))
             label.textAlignment = .center
             label.font = UIFont(name: "HelveticaNeue-Light", size: 15)
-            label.numberOfLines = 5
+            label.numberOfLines = 10
             label.text = message
             return label
         }()
