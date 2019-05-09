@@ -66,10 +66,10 @@ class OptionViewController: UIViewController {
     }
     
     func setupBannerAd() {
-        self.bannerAdView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        self.bannerAdView.adUnitID = Constants.googleAdMobBannerId
         self.bannerAdView.rootViewController = self;
         let request = GADRequest()
-        request.testDevices = [kGADSimulatorID]
+//        request.testDevices = [kGADSimulatorID]
         bannerAdView.load(request)
     }
     

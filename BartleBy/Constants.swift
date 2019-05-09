@@ -10,4 +10,5 @@ import Foundation
 
 class Constants {
     static var inDevelopment = false
+    static var googleAdMobBannerId = inDevelopment ? Helper.valueForKey(key: "GoogleADMobBannerTestID"): Helper.valueForKey(key: "GoogleADMobBannerID")
 }
