@@ -11,7 +11,7 @@ import Firebase
 
 class StatsViewController: UIViewController {
     var ref: DatabaseReference!
-    private let userUID = UIDevice.current.identifierForVendor?.uuidString
+    private let userUID = UserDefaults.standard.string(forKey: "userUID")
     @IBOutlet weak var streakNumberLabel: UILabel!
     @IBOutlet weak var totalNumberLabel: UILabel!
     @IBOutlet weak var totalNotesLabel: UILabel!
@@ -26,8 +26,7 @@ class StatsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+
         ref = Database.database().reference()
     }
     

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Q2p-ZA-nYp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Q2p-ZA-nYp">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -329,7 +329,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="pnY-N9-7D7">
-                                <rect key="frame" x="0.0" y="97.999999999999972" width="414" height="360.33333333333326"/>
+                                <rect key="frame" x="0.0" y="98" width="414" height="360"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="coK-TE-GZK">
                                         <rect key="frame" x="52" y="0.0" width="310" height="61.666666666666664"/>
@@ -357,29 +357,29 @@
                                         <rect key="frame" x="47" y="91.666666666666657" width="320" height="215.99999999999997"/>
                                     </pickerView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vwL-rV-Udo">
-                                        <rect key="frame" x="35" y="337.66666666666669" width="344" height="22.666666666666686"/>
+                                        <rect key="frame" x="35" y="337.66666666666669" width="344" height="22.333333333333314"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="3ph-7e-WRE">
-                                                <rect key="frame" x="0.0" y="0.0" width="344" height="22.666666666666668"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="344" height="22.333333333333332"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I want to write" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GAz-nF-8wi">
-                                                        <rect key="frame" x="0.0" y="1.3333333333333144" width="96.666666666666671" height="20.333333333333332"/>
+                                                        <rect key="frame" x="0.0" y="1" width="96.666666666666671" height="20.333333333333332"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ClV-ie-Qhm">
-                                                        <rect key="frame" x="126.66666666666664" y="0.0" width="217.33333333333337" height="22.666666666666668"/>
+                                                        <rect key="frame" x="126.66666666666664" y="0.0" width="217.33333333333337" height="22.333333333333332"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1232" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sep-3U-HYc">
-                                                                <rect key="frame" x="0.0" y="0.0" width="42.333333333333336" height="22.666666666666668"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="42.333333333333336" height="22.333333333333332"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="19"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="things I am grateful for" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NOJ-uU-UIt">
-                                                                <rect key="frame" x="62.333333333333343" y="0.0" width="155" height="22.666666666666668"/>
+                                                                <rect key="frame" x="62.333333333333343" y="0.0" width="155" height="22.333333333333332"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -406,20 +406,34 @@
                                     <action selector="saveButtonTapped:" destination="7Qx-XR-rBw" eventType="touchUpInside" id="MQX-Bd-e6G"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By doing grateful writing, you are listting out what you Grateful for." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOh-bL-WaQ">
+                                <rect key="frame" x="20" y="481" width="374" height="259"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="259" id="jgk-vm-J0c"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="OOh-bL-WaQ" firstAttribute="top" secondItem="pnY-N9-7D7" secondAttribute="bottom" constant="23" id="17H-q5-RpX"/>
                             <constraint firstItem="xpG-FM-P5a" firstAttribute="leading" secondItem="pnY-N9-7D7" secondAttribute="leading" id="2Is-fl-RGf"/>
+                            <constraint firstItem="xpG-FM-P5a" firstAttribute="top" secondItem="OOh-bL-WaQ" secondAttribute="bottom" constant="8" symbolic="YES" id="FOA-qg-AsA"/>
+                            <constraint firstItem="OOh-bL-WaQ" firstAttribute="centerX" secondItem="xpG-FM-P5a" secondAttribute="centerX" id="HuJ-b2-NP1"/>
                             <constraint firstItem="pnY-N9-7D7" firstAttribute="width" secondItem="UJW-Rh-azh" secondAttribute="width" id="LJo-BZ-61L"/>
                             <constraint firstItem="xpG-FM-P5a" firstAttribute="trailing" secondItem="pnY-N9-7D7" secondAttribute="trailing" id="UaB-3M-kz3"/>
                             <constraint firstItem="pnY-N9-7D7" firstAttribute="top" secondItem="t4f-pu-OCZ" secondAttribute="top" constant="10" id="YAi-fm-zs7"/>
                             <constraint firstItem="pnY-N9-7D7" firstAttribute="centerX" secondItem="t4f-pu-OCZ" secondAttribute="centerX" id="g3w-tA-xhl"/>
                             <constraint firstItem="xpG-FM-P5a" firstAttribute="bottom" secondItem="t4f-pu-OCZ" secondAttribute="bottom" id="nCY-Us-Qr6"/>
+                            <constraint firstItem="OOh-bL-WaQ" firstAttribute="leading" secondItem="UJW-Rh-azh" secondAttribute="leadingMargin" id="ovB-fF-Zxd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="t4f-pu-OCZ"/>
                     </view>
                     <navigationItem key="navigationItem" id="jGP-tf-dhf"/>
                     <connections>
+                        <outlet property="descriptionLabel" destination="OOh-bL-WaQ" id="ehq-sV-4S3"/>
                         <outlet property="numberLabel" destination="sep-3U-HYc" id="uDj-dq-9aj"/>
                         <outlet property="numberPicker" destination="QVG-Cq-2uq" id="QDy-38-LRk"/>
                         <outlet property="optionSegmentControl" destination="ms2-u6-b6j" id="Wsv-jM-EEt"/>
