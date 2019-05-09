@@ -21,6 +21,7 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
     @IBOutlet weak var messageTextView: UITextView!
     @IBOutlet weak var submitFormButton: UIButton!
     @IBAction func submitFormButtonTapped(_ sender: Any) {
+        self.view.endEditing(true)
         sendContactForm()
     }
     override func viewDidLoad() {
@@ -44,8 +45,13 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-                        self.view.frame.origin.y = -keyboardFrame.cgRectValue.height+50
-
+            let screenHeight = self.view.frame.height
+            let doneToolbar = 10
+            
+            let screenMiddleY = screenHeight/2
+            let newMiddleY = ((screenHeight + 44) - CGFloat(keyboardFrame.cgRectValue.height))/2 - CGFloat(doneToolbar)
+            let distance = screenMiddleY-newMiddleY
+            self.view.frame.origin.y = -distance
         }
     }
     

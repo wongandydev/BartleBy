@@ -14,6 +14,7 @@ class ConfigViewController: UIViewController {
     @IBOutlet weak var numberPicker: UIPickerView!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBAction func saveButtonTapped(_ sender: Any) {
         saveNewTemplateSettings()
     }
@@ -59,12 +60,15 @@ class ConfigViewController: UIViewController {
                 typeLabel.text = "things I am grateful for"
             }
             
+            descriptionLabel.text = "By setting grateful writing, you are listing out what you grateful for."
         case 1:
             if numberPicker.selectedRow(inComponent: 0) < 1 {
                 typeLabel.text = "minute of free write"
             } else {
                 typeLabel.text = "minutes of free write"
             }
+            
+            descriptionLabel.text = "By setting free write, you are writing for a certain amount of time. The note will immediately stop after the time is depleated. Don't worry, you can leave the app and the timer will pause. You can also finish early if you'd like."
         default:
             break
         }
