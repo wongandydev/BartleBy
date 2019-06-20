@@ -11,7 +11,6 @@ import UIKit
 extension UIViewController {
     func alertMessage(title: String, message: String) {
         let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-        blurView.frame = self.view.frame
         blurView.tag = 124
         
         let alertView = UIView()
@@ -75,8 +74,11 @@ extension UIViewController {
         })
 
         self.view.addSubview(blurView)
-        self.view.addSubview(alertView)
+        blurView.snp.makeConstraints({ make in
+            make.edges.equalToSuperview()
+        })
         
+        self.view.addSubview(alertView)
         alertView.snp.makeConstraints({ make in
             make.center.equalToSuperview()
             make.width.equalToSuperview().dividedBy(1.2)
