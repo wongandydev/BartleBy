@@ -14,17 +14,14 @@ extension UIViewController {
         blurView.frame = self.view.frame
         blurView.tag = 124
         
-        let alertView = UIView(frame: CGRect(x: 20, y: self.view.frame.height/3, width: self.view.frame.width/1.2, height: 300))
-        alertView.center.x = view.center.x
-        alertView.center.y = view.center.y
+        let alertView = UIView()
         alertView.layer.cornerRadius = 10
         alertView.layer.borderColor = UIColor.lightGray.cgColor
         alertView.tag = 123
         alertView.backgroundColor = .alertWhite
-//        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         let titleLabel: UILabel = {
-            let label = UILabel(frame: CGRect(x: 0, y: 10, width: alertView.frame.width, height: 20))
+            let label = UILabel()
             label.textAlignment = .center
             label.text = title
             label.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
@@ -32,7 +29,7 @@ extension UIViewController {
         }()
         
         let messageLabel: UILabel = {
-            let label = UILabel(frame: CGRect(x: 10, y: titleLabel.center.y + 30, width: alertView.frame.width-20, height: 170))
+            let label = UILabel()
             label.textAlignment = .center
             label.font = UIFont(name: "HelveticaNeue-Light", size: 15)
             label.numberOfLines = 10
@@ -41,7 +38,7 @@ extension UIViewController {
         }()
         
         let okButton: UIButton = {
-            let button = UIButton(frame: CGRect(x: 0, y: alertView.frame.height - 50, width: alertView.frame.width, height: 50))
+            let button = UIButton()
             button.setTitleColor(.black, for: .normal)
             button.setTitle("I got it", for: .normal)
             button.layer.cornerRadius = 10
@@ -56,11 +53,35 @@ extension UIViewController {
         okButton.addTarget(self, action: #selector(exitAlert(sender:)), for: .touchUpInside)
         
         alertView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints({ make in
+            make.top.equalToSuperview().offset(10)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalTo(20)
+        })
+        
         alertView.addSubview(messageLabel)
+        messageLabel.snp.makeConstraints({ make in
+            make.center.equalToSuperview()
+            make.left.right.equalToSuperview().inset(20)
+        })
+        
         alertView.addSubview(okButton)
+        okButton.snp.makeConstraints({ make in
+            make.bottom.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalTo(50)
+            make.centerX.equalToSuperview()
+        })
 
         self.view.addSubview(blurView)
         self.view.addSubview(alertView)
+        
+        alertView.snp.makeConstraints({ make in
+            make.center.equalToSuperview()
+            make.width.equalToSuperview().dividedBy(1.2)
+            make.height.equalTo(300)
+        })
     }
     
     @objc func exitAlert(sender: UIButton){

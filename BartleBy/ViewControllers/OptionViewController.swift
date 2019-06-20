@@ -27,7 +27,7 @@ class OptionViewController: UIViewController {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
         
-        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 200, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 354), collectionViewLayout: flowLayout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "optionCell")
         collectionView.backgroundColor = .clear
         
@@ -40,10 +40,8 @@ class OptionViewController: UIViewController {
         super.viewDidLoad()
         ref = Database.database().reference()
         
-        setupNavbar()
         layoutSubviews()
         getUsername()
-        addEditButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,34 +50,52 @@ class OptionViewController: UIViewController {
         
     }
     
-    fileprivate func setupNavbar() {
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.tintColor = Constants.applicationAccentColor
-        self.navigationController?.navigationBar.barTintColor = Constants.lightestGray
-        self.navigationController?.navigationBar.backgroundColor = .white
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-    }
-    
     private func layoutSubviews() {
         self.view.backgroundColor = .white
-        usernameLabel.frame = CGRect(x: 10, y: 100, width: view.frame.width - 20, height: 35)
+        
         view.addSubview(usernameLabel)
+        usernameLabel.snp.makeConstraints({ make in
+            make.width.equalToSuperview().offset(20)
+            make.height.equalTo(35)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(self.view).offset(Constants.topPadding)
+        })
+        
+        let editButton = UIButton(frame: CGRect(x: (self.view.frame.width/2) - 30, y: 150, width: 60, height: 35))
+        editButton.backgroundColor = .red
+        editButton.layer.cornerRadius = 15
+        editButton.setTitle("Edit", for: .normal)
+        editButton.addTarget(self, action: #selector(editAction), for: .touchUpInside)
+        
+        self.view.addSubview(editButton)
+        editButton.snp.makeConstraints({ make in
+            make.width.equalTo(60)
+            make.height.equalTo(40)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(usernameLabel.snp.bottom).offset(10)
+        })
+        
+        optionsCollectionView.delegate = self
+        optionsCollectionView.dataSource = self
+        
+        view.addSubview(optionsCollectionView)
+        optionsCollectionView.snp.makeConstraints({ make in
+            make.width.equalToSuperview()
+            make.height.equalTo(self.view.frame.height - 354)
+            make.center.equalToSuperview()
+        })
         
         bannerAdView = GADBannerView()
+        bannerAdView.backgroundColor = .black
         setupBannerAd()
         
-        self.view.addSubview(bannerAdView)
+        view.addSubview(bannerAdView)
         bannerAdView.snp.makeConstraints({ make in
-            make.bottom.equalToSuperview().inset(20)
+            make.bottom.equalTo(bottomLayoutGuide.snp.top)
             make.centerX.equalToSuperview()
             make.width.equalTo(320)
             make.height.equalTo(50)
         })
-        
-        
-        optionsCollectionView.delegate = self
-        optionsCollectionView.dataSource = self
-        view.addSubview(optionsCollectionView)
     }
     
     func setupBannerAd() {
@@ -96,15 +112,6 @@ class OptionViewController: UIViewController {
                 self.usernameLabel.text = serverUsername
             }
         })
-    }
-    
-    func addEditButton() {
-        let editButton = UIButton(frame: CGRect(x: (self.view.frame.width/2) - 30, y: 150, width: 60, height: 35))
-        editButton.backgroundColor = .red
-        editButton.layer.cornerRadius = 15
-        editButton.setTitle("Edit", for: .normal)
-        editButton.addTarget(self, action: #selector(editAction), for: .touchUpInside)
-        self.view.addSubview(editButton)
     }
 
    @objc func editAction() {

@@ -75,14 +75,19 @@ class AddViewNotesViewController: UIViewController {
         self.view.backgroundColor = .white
         
         beforeButton = UIButton()
+        beforeButton.backgroundColor = .green
         beforeButton.addTarget(self, action: #selector(beforeButtonTapped(_:)), for: .touchUpInside)
         
         self.view.addSubview(beforeButton)
         beforeButton.snp.makeConstraints({ make in
-            
+            make.width.equalToSuperview().dividedBy(2)
+            make.height.equalTo(66)
+            make.left.equalToSuperview().offset(20)
+            make.top.equalTo(topLayoutGuide.snp.bottom)
         })
         
         nextDoneButton = UIButton()
+        nextDoneButton.backgroundColor = .red
         nextDoneButton.addTarget(self, action: #selector(nextDoneButtonTapped(_:)), for: .touchUpInside)
         
         self.view.addSubview(nextDoneButton)
@@ -91,6 +96,7 @@ class AddViewNotesViewController: UIViewController {
         })
         
         questionLabel = UILabel()
+        questionLabel.backgroundColor = .yellow
         
         self.view.addSubview(questionLabel)
         questionLabel.snp.makeConstraints({ make in
@@ -99,6 +105,7 @@ class AddViewNotesViewController: UIViewController {
         
         answerTextView = UITextView()
         answerTextView.delegate = self
+        answerTextView.backgroundColor = .black
         answerTextView.contentInset = UIEdgeInsets(top: 20, left: 10, bottom: 0, right: 10)
         
         self.view.addSubview(answerTextView)
@@ -107,6 +114,7 @@ class AddViewNotesViewController: UIViewController {
         })
         
         cancelButton = UIButton()
+        cancelButton.backgroundColor = . brown
         cancelButton.setTitle("I want to work on this later.", for: .normal)
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped(_:)), for: .touchUpInside)
         

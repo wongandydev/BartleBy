@@ -59,12 +59,13 @@ class NotesViewController: UIViewController {
     fileprivate func setupTableView() {
         notesTableView.delegate = self
         notesTableView.dataSource = self
-//        self.edgesForExtendedLayout = .init(rawValue: 0)
         notesTableView.tableFooterView = UIView()
         registerCells()
     }
     
     fileprivate func layoutSubviews() {
+        self.edgesForExtendedLayout = .init(rawValue: 0)
+        
         notesTableView = UITableView()
         notesTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         setupTableView()
@@ -83,11 +84,12 @@ class NotesViewController: UIViewController {
         })
         
         bannerAdView = GADBannerView()
+        bannerAdView.backgroundColor = .black
         setupBannerAd()
         
         self.view.addSubview(bannerAdView)
         bannerAdView.snp.makeConstraints({ make in
-            make.bottom.equalToSuperview().inset(20)
+            make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
             make.width.equalTo(320)
             make.height.equalTo(50)
