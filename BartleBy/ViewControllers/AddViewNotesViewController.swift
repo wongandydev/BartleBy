@@ -75,7 +75,8 @@ class AddViewNotesViewController: UIViewController {
         self.view.backgroundColor = .white
         
         beforeButton = UIButton()
-        beforeButton.backgroundColor = .green
+        beforeButton.setTitleColor(.red, for: .normal)
+        beforeButton.setTitleColor(.black, for: .highlighted)
         beforeButton.addTarget(self, action: #selector(beforeButtonTapped(_:)), for: .touchUpInside)
         
         self.view.addSubview(beforeButton)
@@ -87,7 +88,8 @@ class AddViewNotesViewController: UIViewController {
         })
         
         nextDoneButton = UIButton()
-        nextDoneButton.backgroundColor = .red
+        nextDoneButton.setTitleColor(.blue, for: .normal)
+        nextDoneButton.setTitleColor(.black, for: .highlighted)
         nextDoneButton.addTarget(self, action: #selector(nextDoneButtonTapped(_:)), for: .touchUpInside)
         
         self.view.addSubview(nextDoneButton)
@@ -100,7 +102,6 @@ class AddViewNotesViewController: UIViewController {
         })
         
         questionLabel = UILabel()
-        questionLabel.backgroundColor = .yellow
         
         self.view.addSubview(questionLabel)
         questionLabel.snp.makeConstraints({ make in
@@ -123,7 +124,6 @@ class AddViewNotesViewController: UIViewController {
         
         answerTextView = UITextView()
         answerTextView.delegate = self
-        answerTextView.backgroundColor = .black
         answerTextView.contentInset = UIEdgeInsets(top: 20, left: 10, bottom: 0, right: 10)
         
         self.view.addSubview(answerTextView)

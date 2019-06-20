@@ -62,9 +62,11 @@ class OptionViewController: UIViewController {
         })
         
         let editButton = UIButton(frame: CGRect(x: (self.view.frame.width/2) - 30, y: 150, width: 60, height: 35))
-        editButton.backgroundColor = .red
-        editButton.layer.cornerRadius = 15
+//        editButton.backgroundColor = .red
+//        editButton.layer.cornerRadius = 15
         editButton.setTitle("Edit", for: .normal)
+        editButton.setTitleColor(Constants.applicationAccentColor, for: .normal)
+        editButton.setTitleColor(.black, for: .highlighted)
         editButton.addTarget(self, action: #selector(editAction), for: .touchUpInside)
         
         self.view.addSubview(editButton)
