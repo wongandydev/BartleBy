@@ -75,15 +75,6 @@ class OptionViewController: UIViewController {
             make.top.equalTo(usernameLabel.snp.bottom).offset(10)
         })
         
-        optionsCollectionView.delegate = self
-        optionsCollectionView.dataSource = self
-        
-        view.addSubview(optionsCollectionView)
-        optionsCollectionView.snp.makeConstraints({ make in
-            make.width.equalToSuperview()
-            make.height.equalTo(self.view.frame.height - 354)
-            make.center.equalToSuperview()
-        })
         
         bannerAdView = GADBannerView()
         bannerAdView.backgroundColor = .black
@@ -96,6 +87,17 @@ class OptionViewController: UIViewController {
             make.width.equalTo(320)
             make.height.equalTo(50)
         })
+        
+        optionsCollectionView.delegate = self
+        optionsCollectionView.dataSource = self
+        
+        view.addSubview(optionsCollectionView)
+        optionsCollectionView.snp.makeConstraints({ make in
+            make.width.equalToSuperview()
+            make.bottom.equalTo(bannerAdView.snp.top)
+            make.center.equalToSuperview()
+        })
+      
     }
     
     func setupBannerAd() {
