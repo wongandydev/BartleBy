@@ -62,12 +62,14 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - SnapKit (4.0.1)
 
 DEPENDENCIES:
   - Firebase/AdMob
   - Firebase/Core
   - Firebase/Database
   - Mixpanel-swift
+  - SnapKit (~> 4.0.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -82,6 +84,7 @@ SPEC REPOS:
     - leveldb-library
     - Mixpanel-swift
     - nanopb
+    - SnapKit
 
 SPEC CHECKSUMS:
   Firebase: 6df9a6114bc9f106a98fe83d5438d4d9833c2019
@@ -95,7 +98,8 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   Mixpanel-swift: 92fd02942ef4bf5a1bd0630a88223a417b8c8b39
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
 
-PODFILE CHECKSUM: 5c432e70c32a6a872bbbf48cdba1429d4258e1dd
+PODFILE CHECKSUM: 5f86e31cd627de59f047bc6c9c77b61a5bda4822
 
 COCOAPODS: 1.5.3

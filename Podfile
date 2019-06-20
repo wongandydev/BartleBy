@@ -11,6 +11,7 @@ target 'BartleBy' do
 	pod 'Firebase/Database'
 	pod 'Firebase/AdMob'
 	pod 'Mixpanel-swift'
+	pod 'SnapKit', '~> 4.0.0'
 
   target 'BartleByTests' do
     inherit! :search_paths

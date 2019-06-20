@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9EFBDB6B12FB1F8D525A016084797169"
-               BlueprintName = "Mixpanel-swift"
+               BlueprintIdentifier = "CEB7F370651834EA2937C08C2E326EC0"
+               BlueprintName = "SnapKit"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "Mixpanel-swift.framework">
+               BuildableName = "SnapKit.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
