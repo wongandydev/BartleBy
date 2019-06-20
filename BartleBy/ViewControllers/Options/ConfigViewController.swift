@@ -12,27 +12,27 @@ import Firebase
 class ConfigViewController: UIViewController {
     /* Manage Type of Writing */
     
+    private var titleLabel: UILabel!
     private var optionSegmentControl: UISegmentedControl!
     private var numberPicker: UIPickerView!
     private var numberLabel: UILabel!
-    private var typeLabel: UILabel!
     private var descriptionLabel: UILabel!
+    private var saveButton: UIButton!
     
     @objc func saveButtonTapped(_ sender: Any) {
         saveNewTemplateSettings()
     }
     
     @objc func optionSegmentChanged(_ sender: Any) {
-        setTypeLabel()
+        setLabels()
     }
+    
     var ref: DatabaseReference!
     var number: [Int] = Array(1...1000)
     var selectedNumber: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-     
         
         layoutSubviews()
         
@@ -41,7 +41,7 @@ class ConfigViewController: UIViewController {
         getSelectedNumber(completion: { number in
             self.selectedNumber = number
             self.numberPicker.selectRow(number-1, inComponent: 0, animated: true)
-            self.numberLabel.text = String(number)
+            self.setLabels()
         })
         
         getTemplateType(completion: { templateType in
@@ -51,33 +51,92 @@ class ConfigViewController: UIViewController {
                 self.optionSegmentControl.selectedSegmentIndex = 1
             }
             
-            self.setTypeLabel()
+            self.setLabels()
         })
     }
     
     fileprivate func layoutSubviews() {
+        self.view.backgroundColor = .white
+        
+        titleLabel = UILabel()
+        titleLabel.text = "What template would you like to use?"
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .center
+        
+        self.view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints({ make in
+            make.top.equalTo(topLayoutGuide.snp.bottom).offset(30)
+            make.left.right.equalToSuperview().inset(10)
+        })
+        
+        optionSegmentControl = UISegmentedControl()
+        optionSegmentControl.insertSegment(withTitle: "Grateful", at: 0, animated: false)
+        optionSegmentControl.insertSegment(withTitle: "Free Write", at: 1, animated: false)
+        optionSegmentControl.tintColor = Constants.applicationAccentColor
+        optionSegmentControl.addTarget(self, action: #selector(optionSegmentChanged(_:)), for: .valueChanged)
+        
+        self.view.addSubview(optionSegmentControl)
+        optionSegmentControl.snp.makeConstraints({ make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+        })
+        
+        
+        numberPicker = UIPickerView()
         numberPicker.delegate = self
         numberPicker.dataSource = self
+        
+        self.view.addSubview(numberPicker)
+        numberPicker.snp.makeConstraints({ make in
+            make.width.equalToSuperview()
+            make.top.equalTo(optionSegmentControl.snp.bottom).offset(20)
+        })
+        
+        numberLabel = UILabel()
+        numberLabel.numberOfLines = 0
+        numberLabel.textAlignment = .center
+        
+        self.view.addSubview(numberLabel)
+        numberLabel.snp.makeConstraints({ make in
+            make.top.equalTo(numberPicker.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+        })
+        
+        descriptionLabel = UILabel()
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.textAlignment = .justified
+        
+        self.view.addSubview(descriptionLabel)
+        descriptionLabel.snp.makeConstraints({ make in
+            make.top.equalTo(numberLabel.snp.bottom).offset(30)
+            make.left.right.equalToSuperview().inset(20)
+        })
+        
+        saveButton = UIButton()
+        saveButton.backgroundColor = .green
+        saveButton.setTitle("Save", for: .normal)
+        saveButton.setTitleColor(.white, for: .normal)
+        saveButton.setTitleColor(.green, for: .highlighted)
+        saveButton.addTarget(self, action: #selector(saveButtonTapped(_:)), for: .touchUpInside)
+        
+        self.view.addSubview(saveButton)
+        saveButton.snp.makeConstraints({ make in
+            make.width.equalToSuperview()
+            make.height.equalTo(Constants.bottomButtonHeight)
+            make.bottom.equalTo(bottomLayoutGuide.snp.top)
+        })
     }
     
-    func setTypeLabel() {
+    func setLabels() {
         switch  optionSegmentControl.selectedSegmentIndex {
         case 0:
-            if numberPicker.selectedRow(inComponent: 0) < 1 {
-                typeLabel.text = "thing I am grateful for"
-            } else {
-                typeLabel.text = "things I am grateful for"
-            }
-            
+            numberLabel.text = selectedNumber > 1 ? "I want to write \(selectedNumber) things I am grateful for." : "I want to write \(selectedNumber) thing I am grateful for."
             descriptionLabel.text = "By setting grateful writing, you are listing out what you grateful for."
+            break
         case 1:
-            if numberPicker.selectedRow(inComponent: 0) < 1 {
-                typeLabel.text = "minute of free write"
-            } else {
-                typeLabel.text = "minutes of free write"
-            }
-            
+            numberLabel.text = selectedNumber > 1 ? "I want to write \(selectedNumber) minutes of free write." : "I want to write \(selectedNumber) minute of free write."
             descriptionLabel.text = "By setting free write, you are writing for a certain amount of time. The note will immediately stop after the time is depleated. Don't worry, you can leave the app and the timer will pause. You can also finish early if you'd like."
+            break
         default:
             break
         }
@@ -144,8 +203,7 @@ extension ConfigViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedNumber = number[row]
-        numberLabel.text = String(number[row])
-        setTypeLabel()
+        setLabels()
     }
     
     

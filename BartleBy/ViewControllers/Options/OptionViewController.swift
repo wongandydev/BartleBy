@@ -182,17 +182,30 @@ extension OptionViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.row {
             case 0:
-                performSegue(withIdentifier: "gotoConfigVC", sender: nil)
+                let configVC = ConfigViewController()
+                self.navigationController?.pushViewController(configVC, animated: true)
+                break
             case 1:
-                performSegue(withIdentifier: "gotoNotificationVC", sender: nil)
+                let notificationVC = NotificationViewController()
+                self.navigationController?.pushViewController(notificationVC, animated: true)
+                break
             case 2:
-                performSegue(withIdentifier: "gotoStatsVC", sender: nil)
+                let statsVC = StatsViewController()
+                self.navigationController?.pushViewController(statsVC, animated: true)
+                break
             case 3:
                 performSegue(withIdentifier: "gotoHelpVC", sender: nil)
+                let helpVC = HelpViewController()
+                self.navigationController?.pushViewController(helpVC, animated: true)
+                break
             case 4:
                 performSegue(withIdentifier: "gotoAboutVC", sender: nil)
+                let aboutVC = AboutViewController()
+                self.navigationController?.pushViewController(aboutVC, animated: true)
+                break
             default:
                 print("defaulted")
+                break
         }
 
         self.optionsCollectionView.deselectItem(at: indexPath, animated: true)

@@ -121,7 +121,7 @@ class AddViewNotesViewController: UIViewController {
         cancelButton.snp.makeConstraints({ make in
             make.bottom.equalTo(bottomLayoutGuide.snp.top)
             make.width.equalToSuperview()
-            make.height.equalTo(60)
+            make.height.equalTo(Constants.bottomButtonHeight)
         })
         
         answerTextView = UITextView()

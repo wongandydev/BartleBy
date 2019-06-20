@@ -18,4 +18,6 @@ class Constants {
     static let topPadding               = CGFloat(UIApplication.shared.windows[0].safeAreaInsets.top)
     static var bottomPadding            = CGFloat(UIApplication.shared.windows[0].safeAreaInsets.bottom)
     static let tabBarHeight             = CGFloat(49.0)
+    
+    static let bottomButtonHeight       = 60
 }
