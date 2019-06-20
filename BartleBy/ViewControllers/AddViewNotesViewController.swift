@@ -10,50 +10,11 @@ import Firebase
 import UIKit
 
 class AddViewNotesViewController: UIViewController {
-    @IBOutlet weak var beforeButton: UIButton!
-    @IBOutlet weak var nextDoneButton: UIButton!
-    @IBOutlet weak var questionLabel: UILabel!
-    @IBOutlet weak var answerTextView: UITextView!
-    @IBOutlet weak var cancelButton: UIButton!
-    
-    @IBAction func beforeButtonTapped(_ sender: Any) {
-        currentNumber -= 1
-
-        if currentNumber == 0 {
-            beforeButton.isEnabled = false
-        }
-        
-        nextDoneButton.setTitle("Next", for: .normal)
-        questionLabel.text = "\(currentNumber + 1)) What are you grateful for?"
-        answerTextView.text = notes[currentNumber].note
-    }
-    
-    @IBAction func nextDoneButtonTapped(_ sender: Any) {
-        if nextDoneButton.titleLabel?.text == "Done" {
-            if self.answerTextView.text != "" && self.answerTextView.text != "Enter Note" {
-                saveNotes(note: self.answerTextView.text, dateCreated: Helper.sharedInstance.getCurrentDate(), id: (ref?.childByAutoId().key)!)
-                compileNotes()
-                timer?.invalidate()
-                self.dismiss(animated: true, completion: nil)
-            } else {
-                alertMessage(title: "Empty Note", message: "Your note is empty!")
-            }
-            
-        } else {
-            nextQuestion()
-        }
-    }
-    @IBAction func cancelButtonTapped(_ sender: Any) {
-        if cancelButton.titleLabel?.text == "I want to work on this later."{
-            alertLeaveMessage(title: "WAIT!!!", message: "Are you sure you want to do this later? All your progress will not be saved!", cancel: true)
-        } else {
-            if notes[0].note != answerTextView.text {
-                notes[0].note = answerTextView.text
-                compileNotes()
-            }
-            self.dismiss(animated: true, completion: nil)
-        }
-    }
+    private var beforeButton: UIButton!
+    private var nextDoneButton: UIButton!
+    private var questionLabel: UILabel!
+    private var answerTextView: UITextView!
+    private var cancelButton: UIButton!
     
     var ref: DatabaseReference!
     
@@ -73,9 +34,7 @@ class AddViewNotesViewController: UIViewController {
         super.viewDidLoad()
 
         ref = Database.database().reference()
-        answerTextView.contentInset = UIEdgeInsets(top: 20, left: 10, bottom: 0, right: 10)
-        cancelButton.setTitle("I want to work on this later.", for: .normal)
-        answerTextView.delegate = self
+        layoutSubviews()
         addKeyboardDoneButton()
         
         getTemplateType(completion: { templateType in
@@ -102,6 +61,59 @@ class AddViewNotesViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    fileprivate func setupNavbar() {
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.tintColor = Constants.applicationAccentColor
+        self.navigationController?.navigationBar.barTintColor = Constants.lightestGray
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
+    fileprivate func layoutSubviews() {
+        self.view.backgroundColor = .white
+        
+        beforeButton = UIButton()
+        beforeButton.addTarget(self, action: #selector(beforeButtonTapped(_:)), for: .touchUpInside)
+        
+        self.view.addSubview(beforeButton)
+        beforeButton.snp.makeConstraints({ make in
+            
+        })
+        
+        nextDoneButton = UIButton()
+        nextDoneButton.addTarget(self, action: #selector(nextDoneButtonTapped(_:)), for: .touchUpInside)
+        
+        self.view.addSubview(nextDoneButton)
+        nextDoneButton.snp.makeConstraints({ make in
+            
+        })
+        
+        questionLabel = UILabel()
+        
+        self.view.addSubview(questionLabel)
+        questionLabel.snp.makeConstraints({ make in
+            
+        })
+        
+        answerTextView = UITextView()
+        answerTextView.delegate = self
+        answerTextView.contentInset = UIEdgeInsets(top: 20, left: 10, bottom: 0, right: 10)
+        
+        self.view.addSubview(answerTextView)
+        answerTextView.snp.makeConstraints({ make in
+            
+        })
+        
+        cancelButton = UIButton()
+        cancelButton.setTitle("I want to work on this later.", for: .normal)
+        cancelButton.addTarget(self, action: #selector(cancelButtonTapped(_:)), for: .touchUpInside)
+        
+        self.view.addSubview(cancelButton)
+        cancelButton.snp.makeConstraints({ make in
+            
+        })
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -273,6 +285,47 @@ class AddViewNotesViewController: UIViewController {
         
         self.view.addSubview(blurView)
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    
+    @objc func beforeButtonTapped(_ sender: Any) {
+        currentNumber -= 1
+        
+        if currentNumber == 0 {
+            beforeButton.isEnabled = false
+        }
+        
+        nextDoneButton.setTitle("Next", for: .normal)
+        questionLabel.text = "\(currentNumber + 1)) What are you grateful for?"
+        answerTextView.text = notes[currentNumber].note
+    }
+    
+    @objc func nextDoneButtonTapped(_ sender: Any) {
+        if nextDoneButton.titleLabel?.text == "Done" {
+            if self.answerTextView.text != "" && self.answerTextView.text != "Enter Note" {
+                saveNotes(note: self.answerTextView.text, dateCreated: Helper.sharedInstance.getCurrentDate(), id: (ref?.childByAutoId().key)!)
+                compileNotes()
+                timer?.invalidate()
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                alertMessage(title: "Empty Note", message: "Your note is empty!")
+            }
+            
+        } else {
+            nextQuestion()
+        }
+    }
+    
+    @objc func cancelButtonTapped(_ sender: Any) {
+        if cancelButton.titleLabel?.text == "I want to work on this later."{
+            alertLeaveMessage(title: "WAIT!!!", message: "Are you sure you want to do this later? All your progress will not be saved!", cancel: true)
+        } else {
+            if notes[0].note != answerTextView.text {
+                notes[0].note = answerTextView.text
+                compileNotes()
+            }
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 

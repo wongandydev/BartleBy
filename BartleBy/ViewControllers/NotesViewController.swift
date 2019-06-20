@@ -53,7 +53,6 @@ class NotesViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = Constants.applicationAccentColor
         self.navigationController?.navigationBar.barTintColor = Constants.lightestGray
         self.navigationController?.navigationBar.backgroundColor = .white
-        self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
