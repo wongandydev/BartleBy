@@ -80,9 +80,9 @@ class AddViewNotesViewController: UIViewController {
         
         self.view.addSubview(beforeButton)
         beforeButton.snp.makeConstraints({ make in
-            make.width.equalToSuperview().dividedBy(2)
+            make.width.equalToSuperview().dividedBy(2.2)
             make.height.equalTo(66)
-            make.left.equalToSuperview().offset(20)
+            make.left.equalToSuperview().inset(10)
             make.top.equalTo(topLayoutGuide.snp.bottom)
         })
         
@@ -92,7 +92,11 @@ class AddViewNotesViewController: UIViewController {
         
         self.view.addSubview(nextDoneButton)
         nextDoneButton.snp.makeConstraints({ make in
-            
+            make.width.equalToSuperview().dividedBy(2.2)
+            make.height.equalTo(66)
+            make.right.equalToSuperview().inset(10)
+            make.left.equalTo(beforeButton.snp.right).inset(5)
+            make.top.equalTo(topLayoutGuide.snp.bottom)
         })
         
         questionLabel = UILabel()
@@ -100,7 +104,21 @@ class AddViewNotesViewController: UIViewController {
         
         self.view.addSubview(questionLabel)
         questionLabel.snp.makeConstraints({ make in
-            
+            make.centerX.equalToSuperview()
+            make.left.right.equalToSuperview().inset(10)
+            make.top.equalTo(nextDoneButton.snp.bottom).offset(10)
+        })
+        
+        cancelButton = UIButton()
+        cancelButton.backgroundColor = Constants.applicationAccentColor
+        cancelButton.setTitle("I want to work on this later.", for: .normal)
+        cancelButton.addTarget(self, action: #selector(cancelButtonTapped(_:)), for: .touchUpInside)
+        
+        self.view.addSubview(cancelButton)
+        cancelButton.snp.makeConstraints({ make in
+            make.bottom.equalTo(bottomLayoutGuide.snp.top)
+            make.width.equalToSuperview()
+            make.height.equalTo(60)
         })
         
         answerTextView = UITextView()
@@ -110,18 +128,12 @@ class AddViewNotesViewController: UIViewController {
         
         self.view.addSubview(answerTextView)
         answerTextView.snp.makeConstraints({ make in
-            
+            make.bottom.equalTo(cancelButton.snp.top)
+            make.top.equalTo(questionLabel.snp.bottom).offset(20)
+            make.width.equalToSuperview()
         })
         
-        cancelButton = UIButton()
-        cancelButton.backgroundColor = . brown
-        cancelButton.setTitle("I want to work on this later.", for: .normal)
-        cancelButton.addTarget(self, action: #selector(cancelButtonTapped(_:)), for: .touchUpInside)
         
-        self.view.addSubview(cancelButton)
-        cancelButton.snp.makeConstraints({ make in
-            
-        })
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
