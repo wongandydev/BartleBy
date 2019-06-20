@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let window = self.window {
             let main = AllTabBarViewController()
             
-            var navController: UIViewController = UINavigationController.init(rootViewController: main)
+            var navController: UIViewController = main
 
             window.rootViewController = navController
             window.makeKeyAndVisible()

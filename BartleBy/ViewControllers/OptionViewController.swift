@@ -10,14 +10,10 @@ import UIKit
 import Firebase
 
 class OptionViewController: UIViewController {
-    @IBOutlet weak var bannerAdView: GADBannerView!
+    private var bannerAdView: GADBannerView!
     private let userUID = UIDevice.current.identifierForVendor?.uuidString
     
-    var options: [String] = [] {
-        didSet {
-            self.optionsCollectionView.reloadData()
-        }
-    }
+    var options: [String] = ["Manage type of writing", "Manage Notifications", "Stats", "Help", "About"]
     
     let usernameLabel: UILabel = {
         let label = UILabel()
@@ -44,25 +40,46 @@ class OptionViewController: UIViewController {
         super.viewDidLoad()
         ref = Database.database().reference()
         
-        usernameLabel.frame = CGRect(x: 10, y: 100, width: view.frame.width - 20, height: 35)
-        view.addSubview(usernameLabel)
-        
-        
-        optionsCollectionView.delegate = self
-        optionsCollectionView.dataSource = self
-        view.addSubview(optionsCollectionView)
-
-        readOptions()
-//        addOptionsCollectionView()
+        setupNavbar()
+        layoutSubviews()
         getUsername()
         addEditButton()
-        setupBannerAd()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.transparentNavBar()
         
+    }
+    
+    fileprivate func setupNavbar() {
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.tintColor = Constants.applicationAccentColor
+        self.navigationController?.navigationBar.barTintColor = Constants.lightestGray
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
+    private func layoutSubviews() {
+        self.view.backgroundColor = .white
+        usernameLabel.frame = CGRect(x: 10, y: 100, width: view.frame.width - 20, height: 35)
+        view.addSubview(usernameLabel)
+        
+        bannerAdView = GADBannerView()
+        setupBannerAd()
+        
+        self.view.addSubview(bannerAdView)
+        bannerAdView.snp.makeConstraints({ make in
+            make.bottom.equalToSuperview().inset(20)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(320)
+            make.height.equalTo(50)
+        })
+        
+        
+        optionsCollectionView.delegate = self
+        optionsCollectionView.dataSource = self
+        view.addSubview(optionsCollectionView)
     }
     
     func setupBannerAd() {
@@ -77,16 +94,6 @@ class OptionViewController: UIViewController {
         ref.child("users/\(userUID!)/username").observeSingleEvent(of: .value , with: { snapshot in
             if let serverUsername = snapshot.value as? String {
                 self.usernameLabel.text = serverUsername
-            }
-        })
-    }
-    
-    func readOptions(){
-        ref.child("options").observeSingleEvent(of:.value , with: { snapshot in
-            if let options = snapshot.value as? [String]{
-                for option in options {
-                    self.options.append(option)
-                }
             }
         })
     }

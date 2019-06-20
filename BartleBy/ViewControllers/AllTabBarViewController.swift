@@ -32,6 +32,7 @@ class AllTabBarViewController: UITabBarController {
         self.tabBar.isTranslucent = true
         self.tabBar.tintColor = Constants.applicationAccentColor
         self.tabBar.barTintColor = Constants.lightestGray
+        self.tabBar.backgroundColor = .white
         self.tabBar.layer.borderWidth = 0.0
         self.tabBar.clipsToBounds = true
     }
@@ -43,7 +44,7 @@ extension AllTabBarViewController: UITabBarControllerDelegate {
 //    // Called *after* a tab button is tapped
 //    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
 //        // Scroll to top only if already on selected tab
-//        
+//
 //        if previousController == viewController {
 //            if let navVC = viewController as? UINavigationController {
 //                if let notesVC = navVC.viewControllers.first as? NotesViewController {
@@ -59,7 +60,7 @@ extension AllTabBarViewController: UITabBarControllerDelegate {
 //                }
 //            }
 //        }
-//        
+//
 //        previousController = viewController
 //    }
 }
