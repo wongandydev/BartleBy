@@ -58,7 +58,7 @@ class OptionViewController: UIViewController {
             make.width.equalToSuperview().offset(20)
             make.height.equalTo(35)
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.view).offset(Constants.topPadding)
+            make.top.equalTo(self.view).offset(Constants.topPadding + 10)
         })
         
         let editButton = UIButton(frame: CGRect(x: (self.view.frame.width/2) - 30, y: 150, width: 60, height: 35))
@@ -74,7 +74,7 @@ class OptionViewController: UIViewController {
             make.width.equalTo(60)
             make.height.equalTo(40)
             make.centerX.equalToSuperview()
-            make.top.equalTo(usernameLabel.snp.bottom).offset(10)
+            make.top.equalTo(usernameLabel.snp.bottom).offset(5)
         })
         
         

@@ -10,16 +10,19 @@ import UIKit
 import Firebase
 
 class ConfigViewController: UIViewController {
-    @IBOutlet weak var optionSegmentControl: UISegmentedControl!
-    @IBOutlet weak var numberPicker: UIPickerView!
-    @IBOutlet weak var numberLabel: UILabel!
-    @IBOutlet weak var typeLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBAction func saveButtonTapped(_ sender: Any) {
+    /* Manage Type of Writing */
+    
+    private var optionSegmentControl: UISegmentedControl!
+    private var numberPicker: UIPickerView!
+    private var numberLabel: UILabel!
+    private var typeLabel: UILabel!
+    private var descriptionLabel: UILabel!
+    
+    @objc func saveButtonTapped(_ sender: Any) {
         saveNewTemplateSettings()
     }
     
-    @IBAction func optionSegmentChanged(_ sender: Any) {
+    @objc func optionSegmentChanged(_ sender: Any) {
         setTypeLabel()
     }
     var ref: DatabaseReference!
@@ -29,8 +32,9 @@ class ConfigViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        numberPicker.delegate = self
-        numberPicker.dataSource = self
+     
+        
+        layoutSubviews()
         
         ref = Database.database().reference()
         
@@ -49,6 +53,11 @@ class ConfigViewController: UIViewController {
             
             self.setTypeLabel()
         })
+    }
+    
+    fileprivate func layoutSubviews() {
+        numberPicker.delegate = self
+        numberPicker.dataSource = self
     }
     
     func setTypeLabel() {
