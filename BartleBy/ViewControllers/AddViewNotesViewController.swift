@@ -115,6 +115,8 @@ class AddViewNotesViewController: UIViewController {
         cancelButton.setTitle("I want to work on this later.", for: .normal)
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped(_:)), for: .touchUpInside)
         
+        cancelButton.isHidden = !(self.navigationController == nil)
+        
         self.view.addSubview(cancelButton)
         cancelButton.snp.makeConstraints({ make in
             make.bottom.equalTo(bottomLayoutGuide.snp.top)

@@ -42,25 +42,25 @@ class AllTabBarViewController: UITabBarController {
 
 extension AllTabBarViewController: UITabBarControllerDelegate {
 //    // Called *after* a tab button is tapped
-//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-//        // Scroll to top only if already on selected tab
-//
-//        if previousController == viewController {
-//            if let navVC = viewController as? UINavigationController {
-//                if let notesVC = navVC.viewControllers.first as? NotesViewController {
-//                    //At Home ViewController
-//                    if notesVC.notesTableView.visibleCells != nil && (notesVC.view.window != nil) {
-//                        //Make sure viewcontroller has cells and that there is a view.
-//                        notesVC.notesTableView.setContentOffset(CGPoint(x: -notesVC.notesTableView.contentInset.left, y: -notesVC.notesTableView.contentInset.top), animated: true)
-//                    }
-//                } else if let optionVC = navVC.viewControllers.first as? OptionViewController {
-//                    if optionVC.isViewLoaded == true { //Check to make sure view is loaded
-//                        optionVC.scrollToTop()
-//                    }
-//                }
-//            }
-//        }
-//
-//        previousController = viewController
-//    }
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        // Scroll to top only if already on selected tab
+
+        if previousController == viewController {
+            if let navVC = viewController as? UINavigationController {
+                if let notesVC = navVC.viewControllers.first as? NotesViewController {
+                    //At Home ViewController
+                    if notesVC.notesTableView.visibleCells != nil && (notesVC.view.window != nil) {
+                        //Make sure viewcontroller has cells and that there is a view.
+                        notesVC.scrollToTop()
+                    }
+                } else if let optionVC = navVC.viewControllers.first as? OptionViewController {
+                    if optionVC.isViewLoaded == true { //Check to make sure view is loaded
+                        optionVC.scrollToTop()
+                    }
+                }
+            }
+        }
+
+        previousController = viewController
+    }
 }

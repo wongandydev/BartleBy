@@ -127,18 +127,13 @@
 		A028098321CD368B009D7730 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A09E75F822BC229300AB62E6 /* Options */,
 				A02B7ACC21CC3D850062DDC5 /* LoggedIn.storyboard */,
 				A028097F21CD325F009D7730 /* Signup.storyboard */,
 				A02B7AD421CC3D860062DDC5 /* LaunchScreen.storyboard */,
 				A028098121CD3682009D7730 /* SignupSetupViewController.swift */,
 				A02B7ACA21CC3D850062DDC5 /* NotesViewController.swift */,
 				A028098621CD4F64009D7730 /* AddViewNotesViewController.swift */,
-				A0C7D5AD21D1B345003EC195 /* OptionViewController.swift */,
-				A0C7D5B121D316F4003EC195 /* ConfigViewController.swift */,
-				A0C7D5B321D31A9F003EC195 /* NotificationViewController.swift */,
-				A0D138A521D3FA7A0021F424 /* AboutViewController.swift */,
-				A0D138A321D3F9370021F424 /* HelpViewController.swift */,
-				A0A6EDCB21D672D700637C91 /* StatsViewController.swift */,
 				A04FB3DE22BBE56200CD566C /* AllTabBarViewController.swift */,
 			);
 			path = ViewControllers;
@@ -201,6 +196,19 @@
 				A0A6EDCF21D86FD100637C91 /* NavigationController+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A09E75F822BC229300AB62E6 /* Options */ = {
+			isa = PBXGroup;
+			children = (
+				A0C7D5AD21D1B345003EC195 /* OptionViewController.swift */,
+				A0C7D5B121D316F4003EC195 /* ConfigViewController.swift */,
+				A0D138A521D3FA7A0021F424 /* AboutViewController.swift */,
+				A0D138A321D3F9370021F424 /* HelpViewController.swift */,
+				A0A6EDCB21D672D700637C91 /* StatsViewController.swift */,
+				A0C7D5B321D31A9F003EC195 /* NotificationViewController.swift */,
+			);
+			path = Options;
 			sourceTree = "<group>";
 		};
 		F8216DBF80D1D4424F7FB002 /* Frameworks */ = {
