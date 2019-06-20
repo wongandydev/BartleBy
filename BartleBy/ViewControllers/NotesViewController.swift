@@ -9,12 +9,13 @@
 import UIKit
 import Firebase
 import GoogleMobileAds
+import SnapKit
 import Mixpanel
 
 class NotesViewController: UIViewController {
     
-    @IBOutlet weak var notesTableView: UITableView!
-    @IBOutlet weak var bannerAdView: GADBannerView!
+    var notesTableView: UITableView!
+    private var bannerAdView: GADBannerView!
     
     private let refreshControl = UIRefreshControl()
     private let userUID = UIDevice.current.identifierForVendor?.uuidString
@@ -37,22 +38,69 @@ class NotesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
-        
+
+        setupNavbar()
+        layoutSubviews()
+    }
+    
+    fileprivate func registerCells() {
+        notesTableView.register(NoteCell.self, forCellReuseIdentifier: "noteCell")
+    }
+    
+    fileprivate func setupNavbar() {
+        self.navigationItem.title = "BartleBy"
+    }
+    
+    fileprivate func setupTableView() {
         notesTableView.delegate = self
         notesTableView.dataSource = self
+        self.edgesForExtendedLayout = .init(rawValue: 0)
         notesTableView.tableFooterView = UIView()
-        
-        self.navigationItem.title = "BartleBy"
-        
+        registerCells()
+    }
+    
+    fileprivate func layoutSubviews() {
+        notesTableView = UITableView()
+        notesTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        setupTableView()
+        //Add Pull to refresh
         if #available(iOS 10.0, *) {
             notesTableView.refreshControl = refreshControl
         } else {
             notesTableView.addSubview(refreshControl)
         }
-        
         refreshControl.addTarget(self, action: #selector(refreshNoteData), for: .valueChanged)
-        addButton()
+        
+        
+        self.view.addSubview(notesTableView)
+        notesTableView.snp.makeConstraints({ make in
+            make.edges.equalToSuperview()
+        })
+        
+        bannerAdView = GADBannerView()
         setupBannerAd()
+        
+        self.view.addSubview(bannerAdView)
+        bannerAdView.snp.makeConstraints({ make in
+            make.bottom.equalToSuperview().inset(20)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(320)
+            make.height.equalTo(50)
+        })
+        
+        let addButton = UIButton()
+        addButton.layer.cornerRadius = 30
+        addButton.backgroundColor = .red
+        addButton.setImage(UIImage(named: "plus"), for: .normal)
+        addButton.tintColor = .white
+        addButton.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        addButton.addTarget(self, action: #selector(addNote), for: .touchUpInside)
+        
+        self.view.addSubview(addButton)
+        addButton.snp.makeConstraints({ make in
+            make.right.bottom.equalToSuperview().inset(20)
+            make.width.height.equalTo(60)
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,7 +113,6 @@ class NotesViewController: UIViewController {
         self.bannerAdView.adUnitID = Constants.googleAdMobBannerId 
         self.bannerAdView.rootViewController = self;
         let request = GADRequest()
-//        request.testDevices = [kGADSimulatorID]
         bannerAdView.load(request)
     }
     
@@ -106,20 +153,6 @@ class NotesViewController: UIViewController {
 
     }
     
-    
-    func addButton() {
-        let addButton = UIButton(frame: CGRect(x: self.view.frame.width - 70, y: self.view.frame.height - 150, width: 60, height: 60))
-        addButton.layer.cornerRadius = 30
-        addButton.backgroundColor = .red
-//        addButton.setTitle("Add", for: .norm\al)
-        addButton.setImage(UIImage(named: "plus"), for: .normal)
-        addButton.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
-        addButton.titleLabel?.textColor = .white
-        addButton.addTarget(self, action: #selector(addNote), for: .touchUpInside)
-        
-        self.view.addSubview(addButton)
-    }
-
     func readNotes() {
         ref.child("users/\(userUID!)").observeSingleEvent(of: .value , with: { snapshot in
             self.notes.removeAll()
@@ -174,14 +207,14 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let viewNoteViewController = storyboard?.instantiateViewController(withIdentifier: "AddViewNotesViewController") as? AddViewNotesViewController{
-            viewNoteViewController.notes = [notes[indexPath.row]]
-            viewNoteViewController.sameDay = notes[indexPath.row].dateCreated.components(separatedBy: " ")[0] == Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0]
-            self.present(viewNoteViewController, animated: true, completion: nil)
-        }
         self.notesTableView.deselectRow(at: indexPath, animated: true)
+        
+        let viewNoteViewController = AddViewNotesViewController()
+        viewNoteViewController.notes = [notes[indexPath.row]]
+        viewNoteViewController.sameDay = notes[indexPath.row].dateCreated.components(separatedBy: " ")[0] == Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0]
+        self.navigationController?.pushViewController(viewNoteViewController, animated: true)
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 83
     }

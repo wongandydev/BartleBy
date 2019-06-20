@@ -72,12 +72,61 @@ extension UIViewController {
         let cancelButton = UIButton(frame: CGRect(x: 0, y: self.view.frame.height-164, width: self.view.frame.width, height: 64))
         cancelButton.setTitle(title, for: .normal)
         cancelButton.backgroundColor = color
-        cancelButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(dismissNavVC), for: .touchUpInside)
         
         self.view.addSubview(cancelButton)
     }
     
-    @objc func dismissVC() {
+    func scrollToTop() {
+        func scrollToTop(view: UIView?) {
+            guard let view = view else { return }
+            
+            switch view {
+            case let scrollView as UIScrollView:
+                if scrollView.scrollsToTop == true {
+                    scrollView.setContentOffset(CGPoint(x: -scrollView.contentInset.left, y: -max(scrollView.contentInset.top, view.safeAreaInsets.top)), animated: true)
+                    return
+                }
+            default:
+                break
+            }
+            
+            for subView in view.subviews {
+                scrollToTop(view: subView)
+            }
+        }
+        
+        scrollToTop(view: self.view)
+    }
+    
+    func scrollToTopNoNavBar() {
+        //Don't cant about scrollview top of safe area top. Just set to 0.
+        func scrollToTop(view: UIView?) {
+            guard let view = view else { return }
+            
+            switch view {
+            case let scrollView as UIScrollView:
+                if scrollView.scrollsToTop == true {
+                    scrollView.setContentOffset(CGPoint(x: -scrollView.contentInset.left, y: 0), animated: true)
+                    return
+                }
+            default:
+                break
+            }
+            
+            for subView in view.subviews {
+                scrollToTop(view: subView)
+            }
+        }
+        
+        scrollToTop(view: self.view)
+    }
+    
+    @objc func dismissNavVC() {
         self.navigationController?.popViewController(animated: true)
     }
+    
+//    @objc func dismissVC() {
+//        self.dismiss(animated: true, completion: nil)
+//    }
 }

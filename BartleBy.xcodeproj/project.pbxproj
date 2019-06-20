@@ -20,6 +20,7 @@
 		A02B7AD321CC3D860062DDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A02B7AD221CC3D860062DDC5 /* Assets.xcassets */; };
 		A02B7AD621CC3D860062DDC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02B7AD421CC3D860062DDC5 /* LaunchScreen.storyboard */; };
 		A03752DC220DB4D200A784CC /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03752DB220DB4D200A784CC /* UIColor+Extension.swift */; };
+		A04FB3DF22BBE56200CD566C /* AllTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04FB3DE22BBE56200CD566C /* AllTabBarViewController.swift */; };
 		A0A4E4462283CCE800069310 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4E4452283CCE800069310 /* Constants.swift */; };
 		A0A6EDCC21D672D700637C91 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6EDCB21D672D700637C91 /* StatsViewController.swift */; };
 		A0A6EDCE21D6737100637C91 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6EDCD21D6737100637C91 /* UIViewController+Extensions.swift */; };
@@ -66,9 +67,10 @@
 		A02B7AD521CC3D860062DDC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A02B7AD721CC3D860062DDC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A03752DB220DB4D200A784CC /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		A04FB3DE22BBE56200CD566C /* AllTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTabBarViewController.swift; sourceTree = "<group>"; };
 		A0A4E4452283CCE800069310 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A0A6EDCB21D672D700637C91 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
-		A0A6EDCD21D6737100637C91 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		A0A6EDCD21D6737100637C91 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIViewController+Extensions.swift"; path = "../UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		A0A6EDCF21D86FD100637C91 /* NavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationController+Extension.swift"; sourceTree = "<group>"; };
 		A0C7D5A921D135EB003EC195 /* Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template.swift; sourceTree = "<group>"; };
 		A0C7D5AD21D1B345003EC195 /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,9 @@
 		A028098321CD368B009D7730 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A02B7ACC21CC3D850062DDC5 /* LoggedIn.storyboard */,
+				A028097F21CD325F009D7730 /* Signup.storyboard */,
+				A02B7AD421CC3D860062DDC5 /* LaunchScreen.storyboard */,
 				A028098121CD3682009D7730 /* SignupSetupViewController.swift */,
 				A02B7ACA21CC3D850062DDC5 /* NotesViewController.swift */,
 				A028098621CD4F64009D7730 /* AddViewNotesViewController.swift */,
@@ -134,6 +139,7 @@
 				A0D138A521D3FA7A0021F424 /* AboutViewController.swift */,
 				A0D138A321D3F9370021F424 /* HelpViewController.swift */,
 				A0A6EDCB21D672D700637C91 /* StatsViewController.swift */,
+				A04FB3DE22BBE56200CD566C /* AllTabBarViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -153,27 +159,48 @@
 		A02B7AC721CC3D850062DDC5 /* BartleBy */ = {
 			isa = PBXGroup;
 			children = (
+				A04FB3DD22BBE48000CD566C /* Extensions */,
+				A04FB3DC22BBE46E00CD566C /* Cells */,
+				A04FB3DB22BBE46500CD566C /* Model */,
 				A02B114521E662C200CE4A2F /* BartleBy.entitlements */,
-				A0E7AA6821D06DD5001A76C0 /* Helper.swift */,
-				A0C7D5A921D135EB003EC195 /* Template.swift */,
 				A02B7AC821CC3D850062DDC5 /* AppDelegate.swift */,
-				A0A6EDCD21D6737100637C91 /* UIViewController+Extensions.swift */,
-				A0A6EDCF21D86FD100637C91 /* NavigationController+Extension.swift */,
 				A028098321CD368B009D7730 /* ViewControllers */,
-				A02B7ACC21CC3D850062DDC5 /* LoggedIn.storyboard */,
-				A0E7AA6421D06914001A76C0 /* NoteCell.swift */,
-				A028097F21CD325F009D7730 /* Signup.storyboard */,
-				A0E7AA6221D0678E001A76C0 /* Note.swift */,
 				A02B7AD221CC3D860062DDC5 /* Assets.xcassets */,
-				A02B7AD421CC3D860062DDC5 /* LaunchScreen.storyboard */,
 				A02B7AD721CC3D860062DDC5 /* Info.plist */,
 				A02B7ACF21CC3D850062DDC5 /* BartleBy.xcdatamodeld */,
 				A01168CC21CD5F430006C6BD /* GoogleService-Info.plist */,
 				A02B114321E6444100CE4A2F /* keys.plist */,
-				A0A4E4452283CCE800069310 /* Constants.swift */,
-				A03752DB220DB4D200A784CC /* UIColor+Extension.swift */,
 			);
 			path = BartleBy;
+			sourceTree = "<group>";
+		};
+		A04FB3DB22BBE46500CD566C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A0E7AA6221D0678E001A76C0 /* Note.swift */,
+				A0C7D5A921D135EB003EC195 /* Template.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A04FB3DC22BBE46E00CD566C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				A0E7AA6421D06914001A76C0 /* NoteCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		A04FB3DD22BBE48000CD566C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A0E7AA6821D06DD5001A76C0 /* Helper.swift */,
+				A0A4E4452283CCE800069310 /* Constants.swift */,
+				A03752DB220DB4D200A784CC /* UIColor+Extension.swift */,
+				A0A6EDCD21D6737100637C91 /* UIViewController+Extensions.swift */,
+				A0A6EDCF21D86FD100637C91 /* NavigationController+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		F8216DBF80D1D4424F7FB002 /* Frameworks */ = {
@@ -382,6 +409,7 @@
 				A0C7D5B221D316F4003EC195 /* ConfigViewController.swift in Sources */,
 				A0D138A621D3FA7A0021F424 /* AboutViewController.swift in Sources */,
 				A0A6EDCE21D6737100637C91 /* UIViewController+Extensions.swift in Sources */,
+				A04FB3DF22BBE56200CD566C /* AllTabBarViewController.swift in Sources */,
 				A028098721CD4F64009D7730 /* AddViewNotesViewController.swift in Sources */,
 				A02B7AD121CC3D850062DDC5 /* BartleBy.xcdatamodeld in Sources */,
 				A0C7D5AA21D135EB003EC195 /* Template.swift in Sources */,
