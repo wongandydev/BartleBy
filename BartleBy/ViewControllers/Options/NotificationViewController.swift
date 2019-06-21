@@ -83,7 +83,6 @@ class NotificationViewController: UIViewController {
         currentNotificationSettingLabel.text = "No Notifcation"
         UserDefaults.standard.removeObject(forKey: "notificationSetting")
         UserDefaults.standard.synchronize()
-        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func saveButtonTapped(_ sender: Any) {
