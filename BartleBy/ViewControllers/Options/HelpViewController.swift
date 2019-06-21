@@ -13,34 +13,165 @@ import Firebase
 class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate, UITextFieldDelegate{
     var ref: DatabaseReference!
     
-    @IBOutlet weak var questionLabel: UILabel!
-    @IBOutlet weak var answerLabel: UILabel!
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var subjectTexfField: UITextField!
-    @IBOutlet weak var messageTextView: UITextView!
-    @IBOutlet weak var submitFormButton: UIButton!
-    @IBAction func submitFormButtonTapped(_ sender: Any) {
-        self.view.endEditing(true)
-        sendContactForm()
-    }
+    private var questionLabel: UILabel!
+    private var answerLabel: UILabel!
+    private var formQuestionLabel: UILabel!
+    private var nameTextField: UITextField!
+    private var emailTextField: UITextField!
+    private var subjectTextField: UITextField!
+    private var messageTextView: UITextView!
+    private var submitFormButton: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ref = Database.database().reference()
+        layoutSubviews()
         
+        ref = Database.database().reference()
+
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
+
+//        nameTextField.delegate = self
+//        emailTextField.delegate = self
+//        subjectTexfField.delegate = self
+//        messageTextView.delegate = self
+
+//        setupTextView()
+//        getHelpInformation()
+//        addKeyboardDoneButton()
+    }
+    
+    fileprivate func layoutSubviews() {
+        self.view.backgroundColor = .white
         
-        nameTextField.delegate = self
-        emailTextField.delegate = self
-        subjectTexfField.delegate = self
-        messageTextView.delegate = self
+        let scrollView = UIScrollView()
+        scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.bounces = true
+//        scrollView.contentSize = self.view.frame.size
+        scrollView.backgroundColor = .blue
         
-        setupTextView()
-        getHelpInformation()
-        addKeyboardDoneButton()
-//        cancelButton(title: "Cancel", color: .red)
+        self.view.addSubview(scrollView)
+        scrollView.snp.makeConstraints({ make in
+            make.top.equalTo(topLayoutGuide.snp.bottom)
+            make.bottom.equalTo(bottomLayoutGuide.snp.top)
+            make.left.equalTo(self.view)
+            make.right.equalTo(self.view)
+        })
+        
+        let containerView = UIView()
+        containerView.backgroundColor = .yellow
+        
+        scrollView.addSubview(containerView)
+        containerView.snp.makeConstraints({ make in
+            make.top.equalToSuperview()
+            make.left.equalTo(self.view).inset(10)
+            make.right.equalTo(self.view).inset(10)
+            make.bottom.equalTo(scrollView)
+        })
+        
+        questionLabel = UILabel()
+        questionLabel.numberOfLines = 0
+        questionLabel.backgroundColor = .red
+        questionLabel.text = "HELLO"
+        
+        containerView.addSubview(questionLabel)
+        questionLabel.snp.makeConstraints({ make in
+            make.top.equalToSuperview().offset(30)
+            make.width.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.left.equalToSuperview()
+            
+        })
+
+        answerLabel = UILabel()
+        answerLabel.numberOfLines = 0
+        answerLabel.backgroundColor = .green
+        answerLabel.text = "THIS IS THE ANSWER"
+
+        containerView.addSubview(answerLabel)
+        answerLabel.snp.makeConstraints({ make in
+            make.top.equalTo(questionLabel.snp.bottom).offset(10)
+            make.width.equalToSuperview()
+            make.left.equalToSuperview()
+        })
+
+        formQuestionLabel = UILabel()
+        formQuestionLabel.numberOfLines = 0
+        formQuestionLabel.backgroundColor = .brown
+        formQuestionLabel.text = "A different question? Submit a form below"
+
+        containerView.addSubview(formQuestionLabel)
+        formQuestionLabel.snp.makeConstraints({ make in
+            make.top.equalTo(answerLabel.snp.bottom).offset(20)
+            make.width.equalToSuperview()
+            make.left.equalToSuperview()
+        })
+
+        let formStackView = UIStackView()
+        formStackView.alignment = .center
+        formStackView.axis = .vertical
+        formStackView.spacing = 8
+        formStackView.translatesAutoresizingMaskIntoConstraints = false
+
+        containerView.addSubview(formStackView)
+        formStackView.snp.makeConstraints({ make in
+            make.top.equalTo(formQuestionLabel.snp.bottom).offset(10)
+            make.width.equalToSuperview()
+            make.left.equalToSuperview()
+            make.bottom.equalToSuperview()
+        })
+
+        nameTextField = UITextField()
+        nameTextField.backgroundColor = .white
+        nameTextField.borderStyle = .roundedRect
+        nameTextField.placeholder = "Your Name*"
+
+        formStackView.addArrangedSubview(nameTextField)
+        nameTextField.snp.makeConstraints({ make in
+            make.width.equalToSuperview()
+        })
+
+        emailTextField = UITextField()
+        emailTextField.backgroundColor = .white
+        emailTextField.borderStyle = .roundedRect
+        emailTextField.placeholder = "Email*"
+
+        formStackView.addArrangedSubview(emailTextField)
+        emailTextField.snp.makeConstraints({ make in
+            make.width.equalToSuperview()
+        })
+
+        subjectTextField = UITextField()
+        subjectTextField.backgroundColor = .white
+        subjectTextField.borderStyle = .roundedRect
+        subjectTextField.placeholder = "Subject"
+
+        formStackView.addArrangedSubview(subjectTextField)
+        subjectTextField.snp.makeConstraints({ make in
+            make.width.equalToSuperview()
+        })
+
+        messageTextView = UITextView()
+        messageTextView.textColor = .placeholderGray
+        messageTextView.text = "Enter Message*"
+        messageTextView.layer.borderColor = UIColor.lightGray.cgColor
+        messageTextView.layer.cornerRadius = 7
+        messageTextView.layer.borderWidth = 0.3
+        messageTextView.backgroundColor = .white
+
+        formStackView.addArrangedSubview(messageTextView)
+        messageTextView.snp.makeConstraints({ make in
+            make.width.equalToSuperview()
+            make.height.equalTo(400)
+        })
+
+    }
+    
+    @objc func submitFormButtonTapped(_ sender: Any) {
+        self.view.endEditing(true)
+        sendContactForm()
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -60,14 +191,6 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
     }
     
     
-    func setupTextView() {
-        messageTextView.textColor = .placeholderGray
-        messageTextView.text = "Enter Message*"
-        messageTextView.layer.borderColor = UIColor.lightGray.cgColor
-        messageTextView.layer.cornerRadius = 7
-        messageTextView.layer.borderWidth = 0.3
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
@@ -82,7 +205,7 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
         toolbar.sizeToFit()
         nameTextField.inputAccessoryView = toolbar
         emailTextField.inputAccessoryView = toolbar
-        subjectTexfField.inputAccessoryView = toolbar
+        subjectTextField.inputAccessoryView = toolbar
         messageTextView.inputAccessoryView = toolbar
     }
     
@@ -95,7 +218,7 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
         var errors: [String] = []
         
         if !emailTextField.text!.isEmpty && messageTextView.textColor != .placeholderGray && isValidEmail(email: emailTextField.text!) && !nameTextField.text!.isEmpty {
-            ref.child("messages/\(ref.childByAutoId().key!)").setValue(["email":"\(emailTextField.text!)", "name":"\(nameTextField.text!)","subject":"\(subjectTexfField.text!)","message":"\(messageTextView.text!)"],
+            ref.child("messages/\(ref.childByAutoId().key!)").setValue(["email":"\(emailTextField.text!)", "name":"\(nameTextField.text!)","subject":"\(subjectTextField.text!)","message":"\(messageTextView.text!)"],
                    withCompletionBlock: { error, ref in
                     if error != nil {
                         self.alertMessage(title: "Error", message: "There was an error sending  your message. Please try again. \(error?.localizedDescription)")

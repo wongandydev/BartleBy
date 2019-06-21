@@ -46,7 +46,7 @@ class OptionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.transparentNavBar()
+//        self.navigationController?.transparentNavBar()
         
     }
     
@@ -194,17 +194,15 @@ extension OptionViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 self.navigationController?.pushViewController(statsVC, animated: true)
                 break
             case 3:
-                performSegue(withIdentifier: "gotoHelpVC", sender: nil)
                 let helpVC = HelpViewController()
                 self.navigationController?.pushViewController(helpVC, animated: true)
                 break
             case 4:
-                performSegue(withIdentifier: "gotoAboutVC", sender: nil)
                 let aboutVC = AboutViewController()
                 self.navigationController?.pushViewController(aboutVC, animated: true)
                 break
             default:
-                print("defaulted")
+                print("default")
                 break
         }
 
