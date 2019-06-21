@@ -68,6 +68,7 @@ class NotificationViewController: UIViewController {
         saveButton.backgroundColor = .green
         saveButton.setTitle("Save", for: .normal)
         saveButton.setTitleColor(.black, for: .highlighted)
+        saveButton.addTarget(self, action: #selector(saveButtonTapped(_:)), for: .touchUpInside)
         
         self.view.addSubview(saveButton)
         saveButton.snp.makeConstraints({ make in
@@ -104,7 +105,6 @@ class NotificationViewController: UIViewController {
         notificationCenter.add(request)
         UserDefaults.standard.set(Helper.sharedInstance.convert24toAM(date: changeNotifcationDatePicker.date), forKey: "notificationSetting")
         currentNotificationSettingLabel.text = UserDefaults.standard.object(forKey: "notificationSetting") as? String
-        self.navigationController?.popViewController(animated: true)
     }
     
     
