@@ -39,7 +39,7 @@ class ConfigViewController: UIViewController {
         ref = Database.database().reference()
         
         getSelectedNumber(completion: { number in
-            self.selectedNumber = number
+            self.setSelectedNumber(number: number)
             self.numberPicker.selectRow(number-1, inComponent: 0, animated: true)
             self.setLabels()
         })
@@ -51,6 +51,7 @@ class ConfigViewController: UIViewController {
                 self.optionSegmentControl.selectedSegmentIndex = 1
             }
             
+            self.setTemplateType(type: templateType)
             self.setLabels()
         })
     }
@@ -145,35 +146,65 @@ class ConfigViewController: UIViewController {
     }
     
     func getTemplateType(completion: @escaping (String) -> Void) {
-        ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateType").observeSingleEvent(of: .value , with: { snapshot in
-            if let templateType = snapshot.value as? String{
-                completion(templateType)
+        FirebaseNetworkingService.isConnectedToInternet({ isConnected in
+            if isConnected {
+                self.ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateType").observeSingleEvent(of: .value , with: { snapshot in
+                    if let templateType = snapshot.value as? String{
+                        completion(templateType)
+                    } else {
+                        completion(Template.Option.grateful.rawValue)
+                    }
+                })
             } else {
-                self.setTemplateType(type: Template.Option.grateful.rawValue)
-                completion(Template.Option.grateful.rawValue)
+                if let offlineTemplateType = self.getOfflineSelectedTemplateType() {
+                    completion(offlineTemplateType)
+                }
             }
         })
-        
+    }
+    
+    func getOfflineSelectedTemplateType() -> String? {
+        guard let offlineSelectedTemplateType = UserDefaults.standard.value(forKey: "userTemplateType") as? String else { return nil}
+        return offlineSelectedTemplateType
     }
     
     func getSelectedNumber(completion: @escaping (Int) -> Void) {
-        ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateNumber").observeSingleEvent(of: DataEventType.value , with: { snapshot in
-            if let templateNumber = snapshot.value as? Int{
-                completion(templateNumber)
+        FirebaseNetworkingService.isConnectedToInternet({ isConnected in
+            if isConnected {
+                self.ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateNumber").observeSingleEvent(of: DataEventType.value , with: { snapshot in
+                    if let templateNumber = snapshot.value as? Int{
+                        completion(templateNumber)
+                    } else {
+                        completion(1)
+                    }
+                })
             } else {
-                self.setSelectedNumber(number: 1)
-                completion(1)
+                if let offlineNumber = self.getOfflineSelectedNumber() {
+                    completion(offlineNumber)
+                }
             }
         })
-
+    }
+    
+    func getOfflineSelectedNumber() -> Int? {
+        guard let offlineSelectedNumber = UserDefaults.standard.value(forKey: "userTemplateNumber") as? Int else { return nil}
+        return offlineSelectedNumber
     }
     
     func setSelectedNumber(number: Int) {
-        self.ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateNumber").setValue(number)
+        self.selectedNumber = number
+        if let userUID = UserDefaults.standard.object(forKey: "userUID") {
+            self.ref.child("users/\(userUID)/template/templateNumber").setValue(number)
+            UserDefaults.standard.setValue(number, forKey: "userTemplateNumber")
+        }
     }
     
     func setTemplateType(type: String) {
-        self.ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateType").setValue(type)
+        
+        if let userUID = UserDefaults.standard.object(forKey: "userUID") {
+            self.ref.child("users/\(userUID)/template/templateType").setValue(type)
+            UserDefaults.standard.setValue(type, forKey: "userTemplateType")
+        }
     }
 
     func saveNewTemplateSettings() {
