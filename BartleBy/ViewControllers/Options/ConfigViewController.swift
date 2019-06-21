@@ -69,7 +69,7 @@ class ConfigViewController: UIViewController {
             make.top.equalTo(topLayoutGuide.snp.bottom)
             make.left.equalTo(self.view)
             make.right.equalTo(self.view)
-            make.bottom.equalTo(bottomLayoutGuide.snp.top).offset(Constants.bottomButtonHeight)
+            make.bottom.equalTo(bottomLayoutGuide.snp.top)
         })
         
         let containerView = UIView()
@@ -150,7 +150,7 @@ class ConfigViewController: UIViewController {
             make.top.equalTo(descriptionLabel.snp.bottom).offset(30)
             make.width.equalToSuperview()
             make.height.equalTo(Constants.bottomButtonHeight)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().inset(40)
         })
         
        

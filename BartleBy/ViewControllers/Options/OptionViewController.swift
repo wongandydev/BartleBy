@@ -58,7 +58,7 @@ class OptionViewController: UIViewController {
             make.width.equalToSuperview().offset(20)
             make.height.equalTo(35)
             make.centerX.equalToSuperview()
-            make.top.equalTo(topLayoutGuide.snp.bottom).offset(Constants.topPadding + 10)
+            make.top.equalTo(topLayoutGuide.snp.bottom).offset(10)
         })
         
         let editButton = UIButton()
@@ -97,7 +97,7 @@ class OptionViewController: UIViewController {
         optionsCollectionView.snp.makeConstraints({ make in
             make.width.equalToSuperview()
             make.bottom.equalTo(bannerAdView.snp.top)
-            make.top.equalTo(editButton.snp.bottom).offset(20)
+            make.top.equalTo(editButton.snp.bottom).offset(15)
         })
       
     }
