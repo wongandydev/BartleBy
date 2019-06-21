@@ -38,11 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         Database.database().reference().child("users/\(userUID!)/lastLogin").setValue(Helper.sharedInstance.dateToString(date: Date()))
-        
-        let userNotificationCenter = UNUserNotificationCenter.current()
-            userNotificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-        }
-        
+                
         Mixpanel.initialize(token: "7fefd65f0da68515af4a5ffb099eb1d8")
         
         self.window = UIWindow(frame: UIScreen.main.bounds)

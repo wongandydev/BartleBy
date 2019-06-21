@@ -34,6 +34,7 @@ class ConfigViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupNavbar()
         layoutSubviews()
         
         ref = Database.database().reference()
@@ -54,6 +55,14 @@ class ConfigViewController: UIViewController {
             self.setTemplateType(type: templateType)
             self.setLabels()
         })
+    }
+    
+    fileprivate func setupNavbar() {
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.tintColor = Constants.applicationAccentColor
+        self.navigationController?.navigationBar.barTintColor = Constants.lightestGray
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     fileprivate func layoutSubviews() {

@@ -71,7 +71,7 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
         questionLabel = UILabel()
         questionLabel.numberOfLines = 0
         questionLabel.textAlignment = .center
-        questionLabel.text = "HELLO"
+        questionLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         
         containerView.addSubview(questionLabel)
         questionLabel.snp.makeConstraints({ make in
@@ -85,7 +85,7 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
         answerLabel = UILabel()
         answerLabel.numberOfLines = 0
         answerLabel.textAlignment = .center
-        answerLabel.text = "THIS IS THE ANSWER"
+        answerLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
 
         containerView.addSubview(answerLabel)
         answerLabel.snp.makeConstraints({ make in
@@ -97,6 +97,7 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
         formQuestionLabel = UILabel()
         formQuestionLabel.numberOfLines = 0
         formQuestionLabel.textAlignment = .center
+        formQuestionLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         formQuestionLabel.text = "A different question? Submit a form below"
 
         containerView.addSubview(formQuestionLabel)
@@ -166,7 +167,7 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
         
         submitFormButton = UIButton()
         submitFormButton.setTitle("Send Message", for: .normal)
-        submitFormButton.setTitleColor(.green, for: .normal)
+        submitFormButton.setTitleColor(Constants.applicationAccentColor, for: .normal)
         submitFormButton.setTitleColor(.white, for: .highlighted)
         submitFormButton.addTarget(self, action: #selector(submitFormButtonTapped(_:)), for: .touchUpInside)
         

@@ -11,6 +11,7 @@ import UserNotifications
 
 class NotificationViewController: UIViewController {
     
+    private let userNotificationCenter = UNUserNotificationCenter.current()
     private var currentNotificationSettingLabel: UILabel!
     private var changeNotifcationDatePicker: UIDatePicker!
     private var saveButton: UIButton!
@@ -25,6 +26,27 @@ class NotificationViewController: UIViewController {
         setupNavbar()
         layoutSubviews()
         
+        userNotificationCenter.getNotificationSettings(completionHandler: { settings in
+            guard let status = settings.authorizationStatus as? UNAuthorizationStatus else { return }
+            switch status {
+                case .authorized:
+                    break
+                case .notDetermined:
+                    self.userNotificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+                        if !granted {
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
+                    break
+                case .denied:
+                    self.navigationController?.popViewController(animated: true)
+                    break
+                case .provisional:
+                    break
+            }
+        })
+        
+
         changeNotifcationDatePicker.datePickerMode = .time
         currentNotificationSettingLabel.text = "No Notification"
         

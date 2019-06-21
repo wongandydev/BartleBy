@@ -19,6 +19,7 @@
 		A02B7AD621CC3D860062DDC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02B7AD421CC3D860062DDC5 /* LaunchScreen.storyboard */; };
 		A03752DC220DB4D200A784CC /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03752DB220DB4D200A784CC /* UIColor+Extension.swift */; };
 		A04FB3DF22BBE56200CD566C /* AllTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04FB3DE22BBE56200CD566C /* AllTabBarViewController.swift */; };
+		A05E0D3422BDA34500EC20F7 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05E0D3322BDA34500EC20F7 /* Reachability.swift */; };
 		A09E75FA22BD0C4F00AB62E6 /* FirebaseNetowrkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09E75F922BD0C4F00AB62E6 /* FirebaseNetowrkingService.swift */; };
 		A0A4E4462283CCE800069310 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4E4452283CCE800069310 /* Constants.swift */; };
 		A0A6EDCC21D672D700637C91 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6EDCB21D672D700637C91 /* StatsViewController.swift */; };
@@ -65,6 +66,7 @@
 		A02B7AD721CC3D860062DDC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A03752DB220DB4D200A784CC /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		A04FB3DE22BBE56200CD566C /* AllTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTabBarViewController.swift; sourceTree = "<group>"; };
+		A05E0D3322BDA34500EC20F7 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		A09E75F922BD0C4F00AB62E6 /* FirebaseNetowrkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseNetowrkingService.swift; sourceTree = "<group>"; };
 		A0A4E4452283CCE800069310 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A0A6EDCB21D672D700637C91 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				A09E75F922BD0C4F00AB62E6 /* FirebaseNetowrkingService.swift */,
+				A05E0D3322BDA34500EC20F7 /* Reachability.swift */,
 			);
 			path = "Networking ";
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 				A02B7AC921CC3D850062DDC5 /* AppDelegate.swift in Sources */,
 				A0E7AA6521D06914001A76C0 /* NoteCell.swift in Sources */,
 				A0A6EDD021D86FD100637C91 /* NavigationController+Extension.swift in Sources */,
+				A05E0D3422BDA34500EC20F7 /* Reachability.swift in Sources */,
 				A0C7D5B421D31A9F003EC195 /* NotificationViewController.swift in Sources */,
 				A0E7AA6321D0678E001A76C0 /* Note.swift in Sources */,
 				A0E7AA6921D06DD5001A76C0 /* Helper.swift in Sources */,
