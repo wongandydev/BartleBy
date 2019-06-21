@@ -72,7 +72,8 @@ class NotificationViewController: UIViewController {
         
         self.view.addSubview(saveButton)
         saveButton.snp.makeConstraints({ make in
-            make.width.equalToSuperview()
+            make.width.equalToSuperview().inset(10)
+            make.centerX.equalToSuperview()
             make.height.equalTo(Constants.bottomButtonHeight)
             make.bottom.equalTo(bottomLayoutGuide.snp.top)
         })

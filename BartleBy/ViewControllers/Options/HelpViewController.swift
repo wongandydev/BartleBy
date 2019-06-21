@@ -33,14 +33,13 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
 
-//        nameTextField.delegate = self
-//        emailTextField.delegate = self
-//        subjectTexfField.delegate = self
-//        messageTextView.delegate = self
+        nameTextField.delegate = self
+        emailTextField.delegate = self
+        subjectTextField.delegate = self
+        messageTextView.delegate = self
 
-//        setupTextView()
-//        getHelpInformation()
-//        addKeyboardDoneButton()
+        getHelpInformation()
+        addKeyboardDoneButton()
     }
     
     fileprivate func layoutSubviews() {
@@ -49,19 +48,17 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
         let scrollView = UIScrollView()
         scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.bounces = true
-//        scrollView.contentSize = self.view.frame.size
-        scrollView.backgroundColor = .blue
+        scrollView.contentSize = self.view.frame.size
         
         self.view.addSubview(scrollView)
         scrollView.snp.makeConstraints({ make in
             make.top.equalTo(topLayoutGuide.snp.bottom)
-            make.bottom.equalTo(bottomLayoutGuide.snp.top)
             make.left.equalTo(self.view)
             make.right.equalTo(self.view)
+            make.bottom.equalTo(bottomLayoutGuide.snp.top)
         })
         
         let containerView = UIView()
-        containerView.backgroundColor = .yellow
         
         scrollView.addSubview(containerView)
         containerView.snp.makeConstraints({ make in
@@ -73,7 +70,7 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
         
         questionLabel = UILabel()
         questionLabel.numberOfLines = 0
-        questionLabel.backgroundColor = .red
+        questionLabel.textAlignment = .center
         questionLabel.text = "HELLO"
         
         containerView.addSubview(questionLabel)
@@ -87,7 +84,7 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
 
         answerLabel = UILabel()
         answerLabel.numberOfLines = 0
-        answerLabel.backgroundColor = .green
+        answerLabel.textAlignment = .center
         answerLabel.text = "THIS IS THE ANSWER"
 
         containerView.addSubview(answerLabel)
@@ -99,7 +96,7 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
 
         formQuestionLabel = UILabel()
         formQuestionLabel.numberOfLines = 0
-        formQuestionLabel.backgroundColor = .brown
+        formQuestionLabel.textAlignment = .center
         formQuestionLabel.text = "A different question? Submit a form below"
 
         containerView.addSubview(formQuestionLabel)
@@ -120,7 +117,7 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
             make.top.equalTo(formQuestionLabel.snp.bottom).offset(10)
             make.width.equalToSuperview()
             make.left.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().inset(40)
         })
 
         nameTextField = UITextField()
@@ -164,9 +161,18 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
         formStackView.addArrangedSubview(messageTextView)
         messageTextView.snp.makeConstraints({ make in
             make.width.equalToSuperview()
-            make.height.equalTo(400)
+            make.height.equalTo(100)
         })
-
+        
+        submitFormButton = UIButton()
+        submitFormButton.setTitle("Send Message", for: .normal)
+        submitFormButton.setTitleColor(.green, for: .normal)
+        submitFormButton.setTitleColor(.white, for: .highlighted)
+        
+        formStackView.addArrangedSubview(submitFormButton)
+        submitFormButton.snp.makeConstraints({ make in
+            
+        })
     }
     
     @objc func submitFormButtonTapped(_ sender: Any) {

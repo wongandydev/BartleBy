@@ -59,14 +59,37 @@ class ConfigViewController: UIViewController {
     fileprivate func layoutSubviews() {
         self.view.backgroundColor = .white
         
+        let scrollView = UIScrollView()
+        scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.bounces = true
+        scrollView.contentSize = self.view.frame.size
+        
+        self.view.addSubview(scrollView)
+        scrollView.snp.makeConstraints({ make in
+            make.top.equalTo(topLayoutGuide.snp.bottom)
+            make.left.equalTo(self.view)
+            make.right.equalTo(self.view)
+            make.bottom.equalTo(bottomLayoutGuide.snp.top)
+        })
+        
+        let containerView = UIView()
+        
+        scrollView.addSubview(containerView)
+        containerView.snp.makeConstraints({ make in
+            make.top.equalToSuperview()
+            make.left.equalTo(self.view).inset(10)
+            make.right.equalTo(self.view).inset(10)
+            make.bottom.equalTo(scrollView)
+        })
+        
         titleLabel = UILabel()
         titleLabel.text = "What template would you like to use?"
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
         
-        self.view.addSubview(titleLabel)
+        containerView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints({ make in
-            make.top.equalTo(topLayoutGuide.snp.bottom).offset(15)
+            make.top.equalToSuperview().offset(15)
             make.left.right.equalToSuperview().inset(10)
         })
         
@@ -76,7 +99,7 @@ class ConfigViewController: UIViewController {
         optionSegmentControl.tintColor = Constants.applicationAccentColor
         optionSegmentControl.addTarget(self, action: #selector(optionSegmentChanged(_:)), for: .valueChanged)
         
-        self.view.addSubview(optionSegmentControl)
+        containerView.addSubview(optionSegmentControl)
         optionSegmentControl.snp.makeConstraints({ make in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.centerX.equalToSuperview()
@@ -87,10 +110,10 @@ class ConfigViewController: UIViewController {
         numberPicker.delegate = self
         numberPicker.dataSource = self
         
-        self.view.addSubview(numberPicker)
+        containerView.addSubview(numberPicker)
         numberPicker.snp.makeConstraints({ make in
             make.width.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(4)
+            make.height.equalTo(self.view).dividedBy(4)
             make.top.equalTo(optionSegmentControl.snp.bottom).offset(20)
         })
         
@@ -98,11 +121,22 @@ class ConfigViewController: UIViewController {
         numberLabel.numberOfLines = 0
         numberLabel.textAlignment = .center
         
-        self.view.addSubview(numberLabel)
+        containerView.addSubview(numberLabel)
         numberLabel.snp.makeConstraints({ make in
             make.top.equalTo(numberPicker.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         })
+        
+        descriptionLabel = UILabel()
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.textAlignment = .justified
+        
+        containerView.addSubview(descriptionLabel)
+        descriptionLabel.snp.makeConstraints({ make in
+            make.top.equalTo(numberLabel.snp.bottom).offset(30)
+            make.left.right.equalToSuperview().inset(20)
+        })
+        
         
         saveButton = UIButton()
         saveButton.backgroundColor = .green
@@ -111,22 +145,15 @@ class ConfigViewController: UIViewController {
         saveButton.setTitleColor(.green, for: .highlighted)
         saveButton.addTarget(self, action: #selector(saveButtonTapped(_:)), for: .touchUpInside)
         
-        self.view.addSubview(saveButton)
+        containerView.addSubview(saveButton)
         saveButton.snp.makeConstraints({ make in
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(30)
             make.width.equalToSuperview()
             make.height.equalTo(Constants.bottomButtonHeight)
-            make.bottom.equalTo(bottomLayoutGuide.snp.top)
+            make.bottom.equalToSuperview()
         })
         
-        descriptionLabel = UILabel()
-        descriptionLabel.numberOfLines = 0
-        descriptionLabel.textAlignment = .justified
-        
-        self.view.addSubview(descriptionLabel)
-        descriptionLabel.snp.makeConstraints({ make in
-            make.top.equalTo(numberLabel.snp.bottom).offset(30)
-            make.left.right.equalToSuperview().inset(20)
-        })
+       
     }
     
     func setLabels() {
