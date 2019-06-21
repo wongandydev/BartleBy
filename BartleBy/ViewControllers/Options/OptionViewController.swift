@@ -58,10 +58,10 @@ class OptionViewController: UIViewController {
             make.width.equalToSuperview().offset(20)
             make.height.equalTo(35)
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.view).offset(Constants.topPadding + 10)
+            make.top.equalTo(topLayoutGuide.snp.bottom).offset(Constants.topPadding + 10)
         })
         
-        let editButton = UIButton(frame: CGRect(x: (self.view.frame.width/2) - 30, y: 150, width: 60, height: 35))
+        let editButton = UIButton()
 //        editButton.backgroundColor = .red
 //        editButton.layer.cornerRadius = 15
         editButton.setTitle("Edit", for: .normal)
@@ -97,7 +97,7 @@ class OptionViewController: UIViewController {
         optionsCollectionView.snp.makeConstraints({ make in
             make.width.equalToSuperview()
             make.bottom.equalTo(bannerAdView.snp.top)
-            make.center.equalToSuperview()
+            make.top.equalTo(editButton.snp.bottom).offset(20)
         })
       
     }
