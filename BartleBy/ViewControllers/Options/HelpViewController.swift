@@ -168,6 +168,7 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
         submitFormButton.setTitle("Send Message", for: .normal)
         submitFormButton.setTitleColor(.green, for: .normal)
         submitFormButton.setTitleColor(.white, for: .highlighted)
+        submitFormButton.addTarget(self, action: #selector(submitFormButtonTapped(_:)), for: .touchUpInside)
         
         formStackView.addArrangedSubview(submitFormButton)
         submitFormButton.snp.makeConstraints({ make in
@@ -258,7 +259,7 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
     }
     
     func isValidEmail(email:String) -> Bool {
-        let emailRegEx = "\\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+(?:[A-Z]{2}|asia|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|travel)\\b)\\Z"
+        let emailRegEx = "\\A(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+(?:[A-Z]{2}|asia|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|travel)\\b)\\Z"
         
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: email)
