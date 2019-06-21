@@ -43,7 +43,7 @@ class Helper {
         return dateFormatter.date(from: time) ?? Date()
     }
     
-    func convertAMto24(date: Date) -> String {
+    func timeToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
         

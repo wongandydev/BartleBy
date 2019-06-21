@@ -65,7 +65,7 @@ class ConfigViewController: UIViewController {
         
         self.view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints({ make in
-            make.top.equalTo(topLayoutGuide.snp.bottom).offset(30)
+            make.top.equalTo(topLayoutGuide.snp.bottom).offset(15)
             make.left.right.equalToSuperview().inset(10)
         })
         
@@ -89,6 +89,7 @@ class ConfigViewController: UIViewController {
         self.view.addSubview(numberPicker)
         numberPicker.snp.makeConstraints({ make in
             make.width.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(4)
             make.top.equalTo(optionSegmentControl.snp.bottom).offset(20)
         })
         
@@ -100,16 +101,6 @@ class ConfigViewController: UIViewController {
         numberLabel.snp.makeConstraints({ make in
             make.top.equalTo(numberPicker.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
-        })
-        
-        descriptionLabel = UILabel()
-        descriptionLabel.numberOfLines = 0
-        descriptionLabel.textAlignment = .justified
-        
-        self.view.addSubview(descriptionLabel)
-        descriptionLabel.snp.makeConstraints({ make in
-            make.top.equalTo(numberLabel.snp.bottom).offset(30)
-            make.left.right.equalToSuperview().inset(20)
         })
         
         saveButton = UIButton()
@@ -124,6 +115,17 @@ class ConfigViewController: UIViewController {
             make.width.equalToSuperview()
             make.height.equalTo(Constants.bottomButtonHeight)
             make.bottom.equalTo(bottomLayoutGuide.snp.top)
+        })
+        
+        descriptionLabel = UILabel()
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.textAlignment = .justified
+        
+        self.view.addSubview(descriptionLabel)
+        descriptionLabel.snp.makeConstraints({ make in
+            make.top.equalTo(numberLabel.snp.bottom).offset(30)
+            make.left.right.equalToSuperview().inset(20)
+            make.bottom.equalTo(saveButton.snp.top)
         })
     }
     
