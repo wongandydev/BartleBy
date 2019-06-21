@@ -126,7 +126,6 @@ class ConfigViewController: UIViewController {
         descriptionLabel.snp.makeConstraints({ make in
             make.top.equalTo(numberLabel.snp.bottom).offset(30)
             make.left.right.equalToSuperview().inset(20)
-            make.bottom.equalTo(saveButton.snp.top)
         })
     }
     
