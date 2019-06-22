@@ -19,5 +19,15 @@ class Constants {
     static var bottomPadding            = CGFloat(UIApplication.shared.windows[0].safeAreaInsets.bottom)
     static let tabBarHeight             = CGFloat(49.0)
     
+    static let screenWidth = UIScreen.main.bounds.width
+    
+    static let typeScale: CGFloat = {
+        if screenWidth < 375.0  { return 320.0/375.0 }     // iPhone 5/5S/5SE
+        if screenWidth >= 414.0 { return 414.0/375.0 }     // iPhone 6+/7+/8+, XR, Xs Max
+        return 1.0                                         // iPhone X/Xs
+    }()
+    
     static let bottomButtonHeight       = 60
+    
+    
 }

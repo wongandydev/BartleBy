@@ -31,16 +31,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             FirebaseNetworkingService.signUpDefaultUser()
         }
         
-        
-                
         Mixpanel.initialize(token: "7fefd65f0da68515af4a5ffb099eb1d8")
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
         if let window = self.window {
             let main = AllTabBarViewController()
+            let emailVC = EmailLoginViewController()
             
-            var navController: UIViewController = main
+            var navController: UIViewController = emailVC
 
             window.rootViewController = navController
             window.makeKeyAndVisible()
