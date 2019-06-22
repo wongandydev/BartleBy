@@ -13,7 +13,7 @@ class OptionViewController: UIViewController {
     private var bannerAdView: GADBannerView!
     private let userUID = UIDevice.current.identifierForVendor?.uuidString
     
-    var options: [String] = ["Manage type of writing", "Manage Notifications", "Stats", "Help", "About"]
+    var options: [String] = ["Manage type of writing", "Manage Notifications", "Stats", "Help", "About", "Sign Up/Sign In"]
     
     let usernameLabel: UILabel = {
         let label = UILabel()
@@ -203,6 +203,9 @@ extension OptionViewController: UICollectionViewDelegate, UICollectionViewDataSo
             case 4:
                 let aboutVC = AboutViewController()
                 self.navigationController?.pushViewController(aboutVC, animated: true)
+                break
+            case 5:
+                
                 break
             default:
                 print("default")

@@ -70,3 +70,9 @@ class Helper {
     }
 }
 
+extension Int {
+    func currentTimestamp() -> Int {
+        return Int(Date().timeIntervalSince1970)
+    }
+}
+

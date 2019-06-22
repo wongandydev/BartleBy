@@ -23,21 +23,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         GADMobileAds.configure(withApplicationID: Helper.valueForKey(key: "GoogleADMobAppID"))
         
-        let userUID = UIDevice.current.identifierForVendor?.uuidString
-        UserDefaults.standard.set(userUID, forKey: "userUID")
-        
-        if !UserDefaults.standard.bool(forKey: "isFirstLaunch") {
-            //sign up user with default\
-            Database.database().reference().child("users/\(userUID!)/stats/streak").setValue(0)
-            Database.database().reference().child("users/\(userUID!)/stats/totalNotes").setValue(0)
-            Database.database().reference().child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateNumber").setValue(5)
-            Database.database().reference().child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateType").setValue(Template.Option.grateful.rawValue)
-            
-            UserDefaults.standard.set(true, forKey: "isFirstLaunch")
-            UserDefaults.standard.synchronize()
+        if let userId = UserDefaults.standard.value(forKey: "userUID")  {
+            let currentTime = Int().currentTimestamp()
+            Database.database().reference().child("users/\(userId)/loginActivity").updateChildValues(["\(currentTime)" : ["userDateTime": Helper.sharedInstance.dateToString(date: Date()), "time": currentTime]])
+            Database.database().reference().child("users/\(userId)/lastLogin").setValue("\(currentTime)")
+        } else {
+            FirebaseNetworkingService.signUpDefaultUser()
         }
         
-        Database.database().reference().child("users/\(userUID!)/lastLogin").setValue(Helper.sharedInstance.dateToString(date: Date()))
+        
                 
         Mixpanel.initialize(token: "7fefd65f0da68515af4a5ffb099eb1d8")
         

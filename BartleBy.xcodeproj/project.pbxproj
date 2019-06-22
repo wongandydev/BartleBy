@@ -20,6 +20,7 @@
 		A03752DC220DB4D200A784CC /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03752DB220DB4D200A784CC /* UIColor+Extension.swift */; };
 		A04FB3DF22BBE56200CD566C /* AllTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04FB3DE22BBE56200CD566C /* AllTabBarViewController.swift */; };
 		A05E0D3422BDA34500EC20F7 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05E0D3322BDA34500EC20F7 /* Reachability.swift */; };
+		A05E0D3622BDAB0C00EC20F7 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05E0D3522BDAB0C00EC20F7 /* EmailLoginViewController.swift */; };
 		A09E75FA22BD0C4F00AB62E6 /* FirebaseNetowrkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09E75F922BD0C4F00AB62E6 /* FirebaseNetowrkingService.swift */; };
 		A0A4E4462283CCE800069310 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4E4452283CCE800069310 /* Constants.swift */; };
 		A0A6EDCC21D672D700637C91 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6EDCB21D672D700637C91 /* StatsViewController.swift */; };
@@ -67,6 +68,7 @@
 		A03752DB220DB4D200A784CC /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		A04FB3DE22BBE56200CD566C /* AllTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTabBarViewController.swift; sourceTree = "<group>"; };
 		A05E0D3322BDA34500EC20F7 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		A05E0D3522BDAB0C00EC20F7 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
 		A09E75F922BD0C4F00AB62E6 /* FirebaseNetowrkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseNetowrkingService.swift; sourceTree = "<group>"; };
 		A0A4E4452283CCE800069310 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A0A6EDCB21D672D700637C91 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				A0D138A321D3F9370021F424 /* HelpViewController.swift */,
 				A0A6EDCB21D672D700637C91 /* StatsViewController.swift */,
 				A0C7D5B321D31A9F003EC195 /* NotificationViewController.swift */,
+				A05E0D3522BDAB0C00EC20F7 /* EmailLoginViewController.swift */,
 			);
 			path = Options;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				A028098721CD4F64009D7730 /* AddViewNotesViewController.swift in Sources */,
 				A02B7AD121CC3D850062DDC5 /* BartleBy.xcdatamodeld in Sources */,
 				A0C7D5AA21D135EB003EC195 /* Template.swift in Sources */,
+				A05E0D3622BDAB0C00EC20F7 /* EmailLoginViewController.swift in Sources */,
 				A02B7ACB21CC3D850062DDC5 /* NotesViewController.swift in Sources */,
 				A0D138A421D3F9370021F424 /* HelpViewController.swift in Sources */,
 				A02B7AC921CC3D850062DDC5 /* AppDelegate.swift in Sources */,
