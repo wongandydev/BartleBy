@@ -53,6 +53,8 @@ class OptionViewController: UIViewController {
     private func layoutSubviews() {
         self.view.backgroundColor = .white
         
+        usernameLabel.isHidden =  true
+        
         view.addSubview(usernameLabel)
         usernameLabel.snp.makeConstraints({ make in
             make.width.equalToSuperview().offset(20)
@@ -62,6 +64,7 @@ class OptionViewController: UIViewController {
         })
         
         let editButton = UIButton()
+        editButton.isHidden = true
 //        editButton.backgroundColor = .red
 //        editButton.layer.cornerRadius = 15
         editButton.setTitle("Edit", for: .normal)

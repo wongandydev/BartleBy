@@ -75,6 +75,7 @@ class AddViewNotesViewController: UIViewController {
         self.view.backgroundColor = .white
         
         beforeButton = UIButton()
+        beforeButton.setTitle("Back", for: .normal)
         beforeButton.setTitleColor(.red, for: .normal)
         beforeButton.setTitleColor(.black, for: .highlighted)
         beforeButton.addTarget(self, action: #selector(beforeButtonTapped(_:)), for: .touchUpInside)
@@ -127,6 +128,7 @@ class AddViewNotesViewController: UIViewController {
         answerTextView = UITextView()
         answerTextView.delegate = self
         answerTextView.contentInset = UIEdgeInsets(top: 20, left: 10, bottom: 0, right: 10)
+        answerTextView.font = UIFont.systemFont(ofSize: 16, weight: .light)
         
         self.view.addSubview(answerTextView)
         answerTextView.snp.makeConstraints({ make in
@@ -141,15 +143,15 @@ class AddViewNotesViewController: UIViewController {
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
 //            self.view.frame.origin.y = -keyboardFrame.cgRectValue.height+50
-            self.answerTextView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: keyboardFrame.cgRectValue.height, right: 10);
-            self.answerTextView.scrollIndicatorInsets = self.answerTextView.contentInset;
+            self.answerTextView.contentInset = UIEdgeInsets(top: 20, left: 10, bottom: keyboardFrame.cgRectValue.height, right: 10)
+            self.answerTextView.scrollIndicatorInsets = self.answerTextView.contentInset
         }
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
 //        self.view.frame.origin.y = 0
-        self.answerTextView.contentInset = .zero;
-        self.answerTextView.scrollIndicatorInsets = .zero;
+        self.answerTextView.contentInset = UIEdgeInsets(top: 20, left: 10, bottom: 0, right: 10)
+        self.answerTextView.scrollIndicatorInsets = self.answerTextView.contentInset
     }
 
     func getSelectedNumber(completion: @escaping (Int) -> Void) {
@@ -233,6 +235,7 @@ class AddViewNotesViewController: UIViewController {
     
     func nextQuestion() {
         beforeButton.isEnabled = true
+        beforeButton.isHidden = false
         
         notes.indices.contains(currentNumber) ? notes[currentNumber].note = answerTextView.text : saveNotes(note: self.answerTextView.text == "Enter Note" ? "" : self.answerTextView.text, dateCreated: Helper.sharedInstance.getCurrentDate(), id: (ref?.childByAutoId().key)!)
         
@@ -319,7 +322,8 @@ class AddViewNotesViewController: UIViewController {
         
         nextDoneButton.setTitle("Next", for: .normal)
         questionLabel.text = "\(currentNumber + 1)) What are you grateful for?"
-        answerTextView.text = notes[currentNumber].note
+        answerTextView.text = notes[currentNumber].note.isEmpty ? "Enter Note" : notes[currentNumber].note
+        answerTextView.textColor = notes[currentNumber].note.isEmpty ? .placeholderGray : .black
     }
     
     @objc func nextDoneButtonTapped(_ sender: Any) {
@@ -356,6 +360,13 @@ extension AddViewNotesViewController: UITextViewDelegate {
         if textView.textColor == .placeholderGray {
             textView.text = ""
             textView.textColor = .black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Enter Note"
+            textView.textColor = .placeholderGray
         }
     }
 }
