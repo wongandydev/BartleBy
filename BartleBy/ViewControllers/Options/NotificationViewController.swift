@@ -35,6 +35,7 @@ class NotificationViewController: UIViewController {
                     self.userNotificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
                         if !granted {
                             self.navigationController?.popViewController(animated: true)
+                            self.view.alpha = 0.0
                         }
                     }
                     break

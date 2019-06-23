@@ -29,6 +29,9 @@ class AddViewNotesViewController: UIViewController {
     var timer: Timer?
     var handle: UInt!
     
+    let placeHolderText = "Enter Note"
+    let placeHolderColor: UIColor = .placeholderGray
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -236,11 +239,26 @@ class AddViewNotesViewController: UIViewController {
         self.view.endEditing(true)
     }
     
+    /***
+        - Checks if the note was already appended, if not append it and save the notes. It also checks to make sure the answer textview text is not the placeholder text, if it is, it saves an empty string.
+     */
+    
+    fileprivate func addNote() {
+        print(self.answerTextView.text == placeHolderText)
+        print(self.answerTextView.text)
+        let note = self.answerTextView.text == placeHolderText ? "" : self.answerTextView.text ?? "no notes"
+        
+        notes.indices.contains(currentNumber) ? notes[currentNumber].note = note : saveNotes(note: note, dateCreated: Helper.sharedInstance.getCurrentDate(), id: (ref?.childByAutoId().key)!)
+    }
+    
     
     func nextQuestion() {
         hideBeforeButton(false)
         
-        notes.indices.contains(currentNumber) ? notes[currentNumber].note = answerTextView.text : saveNotes(note: self.answerTextView.text == "Enter Note" ? "" : self.answerTextView.text, dateCreated: Helper.sharedInstance.getCurrentDate(), id: (ref?.childByAutoId().key)!)
+        //dismiss keyboard
+        answerTextView.resignFirstResponder()
+        
+        addNote()
         
         currentNumber+=1
         
@@ -248,8 +266,8 @@ class AddViewNotesViewController: UIViewController {
             nextDoneButton.setTitle("Done", for: .normal)
         }
         
-        answerTextView.text = notes.indices.contains(currentNumber) ? notes[currentNumber].note : ""
-        answerTextView.textColor = .black
+        answerTextView.text = notes.indices.contains(currentNumber) &&  notes[currentNumber].note != "" ? notes[currentNumber].note : placeHolderText
+        answerTextView.textColor = notes.indices.contains(currentNumber) &&  notes[currentNumber].note != ""  ?  .black : placeHolderColor
         questionLabel.text = "\(currentNumber + 1)) What are you grateful for?"
     }
     
@@ -279,8 +297,8 @@ class AddViewNotesViewController: UIViewController {
             startTimer()
         }
     
-        answerTextView.text = "Enter Note"
-        answerTextView.textColor = .placeholderGray
+        answerTextView.text = placeHolderText
+        answerTextView.textColor = placeHolderColor
 
         if numberOfQuestions > 1 {
             nextDoneButton.setTitle("Next", for: .normal)
@@ -327,6 +345,11 @@ class AddViewNotesViewController: UIViewController {
     
     
     @objc func beforeButtonTapped(_ sender: Any) {
+        //dismiss keyboard
+        answerTextView.resignFirstResponder()
+        
+        addNote()
+        
         currentNumber -= 1
         
         if currentNumber == 0 {
@@ -335,14 +358,14 @@ class AddViewNotesViewController: UIViewController {
         
         nextDoneButton.setTitle("Next", for: .normal)
         questionLabel.text = "\(currentNumber + 1)) What are you grateful for?"
-        answerTextView.text = notes[currentNumber].note.isEmpty ? "Enter Note" : notes[currentNumber].note
-        answerTextView.textColor = notes[currentNumber].note.isEmpty ? .placeholderGray : .black
+        answerTextView.text = notes[currentNumber].note == "" ? placeHolderText : notes[currentNumber].note
+        answerTextView.textColor = notes[currentNumber].note == "" ? placeHolderColor : .black
     }
     
     @objc func nextDoneButtonTapped(_ sender: Any) {
         if nextDoneButton.titleLabel?.text == "Done" {
-            if self.templateType == Template.grateful && self.answerTextView.text != "" && self.answerTextView.text != "Enter Note" {
-                saveNotes(note: self.answerTextView.text, dateCreated: Helper.sharedInstance.getCurrentDate(), id: (ref?.childByAutoId().key)!)
+            if self.templateType == Template.grateful && self.answerTextView.text != "" && self.answerTextView.text != placeHolderText && !notes.contains(where: { $0.note.isEmpty}) {
+                addNote()
                 compileNotes()
                 self.dismiss(animated: true, completion: nil)
             } else {
@@ -375,7 +398,7 @@ extension AddViewNotesViewController: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == .placeholderGray {
+        if textView.textColor == placeHolderColor {
             textView.text = ""
             textView.textColor = .black
         }
@@ -383,8 +406,8 @@ extension AddViewNotesViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
-            textView.text = "Enter Note"
-            textView.textColor = .placeholderGray
+            textView.text = placeHolderText
+            textView.textColor = placeHolderColor
         }
     }
 }

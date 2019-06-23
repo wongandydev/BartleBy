@@ -141,7 +141,7 @@ class NotesViewController: UIViewController {
                     let secondDate = Helper.sharedInstance.stringToDate(date: self.notes[noteIndex + 1].dateCreated.components(separatedBy: " ")[0])
                     
                     let difference = Calendar.current.dateComponents([.day], from: firstDate, to: secondDate).day ?? 0
-                    //IF greater than one break
+                    //If greater than one break
                     if  difference < -1 {
                         //Do not count
                         break
