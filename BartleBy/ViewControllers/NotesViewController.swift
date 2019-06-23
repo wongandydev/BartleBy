@@ -131,7 +131,7 @@ class NotesViewController: UIViewController {
         if totalNotes > 1 {
             let diffFromTodayToLastNote: Int = Calendar.current.dateComponents([.day], from: today, to: latestNote).day ?? 0
             //If the difference between today and latest note is more than 0; set as 0
-            if diffFromTodayToLastNote < 0 {
+            if diffFromTodayToLastNote < -1 {
                 currentStreak = 0
             } else {
                 //Include today
@@ -141,9 +141,13 @@ class NotesViewController: UIViewController {
                     let secondDate = Helper.sharedInstance.stringToDate(date: self.notes[noteIndex + 1].dateCreated.components(separatedBy: " ")[0])
                     
                     let difference = Calendar.current.dateComponents([.day], from: firstDate, to: secondDate).day ?? 0
-                    //If the diffference is today or greater than one don't do anything
-                    if  difference < -1 || difference == 0 {
+                    //IF greater than one break
+                    if  difference < -1 {
                         //Do not count
+                        break
+                    //If the diffference is today
+                    } else if difference == 0 {
+                        //Do nothing
                     } else {
                         currentStreak += 1
                     }

@@ -18,7 +18,6 @@ class AddViewNotesViewController: UIViewController {
     
     var ref: DatabaseReference!
     
-    let userUID = UIDevice.current.identifierForVendor?.uuidString
     var currentNumber = 0
     var numberOfQuestions = 0
     var numberOfMinutes = 0
@@ -189,26 +188,28 @@ class AddViewNotesViewController: UIViewController {
             compiledNote = notes[notes.count - 1].note
         }
         
-        if newNote {
-            self.ref.child("notes/\(notes[notes.count-1].id)").setValue(["note": compiledNote,
-                                                                       "dateCreated": notes[notes.count-1].dateCreated,
-                                                                       "id": notes[notes.count-1].id,
-                                                                       "templateType": notes[notes.count-1].templateType])
+        if let userId = UserDefaults.standard.value(forKey: Constants.userId) as? String {
+            if newNote {
+                self.ref.child("notes/\(notes[notes.count-1].id)").setValue(["note": compiledNote,
+                                                                           "dateCreated": notes[notes.count-1].dateCreated,
+                                                                           "id": notes[notes.count-1].id,
+                                                                           "templateType": notes[notes.count-1].templateType])
 
-            self.ref.child("users/\(userUID!)/notes/\(notes[notes.count-1].id)").setValue(["note": compiledNote,
-                                                                                         "dateCreated": notes[notes.count-1].dateCreated,
-                                                                                         "id": notes[notes.count-1].id,
-                                                                                         "templateType": notes[notes.count-1].templateType])
-        } else {
-            self.ref.child("notes/\(notes[notes.count-1].id)").setValue(["note": notes[notes.count-1].note,
-                                                                         "dateCreated": notes[notes.count-1].dateCreated,
-                                                                         "id": notes[notes.count-1].id,
-                                                                         "templateType": notes[notes.count-1].templateType])
-            
-            self.ref.child("users/\(userUID!)/notes/\(notes[notes.count-1].id)").setValue(["note": notes[notes.count-1].note,
-                                                                                           "dateCreated": notes[notes.count-1].dateCreated,
-                                                                                           "id": notes[notes.count-1].id,
-                                                                                           "templateType": notes[notes.count-1].templateType])
+                self.ref.child("users/\(userId)/notes/\(notes[notes.count-1].id)").setValue(["note": compiledNote,
+                                                                                             "dateCreated": notes[notes.count-1].dateCreated,
+                                                                                             "id": notes[notes.count-1].id,
+                                                                                             "templateType": notes[notes.count-1].templateType])
+            } else {
+                self.ref.child("notes/\(notes[notes.count-1].id)").setValue(["note": notes[notes.count-1].note,
+                                                                             "dateCreated": notes[notes.count-1].dateCreated,
+                                                                             "id": notes[notes.count-1].id,
+                                                                             "templateType": notes[notes.count-1].templateType])
+                
+                self.ref.child("users/\(userId)/notes/\(notes[notes.count-1].id)").setValue(["note": notes[notes.count-1].note,
+                                                                                               "dateCreated": notes[notes.count-1].dateCreated,
+                                                                                               "id": notes[notes.count-1].id,
+                                                                                               "templateType": notes[notes.count-1].templateType])
+            }
         }
     }
 
@@ -247,8 +248,8 @@ class AddViewNotesViewController: UIViewController {
             nextDoneButton.setTitle("Done", for: .normal)
         }
         
-        answerTextView.text = notes.indices.contains(currentNumber) ? notes[currentNumber].note : "Enter Note"
-        answerTextView.textColor = .placeholderGray
+        answerTextView.text = notes.indices.contains(currentNumber) ? notes[currentNumber].note : ""
+        answerTextView.textColor = .black
         questionLabel.text = "\(currentNumber + 1)) What are you grateful for?"
     }
     
