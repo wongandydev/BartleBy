@@ -21,7 +21,7 @@
 		A04FB3DF22BBE56200CD566C /* AllTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04FB3DE22BBE56200CD566C /* AllTabBarViewController.swift */; };
 		A05E0D3422BDA34500EC20F7 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05E0D3322BDA34500EC20F7 /* Reachability.swift */; };
 		A05E0D3622BDAB0C00EC20F7 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05E0D3522BDAB0C00EC20F7 /* EmailLoginViewController.swift */; };
-		A09E75FA22BD0C4F00AB62E6 /* FirebaseNetowrkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09E75F922BD0C4F00AB62E6 /* FirebaseNetowrkingService.swift */; };
+		A09E75FA22BD0C4F00AB62E6 /* FirebaseNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09E75F922BD0C4F00AB62E6 /* FirebaseNetworkingService.swift */; };
 		A0A4E4462283CCE800069310 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4E4452283CCE800069310 /* Constants.swift */; };
 		A0A6EDCC21D672D700637C91 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6EDCB21D672D700637C91 /* StatsViewController.swift */; };
 		A0A6EDCE21D6737100637C91 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6EDCD21D6737100637C91 /* UIViewController+Extensions.swift */; };
@@ -32,6 +32,9 @@
 		A0C7D5B421D31A9F003EC195 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C7D5B321D31A9F003EC195 /* NotificationViewController.swift */; };
 		A0D138A421D3F9370021F424 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D138A321D3F9370021F424 /* HelpViewController.swift */; };
 		A0D138A621D3FA7A0021F424 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D138A521D3FA7A0021F424 /* AboutViewController.swift */; };
+		A0E0FE6B22BF109600DC3BF4 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0FE6A22BF109600DC3BF4 /* Int+Extensions.swift */; };
+		A0E0FE6D22BF109F00DC3BF4 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0FE6C22BF109F00DC3BF4 /* String+Extensions.swift */; };
+		A0E0FE7022BF328200DC3BF4 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0FE6F22BF328200DC3BF4 /* Spinner.swift */; };
 		A0E7AA6321D0678E001A76C0 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7AA6221D0678E001A76C0 /* Note.swift */; };
 		A0E7AA6521D06914001A76C0 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7AA6421D06914001A76C0 /* NoteCell.swift */; };
 		A0E7AA6921D06DD5001A76C0 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7AA6821D06DD5001A76C0 /* Helper.swift */; };
@@ -69,7 +72,7 @@
 		A04FB3DE22BBE56200CD566C /* AllTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTabBarViewController.swift; sourceTree = "<group>"; };
 		A05E0D3322BDA34500EC20F7 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		A05E0D3522BDAB0C00EC20F7 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
-		A09E75F922BD0C4F00AB62E6 /* FirebaseNetowrkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseNetowrkingService.swift; sourceTree = "<group>"; };
+		A09E75F922BD0C4F00AB62E6 /* FirebaseNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseNetworkingService.swift; sourceTree = "<group>"; };
 		A0A4E4452283CCE800069310 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A0A6EDCB21D672D700637C91 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		A0A6EDCD21D6737100637C91 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIViewController+Extensions.swift"; path = "../UIViewController+Extensions.swift"; sourceTree = "<group>"; };
@@ -80,6 +83,9 @@
 		A0C7D5B321D31A9F003EC195 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		A0D138A321D3F9370021F424 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		A0D138A521D3FA7A0021F424 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		A0E0FE6A22BF109600DC3BF4 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
+		A0E0FE6C22BF109F00DC3BF4 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		A0E0FE6F22BF328200DC3BF4 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		A0E7AA6221D0678E001A76C0 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		A0E7AA6421D06914001A76C0 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		A0E7AA6821D06DD5001A76C0 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -154,6 +160,7 @@
 		A02B7AC721CC3D850062DDC5 /* BartleBy */ = {
 			isa = PBXGroup;
 			children = (
+				A0E0FE6E22BF327700DC3BF4 /* UI Components */,
 				A09E75FB22BD0C5600AB62E6 /* Networking  */,
 				A04FB3DD22BBE48000CD566C /* Extensions */,
 				A04FB3DC22BBE46E00CD566C /* Cells */,
@@ -195,6 +202,8 @@
 				A03752DB220DB4D200A784CC /* UIColor+Extension.swift */,
 				A0A6EDCD21D6737100637C91 /* UIViewController+Extensions.swift */,
 				A0A6EDCF21D86FD100637C91 /* NavigationController+Extension.swift */,
+				A0E0FE6A22BF109600DC3BF4 /* Int+Extensions.swift */,
+				A0E0FE6C22BF109F00DC3BF4 /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -216,10 +225,18 @@
 		A09E75FB22BD0C5600AB62E6 /* Networking  */ = {
 			isa = PBXGroup;
 			children = (
-				A09E75F922BD0C4F00AB62E6 /* FirebaseNetowrkingService.swift */,
+				A09E75F922BD0C4F00AB62E6 /* FirebaseNetworkingService.swift */,
 				A05E0D3322BDA34500EC20F7 /* Reachability.swift */,
 			);
 			path = "Networking ";
+			sourceTree = "<group>";
+		};
+		A0E0FE6E22BF327700DC3BF4 /* UI Components */ = {
+			isa = PBXGroup;
+			children = (
+				A0E0FE6F22BF328200DC3BF4 /* Spinner.swift */,
+			);
+			path = "UI Components";
 			sourceTree = "<group>";
 		};
 		F8216DBF80D1D4424F7FB002 /* Frameworks */ = {
@@ -390,6 +407,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BartleBy/Pods-BartleBy-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift/Mixpanel.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -400,6 +418,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -424,7 +443,7 @@
 				A0A6EDCC21D672D700637C91 /* StatsViewController.swift in Sources */,
 				A03752DC220DB4D200A784CC /* UIColor+Extension.swift in Sources */,
 				A0C7D5B221D316F4003EC195 /* ConfigViewController.swift in Sources */,
-				A09E75FA22BD0C4F00AB62E6 /* FirebaseNetowrkingService.swift in Sources */,
+				A09E75FA22BD0C4F00AB62E6 /* FirebaseNetworkingService.swift in Sources */,
 				A0D138A621D3FA7A0021F424 /* AboutViewController.swift in Sources */,
 				A0A6EDCE21D6737100637C91 /* UIViewController+Extensions.swift in Sources */,
 				A04FB3DF22BBE56200CD566C /* AllTabBarViewController.swift in Sources */,
@@ -433,12 +452,15 @@
 				A0C7D5AA21D135EB003EC195 /* Template.swift in Sources */,
 				A05E0D3622BDAB0C00EC20F7 /* EmailLoginViewController.swift in Sources */,
 				A02B7ACB21CC3D850062DDC5 /* NotesViewController.swift in Sources */,
+				A0E0FE6D22BF109F00DC3BF4 /* String+Extensions.swift in Sources */,
 				A0D138A421D3F9370021F424 /* HelpViewController.swift in Sources */,
+				A0E0FE7022BF328200DC3BF4 /* Spinner.swift in Sources */,
 				A02B7AC921CC3D850062DDC5 /* AppDelegate.swift in Sources */,
 				A0E7AA6521D06914001A76C0 /* NoteCell.swift in Sources */,
 				A0A6EDD021D86FD100637C91 /* NavigationController+Extension.swift in Sources */,
 				A05E0D3422BDA34500EC20F7 /* Reachability.swift in Sources */,
 				A0C7D5B421D31A9F003EC195 /* NotificationViewController.swift in Sources */,
+				A0E0FE6B22BF109600DC3BF4 /* Int+Extensions.swift in Sources */,
 				A0E7AA6321D0678E001A76C0 /* Note.swift in Sources */,
 				A0E7AA6921D06DD5001A76C0 /* Helper.swift in Sources */,
 			);

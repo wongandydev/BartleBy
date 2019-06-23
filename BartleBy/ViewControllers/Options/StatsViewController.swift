@@ -11,7 +11,7 @@ import Firebase
 
 class StatsViewController: UIViewController {
     var ref: DatabaseReference!
-    private let userUID = UserDefaults.standard.string(forKey: "userUID")
+    private var userID: String!
     private var titleLabel: UILabel!
     private var totalDaysLabel: UILabel!
     private var totalDaysTextLabel: UILabel!
@@ -29,6 +29,10 @@ class StatsViewController: UIViewController {
         super.viewDidLoad()
 
         ref = Database.database().reference()
+        
+        if let userId =  UserDefaults.standard.string(forKey: Constants.userId) as? String {
+            self.userID = userId
+        }
         layoutSubviews()
     }
     
@@ -132,30 +136,32 @@ class StatsViewController: UIViewController {
     }
     
     func getStats() {
-        ref.child("users/\(userUID!)/stats").observeSingleEvent(of: .value , with: { snapshot in
-            if let stat = snapshot.value as? [String: Int] {
-                if let streak = stat["streak"] as? Int {
-                    if let totalNotes = stat["totalNotes"] as? Int {
-                        self.totalDaysLabel.text = String(streak)
-                        UserDefaults.standard.set(streak, forKey: "stat_streak")
-                        self.totalNotesLabel.text = String(totalNotes)
-                        UserDefaults.standard.set(totalNotes, forKey: "stat_totalNotes")
-                        
-                        if streak > 1 {
-                            self.totalDaysTextLabel.text = "days in a row"
-                        } else {
-                            self.totalDaysTextLabel.text = "day in a row"
-                        }
-                        
-                        if totalNotes > 1 {
-                            self.totalNotesTextLabel.text = "notes in total"
-                        } else {
-                            self.totalNotesTextLabel.text = "note in total"
+        if let userId = userID {
+            ref.child("users/\(userID!)/stats").observeSingleEvent(of: .value , with: { snapshot in
+                if let stat = snapshot.value as? [String: Int] {
+                    if let streak = stat["streak"] as? Int {
+                        if let totalNotes = stat["totalNotes"] as? Int {
+                            self.totalDaysLabel.text = String(streak)
+                            UserDefaults.standard.set(streak, forKey: "stat_streak")
+                            self.totalNotesLabel.text = String(totalNotes)
+                            UserDefaults.standard.set(totalNotes, forKey: "stat_totalNotes")
+                            
+                            if streak > 1 {
+                                self.totalDaysTextLabel.text = "days in a row"
+                            } else {
+                                self.totalDaysTextLabel.text = "day in a row"
+                            }
+                            
+                            if totalNotes > 1 {
+                                self.totalNotesTextLabel.text = "notes in total"
+                            } else {
+                                self.totalNotesTextLabel.text = "note in total"
+                            }
                         }
                     }
                 }
-            }
-        })
+            })
+        }
         offlineStats()
     }
 }

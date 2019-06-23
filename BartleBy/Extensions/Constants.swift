@@ -29,5 +29,6 @@ class Constants {
     
     static let bottomButtonHeight       = 60
     
-    
+    static let userId                   = "userId"
+    static let userHasLoggedIn          = "userHasLoggedIn"
 }

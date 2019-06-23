@@ -40,6 +40,8 @@ class OptionViewController: UIViewController {
         super.viewDidLoad()
         ref = Database.database().reference()
         
+        setupNavbar()
+        
         layoutSubviews()
         getUsername()
     }
@@ -48,6 +50,15 @@ class OptionViewController: UIViewController {
         super.viewWillAppear(animated)
 //        self.navigationController?.transparentNavBar()
         
+    }
+    
+    
+    fileprivate func setupNavbar() {
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.tintColor = Constants.applicationAccentColor
+        self.navigationController?.navigationBar.barTintColor = Constants.lightestGray
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     private func layoutSubviews() {
@@ -205,7 +216,14 @@ extension OptionViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 self.navigationController?.pushViewController(aboutVC, animated: true)
                 break
             case 5:
-                
+                if let hasLoggedIn = UserDefaults.standard.bool(forKey: Constants.userHasLoggedIn) as? Bool {
+                    if hasLoggedIn {
+                        stockAlertMessage(title: "", message: "You have already logged in.")
+                    } else {
+                        let emailVC = EmailLoginViewController()
+                        self.navigationController?.pushViewController(emailVC, animated: true)
+                    }
+                }
                 break
             default:
                 print("default")

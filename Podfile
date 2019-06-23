@@ -10,6 +10,8 @@ target 'BartleBy' do
 	pod 'Firebase/Core'
 	pod 'Firebase/Database'
 	pod 'Firebase/AdMob'
+	pod 'Firebase/Analytics'
+	pod 'Firebase/Auth'
 	pod 'Mixpanel-swift'
 	pod 'SnapKit', '~> 4.0.0'
 

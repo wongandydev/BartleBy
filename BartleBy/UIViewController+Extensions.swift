@@ -9,6 +9,24 @@
 import UIKit
 
 extension UIViewController {
+    func stockAlertMessage(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func popVCAfterOK(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: { action in
+            self.navigationController?.popViewController(animated: true)
+        }))
+            
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     func alertMessage(title: String, message: String) {
         let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
         blurView.tag = 124

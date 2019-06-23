@@ -8,19 +8,11 @@
 
 import UIKit
 
-class Template {
-    enum Option:String {
-        case grateful
-        case freeWrite
-    }
-    
-    var option: Option
-    
-    init(option: Option) {
-        self.option = option
-    }
-    
-    static func == (lhs: Template, rhs: Template) -> Bool{
-        return lhs == rhs
-    }
+enum Template: String {
+    case grateful
+    case freeWrite
+
+//    static func == (lhs: Template, rhs: Template) -> Bool{
+//        return lhs == rhs
+//    }
 }

@@ -34,7 +34,6 @@ class ConfigViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNavbar()
         layoutSubviews()
         
         ref = Database.database().reference()
@@ -46,7 +45,7 @@ class ConfigViewController: UIViewController {
         })
         
         getTemplateType(completion: { templateType in
-            if templateType == Template.Option.grateful.rawValue {
+            if templateType == Template.grateful.rawValue {
                 self.optionSegmentControl.selectedSegmentIndex = 0
             } else {
                 self.optionSegmentControl.selectedSegmentIndex = 1
@@ -55,14 +54,6 @@ class ConfigViewController: UIViewController {
             self.setTemplateType(type: templateType)
             self.setLabels()
         })
-    }
-    
-    fileprivate func setupNavbar() {
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.tintColor = Constants.applicationAccentColor
-        self.navigationController?.navigationBar.barTintColor = Constants.lightestGray
-        self.navigationController?.navigationBar.backgroundColor = .white
-        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     fileprivate func layoutSubviews() {
@@ -183,13 +174,16 @@ class ConfigViewController: UIViewController {
     func getTemplateType(completion: @escaping (String) -> Void) {
         FirebaseNetworkingService.isConnectedToInternet({ isConnected in
             if isConnected {
-                self.ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateType").observeSingleEvent(of: .value , with: { snapshot in
-                    if let templateType = snapshot.value as? String{
-                        completion(templateType)
-                    } else {
-                        completion(Template.Option.grateful.rawValue)
-                    }
-                })
+                if let userId = UserDefaults.standard.value(forKey: Constants.userId) as? String {
+                    self.ref.child("users/\(userId)/template/templateType").observeSingleEvent(of: .value , with: { snapshot in
+                        if let templateType = snapshot.value as? String{
+                            completion(templateType)
+                        } else {
+                            completion(Template.grateful.rawValue)
+                        }
+                    })
+                }
+                
             } else {
                 if let offlineTemplateType = self.getOfflineSelectedTemplateType() {
                     completion(offlineTemplateType)
@@ -206,13 +200,15 @@ class ConfigViewController: UIViewController {
     func getSelectedNumber(completion: @escaping (Int) -> Void) {
         FirebaseNetworkingService.isConnectedToInternet({ isConnected in
             if isConnected {
-                self.ref.child("users/\(UserDefaults.standard.object(forKey: "userUID")!)/template/templateNumber").observeSingleEvent(of: DataEventType.value , with: { snapshot in
-                    if let templateNumber = snapshot.value as? Int{
-                        completion(templateNumber)
-                    } else {
-                        completion(1)
-                    }
-                })
+                if let userId = UserDefaults.standard.value(forKey: Constants.userId) as? String {
+                    self.ref.child("users/\(userId)/template/templateNumber").observeSingleEvent(of: .value , with: { snapshot in
+                        if let templateNumber = snapshot.value as? Int{
+                            completion(templateNumber)
+                        } else {
+                            completion(1)
+                        }
+                    })
+                }
             } else {
                 if let offlineNumber = self.getOfflineSelectedNumber() {
                     completion(offlineNumber)
@@ -228,7 +224,7 @@ class ConfigViewController: UIViewController {
     
     func setSelectedNumber(number: Int) {
         self.selectedNumber = number
-        if let userUID = UserDefaults.standard.object(forKey: "userUID") {
+        if let userUID = UserDefaults.standard.object(forKey: Constants.userId) {
             self.ref.child("users/\(userUID)/template/templateNumber").setValue(number)
             UserDefaults.standard.setValue(number, forKey: "userTemplateNumber")
         }
@@ -236,7 +232,7 @@ class ConfigViewController: UIViewController {
     
     func setTemplateType(type: String) {
         
-        if let userUID = UserDefaults.standard.object(forKey: "userUID") {
+        if let userUID = UserDefaults.standard.object(forKey: Constants.userId) {
             self.ref.child("users/\(userUID)/template/templateType").setValue(type)
             UserDefaults.standard.setValue(type, forKey: "userTemplateType")
         }
@@ -246,9 +242,9 @@ class ConfigViewController: UIViewController {
         setSelectedNumber(number: selectedNumber)
         switch  optionSegmentControl.selectedSegmentIndex {
             case 0:
-                setTemplateType(type: Template.Option.grateful.rawValue)
+                setTemplateType(type: Template.grateful.rawValue)
             case 1:
-                setTemplateType(type: Template.Option.freeWrite.rawValue)
+                setTemplateType(type: Template.freeWrite.rawValue)
             default:
                 break
         }

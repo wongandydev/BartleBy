@@ -22,16 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         GADMobileAds.configure(withApplicationID: Helper.valueForKey(key: "GoogleADMobAppID"))
+        Mixpanel.initialize(token: "7fefd65f0da68515af4a5ffb099eb1d8")
         
-        if let userId = UserDefaults.standard.value(forKey: "userUID")  {
-            let currentTime = Int().currentTimestamp()
-            Database.database().reference().child("users/\(userId)/loginActivity").updateChildValues(["\(currentTime)" : ["userDateTime": Helper.sharedInstance.dateToString(date: Date()), "time": currentTime]])
-            Database.database().reference().child("users/\(userId)/lastLogin").setValue("\(currentTime)")
+        if let userId = UserDefaults.standard.value(forKey: Constants.userId) as? String {
+            FirebaseNetworkingService.updateLoginActivity(userId: userId)
         } else {
             FirebaseNetworkingService.signUpDefaultUser()
         }
-        
-        Mixpanel.initialize(token: "7fefd65f0da68515af4a5ffb099eb1d8")
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
@@ -39,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let main = AllTabBarViewController()
             let emailVC = EmailLoginViewController()
             
-            var navController: UIViewController = emailVC
+            var navController: UIViewController = main
 
             window.rootViewController = navController
             window.makeKeyAndVisible()

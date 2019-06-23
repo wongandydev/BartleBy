@@ -18,7 +18,6 @@ class NotesViewController: UIViewController {
     private var bannerAdView: GADBannerView!
     
     private let refreshControl = UIRefreshControl()
-    private let userUID = UIDevice.current.identifierForVendor?.uuidString
     
     var ref: DatabaseReference!
     
@@ -131,17 +130,20 @@ class NotesViewController: UIViewController {
 
         if totalNotes > 1 {
             let diffFromTodayToLastNote: Int = Calendar.current.dateComponents([.day], from: today, to: latestNote).day ?? 0
-            if diffFromTodayToLastNote < -1 {
+            //If the difference between today and latest note is more than 0; set as 0
+            if diffFromTodayToLastNote < 0 {
                 currentStreak = 0
             } else {
+                //Include today
                 currentStreak += 1
                 for noteIndex in 0...totalNotes - 2{
                     let firstDate = Helper.sharedInstance.stringToDate(date: self.notes[noteIndex].dateCreated.components(separatedBy: " ")[0])
                     let secondDate = Helper.sharedInstance.stringToDate(date: self.notes[noteIndex + 1].dateCreated.components(separatedBy: " ")[0])
                     
                     let difference = Calendar.current.dateComponents([.day], from: firstDate, to: secondDate).day ?? 0
-                    if  difference < -1 {
-                        break
+                    //If the diffference is today or greater than one don't do anything
+                    if  difference < -1 || difference == 0 {
+                        //Do not count
                     } else {
                         currentStreak += 1
                     }
@@ -156,28 +158,31 @@ class NotesViewController: UIViewController {
             
         }
         
-        self.ref.child("users/\(self.userUID!)/stats").setValue(["streak": currentStreak, "totalNotes": totalNotes])
-
+        if let userID = UserDefaults.standard.value(forKey: Constants.userId) as? String {
+            self.ref.child("users/\(userID)/stats").setValue(["streak": currentStreak, "totalNotes": totalNotes])
+        }
     }
     
     func readNotes() {
-        ref.child("users/\(userUID!)").observeSingleEvent(of: .value , with: { snapshot in
-            self.notes.removeAll()
-            if let userData = snapshot.value as? [String: AnyObject]{
-                if let notes = userData["notes"] as? [String: AnyObject]{
-                    for note in notes {
-                        if let value = note.value as? [String: AnyObject],
-                            let answerNote = value["note"] as? String,
-                            let dateCreated = value["dateCreated"] as? String,
-                            let templateType = value["templateType"] as? String{
+        if let userID = UserDefaults.standard.value(forKey: Constants.userId) as? String {
+            ref.child("users/\(userID)").observeSingleEvent(of: .value , with: { snapshot in
+                self.notes.removeAll()
+                if let userData = snapshot.value as? [String: AnyObject]{
+                    if let notes = userData["notes"] as? [String: AnyObject]{
+                        for note in notes {
+                            if let value = note.value as? [String: AnyObject],
+                                let answerNote = value["note"] as? String,
+                                let dateCreated = value["dateCreated"] as? String,
+                                let templateType = value["templateType"] as? String{
                                 self.notes.append(Note(note: answerNote, dateCreated: dateCreated, id: note.key, templateType: templateType))
+                            }
                         }
+                        
                     }
-                   
                 }
-            }
-            self.setStats()
-        })
+                self.setStats()
+            })
+        }
     }
 
     
