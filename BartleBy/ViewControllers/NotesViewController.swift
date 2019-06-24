@@ -118,9 +118,10 @@ class NotesViewController: UIViewController {
     }
     
     func setupBannerAd() {
-        self.bannerAdView.adUnitID = Constants.googleAdMobBannerId 
+        self.bannerAdView.adUnitID = Constants.googleAdMobBannerId
         self.bannerAdView.rootViewController = self;
         let request = GADRequest()
+        request.testDevices = [kGADSimulatorID]
         bannerAdView.load(request)
     }
     

@@ -27,6 +27,7 @@ class AboutViewController: UIViewController {
     
     fileprivate func layoutSubviews() {
         self.view.backgroundColor = .white
+        self.edgesForExtendedLayout = .init(rawValue: 0)
         
         aboutTextView = UITextView()
         aboutTextView.contentInset = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
