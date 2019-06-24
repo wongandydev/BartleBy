@@ -76,8 +76,6 @@ class OptionViewController: UIViewController {
         
         let editButton = UIButton()
         editButton.isHidden = true
-//        editButton.backgroundColor = .red
-//        editButton.layer.cornerRadius = 15
         editButton.setTitle("Edit", for: .normal)
         editButton.setTitleColor(Constants.applicationAccentColor, for: .normal)
         editButton.setTitleColor(.black, for: .highlighted)

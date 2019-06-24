@@ -32,12 +32,7 @@ class NotificationViewController: UIViewController {
                 case .authorized:
                     break
                 case .notDetermined:
-                    self.userNotificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-                        if !granted {
-                            self.navigationController?.popViewController(animated: true)
-                            self.view.alpha = 0.0
-                        }
-                    }
+                    self.navigationController?.popViewController(animated: true)
                     break
                 case .denied:
                     self.navigationController?.popViewController(animated: true)
