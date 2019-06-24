@@ -64,30 +64,30 @@ class OptionViewController: UIViewController {
     private func layoutSubviews() {
         self.view.backgroundColor = .white
         
-        usernameLabel.isHidden =  true
-        
-        view.addSubview(usernameLabel)
-        usernameLabel.snp.makeConstraints({ make in
-            make.width.equalToSuperview().offset(20)
-            make.height.equalTo(35)
-            make.centerX.equalToSuperview()
-            make.top.equalTo(topLayoutGuide.snp.bottom).offset(10)
-        })
-        
-        let editButton = UIButton()
-        editButton.isHidden = true
-        editButton.setTitle("Edit", for: .normal)
-        editButton.setTitleColor(Constants.applicationAccentColor, for: .normal)
-        editButton.setTitleColor(.black, for: .highlighted)
-        editButton.addTarget(self, action: #selector(editAction), for: .touchUpInside)
-        
-        self.view.addSubview(editButton)
-        editButton.snp.makeConstraints({ make in
-            make.width.equalTo(60)
-            make.height.equalTo(40)
-            make.centerX.equalToSuperview()
-            make.top.equalTo(usernameLabel.snp.bottom).offset(5)
-        })
+//        usernameLabel.alpha = 0.0
+//
+//        view.addSubview(usernameLabel)
+//        usernameLabel.snp.makeConstraints({ make in
+//            make.width.equalToSuperview().offset(20)
+//            make.height.equalTo(35)
+//            make.centerX.equalToSuperview()
+//            make.top.equalTo(topLayoutGuide.snp.bottom).offset(10)
+//        })
+//
+//        let editButton = UIButton()
+//        editButton.alpha = 0.0
+//        editButton.setTitle("Edit", for: .normal)
+//        editButton.setTitleColor(Constants.applicationAccentColor, for: .normal)
+//        editButton.setTitleColor(.black, for: .highlighted)
+//        editButton.addTarget(self, action: #selector(editAction), for: .touchUpInside)
+//
+//        self.view.addSubview(editButton)
+//        editButton.snp.makeConstraints({ make in
+//            make.width.equalTo(60)
+//            make.height.equalTo(40)
+//            make.centerX.equalToSuperview()
+//            make.top.equalTo(usernameLabel.snp.bottom).offset(5)
+//        })
         
         
         bannerAdView = GADBannerView()
@@ -109,7 +109,7 @@ class OptionViewController: UIViewController {
         optionsCollectionView.snp.makeConstraints({ make in
             make.width.equalToSuperview()
             make.bottom.equalTo(bannerAdView.snp.top)
-            make.top.equalTo(editButton.snp.bottom).offset(15)
+            make.top.equalTo(topLayoutGuide.snp.bottom).offset(15)
         })
       
     }

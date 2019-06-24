@@ -64,6 +64,7 @@ class NotesViewController: UIViewController {
     
     fileprivate func layoutSubviews() {
         self.edgesForExtendedLayout = .init(rawValue: 0)
+        self.view.backgroundColor = .white
         
         notesTableView = UITableView()
         notesTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -75,13 +76,7 @@ class NotesViewController: UIViewController {
             notesTableView.addSubview(refreshControl)
         }
         refreshControl.addTarget(self, action: #selector(refreshNoteData), for: .valueChanged)
-        
-        
-        self.view.addSubview(notesTableView)
-        notesTableView.snp.makeConstraints({ make in
-            make.edges.equalToSuperview()
-        })
-        
+    
         bannerAdView = GADBannerView()
         bannerAdView.backgroundColor = .black
         setupBannerAd()
@@ -93,6 +88,13 @@ class NotesViewController: UIViewController {
             make.width.equalTo(320)
             make.height.equalTo(50)
         })
+        
+        self.view.addSubview(notesTableView)
+        notesTableView.snp.makeConstraints({ make in
+            make.top.left.right.equalToSuperview()
+            make.bottom.equalTo(bannerAdView.snp.top)
+        })
+        
         
         let addButton = UIButton()
         addButton.layer.cornerRadius = 30

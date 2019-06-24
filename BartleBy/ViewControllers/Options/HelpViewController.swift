@@ -158,6 +158,7 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
         messageTextView.layer.cornerRadius = 7
         messageTextView.layer.borderWidth = 0.3
         messageTextView.backgroundColor = .white
+        messageTextView.font = UIFont.systemFont(ofSize: 16, weight: .light)
 
         formStackView.addArrangedSubview(messageTextView)
         messageTextView.snp.makeConstraints({ make in
@@ -278,6 +279,9 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
                 
             }
         })
+        
+        self.questionLabel.text = "Why can I not edit any of my notes after I am done?"
+        self.answerLabel.text = "We do not allow editing notes after it is written to keep the integrity of your thoughts at the moment. So when you look back, it is the thought you wrote. Not something edited. This is a feature that separates BartleBy from other note taking apps."
     }
     
     func submitFormMessage(title: String, message: String) {
