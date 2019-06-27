@@ -26,6 +26,8 @@ class NotificationViewController: UIViewController {
         setupNavbar()
         layoutSubviews()
         
+        BartleByNotificationCenter.stockAskForNotificationPermission()
+        
         userNotificationCenter.getNotificationSettings(completionHandler: { settings in
             guard let status = settings.authorizationStatus as? UNAuthorizationStatus else { return }
             switch status {

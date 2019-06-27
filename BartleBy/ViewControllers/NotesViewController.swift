@@ -38,6 +38,13 @@ class NotesViewController: UIViewController {
         super.viewDidLoad()
         ref = Database.database().reference()
 
+        if let isFirstLaunch = UserDefaults.standard.bool(forKey: Constants.isFirstLaunch) as? Bool {
+            if !isFirstLaunch {
+                stockAlertMessage(title: "Welcome", message: "By default, the app recommends 5 things to be grateful for. YOu can change this in Options > Manage type of writing.")
+                UserDefaults.standard.set(true, forKey: Constants.isFirstLaunch)
+            }
+        }
+        
         setupNavbar()
         layoutSubviews()
     }
