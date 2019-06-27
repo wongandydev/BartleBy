@@ -94,6 +94,21 @@ class FirebaseNetworkingService {
         })
     }
     
+    static func getNoteTotal(_ completion: @escaping (_ totalNotes: Int) -> Void) {
+        if let userID = UserDefaults.standard.value(forKey: Constants.userId) as? String {
+            ref.child("users/\(userID)").observeSingleEvent(of: .value , with: { snapshot in
+                if let userData = snapshot.value as? [String: AnyObject]{
+                    if let notes = userData["notes"] as? [String: AnyObject]{
+                        completion(notes.count)
+                    }
+                } else {
+                    completion(-1)
+                }
+            })
+        }
+        
+    }
+    
     static func syncCurrentUserDataWithLoginUser(previousUserID: String, currentFirebaseUID: String, _ completion: @escaping (_ isCompleted: Bool) -> Void) {
         var previousUserData = [String: AnyObject]()
 //        var currentUserData = [String: AnyObject]()

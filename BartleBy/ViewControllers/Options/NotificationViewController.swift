@@ -46,7 +46,7 @@ class NotificationViewController: UIViewController {
         
 
         changeNotifcationDatePicker.datePickerMode = .time
-        currentNotificationSettingLabel.text = "No Notification"
+        currentNotificationSettingLabel.text = "No Notification Set"
         
         if let currentNotification = UserDefaults.standard.object(forKey: "notificationSetting") as? String {
             changeNotifcationDatePicker.date = Helper.sharedInstance.stringToTime(time: currentNotification)

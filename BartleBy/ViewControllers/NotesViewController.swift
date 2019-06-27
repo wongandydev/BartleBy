@@ -202,10 +202,14 @@ class NotesViewController: UIViewController {
     
     @objc func addNote() {
         if notes == [] || notes[0].dateCreated.components(separatedBy: " ")[0] != Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0] {
-            let addNoteViewController = AddViewNotesViewController()
-            addNoteViewController.newNote = true
-            Mixpanel.mainInstance().track(event: "User created new note")
-            self.present(addNoteViewController, animated: true, completion: nil)
+            if !Reachability.isConnectedToNetwork() {
+                stockAlertMessage(title: "Not connected to the internet", message: "You are not connected to the internet. Please try again.")
+            } else {
+                let addNoteViewController = AddViewNotesViewController()
+                addNoteViewController.newNote = true
+                Mixpanel.mainInstance().track(event: "User created new note")
+                self.present(addNoteViewController, animated: true, completion: nil)
+            }
         } else {
             alertMessage(title: "Already written note today", message: "Hi, it is great you want to keep writing today. But you already did today. Come back tomorrow to write again!")
             Mixpanel.mainInstance().track(event: "User attempt to create another note")

@@ -77,6 +77,7 @@ class AddViewNotesViewController: UIViewController {
         
         beforeButton = UIButton()
         beforeButton.setTitle("Back", for: .normal)
+        beforeButton.isHidden = true
         beforeButton.setTitleColor(.red, for: .normal)
         beforeButton.setTitleColor(.black, for: .highlighted)
         beforeButton.addTarget(self, action: #selector(beforeButtonTapped(_:)), for: .touchUpInside)
