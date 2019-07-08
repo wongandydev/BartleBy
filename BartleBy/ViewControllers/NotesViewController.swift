@@ -177,7 +177,25 @@ class NotesViewController: UIViewController {
         }
     }
     
-    func readNotes() {
+    private func addBackgroundView() {
+        let backgroundLabel = UILabel()
+        backgroundLabel.text = "Add a note below to get started on jotting your thoughts!"
+        backgroundLabel.textAlignment = .center
+        backgroundLabel.textColor = Constants.applicationAccentColor
+        backgroundLabel.numberOfLines = 0
+        backgroundLabel.font = UIFont.systemFont(ofSize: 22)
+        
+        self.notesTableView.backgroundView = backgroundLabel
+        
+        backgroundLabel.snp.makeConstraints({ make in
+            make.center.equalToSuperview()
+            make.width.equalToSuperview().offset(-25)
+            make.height.equalTo(200)
+        })
+        
+    }
+    
+    fileprivate func readNotes() {
         if let userID = UserDefaults.standard.value(forKey: Constants.userId) as? String {
             ref.child("users/\(userID)").observeSingleEvent(of: .value , with: { snapshot in
                 self.notes.removeAll()
@@ -226,6 +244,10 @@ class NotesViewController: UIViewController {
 
 extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if notes.count == 0 {
+            addBackgroundView()
+        }
+        
         return notes.count
     }
     
