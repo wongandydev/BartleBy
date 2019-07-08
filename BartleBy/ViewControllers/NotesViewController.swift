@@ -17,7 +17,7 @@ class NotesViewController: UIViewController {
     var notesTableView: UITableView!
     private var bannerAdView: GADBannerView!
     
-    private let refreshControl = UIRefreshControl()
+//    private let refreshControl = UIRefreshControl()
     
     var ref: DatabaseReference!
     
@@ -76,13 +76,14 @@ class NotesViewController: UIViewController {
         notesTableView = UITableView()
         notesTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         setupTableView()
-        //Add Pull to refresh
-        if #available(iOS 10.0, *) {
-            notesTableView.refreshControl = refreshControl
-        } else {
-            notesTableView.addSubview(refreshControl)
-        }
-        refreshControl.addTarget(self, action: #selector(refreshNoteData), for: .valueChanged)
+        
+//        //Add Pull to refresh
+//        if #available(iOS 10.0, *) {
+//            notesTableView.refreshControl = refreshControl
+//        } else {
+//            notesTableView.addSubview(refreshControl)
+//        }
+//        refreshControl.addTarget(self, action: #selector(refreshNoteData), for: .valueChanged)
     
         bannerAdView = GADBannerView()
         bannerAdView.backgroundColor = .black
@@ -179,7 +180,7 @@ class NotesViewController: UIViewController {
     
     private func addBackgroundView() {
         let backgroundLabel = UILabel()
-        backgroundLabel.text = "Add a note below to get started on jotting your thoughts!"
+        backgroundLabel.text = "Add a note to get started on jotting down your thoughts!"
         backgroundLabel.textAlignment = .center
         backgroundLabel.textColor = Constants.applicationAccentColor
         backgroundLabel.numberOfLines = 0
@@ -246,6 +247,8 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if notes.count == 0 {
             addBackgroundView()
+        } else {
+            self.notesTableView.backgroundView = nil
         }
         
         return notes.count
