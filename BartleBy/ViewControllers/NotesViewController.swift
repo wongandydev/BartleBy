@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseAnalytics
+import FirebaseDatabase
 import GoogleMobileAds
 import SnapKit
 import Mixpanel
@@ -233,12 +234,14 @@ class NotesViewController: UIViewController {
             } else {
                 let addNoteViewController = AddViewNotesViewController()
                 addNoteViewController.newNote = true
+                Analytics.logEvent("User created new note", parameters: nil)
                 Mixpanel.mainInstance().track(event: "User created new note")
                 self.present(addNoteViewController, animated: true, completion: nil)
             }
         } else {
             alertMessage(title: "Already written note today", message: "Hi, it is great you want to keep writing today. But you already did today. Come back tomorrow to write again!")
-            Mixpanel.mainInstance().track(event: "User attempt to create another note")
+            Analytics.logEvent("User attempted to create another note", parameters: nil)
+            Mixpanel.mainInstance().track(event: "User attempted to create another note")
         }
     }
     

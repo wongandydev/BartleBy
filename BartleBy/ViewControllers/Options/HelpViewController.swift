@@ -8,9 +8,10 @@
 
 import UIKit
 import MessageUI
-import Firebase
+import FirebaseDatabase
+import FirebaseAnalytics
 
-class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate, UITextFieldDelegate{
+class HelpViewController: UIViewController, UITextFieldDelegate{
     var ref: DatabaseReference!
     
     private var questionLabel: UILabel!
@@ -98,7 +99,7 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
         formQuestionLabel.numberOfLines = 0
         formQuestionLabel.textAlignment = .center
         formQuestionLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        formQuestionLabel.text = "A different question? Submit a form below"
+        formQuestionLabel.text = "A different question? Submit a form below or click 'Email Support'."
 
         containerView.addSubview(formQuestionLabel)
         formQuestionLabel.snp.makeConstraints({ make in
@@ -118,7 +119,6 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
             make.top.equalTo(formQuestionLabel.snp.bottom).offset(10)
             make.width.equalToSuperview()
             make.left.equalToSuperview()
-            make.bottom.equalToSuperview().inset(40)
         })
 
         nameTextField = UITextField()
@@ -169,18 +169,52 @@ class HelpViewController: UIViewController, MFMailComposeViewControllerDelegate,
         submitFormButton = UIButton()
         submitFormButton.setTitle("Send Message", for: .normal)
         submitFormButton.setTitleColor(Constants.applicationAccentColor, for: .normal)
-        submitFormButton.setTitleColor(.white, for: .highlighted)
+        submitFormButton.setTitleColor(Constants.lightestGray, for: .highlighted)
+        submitFormButton.backgroundColor = .clear
+        submitFormButton.layer.cornerRadius = 10
+        submitFormButton.layer.borderWidth = 2
+        submitFormButton.layer.borderColor = Constants.applicationAccentColor.cgColor
         submitFormButton.addTarget(self, action: #selector(submitFormButtonTapped(_:)), for: .touchUpInside)
         
         formStackView.addArrangedSubview(submitFormButton)
         submitFormButton.snp.makeConstraints({ make in
-            
+            make.width.equalTo(160)
+            make.height.equalTo(44)
+        })
+        
+        let emailSupportButton = UIButton()
+        emailSupportButton.setTitle("Email Support", for: .normal)
+        emailSupportButton.setTitleColor(Constants.lightestGray, for: .normal)
+        emailSupportButton.setTitleColor(Constants.applicationAccentColor, for: .highlighted)
+        emailSupportButton.addTarget(self, action: #selector(sendSupportMail), for: .touchUpInside)
+        emailSupportButton.backgroundColor = Constants.applicationAccentColor
+        emailSupportButton.layer.cornerRadius = 10
+        emailSupportButton.layer.borderWidth = 0
+        
+        containerView.addSubview(emailSupportButton)
+        emailSupportButton.snp.makeConstraints({ make in
+            make.top.equalTo(formStackView.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(160)
+            make.height.equalTo(44)
+            make.bottom.equalToSuperview().inset(40)
         })
     }
     
     @objc func submitFormButtonTapped(_ sender: Any) {
         self.view.endEditing(true)
         sendContactForm()
+    }
+    
+    @objc func sendSupportMail() {
+        var emailTitle = "Questions, Feedback, App Support"
+        var toRecipents = ["bartleby.help@gmail.com"]
+        var mailComposeVC: MFMailComposeViewController = MFMailComposeViewController()
+        mailComposeVC.mailComposeDelegate = self
+        mailComposeVC.setSubject(emailTitle)
+        mailComposeVC.setToRecipients(toRecipents)
+        
+        self.present(mailComposeVC, animated: true, completion: nil)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -316,7 +350,25 @@ extension HelpViewController: UITextViewDelegate {
     }
 }
 
-
-extension UIColor {
-    static var placeholderGray = UIColor(red: 178/225, green: 178/225, blue: 178/225, alpha: 1.0)
+extension HelpViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result {
+        case .cancelled:
+            Analytics.logEvent("sendSupportMail", parameters: ["status": "cancelled"])
+            print("Mail cancelled")
+        case .failed:
+            Analytics.logEvent("sendSupportMail", parameters: ["status": "failed"])
+            print("Mail failed")
+        case .saved :
+            Analytics.logEvent("sendSupportMail", parameters: ["status": "saved"])
+            print("Mail saved as draft")
+        case .sent:
+            Analytics.logEvent("sendSupportMail", parameters: ["status": "sent"])
+            print("Mail sent")
+        default:
+            break
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+    }
 }

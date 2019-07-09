@@ -8,6 +8,7 @@
 
 import UIKit
 import Mixpanel
+import FirebaseAnalytics
 
 class EmailLoginViewController: UIViewController {
     
@@ -225,6 +226,7 @@ class EmailLoginViewController: UIViewController {
     
     fileprivate func loginUser(email: String, password: String) {
         guard let userID = UserDefaults.standard.value(forKey: Constants.userId) as? String else {
+            Analytics.logEvent("userEmailCreationFailed", parameters: ["error": "Could not get userID from UserDefaults"])
             Mixpanel.mainInstance().track(event: "userEmailCreationFailed", properties: ["error": "Could not get userID from UserDefaults"])
             return
         }

@@ -37,6 +37,7 @@ class FirebaseNetworkingService {
             
             updateLoginActivity(userId: userID)
             
+            Analytics.logEvent("newUserCreated", parameters: ["userID": userID])
             Mixpanel.mainInstance().track(event: "newUserCreated", properties: ["userID": userID])
             
             UserDefaults.standard.synchronize()
@@ -51,6 +52,7 @@ class FirebaseNetworkingService {
     
     static func signUpUserWithEmail(email: String, password: String, _ completion: @escaping (_ isCompleted: Bool) -> Void) {
         guard let userID = UserDefaults.standard.value(forKey: Constants.userId) as? String else {
+            Analytics.logEvent("userEmailCreationFailed", parameters: ["error": "Could not get userID from UserDefaults"])
             Mixpanel.mainInstance().track(event: "userEmailCreationFailed", properties: ["error": "Could not get userID from UserDefaults"])
             completion(false)
             return
@@ -59,12 +61,14 @@ class FirebaseNetworkingService {
         Auth.auth().createUser(withEmail: email, password: password, completion: { authResult, error in
             if let error = error {
                 print("error signing up user with email")
+                Analytics.logEvent("userEmailCreationFailed", parameters: ["error": error.localizedDescription])
                 Mixpanel.mainInstance().track(event: "userEmailCreationFailed", properties: ["error": error.localizedDescription])
                 completion(false)
             } else {
                 postUserEmailFirebaseUID(userID: userID, email: email, firebaseUID: getCurrentFirebaseUserUID(), { isCompleted in
                     if isCompleted {
                         completion(true)
+                        Analytics.logEvent("userEmailCreation", parameters: ["email": email, "userId": userID])
                         Mixpanel.mainInstance().track(event: "userEmailCreation", properties: ["email": email, "userId": userID])
                     }
                 })
