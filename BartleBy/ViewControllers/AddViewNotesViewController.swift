@@ -38,27 +38,43 @@ class AddViewNotesViewController: UIViewController {
         ref = Database.database().reference()
         layoutSubviews()
         
-        getTemplateType(completion: { templateType in
-            if templateType == Template.grateful.rawValue {
-                self.templateType = Template.grateful
-            } else {
-                self.templateType = Template.freeWrite
-            }
-            
-            if self.newNote {
-                self.getSelectedNumber(completion: { selectedNumber in
-                    if self.templateType == Template.grateful {
-                        self.numberOfQuestions = selectedNumber
+        FirebaseNetworkingService.isConnectedToInternet({ isConnected in
+            if isConnected {
+                self.getTemplateType(completion: { templateType in
+                    if templateType == Template.grateful.rawValue {
+                        self.templateType = Template.grateful
                     } else {
-                        self.numberOfMinutes = selectedNumber
-                        self.seconds = selectedNumber * 60
+                        self.templateType = Template.freeWrite
                     }
-                    self.setupQuestions()
+                    
+                    if self.newNote {
+                        self.getSelectedNumber(completion: { selectedNumber in
+                            if self.templateType == Template.grateful {
+                                self.numberOfQuestions = selectedNumber
+                            } else {
+                                self.numberOfMinutes = selectedNumber
+                                self.seconds = selectedNumber * 60
+                            }
+                            self.setupQuestions()
+                        })
+                    } else {
+                        self.readNote()
+                    }
                 })
             } else {
+                guard let offlineSelectedTemplateType = UserDefaults.standard.value(forKey: "userTemplateType") as? String else { return }
+                if offlineSelectedTemplateType == Template.grateful.rawValue {
+                    self.templateType = Template.grateful
+                } else {
+                    self.templateType = Template.freeWrite
+                }
+                
+                
                 self.readNote()
             }
         })
+        
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)

@@ -30,6 +30,7 @@ class NotesViewController: UIViewController {
 
                 return dateFormatter.date(from: note1.dateCreated)! > dateFormatter.date(from: note2.dateCreated)!
             })
+            UserDefaults.standard.setValue(NSKeyedArchiver.archivedData(withRootObject: notes), forKey: "offlineNotes")
             self.notesTableView.reloadData()
         }
     }
@@ -197,6 +198,12 @@ class NotesViewController: UIViewController {
     }
     
     fileprivate func readNotes() {
+        if let noteData = UserDefaults.standard.value(forKey: "offlineNotes") as? Data,
+            let noteObject = NSKeyedUnarchiver.unarchiveObject(with: noteData) as? [Note] {
+            
+            self.notes = noteObject
+        }
+        
         if let userID = UserDefaults.standard.value(forKey: Constants.userId) as? String {
             ref.child("users/\(userID)").observeSingleEvent(of: .value , with: { snapshot in
                 self.notes.removeAll()
@@ -235,11 +242,11 @@ class NotesViewController: UIViewController {
         }
     }
     
-    @objc func refreshNoteData() {
-        notes = []
-        readNotes()
-        self.refreshControl.endRefreshing()
-    }
+//    @objc func refreshNoteData() {
+//        notes = []
+//        readNotes()
+//        self.refreshControl.endRefreshing()
+//    }
     
 }
 
@@ -266,6 +273,7 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
         let viewNoteViewController = AddViewNotesViewController()
         viewNoteViewController.notes = [notes[indexPath.row]]
         viewNoteViewController.sameDay = notes[indexPath.row].dateCreated.components(separatedBy: " ")[0] == Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0]
+        
         self.navigationController?.pushViewController(viewNoteViewController, animated: true)
     }
 
