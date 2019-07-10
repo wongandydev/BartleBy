@@ -88,7 +88,6 @@ class NotesViewController: UIViewController {
 //        refreshControl.addTarget(self, action: #selector(refreshNoteData), for: .valueChanged)
     
         bannerAdView = GADBannerView()
-        bannerAdView.backgroundColor = .black
         setupBannerAd()
         
         self.view.addSubview(bannerAdView)
