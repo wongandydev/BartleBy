@@ -50,7 +50,6 @@ class NotesViewController: UIViewController {
             })
             
             UserDefaults.standard.setValue(NSKeyedArchiver.archivedData(withRootObject: notes), forKey: "offlineNotes")
-            self.notesTableView.reloadData()
         }
     }
     
@@ -98,6 +97,8 @@ class NotesViewController: UIViewController {
         monthYearFormatter.dateFormat = "MM/dd/yy' 'hh:mm:ss a"
         monthYearFormatter.timeZone = NSTimeZone.system
         
+        sortedNotes = [[]]
+        
         for note in notes {
             print("count: \(sortedNotes.count)")
             if let noteDate = monthYearFormatter.date(from: note.dateCreated) as? Date {
@@ -110,7 +111,6 @@ class NotesViewController: UIViewController {
                     print(indexFromMonthOfNotes)
                     //If the array doesn't have that index, add it.
                     if !sortedNotes.indices.contains(indexFromMonthOfNotes) {
-                        print("indexFromMonthOfNotes")
                         sortedNotes.append([])
                     }
                     
@@ -255,6 +255,7 @@ class NotesViewController: UIViewController {
                 let noteObject = NSKeyedUnarchiver.unarchiveObject(with: noteData) as? [Note] {
                 
                 self.notes = noteObject
+                self.sortNotes()
             }
             
             if let userID = UserDefaults.standard.value(forKey: Constants.userId) as? String {
@@ -322,26 +323,7 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
         
         return sortedNotes[section].count
     }
-    
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        if let sectionLatestNote = sortedNotes[section].first?.dateCreated,
-//            let sectionLatestNoteDate = Helper.sharedInstance.stringToDate(date: sectionLatestNote) as? Date {
-//            let calendar = Calendar.current
-//            let componenets = calendar.dateComponents([.month, .year], from: sectionLatestNoteDate)
-//
-//            //Converting string date to just month year format.
-//            if let date = calendar.date(from: componenets) {
-//                let sectionLabel = UILabel()
-//                sectionLabel.text = Helper.sharedInstance.setMonthYearToString(date: date)
-//
-//                return sectionLabel
-//            }
-//
-//        }
-//
-//        return UIView()
-//    }
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if let sectionLatestNote = sortedNotes[section].first?.dateCreated,
             let sectionLatestNoteDate = Helper.sharedInstance.stringToDate(date: sectionLatestNote) as? Date {
@@ -350,10 +332,7 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
             
             //Converting string date to just month year format.
             if let date = calendar.date(from: componenets) {
-//                let sectionLabel = UILabel()
                 return Helper.sharedInstance.setMonthYearToString(date: date)
-                
-//                return sectionLabel
             }
             
         }
@@ -371,8 +350,8 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
         self.notesTableView.deselectRow(at: indexPath, animated: true)
         
         let viewNoteViewController = AddViewNotesViewController()
-        viewNoteViewController.notes = [notes[indexPath.row]]
-        viewNoteViewController.sameDay = notes[indexPath.row].dateCreated.components(separatedBy: " ")[0] == Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0]
+        viewNoteViewController.notes = [sortedNotes[indexPath.section][indexPath.row]]
+        viewNoteViewController.sameDay = sortedNotes[indexPath.section][indexPath.row].dateCreated.components(separatedBy: " ")[0] == Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0]
         
         self.navigationController?.pushViewController(viewNoteViewController, animated: true)
     }

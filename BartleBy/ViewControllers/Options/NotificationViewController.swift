@@ -101,7 +101,7 @@ class NotificationViewController: UIViewController {
     
     @objc func resetBarButtonItemTapped(_ sender: Any) {
         notificationCenter.removeAllPendingNotificationRequests()
-        currentNotificationSettingLabel.text = "No Notifcation"
+        currentNotificationSettingLabel.text = "Notification Removed"
         UserDefaults.standard.removeObject(forKey: "notificationSetting")
         UserDefaults.standard.synchronize()
     }
