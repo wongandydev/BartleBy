@@ -28,13 +28,35 @@ class NotesViewController: UIViewController {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MM/dd/yy' 'hh:mm:ss a"
                 dateFormatter.timeZone = NSTimeZone.system
-
+                
                 return dateFormatter.date(from: note1.dateCreated)! > dateFormatter.date(from: note2.dateCreated)!
             })
+            
+            let monthYearFormatter = DateFormatter()
+            monthYearFormatter.dateFormat = "MM/dd/yy' 'hh:mm:ss a"
+            monthYearFormatter.timeZone = NSTimeZone.system
+            
+            notes.forEach({ note in
+                if let noteDate = monthYearFormatter.date(from: note.dateCreated) as? Date {
+                    let calendar = Calendar.current
+                    let componenets = calendar.dateComponents([.month, .year], from: noteDate)
+                    
+                    if let noteMonthYear = calendar.date(from: componenets) {
+                        if !monthsOfNotes.contains(noteMonthYear) {
+                            monthsOfNotes.append(noteMonthYear)
+                        }
+                    }
+                }
+            })
+            
             UserDefaults.standard.setValue(NSKeyedArchiver.archivedData(withRootObject: notes), forKey: "offlineNotes")
             self.notesTableView.reloadData()
         }
     }
+    
+    var sortedNotes: [[Note]] = [[]]
+    
+    var monthsOfNotes: [Date] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +91,36 @@ class NotesViewController: UIViewController {
         notesTableView.dataSource = self
         notesTableView.tableFooterView = UIView()
         registerCells()
+    }
+    
+    fileprivate func sortNotes() {
+        let monthYearFormatter = DateFormatter()
+        monthYearFormatter.dateFormat = "MM/dd/yy' 'hh:mm:ss a"
+        monthYearFormatter.timeZone = NSTimeZone.system
+        
+        for note in notes {
+            print("count: \(sortedNotes.count)")
+            if let noteDate = monthYearFormatter.date(from: note.dateCreated) as? Date {
+                let calendar = Calendar.current
+                let componenets = calendar.dateComponents([.month, .year], from: noteDate)
+                
+                if let noteMonthYear = calendar.date(from: componenets),
+                    let indexFromMonthOfNotes = monthsOfNotes.index(of: noteMonthYear) {
+                    
+                    print(indexFromMonthOfNotes)
+                    //If the array doesn't have that index, add it.
+                    if !sortedNotes.indices.contains(indexFromMonthOfNotes) {
+                        print("indexFromMonthOfNotes")
+                        sortedNotes.append([])
+                    }
+                    
+                    //add notes based on month index.
+                    sortedNotes[indexFromMonthOfNotes].append(note)
+                }
+            }
+        }
+        
+        self.notesTableView.reloadData()
     }
     
     fileprivate func layoutSubviews() {
@@ -221,6 +273,7 @@ class NotesViewController: UIViewController {
                         }
                     }
                     self.setStats()
+                    self.sortNotes()
                 })
             }
         }
@@ -254,19 +307,63 @@ class NotesViewController: UIViewController {
 }
 
 extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        print(sortedNotes.count)
+        return sortedNotes.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if notes.count == 0 {
+        if sortedNotes.count == 0 {
             addBackgroundView()
         } else {
             self.notesTableView.backgroundView = nil
         }
         
-        return notes.count
+        
+        return sortedNotes[section].count
+    }
+    
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        if let sectionLatestNote = sortedNotes[section].first?.dateCreated,
+//            let sectionLatestNoteDate = Helper.sharedInstance.stringToDate(date: sectionLatestNote) as? Date {
+//            let calendar = Calendar.current
+//            let componenets = calendar.dateComponents([.month, .year], from: sectionLatestNoteDate)
+//
+//            //Converting string date to just month year format.
+//            if let date = calendar.date(from: componenets) {
+//                let sectionLabel = UILabel()
+//                sectionLabel.text = Helper.sharedInstance.setMonthYearToString(date: date)
+//
+//                return sectionLabel
+//            }
+//
+//        }
+//
+//        return UIView()
+//    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if let sectionLatestNote = sortedNotes[section].first?.dateCreated,
+            let sectionLatestNoteDate = Helper.sharedInstance.stringToDate(date: sectionLatestNote) as? Date {
+            let calendar = Calendar.current
+            let componenets = calendar.dateComponents([.month, .year], from: sectionLatestNoteDate)
+            
+            //Converting string date to just month year format.
+            if let date = calendar.date(from: componenets) {
+//                let sectionLabel = UILabel()
+                return Helper.sharedInstance.setMonthYearToString(date: date)
+                
+//                return sectionLabel
+            }
+            
+        }
+        
+        return "Unknown"
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "noteCell", for: indexPath) as! NoteCell
-        cell.dateLabel.text = notes[indexPath.row].dateCreated.components(separatedBy: " ")[0]
+        cell.dateLabel.text = sortedNotes[indexPath.section][indexPath.row].dateCreated.components(separatedBy: " ")[0]
         return cell
     }
     

@@ -29,10 +29,18 @@ class Helper {
     
     func stringToDate(date: String) -> Date {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yy'"
+        dateFormatter.dateFormat = "MM/dd/yy' 'hh:mm:ss a"
         dateFormatter.timeZone = NSTimeZone.system
         
         return dateFormatter.date(from: date) ?? Date()
+    }
+    
+    func setMonthYearToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM yyyy"
+        dateFormatter.timeZone = NSTimeZone.system
+        
+        return dateFormatter.string(from: date)
     }
     
     func stringToTime(time: String) -> Date {
