@@ -33,4 +33,5 @@ class Constants {
     static let userId                   = "userId"
     static let userHasLoggedIn          = "userHasLoggedIn"
     static let isFirstLaunch            = "isFirstLaunch"
+    static let allowAuthentication      = "allowAuthentication"
 }

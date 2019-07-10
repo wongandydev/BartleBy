@@ -40,6 +40,12 @@ class EmailLoginViewController: UIViewController {
         setTapGesture()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        Spinner.stop()
+    }
+    
     fileprivate func setTapGesture(){
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap))
         view.addGestureRecognizer(tapGesture)

@@ -13,7 +13,7 @@ class OptionViewController: UIViewController {
     private var bannerAdView: GADBannerView!
     private let userUID = UIDevice.current.identifierForVendor?.uuidString
     
-    var options: [String] = ["Manage type of writing", "Manage Notifications", "Stats", "Help", "About", "Sign Up/Sign In"]
+    var options: [String] = ["Manage type of writing", "Manage Notifications", "Stats", "Help", "About", "Face ID/ Touch ID", "Sign Up/Sign In"]
     
     let usernameLabel: UILabel = {
         let label = UILabel()
@@ -212,6 +212,10 @@ extension OptionViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 self.navigationController?.pushViewController(aboutVC, animated: true)
                 break
             case 5:
+                let bioVC = BiometricSetupViewController()
+                self.navigationController?.pushViewController(bioVC, animated: true)
+                break
+            case 6:
                 if let hasLoggedIn = UserDefaults.standard.bool(forKey: Constants.userHasLoggedIn) as? Bool {
                     if hasLoggedIn {
                         stockAlertMessage(title: "", message: "You have already logged in.")

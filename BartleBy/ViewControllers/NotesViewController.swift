@@ -55,7 +55,13 @@ class NotesViewController: UIViewController {
     
     var sortedNotes: [[Note]] = [[]]
     
-    var monthsOfNotes: [Date] = []
+    var monthsOfNotes: [Date] = [] {
+        didSet {
+            monthsOfNotes.sort(by: { (date1, date2) in
+                date1 > date2
+            })
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,7 +106,6 @@ class NotesViewController: UIViewController {
         sortedNotes = [[]]
         
         for note in notes {
-            print("count: \(sortedNotes.count)")
             if let noteDate = monthYearFormatter.date(from: note.dateCreated) as? Date {
                 let calendar = Calendar.current
                 let componenets = calendar.dateComponents([.month, .year], from: noteDate)
@@ -250,7 +255,7 @@ class NotesViewController: UIViewController {
     }
     
     fileprivate func readNotes() {
-        if notes.isEmpty {
+        
             if let noteData = UserDefaults.standard.value(forKey: "offlineNotes") as? Data,
                 let noteObject = NSKeyedUnarchiver.unarchiveObject(with: noteData) as? [Note] {
                 
@@ -277,7 +282,6 @@ class NotesViewController: UIViewController {
                     self.sortNotes()
                 })
             }
-        }
     }
 
     
@@ -314,7 +318,7 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if sortedNotes.count == 0 {
+        if notes.count == 0 {
             addBackgroundView()
         } else {
             self.notesTableView.backgroundView = nil
@@ -337,7 +341,7 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
         
-        return "Unknown"
+        return nil
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -92,8 +92,10 @@ class FirebaseNetworkingService {
         Auth.auth().signIn(withEmail: email, password: password, completion: { authResult, error in
             if let error = error {
                 completion(false)
+                print("login failed. \(email)")
             } else {
                 completion(true)
+                print("login sucessful. \(email)")
             }
         })
     }
@@ -121,23 +123,39 @@ class FirebaseNetworkingService {
             if let userData = userData {
                 if let usertemplate = userData["template"] as? [String: AnyObject],
                     let stats = userData["stats"] as? [String: AnyObject],
-                    let notes = userData["notes"] as? [String: AnyObject] ,
                     let loginActivity = userData["loginActivity"] as? [String: AnyObject] {
                     
-                    getUserInfoFirebase(uid: currentFirebaseUID, { userData in
-                        if let userId = userData?.keys.first as? String {
-                            UserDefaults.standard.set(userId, forKey: Constants.userId)
-                            ref.child("users/\(userId)/notes").updateChildValues(notes)
-                            ref.child("users/\(userId)/loginActivity").updateChildValues(loginActivity)
-                            ref.child("users/\(userId)/stats").setValue(stats)
-                            ref.child("users/\(userId)/template").setValue(usertemplate)
-                            updateLoginActivity(userId: userId)
-                            completion(true)
-                        } else {
-                            completion(false)
-                            print("failed to get login user userId")
-                        }
-                    })
+                    if let notes = userData["notes"] as? [String: AnyObject] {
+                        getUserInfoFirebase(uid: currentFirebaseUID, { userData in
+                            if let userId = userData?.keys.first as? String {
+                                UserDefaults.standard.set(userId, forKey: Constants.userId)
+                                ref.child("users/\(userId)/notes").updateChildValues(notes)
+                                ref.child("users/\(userId)/loginActivity").updateChildValues(loginActivity)
+                                ref.child("users/\(userId)/stats").setValue(stats)
+                                ref.child("users/\(userId)/template").setValue(usertemplate)
+                                updateLoginActivity(userId: userId)
+                                completion(true)
+                            } else {
+                                completion(false)
+                                print("failed to get login user userId")
+                            }
+                        })
+                    } else {
+                        //User have no notes
+                        getUserInfoFirebase(uid: currentFirebaseUID, { userData in
+                            if let userId = userData?.keys.first as? String {
+                                UserDefaults.standard.set(userId, forKey: Constants.userId)
+                                ref.child("users/\(userId)/loginActivity").updateChildValues(loginActivity)
+                                ref.child("users/\(userId)/stats").setValue(stats)
+                                ref.child("users/\(userId)/template").setValue(usertemplate)
+                                updateLoginActivity(userId: userId)
+                                completion(true)
+                            } else {
+                                completion(false)
+                                print("failed to get login user userId")
+                            }
+                        })
+                    }
                 }
                 
                 //Save new userId here
