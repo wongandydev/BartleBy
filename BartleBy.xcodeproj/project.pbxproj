@@ -75,6 +75,7 @@
 		A0A6EDCB21D672D700637C91 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		A0A6EDCD21D6737100637C91 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIViewController+Extensions.swift"; path = "../UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		A0A6EDCF21D86FD100637C91 /* NavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationController+Extension.swift"; sourceTree = "<group>"; };
+		A0B3264D22D6137D006A170B /* BartleBy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BartleBy.entitlements; sourceTree = "<group>"; };
 		A0B4C30022C04DBA00A432CF /* BartleByNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartleByNotificationCenter.swift; sourceTree = "<group>"; };
 		A0C7D5A921D135EB003EC195 /* Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template.swift; sourceTree = "<group>"; };
 		A0C7D5AD21D1B345003EC195 /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +160,7 @@
 		A02B7AC721CC3D850062DDC5 /* BartleBy */ = {
 			isa = PBXGroup;
 			children = (
+				A0B3264D22D6137D006A170B /* BartleBy.entitlements */,
 				A0E0FE6E22BF327700DC3BF4 /* UI Components */,
 				A09E75FB22BD0C5600AB62E6 /* Networking  */,
 				A04FB3DD22BBE48000CD566C /* Extensions */,

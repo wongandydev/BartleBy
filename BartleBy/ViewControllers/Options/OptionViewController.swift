@@ -91,7 +91,6 @@ class OptionViewController: UIViewController {
         
         
         bannerAdView = GADBannerView()
-        bannerAdView.backgroundColor = .black
         setupBannerAd()
         
         view.addSubview(bannerAdView)
