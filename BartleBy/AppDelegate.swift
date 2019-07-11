@@ -42,6 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window.makeKeyAndVisible()
         }
         
+        AuthenticationManager.authenticateUser()
+        
         return true
     }
 

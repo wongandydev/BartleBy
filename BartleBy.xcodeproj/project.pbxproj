@@ -26,6 +26,8 @@
 		A0A6EDCE21D6737100637C91 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6EDCD21D6737100637C91 /* UIViewController+Extensions.swift */; };
 		A0A6EDD021D86FD100637C91 /* NavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6EDCF21D86FD100637C91 /* NavigationController+Extension.swift */; };
 		A0B3264F22D6A019006A170B /* BiometricSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B3264E22D6A019006A170B /* BiometricSetupViewController.swift */; };
+		A0B3265122D6BFE8006A170B /* BiometricViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B3265022D6BFE8006A170B /* BiometricViewController.swift */; };
+		A0B3265322D6C008006A170B /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B3265222D6C008006A170B /* AuthenticationManager.swift */; };
 		A0B4C30122C04DBA00A432CF /* BartleByNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B4C30022C04DBA00A432CF /* BartleByNotificationCenter.swift */; };
 		A0C7D5AA21D135EB003EC195 /* Template.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C7D5A921D135EB003EC195 /* Template.swift */; };
 		A0C7D5AE21D1B345003EC195 /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C7D5AD21D1B345003EC195 /* OptionViewController.swift */; };
@@ -78,6 +80,8 @@
 		A0A6EDCF21D86FD100637C91 /* NavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationController+Extension.swift"; sourceTree = "<group>"; };
 		A0B3264D22D6137D006A170B /* BartleBy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BartleBy.entitlements; sourceTree = "<group>"; };
 		A0B3264E22D6A019006A170B /* BiometricSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricSetupViewController.swift; sourceTree = "<group>"; };
+		A0B3265022D6BFE8006A170B /* BiometricViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricViewController.swift; sourceTree = "<group>"; };
+		A0B3265222D6C008006A170B /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		A0B4C30022C04DBA00A432CF /* BartleByNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartleByNotificationCenter.swift; sourceTree = "<group>"; };
 		A0C7D5A921D135EB003EC195 /* Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template.swift; sourceTree = "<group>"; };
 		A0C7D5AD21D1B345003EC195 /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +147,7 @@
 				A02B7ACA21CC3D850062DDC5 /* NotesViewController.swift */,
 				A028098621CD4F64009D7730 /* AddViewNotesViewController.swift */,
 				A04FB3DE22BBE56200CD566C /* AllTabBarViewController.swift */,
+				A0B3265022D6BFE8006A170B /* BiometricViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 			children = (
 				A0E7AA6221D0678E001A76C0 /* Note.swift */,
 				A0C7D5A921D135EB003EC195 /* Template.swift */,
+				A0B3265222D6C008006A170B /* AuthenticationManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -452,6 +458,7 @@
 				A0C7D5B221D316F4003EC195 /* ConfigViewController.swift in Sources */,
 				A09E75FA22BD0C4F00AB62E6 /* FirebaseNetworkingService.swift in Sources */,
 				A0D138A621D3FA7A0021F424 /* AboutViewController.swift in Sources */,
+				A0B3265122D6BFE8006A170B /* BiometricViewController.swift in Sources */,
 				A0A6EDCE21D6737100637C91 /* UIViewController+Extensions.swift in Sources */,
 				A04FB3DF22BBE56200CD566C /* AllTabBarViewController.swift in Sources */,
 				A028098721CD4F64009D7730 /* AddViewNotesViewController.swift in Sources */,
@@ -461,6 +468,7 @@
 				A0E0FE6D22BF109F00DC3BF4 /* String+Extensions.swift in Sources */,
 				A0B4C30122C04DBA00A432CF /* BartleByNotificationCenter.swift in Sources */,
 				A0D138A421D3F9370021F424 /* HelpViewController.swift in Sources */,
+				A0B3265322D6C008006A170B /* AuthenticationManager.swift in Sources */,
 				A0E0FE7022BF328200DC3BF4 /* Spinner.swift in Sources */,
 				A02B7AC921CC3D850062DDC5 /* AppDelegate.swift in Sources */,
 				A0E7AA6521D06914001A76C0 /* NoteCell.swift in Sources */,

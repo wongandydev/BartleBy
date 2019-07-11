@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import LocalAuthentication
 
 class BiometricSetupViewController: UIViewController {
     var titleLabel: UILabel!
@@ -73,100 +72,29 @@ class BiometricSetupViewController: UIViewController {
         firstRowStackView.addArrangedSubview(toggleAuthSwitch)
     }
     
+    fileprivate func areYouSureAlert() {
+        let alertController = UIAlertController(title: "Are you sure you want to turn off \(AuthenticationManager.getUserAvailableBiometricType())?", message: "Turning off \(AuthenticationManager.getUserAvailableBiometricType()) means your notes will be accessible once the app is opened.", preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "I'm Sure", style: .default, handler: { action in
+            UserDefaults.standard.set(false, forKey: Constants.allowAuthentication)
+            self.toggleAuthSwitch.setOn(UserDefaults.standard.bool(forKey: Constants.allowAuthentication), animated: true)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "I changed my mind.", style: .cancel, handler: { action in
+            self.toggleAuthSwitch.setOn(UserDefaults.standard.bool(forKey: Constants.allowAuthentication), animated: true)
+        }))
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     @objc func toggleAuth() {
-        UserDefaults.standard.set(!UserDefaults.standard.bool(forKey: Constants.allowAuthentication), forKey: Constants.allowAuthentication)
-    }
-}
-
-class BiometricViewController: UIViewController {
-    var retryButton: UIButton!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        layoutSubviews()
-    }
-    
-    func showContent() {
-        DispatchQueue.main.async {
-            self.view.backgroundColor = .red
-            self.retryButton.isHidden = false
-        }
-    }
-    
-    fileprivate func layoutSubviews() {
-        self.view.backgroundColor = .white
-        
-        retryButton = UIButton()
-        retryButton.setTitle("Retry Face ID", for: .normal)
-        retryButton.isHidden = true
-        retryButton.addTarget(self, action: #selector(retryFaceID), for: .touchUpInside)
-        
-        self.view.addSubview(retryButton)
-        retryButton.snp.makeConstraints({ make in
-            make.center.equalToSuperview()
-        })
-    }
-    
-    @objc func retryFaceID() {
-        AuthenticationManager.authenticateUser()
-    }
-}
-
-class AuthenticationManager {
-    static let userAllowsAuthentication = UserDefaults.standard.bool(forKey: Constants.allowAuthentication)
-    
-    static func getUserAvailableBiometricType() -> String {
-        let context = LAContext()
-        if #available(iOS 11, *) {
-            let _ = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
-            switch(context.biometryType) {
-            case .none:
-               return ""
-            case .touchID:
-                return "Touch ID"
-            case .faceID:
-                return "Face ID"
-
-            }
+        if UserDefaults.standard.bool(forKey: Constants.allowAuthentication) {
+            toggleAuthSwitch.setOn(UserDefaults.standard.bool(forKey: Constants.allowAuthentication), animated: true)
+            areYouSureAlert()
         } else {
-            return ""
-        }
-    }
-    
-    
-    static func authenticateUser() {
-        if userAllowsAuthentication {
-            let bioVC = BiometricViewController()
-            
-            if let app = UIApplication.shared.delegate as? AppDelegate, let window = app.window {
-                window.rootViewController?.present(bioVC, animated: true, completion: nil)
-            }
-            let context = LAContext()
-            var error: NSError?
-            
-            context.localizedCancelTitle = "Cancel."
-            
-            if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-                print("error; \(error)")
-            }
-            
-            let reason = "Log in to access notes"
-            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, error in
-                
-                if success {
-                    // Move to the main thread because a state update triggers UI changes.
-                    
-                    DispatchQueue.main.async {
-                        if let app = UIApplication.shared.delegate as? AppDelegate, let window = app.window {
-                            window.rootViewController?.dismiss(animated: true, completion: { print("FaceID Completed | LaController dismissed")})
-                        }
-                    }
-                } else {
-                    print(error?.localizedDescription ?? "Failed to authenticate")
-                    bioVC.showContent()
-                }
-            }
+            UserDefaults.standard.set(!UserDefaults.standard.bool(forKey: Constants.allowAuthentication), forKey: Constants.allowAuthentication)
+            toggleAuthSwitch.setOn(UserDefaults.standard.bool(forKey: Constants.allowAuthentication), animated: true)
         }
     }
 }
+
