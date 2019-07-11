@@ -78,6 +78,23 @@ class BiometricSetupViewController: UIViewController {
     }
 }
 
+class BiometricViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        layoutSubviews()
+    }
+    
+    func showContent() {
+        DispatchQueue.main.async {
+            self.view.backgroundColor = .red
+        }
+    }
+    
+    fileprivate func layoutSubviews() {
+        self.view.backgroundColor = .white
+    }
+}
 
 class AuthenticationManager {
     static let userAllowsAuthentication = UserDefaults.standard.bool(forKey: Constants.allowAuthentication)
@@ -103,6 +120,11 @@ class AuthenticationManager {
     
     static func authenticateUser() {
         if userAllowsAuthentication {
+            let bioVC = BiometricViewController()
+            
+            if let app = UIApplication.shared.delegate as? AppDelegate, let window = app.window {
+                window.rootViewController?.present(bioVC, animated: true, completion: nil)
+            }
             var context = LAContext()
             var error: NSError?
             
@@ -118,12 +140,14 @@ class AuthenticationManager {
                 if success {
                     // Move to the main thread because a state update triggers UI changes.
                     
-                    
-                    if let app = UIApplication.shared.delegate as? AppDelegate, let window = app.window {
-                        window.rootViewController?.dismiss(animated: false, completion: { print("FaceID Completed | LaController dismissed")})
+                    DispatchQueue.main.async {
+                        if let app = UIApplication.shared.delegate as? AppDelegate, let window = app.window {
+                            window.rootViewController?.dismiss(animated: true, completion: { print("FaceID Completed | LaController dismissed")})
+                        }
                     }
                 } else {
                     print(error?.localizedDescription ?? "Failed to authenticate")
+                    bioVC.showContent()
                 }
             }
         }
