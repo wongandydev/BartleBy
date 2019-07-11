@@ -10,7 +10,11 @@ import UIKit
 import LocalAuthentication
 
 class AuthenticationManager {
-    static let userAllowsAuthentication = UserDefaults.standard.bool(forKey: Constants.allowAuthentication)
+    static var userAllowsAuthentication: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Constants.allowAuthentication)
+        }
+    }
     
     static func getUserAvailableBiometricType() -> String {
         let context = LAContext()

@@ -76,7 +76,7 @@ class BiometricSetupViewController: UIViewController {
         let alertController = UIAlertController(title: "Are you sure you want to turn off \(AuthenticationManager.getUserAvailableBiometricType())?", message: "Turning off \(AuthenticationManager.getUserAvailableBiometricType()) means your notes will be accessible once the app is opened.", preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: "I'm Sure", style: .default, handler: { action in
-            UserDefaults.standard.set(false, forKey: Constants.allowAuthentication)
+            UserDefaults.standard.set(!UserDefaults.standard.bool(forKey: Constants.allowAuthentication), forKey: Constants.allowAuthentication)
             self.toggleAuthSwitch.setOn(UserDefaults.standard.bool(forKey: Constants.allowAuthentication), animated: true)
         }))
         
