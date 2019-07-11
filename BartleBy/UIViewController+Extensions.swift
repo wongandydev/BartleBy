@@ -17,6 +17,32 @@ extension UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    func forgotPasswordAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        alertController.addTextField(configurationHandler: {(textField) in
+            textField.placeholder = "Enter email"
+        })
+        
+        alertController.addAction(UIAlertAction(title: "Send Email", style: .default, handler: { action in
+            if let enteredEmail = alertController.textFields?.first?.text {
+                FirebaseNetworkingService.forgotPassword(email: enteredEmail) { isSuccess in
+                    if isSuccess {
+                        self.stockAlertMessage(title: "Email Sent", message: "Your password reset email is on its way.")
+                    } else {
+                        self.stockAlertMessage(title: "Email Invalid", message: "Your email is not correct please try again.")
+                    }
+                    
+                }
+            }
+            
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     func popVCAfterOK(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         

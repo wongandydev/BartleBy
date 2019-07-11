@@ -100,6 +100,19 @@ class FirebaseNetworkingService {
         })
     }
     
+    static func forgotPassword(email: String, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
+        Auth.auth().sendPasswordReset(withEmail: email, completion: { error in
+            if let error = error {
+                print("Error sending message")
+                completion(false)
+            }
+            
+            completion(true)
+            print("success")
+        })
+
+    }
+    
     static func getNoteTotal(_ completion: @escaping (_ totalNotes: Int) -> Void) {
         if let userID = UserDefaults.standard.value(forKey: Constants.userId) as? String {
             ref.child("users/\(userID)").observeSingleEvent(of: .value , with: { snapshot in

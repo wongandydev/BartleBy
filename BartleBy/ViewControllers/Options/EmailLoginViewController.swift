@@ -64,9 +64,11 @@ class EmailLoginViewController: UIViewController {
         if isSignUp {
             registerButton.setTitle("Register", for: .normal)
             welcomeMessage.text = "Sign Up"
+            forgotPasswordButtion.isHidden = true
         } else {
             registerButton.setTitle("Sign In", for: .normal)
             welcomeMessage.text = "Sign In"
+            forgotPasswordButtion.isHidden = false
         }
     }
     
@@ -149,6 +151,20 @@ class EmailLoginViewController: UIViewController {
             make.bottom.equalToSuperview().offset(-30)
             make.centerX.equalToSuperview()
         })
+        
+        forgotPasswordButtion = UIButton()
+        forgotPasswordButtion.setTitle("Forgot Password.", for: .normal)
+        forgotPasswordButtion.isHidden = true
+        forgotPasswordButtion.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        forgotPasswordButtion.addTarget(self, action: #selector(forgotPasswordTapped), for: .touchUpInside)
+        forgotPasswordButtion.setTitleColor(.black, for: .normal)
+        forgotPasswordButtion.setTitleColor(.white, for: .highlighted)
+        self.view.addSubview(forgotPasswordButtion)
+        forgotPasswordButtion.snp.makeConstraints({ make in
+            make.top.equalTo(registerButton.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+        })
+        
     }
     
     fileprivate func loginUser(email: String, password: String) {
@@ -212,6 +228,10 @@ class EmailLoginViewController: UIViewController {
         }
     }
     
+    fileprivate func forgotPassword() {
+        forgotPasswordAlert(title: "Forgot Password?", message: "Enter your email below, we will send you a email to reset your password.")
+    }
+    
     @objc func toggleSignIn() {
         isSignUp = !isSignUp
     }
@@ -219,6 +239,10 @@ class EmailLoginViewController: UIViewController {
     @objc func tap() {
         registerEmailTextField.resignFirstResponder()
         registerPasswordTextField.resignFirstResponder()
+    }
+    
+    @objc func forgotPasswordTapped() {
+        forgotPassword()
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
