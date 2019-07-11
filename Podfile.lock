@@ -1,4 +1,7 @@
 PODS:
+  - Crashlytics (3.13.3):
+    - Fabric (~> 1.10.2)
+  - Fabric (1.10.2)
   - Firebase/AdMob (5.13.0):
     - Firebase/Core
     - Google-Mobile-Ads-SDK (~> 7.35)
@@ -77,6 +80,8 @@ PODS:
   - SnapKit (4.0.1)
 
 DEPENDENCIES:
+  - Crashlytics (~> 3.13.3)
+  - Fabric (~> 1.10.2)
   - Firebase/AdMob
   - Firebase/Analytics
   - Firebase/Auth
@@ -87,6 +92,8 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Crashlytics
+    - Fabric
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -104,6 +111,8 @@ SPEC REPOS:
     - SnapKit
 
 SPEC CHECKSUMS:
+  Crashlytics: 2aa08cd61fb1d62718c4e653169461d1d7377de2
+  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   Firebase: 6df9a6114bc9f106a98fe83d5438d4d9833c2019
   FirebaseAnalytics: 63202d2665de4e6adcbdce189135255d8b5962ba
   FirebaseAuth: 9299ab178271bec7426967b05b2718bb6fc31f17
@@ -120,6 +129,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
 
-PODFILE CHECKSUM: ed6846de9ec8d21a7ae9591a406f27148a1c6435
+PODFILE CHECKSUM: 4f2410707119a36b7ce7f1f1398e2a43a202ce99
 
 COCOAPODS: 1.5.3

@@ -13,19 +13,16 @@ import FirebaseAnalytics
 class EmailLoginViewController: UIViewController {
     
     //Register
-    private var registerView: UIView!
+//    private var registerView: UIView!
+    private var welcomeMessage: UILabel!
     private var registerEmailTextField: UITextField!
     private var registerPasswordTextField: UITextField!
     private var registerButton: UIButton!
     private var toggleSignInButton: UIButton!
-    
-    //Login
-    private var loginView: UIView!
-    private var loginEmailTextField: UITextField!
-    private var loginPasswordTextField: UITextField!
-    private var signInButton: UIButton!
     private var forgotPasswordButtion: UIButton!
-    private var toggleSignUpButton: UIButton!
+    
+    private var keyboardHeight = CGFloat(0)
+    private var defaultY = CGFloat(0)
     
     private var isSignUp: Bool = true {
         didSet {
@@ -37,13 +34,25 @@ class EmailLoginViewController: UIViewController {
         super.viewDidLoad()
         
         layoutSubview()
+        setupKeyboardNotification()
         setTapGesture()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        remoteKeyboardNotification()
         Spinner.stop()
+    }
+    
+    fileprivate func setupKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: Selector("keyboardWillShow:"), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector("keyboardWillHide:"), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    fileprivate func remoteKeyboardNotification() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     fileprivate func setTapGesture(){
@@ -53,23 +62,18 @@ class EmailLoginViewController: UIViewController {
     
     fileprivate func switchSignUpLogin() {
         if isSignUp {
-            loginView.alpha = 0.0
-            registerView.alpha = 1.0
+            registerButton.setTitle("Register", for: .normal)
+            welcomeMessage.text = "Sign Up"
         } else {
-            loginView.alpha = 1.0
-            registerView.alpha = 0.0
+            registerButton.setTitle("Sign In", for: .normal)
+            welcomeMessage.text = "Sign In"
         }
     }
     
     fileprivate func layoutSubview() {
         self.view.backgroundColor = .white
         self.edgesForExtendedLayout = .init(rawValue: 0)
-        
-        registerView = UIView()
-        view.addSubview(registerView)
-        registerView.snp.makeConstraints({ make in
-            make.edges.equalToSuperview()
-        })
+        defaultY = self.view.frame.origin.y
         
         registerEmailTextField = UITextField()
         registerEmailTextField.backgroundColor = .white
@@ -82,7 +86,7 @@ class EmailLoginViewController: UIViewController {
         registerEmailTextField.delegate = self
         registerEmailTextField.font = UIFont.systemFont(ofSize: 17 * Constants.typeScale)
         
-        registerView.addSubview(registerEmailTextField)
+        self.view.addSubview(registerEmailTextField)
         registerEmailTextField.snp.makeConstraints({ make in
             make.height.equalTo(40)
             make.centerY.equalToSuperview().offset(-25)
@@ -90,12 +94,12 @@ class EmailLoginViewController: UIViewController {
             make.left.right.equalToSuperview().inset(40)
         })
         
-        let welcomeMessage = UILabel()
+        welcomeMessage = UILabel()
         welcomeMessage.numberOfLines = 0
         welcomeMessage.font = UIFont.systemFont(ofSize: 50, weight: .ultraLight)
         welcomeMessage.text = "Sign Up"
         
-        registerView.addSubview(welcomeMessage)
+        self.view.addSubview(welcomeMessage)
         welcomeMessage.snp.makeConstraints({ make in
             make.bottom.equalTo(registerEmailTextField.snp.top).offset(-20)
             make.centerX.equalToSuperview()
@@ -112,7 +116,7 @@ class EmailLoginViewController: UIViewController {
         registerPasswordTextField.delegate = self
         registerPasswordTextField.font = UIFont.systemFont(ofSize: 17 * Constants.typeScale)
         
-        registerView.addSubview(registerPasswordTextField)
+        self.view.addSubview(registerPasswordTextField)
         registerPasswordTextField.snp.makeConstraints({ make in
             make.height.equalTo(40)
             make.centerY.equalToSuperview().offset(25)
@@ -125,9 +129,9 @@ class EmailLoginViewController: UIViewController {
         registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         registerButton.setTitleColor(.black, for: .normal)
         registerButton.setTitleColor(.white, for: .highlighted)
-        registerButton.addTarget(self, action: #selector(signUp), for: .touchUpInside)
+        registerButton.addTarget(self, action: #selector(signUpSignIn), for: .touchUpInside)
         
-        registerView.addSubview(registerButton)
+        self.view.addSubview(registerButton)
         registerButton.snp.makeConstraints({ make in
             make.top.equalTo(registerPasswordTextField.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
@@ -140,91 +144,8 @@ class EmailLoginViewController: UIViewController {
         toggleSignInButton.setTitleColor(.black, for: .normal)
         toggleSignInButton.setTitleColor(.white, for: .highlighted)
         
-        registerView.addSubview(toggleSignInButton)
+        self.view.addSubview(toggleSignInButton)
         toggleSignInButton.snp.makeConstraints({ make in
-            make.bottom.equalToSuperview().offset(-30)
-            make.centerX.equalToSuperview()
-        })
-        
-        loginView = UIView()
-        loginView.alpha = 0.0
-        view.addSubview(loginView)
-        loginView.snp.makeConstraints({ make in
-            make.edges.equalToSuperview()
-        })
-        
-        loginEmailTextField = UITextField()
-        loginEmailTextField.backgroundColor = .white
-        loginEmailTextField.borderStyle = .roundedRect
-        loginEmailTextField.placeholder = "user@bartleby.com"
-        loginEmailTextField.keyboardType = .emailAddress
-        loginEmailTextField.keyboardAppearance = .dark
-        loginEmailTextField.textAlignment = .center
-        loginEmailTextField.autocapitalizationType = .none
-        loginEmailTextField.delegate = self
-        loginEmailTextField.font = UIFont.systemFont(ofSize: 17 * Constants.typeScale)
-        
-        
-        loginView.addSubview(loginEmailTextField)
-        loginEmailTextField.snp.makeConstraints({ make in
-            make.height.equalTo(40)
-            make.centerY.equalToSuperview().offset(-25)
-            make.centerX.equalToSuperview()
-            make.left.right.equalToSuperview().inset(40)
-        })
-        
-        let loginWelcomeMessaage = UILabel()
-        loginWelcomeMessaage.numberOfLines = 0
-        loginWelcomeMessaage.font = UIFont.systemFont(ofSize: 50, weight: .ultraLight)
-        loginWelcomeMessaage.text = "Login"
-        
-        loginView.addSubview(loginWelcomeMessaage)
-        loginWelcomeMessaage.snp.makeConstraints({ make in
-            make.bottom.equalTo(registerEmailTextField.snp.top).offset(-20)
-            make.centerX.equalToSuperview()
-        })
-        
-        loginPasswordTextField = UITextField()
-        loginPasswordTextField.backgroundColor = .white
-        loginPasswordTextField.borderStyle = .roundedRect
-        loginPasswordTextField.placeholder = "Password"
-        loginPasswordTextField.keyboardType = .default
-        loginPasswordTextField.keyboardAppearance = .dark
-        loginPasswordTextField.textAlignment = .center
-        loginPasswordTextField.autocapitalizationType = .none
-        loginPasswordTextField.delegate = self
-        loginPasswordTextField.font = UIFont.systemFont(ofSize: 17 * Constants.typeScale)
-        
-        loginView.addSubview(loginPasswordTextField)
-        loginPasswordTextField.snp.makeConstraints({ make in
-            make.height.equalTo(40)
-            make.centerY.equalToSuperview().offset(25)
-            make.centerX.equalToSuperview()
-            make.left.right.equalToSuperview().inset(40)
-        })
-        
-        signInButton = UIButton()
-        signInButton.setTitle("Sign in", for: .normal)
-        signInButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        signInButton.setTitleColor(.black, for: .normal)
-        signInButton.setTitleColor(.white, for: .highlighted)
-        signInButton.addTarget(self, action: #selector(login), for: .touchUpInside)
-        
-        loginView.addSubview(signInButton)
-        signInButton.snp.makeConstraints({ make in
-            make.top.equalTo(loginPasswordTextField.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
-        })
-        
-        toggleSignUpButton = UIButton()
-        toggleSignUpButton.setTitle("I have an account.", for: .normal)
-        toggleSignUpButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .light)
-        toggleSignUpButton.addTarget(self, action: #selector(toggleSignIn), for: .touchUpInside)
-        toggleSignUpButton.setTitleColor(.black, for: .normal)
-        toggleSignUpButton.setTitleColor(.white, for: .highlighted)
-        
-        loginView.addSubview(toggleSignUpButton)
-        toggleSignUpButton.snp.makeConstraints({ make in
             make.bottom.equalToSuperview().offset(-30)
             make.centerX.equalToSuperview()
         })
@@ -298,26 +219,62 @@ class EmailLoginViewController: UIViewController {
     @objc func tap() {
         registerEmailTextField.resignFirstResponder()
         registerPasswordTextField.resignFirstResponder()
-        loginEmailTextField.resignFirstResponder()
-        loginPasswordTextField.resignFirstResponder()
     }
     
-    @objc func login() {
-        if let email = loginEmailTextField.text,
-            let password = loginPasswordTextField.text {
-                loginUser(email: email, password: password)
+    @objc func keyboardWillShow(_ notification: Notification) {
+        // Get keyboard animation options
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            if (CGFloat(keyboardRectangle.height) > self.keyboardHeight) {
+                self.keyboardHeight = keyboardRectangle.height // so UI doesn't wiggle between uitextfields
+            }
+            let keyboardAnimationCurve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as! Int
+            let keyboardAnimationDuration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]) as! Double
         }
+        
+        let screenMiddleY = self.view.frame.height/2
+        let newMiddleY = (CGFloat(self.view.frame.height+Constants.topPadding+45)-CGFloat(self.keyboardHeight))/2
+        let distance = screenMiddleY-newMiddleY
+        
+        UIView.animate(withDuration: TimeInterval(0.3), delay: 0.0 , animations: {
+            self.defaultY = self.defaultY > 0 ? self.defaultY : self.view.frame.origin.y
+            self.view.frame.origin.y = (self.defaultY+44)-distance
+            
+        }, completion: {(finished: Bool) in
+        })
     }
     
-    @objc func signUp() {
+    @objc func keyboardWillHide(_ notification: Notification) {
+        
+        UIView.animate(withDuration: TimeInterval(0.3), delay: 0.0, animations: {
+            self.view.frame.origin.y = self.defaultY
+        }, completion: {(finished: Bool) in
+            
+        })
+    }
+    
+    @objc func signUpSignIn() {
         if let email = registerEmailTextField.text,
             let password = registerPasswordTextField.text {
-            signUpUser(email: email, password: password)
+            if isSignUp {
+                signUpUser(email: email, password: password)
+            } else {
+                loginUser(email: email, password: password)
+            }
         }
     }
 
 }
 
 extension EmailLoginViewController: UITextFieldDelegate {
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == registerEmailTextField {
+            textField.resignFirstResponder()
+            registerPasswordTextField.becomeFirstResponder()
+        } else if textField == registerPasswordTextField {
+            registerPasswordTextField.resignFirstResponder()
+            signUpSignIn()
+        }
+        return false
+    }
 }

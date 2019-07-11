@@ -14,6 +14,8 @@ target 'BartleBy' do
 	pod 'Firebase/Auth'
 	pod 'Mixpanel-swift'
 	pod 'SnapKit', '~> 4.0.0'
+	pod 'Fabric', '~> 1.10.2'
+	pod 'Crashlytics', '~> 3.13.3'
 
   target 'BartleByTests' do
     inherit! :search_paths
