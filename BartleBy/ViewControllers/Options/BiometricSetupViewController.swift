@@ -79,6 +79,8 @@ class BiometricSetupViewController: UIViewController {
 }
 
 class BiometricViewController: UIViewController {
+    var retryButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -88,11 +90,26 @@ class BiometricViewController: UIViewController {
     func showContent() {
         DispatchQueue.main.async {
             self.view.backgroundColor = .red
+            self.retryButton.isHidden = false
         }
     }
     
     fileprivate func layoutSubviews() {
         self.view.backgroundColor = .white
+        
+        retryButton = UIButton()
+        retryButton.setTitle("Retry Face ID", for: .normal)
+        retryButton.isHidden = true
+        retryButton.addTarget(self, action: #selector(retryFaceID), for: .touchUpInside)
+        
+        self.view.addSubview(retryButton)
+        retryButton.snp.makeConstraints({ make in
+            make.center.equalToSuperview()
+        })
+    }
+    
+    @objc func retryFaceID() {
+        AuthenticationManager.authenticateUser()
     }
 }
 
@@ -100,7 +117,7 @@ class AuthenticationManager {
     static let userAllowsAuthentication = UserDefaults.standard.bool(forKey: Constants.allowAuthentication)
     
     static func getUserAvailableBiometricType() -> String {
-        var context = LAContext()
+        let context = LAContext()
         if #available(iOS 11, *) {
             let _ = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
             switch(context.biometryType) {
@@ -125,7 +142,7 @@ class AuthenticationManager {
             if let app = UIApplication.shared.delegate as? AppDelegate, let window = app.window {
                 window.rootViewController?.present(bioVC, animated: true, completion: nil)
             }
-            var context = LAContext()
+            let context = LAContext()
             var error: NSError?
             
             context.localizedCancelTitle = "Cancel."
