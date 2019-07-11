@@ -330,7 +330,8 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if let sectionLatestNote = sortedNotes[section].first?.dateCreated,
-            let sectionLatestNoteDate = Helper.sharedInstance.stringToDate(date: sectionLatestNote) as? Date {
+            let sectionLatestNoteDateStrng = sectionLatestNote.components(separatedBy: " ").first as? String,
+            let sectionLatestNoteDate = Helper.sharedInstance.stringToDate(date: sectionLatestNoteDateStrng) as? Date {
             let calendar = Calendar.current
             let componenets = calendar.dateComponents([.month, .year], from: sectionLatestNoteDate)
             

@@ -59,7 +59,7 @@ class AuthenticationManager {
                     
                     DispatchQueue.main.async {
                         if let app = UIApplication.shared.delegate as? AppDelegate, let window = app.window {
-                            window.rootViewController?.dismiss(animated: true, completion: { print("FaceID Completed | LaController dismissed")})
+                            window.rootViewController?.dismiss(animated: true, completion: { print("Auth Sucessful")})
                         }
                     }
                 } else {
