@@ -125,6 +125,7 @@ class NotesViewController: UIViewController {
             }
         }
         
+        Spinner.stop()
         self.notesTableView.reloadData()
     }
     
@@ -255,33 +256,33 @@ class NotesViewController: UIViewController {
     }
     
     fileprivate func readNotes() {
-        
-            if let noteData = UserDefaults.standard.value(forKey: "offlineNotes") as? Data,
-                let noteObject = NSKeyedUnarchiver.unarchiveObject(with: noteData) as? [Note] {
-                
-                self.notes = noteObject
-                self.sortNotes()
-            }
+        Spinner.start(view: self.view)
+        if let noteData = UserDefaults.standard.value(forKey: "offlineNotes") as? Data,
+            let noteObject = NSKeyedUnarchiver.unarchiveObject(with: noteData) as? [Note] {
             
-            if let userID = UserDefaults.standard.value(forKey: Constants.userId) as? String {
-                ref.child("users/\(userID)").observeSingleEvent(of: .value , with: { snapshot in
-                    self.notes.removeAll()
-                    if let userData = snapshot.value as? [String: AnyObject]{
-                        if let notes = userData["notes"] as? [String: AnyObject]{
-                            for note in notes {
-                                if let value = note.value as? [String: AnyObject],
-                                    let answerNote = value["note"] as? String,
-                                    let dateCreated = value["dateCreated"] as? String,
-                                    let templateType = value["templateType"] as? String{
-                                    self.notes.append(Note(note: answerNote, dateCreated: dateCreated, id: note.key, templateType: templateType))
-                                }
+            self.notes = noteObject
+            self.sortNotes()
+        }
+        
+        if let userID = UserDefaults.standard.value(forKey: Constants.userId) as? String {
+            ref.child("users/\(userID)").observeSingleEvent(of: .value , with: { snapshot in
+                self.notes.removeAll()
+                if let userData = snapshot.value as? [String: AnyObject]{
+                    if let notes = userData["notes"] as? [String: AnyObject]{
+                        for note in notes {
+                            if let value = note.value as? [String: AnyObject],
+                                let answerNote = value["note"] as? String,
+                                let dateCreated = value["dateCreated"] as? String,
+                                let templateType = value["templateType"] as? String{
+                                self.notes.append(Note(note: answerNote, dateCreated: dateCreated, id: note.key, templateType: templateType))
                             }
                         }
                     }
-                    self.setStats()
-                    self.sortNotes()
-                })
-            }
+                }
+                self.setStats()
+                self.sortNotes()
+            })
+        }
     }
 
     

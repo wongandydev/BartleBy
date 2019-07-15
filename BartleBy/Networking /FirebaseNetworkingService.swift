@@ -48,6 +48,7 @@ class FirebaseNetworkingService {
         let currentTime = Int().currentTimestamp()
         Database.database().reference().child("users/\(userId)/loginActivity").updateChildValues(["\(currentTime)" : ["userDateTime": Helper.sharedInstance.dateToString(date: Date()), "time": currentTime]])
         Database.database().reference().child("users/\(userId)/lastLogin").setValue(currentTime)
+        postUserDetailInfo(userID: userId)
     }
     
     static func signUpUserWithEmail(email: String, password: String, _ completion: @escaping (_ isCompleted: Bool) -> Void) {
@@ -126,6 +127,26 @@ class FirebaseNetworkingService {
             })
         }
         
+    }
+    
+    static func postUserDetailInfo(userID: String) {
+        let iosVersionNumber = ProcessInfo.init().iOSVersionNumber
+        var appVersion = Bundle.main.releaseVersionNumber?.replacingOccurrences(of: ".", with: "_")
+        
+        if appVersion?.components(separatedBy: "_").count == 2 {
+            appVersion = "\(appVersion!)_0"
+        }
+        
+        let buildNumber = Bundle.main.buildVersionNumber
+        ref.child("users/\(userID)/userActivityInfo").updateChildValues(
+            ["ios_\(appVersion!)_b\(buildNumber!)": ["appVersion": appVersion,
+                                                     "buildNumber": buildNumber,
+                                                     "iosVersionNumber":iosVersionNumber,
+                                                     "timeLatest": Int().currentTimestamp(),
+                                                     "userUUID": UIDevice.current.identifierForVendor?.uuidString,
+                                                     "userDevice": UIDevice.modelName]]
+        )
+
     }
     
     static func syncCurrentUserDataWithLoginUser(previousUserID: String, currentFirebaseUID: String, _ completion: @escaping (_ isCompleted: Bool) -> Void) {
