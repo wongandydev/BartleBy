@@ -24,11 +24,11 @@ class FirebaseNetworkingService {
     }
     
     static func signUpDefaultUser() {
-        let userID = UIDevice.current.identifierForVendor?.uuidString
+        let userID = Helper.generateUserID()
         UserDefaults.standard.set(userID, forKey: Constants.userId)
         
         //sign up user with default
-        if let userID = userID {
+        if let userID = userID as? String {
             Database.database().reference().child("users/\(userID)/stats/streak").setValue(0)
             Database.database().reference().child("users/\(userID)/stats/totalNotes").setValue(0)
             Database.database().reference().child("users/\(userID)/template/templateNumber").setValue(5)

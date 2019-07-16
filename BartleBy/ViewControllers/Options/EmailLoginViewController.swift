@@ -20,6 +20,7 @@ class EmailLoginViewController: UIViewController {
     private var registerButton: UIButton!
     private var toggleSignInButton: UIButton!
     private var forgotPasswordButtion: UIButton!
+    private var toggleSecureTextButton: UIButton!
     
     private var keyboardHeight = CGFloat(0)
     private var defaultY = CGFloat(0)
@@ -112,6 +113,7 @@ class EmailLoginViewController: UIViewController {
         registerPasswordTextField.borderStyle = .roundedRect
         registerPasswordTextField.placeholder = "Password"
         registerPasswordTextField.keyboardType = .default
+        registerPasswordTextField.isSecureTextEntry = true
         registerPasswordTextField.keyboardAppearance = .dark
         registerPasswordTextField.textAlignment = .center
         registerPasswordTextField.autocapitalizationType = .none
@@ -124,6 +126,19 @@ class EmailLoginViewController: UIViewController {
             make.centerY.equalToSuperview().offset(25)
             make.centerX.equalToSuperview()
             make.left.right.equalToSuperview().inset(40)
+        })
+        
+        toggleSecureTextButton = UIButton()
+        toggleSecureTextButton.setImage(registerPasswordTextField.isSecureTextEntry ? UIImage(named: "secured") : UIImage(named: "unsecured"), for: .normal)
+        toggleSecureTextButton.setTitleColor(.applicationAccentColor, for: .normal)
+        toggleSecureTextButton.tintColor = .applicationAccentColor
+        toggleSecureTextButton.addTarget(self, action: #selector(toggleSecureText), for: .touchUpInside)
+        
+        self.view.addSubview(toggleSecureTextButton)
+        toggleSecureTextButton.snp.makeConstraints({ make in
+            make.right.equalTo(registerPasswordTextField.snp.right).inset(10)
+            make.top.equalTo(registerPasswordTextField.snp.top)
+            make.bottom.equalTo(registerPasswordTextField.snp.bottom)
         })
         
         registerButton = UIButton()
@@ -164,7 +179,6 @@ class EmailLoginViewController: UIViewController {
             make.top.equalTo(registerButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         })
-        
     }
     
     fileprivate func loginUser(email: String, password: String) {
@@ -239,6 +253,11 @@ class EmailLoginViewController: UIViewController {
     @objc func tap() {
         registerEmailTextField.resignFirstResponder()
         registerPasswordTextField.resignFirstResponder()
+    }
+    
+    @objc func toggleSecureText() {
+        registerPasswordTextField.isSecureTextEntry = !registerPasswordTextField.isSecureTextEntry
+        toggleSecureTextButton.setImage(registerPasswordTextField.isSecureTextEntry ? UIImage(named: "secured") : UIImage(named: "unsecured"), for: .normal)
     }
     
     @objc func forgotPasswordTapped() {
