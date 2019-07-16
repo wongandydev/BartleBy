@@ -13,7 +13,7 @@ class OptionViewController: UIViewController {
     private var bannerAdView: GADBannerView!
     private let userUID = UIDevice.current.identifierForVendor?.uuidString
     
-    var options: [String] = ["Manage type of writing", "Manage Notifications", "Stats", "Help", "About", "Face ID/ Touch ID", "Sign Up/Sign In"]
+    var options: [String] = ["Manage type of writing", "Manage Notifications", "Stats", "Help", "About", "Turn on \(AuthenticationManager.getUserAvailableBiometricType())", "Sign Up/Sign In"]
     
     let usernameLabel: UILabel = {
         let label = UILabel()
