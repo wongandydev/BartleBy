@@ -9,7 +9,7 @@
 import UIKit
 
 class Constants {
-    static let inDevelopment = false //PRODUCTION!!! Set to false when shipping
+    static let inDevelopment = true //PRODUCTION!!! Set to false when shipping
     static var googleAdMobBannerId      = inDevelopment ? Helper.valueForKey(key: "GoogleADMobBannerTestID") : Helper.valueForKey(key: "GoogleADMobBannerID")
     
     static let applicationAccentColor   = UIColor(red: 225/225, green: 0/225, blue: 45/225, alpha: 1.0) /* #FF002D */
