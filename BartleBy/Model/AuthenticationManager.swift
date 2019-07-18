@@ -34,7 +34,6 @@ class AuthenticationManager {
         }
     }
     
-    
     static func authenticateUser() {
         if userAllowsAuthentication {
             let bioVC = BiometricViewController()
@@ -53,10 +52,8 @@ class AuthenticationManager {
             
             let reason = "Log in to access notes"
             context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, error in
-                
                 if success {
                     // Move to the main thread because a state update triggers UI changes.
-                    
                     DispatchQueue.main.async {
                         if let app = UIApplication.shared.delegate as? AppDelegate, let window = app.window {
                             window.rootViewController?.dismiss(animated: true, completion: { print("Auth Sucessful")})
@@ -66,6 +63,27 @@ class AuthenticationManager {
                     print(error?.localizedDescription ?? "Failed to authenticate")
                     bioVC.showContent()
                 }
+            }
+        }
+    }
+    
+    static func authenticateUser(_ completion: @escaping (_ isSucess: Bool) -> Void) {
+        let context = LAContext()
+        var error: NSError?
+        
+        context.localizedCancelTitle = "Cancel"
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+            print("error; \(error)")
+        }
+        
+        let reason = "Log in to access notes"
+        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, error in
+            if success {
+                // Move to the main thread because a state update triggers UI changes.
+                completion(true)
+            } else {
+                completion(false)
             }
         }
     }

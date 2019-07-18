@@ -76,8 +76,16 @@ class BiometricSetupViewController: UIViewController {
         let alertController = UIAlertController(title: "Are you sure you want to turn off \(AuthenticationManager.getUserAvailableBiometricType())?", message: "Turning off \(AuthenticationManager.getUserAvailableBiometricType()) means your notes will be accessible once the app is opened.", preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: "I'm Sure", style: .default, handler: { action in
-            UserDefaults.standard.set(!UserDefaults.standard.bool(forKey: Constants.allowAuthentication), forKey: Constants.allowAuthentication)
-            self.toggleAuthSwitch.setOn(UserDefaults.standard.bool(forKey: Constants.allowAuthentication), animated: true)
+            AuthenticationManager.authenticateUser { isSucess in
+                if isSucess {
+                    DispatchQueue.main.async {
+                        UserDefaults.standard.set(!UserDefaults.standard.bool(forKey: Constants.allowAuthentication), forKey: Constants.allowAuthentication)
+                        self.toggleAuthSwitch.setOn(UserDefaults.standard.bool(forKey: Constants.allowAuthentication), animated: true)
+                    }
+                }
+            }
+            
+            
         }))
         
         alertController.addAction(UIAlertAction(title: "I changed my mind.", style: .cancel, handler: { action in
@@ -88,12 +96,20 @@ class BiometricSetupViewController: UIViewController {
     }
     
     @objc func toggleAuth() {
+        toggleAuthSwitch.isOn = toggleAuthSwitch.isOn
         if UserDefaults.standard.bool(forKey: Constants.allowAuthentication) {
             toggleAuthSwitch.setOn(UserDefaults.standard.bool(forKey: Constants.allowAuthentication), animated: true)
             areYouSureAlert()
         } else {
-            UserDefaults.standard.set(!UserDefaults.standard.bool(forKey: Constants.allowAuthentication), forKey: Constants.allowAuthentication)
             toggleAuthSwitch.setOn(UserDefaults.standard.bool(forKey: Constants.allowAuthentication), animated: true)
+            AuthenticationManager.authenticateUser { isSuccess in
+                if isSuccess {
+                    UserDefaults.standard.set(!UserDefaults.standard.bool(forKey: Constants.allowAuthentication), forKey: Constants.allowAuthentication)
+                    DispatchQueue.main.async {
+                        self.toggleAuthSwitch.setOn(UserDefaults.standard.bool(forKey: Constants.allowAuthentication), animated: true)
+                    }
+                }
+            }
         }
     }
 }
