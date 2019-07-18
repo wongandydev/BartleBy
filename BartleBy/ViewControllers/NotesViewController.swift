@@ -69,7 +69,24 @@ class NotesViewController: UIViewController {
 
         if let isFirstLaunch = UserDefaults.standard.bool(forKey: Constants.isFirstLaunch) as? Bool {
             if !isFirstLaunch {
-                stockAlertMessage(title: "Welcome", message: "By default, the app recommends 5 things to be grateful for. You can change this in Options > Manage type of writing.")
+                let alertController = UIAlertController(title: "Welcome", message: "By default, the app recommends 5 things to be grateful for. You can change this in Options > Manage type of writing.", preferredStyle: .alert)
+                
+                alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                alertController.addAction(UIAlertAction(title: "Let's change it.", style: .default, handler: { action in
+                    self.tabBarController?.selectedIndex = 1
+                    if let currentTabVC = self.tabBarController,
+                        let currentNavVC = currentTabVC.selectedViewController as? UINavigationController,
+                        let currentVC = currentNavVC.viewControllers.first as? OptionViewController {
+                        
+                        let configVC = ConfigViewController()
+                        currentVC.navigationController?.pushViewController(configVC, animated: true)
+                        
+                    }
+                    
+                }))
+                
+                self.present(alertController, animated: true, completion: nil)
+                
                 UserDefaults.standard.set(true, forKey: Constants.isFirstLaunch)
             }
         }

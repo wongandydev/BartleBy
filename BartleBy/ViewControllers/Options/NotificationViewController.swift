@@ -18,8 +18,6 @@ class NotificationViewController: UIViewController {
     
     let notificationCenter = UNUserNotificationCenter.current()
     
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,7 +32,6 @@ class NotificationViewController: UIViewController {
                 case .authorized:
                     break
                 case .notDetermined:
-                    self.navigationController?.popViewController(animated: true)
                     break
                 case .denied:
                     self.navigationController?.popViewController(animated: true)

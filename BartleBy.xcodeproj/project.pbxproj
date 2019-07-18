@@ -35,6 +35,7 @@
 		A0C7D5B421D31A9F003EC195 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C7D5B321D31A9F003EC195 /* NotificationViewController.swift */; };
 		A0D138A421D3F9370021F424 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D138A321D3F9370021F424 /* HelpViewController.swift */; };
 		A0D138A621D3FA7A0021F424 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D138A521D3FA7A0021F424 /* AboutViewController.swift */; };
+		A0DBBC8822E005F10049800D /* IntroNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DBBC8722E005F10049800D /* IntroNotificationViewController.swift */; };
 		A0E0FE6B22BF109600DC3BF4 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0FE6A22BF109600DC3BF4 /* Int+Extensions.swift */; };
 		A0E0FE6D22BF109F00DC3BF4 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0FE6C22BF109F00DC3BF4 /* String+Extensions.swift */; };
 		A0E0FE7022BF328200DC3BF4 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0FE6F22BF328200DC3BF4 /* Spinner.swift */; };
@@ -89,6 +90,7 @@
 		A0C7D5B321D31A9F003EC195 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		A0D138A321D3F9370021F424 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		A0D138A521D3FA7A0021F424 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		A0DBBC8722E005F10049800D /* IntroNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroNotificationViewController.swift; sourceTree = "<group>"; };
 		A0E0FE6A22BF109600DC3BF4 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		A0E0FE6C22BF109F00DC3BF4 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		A0E0FE6F22BF328200DC3BF4 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				A028098621CD4F64009D7730 /* AddViewNotesViewController.swift */,
 				A04FB3DE22BBE56200CD566C /* AllTabBarViewController.swift */,
 				A0B3265022D6BFE8006A170B /* BiometricViewController.swift */,
+				A0DBBC8722E005F10049800D /* IntroNotificationViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -468,6 +471,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0DBBC8822E005F10049800D /* IntroNotificationViewController.swift in Sources */,
 				A0B3264F22D6A019006A170B /* BiometricSetupViewController.swift in Sources */,
 				A028098221CD3682009D7730 /* SignupSetupViewController.swift in Sources */,
 				A0A4E4462283CCE800069310 /* Constants.swift in Sources */,

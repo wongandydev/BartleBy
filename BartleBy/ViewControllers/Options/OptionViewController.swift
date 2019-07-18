@@ -196,9 +196,17 @@ extension OptionViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 self.navigationController?.pushViewController(configVC, animated: true)
                 break
             case 1:
-                let notificationVC = NotificationViewController()
-                self.navigationController?.pushViewController(notificationVC, animated: true)
-                break
+                BartleByNotificationCenter.getUserAuthorizationStatus { status in
+                    if status == .notDetermined {
+                        let introNotificationVC = IntroNotificationViewController()
+                        self.present(introNotificationVC, animated: true, completion: nil)
+                    } else {
+                        DispatchQueue.main.async {
+                            let notificationVC = NotificationViewController()
+                            self.navigationController?.pushViewController(notificationVC, animated: true)
+                        }
+                    }
+                }
             case 2:
                 let statsVC = StatsViewController()
                 self.navigationController?.pushViewController(statsVC, animated: true)
