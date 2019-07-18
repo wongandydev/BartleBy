@@ -17,6 +17,21 @@ extension UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    func goTosettingsmessage(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "Go to settings", style: .default, handler: { action in
+            let settingsUrl = URL(string: UIApplication.openSettingsURLString)
+            if let url = settingsUrl {
+                UIApplication.shared.openURL(url)
+            }
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Never mind", style: .default, handler: nil))
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     func forgotPasswordAlert(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
