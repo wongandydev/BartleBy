@@ -149,6 +149,14 @@ class FirebaseNetworkingService {
 
     }
     
+    
+    /**
+        This will update values, not replace them.
+     */
+    static func postDataToFirebase(path: String, value: [String: Any]) {
+        ref.child(path).updateChildValues(value)
+    }
+    
     static func syncCurrentUserDataWithLoginUser(previousUserID: String, currentFirebaseUID: String, _ completion: @escaping (_ isCompleted: Bool) -> Void) {
         var previousUserData = [String: AnyObject]()
 //        var currentUserData = [String: AnyObject]()
@@ -191,9 +199,6 @@ class FirebaseNetworkingService {
                         })
                     }
                 }
-                
-                //Save new userId here
-                
             }
         })
 

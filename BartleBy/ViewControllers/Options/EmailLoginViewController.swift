@@ -47,8 +47,8 @@ class EmailLoginViewController: UIViewController {
     }
     
     fileprivate func setupKeyboardNotification() {
-        NotificationCenter.default.addObserver(self, selector: Selector("keyboardWillShow:"), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: Selector("keyboardWillHide:"), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     fileprivate func remoteKeyboardNotification() {
@@ -205,6 +205,8 @@ class EmailLoginViewController: UIViewController {
                             UserDefaults.standard.set(true, forKey: Constants.userHasLoggedIn)
                             Spinner.stop()
                             self.popVCAfterOK(title: "Success", message: "\(email) is officially connected and all your notes are synced.")
+                            
+                            FirebaseNetworkingService.postDataToFirebase(path:"users/\(userID)/depreciated", value: ["newUser": UserDefaults.standard.value(forKey: Constants.userId) ?? "", "email": email])
                         } else {
                             Spinner.stop()
                             self.stockAlertMessage(title: "Sync Error", message: "Unable to sync data")
