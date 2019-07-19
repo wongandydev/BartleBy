@@ -134,6 +134,7 @@ class HelpViewController: UIViewController, UITextFieldDelegate{
         emailTextField = UITextField()
         emailTextField.backgroundColor = .white
         emailTextField.borderStyle = .roundedRect
+        emailTextField.keyboardType = .emailAddress
         emailTextField.placeholder = "Email*"
 
         formStackView.addArrangedSubview(emailTextField)
