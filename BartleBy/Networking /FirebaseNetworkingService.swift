@@ -14,7 +14,7 @@ class FirebaseNetworkingService {
     
     static func isConnectedToInternet(_ completion: @escaping (_ isConnected: Bool) -> Void) {
         let connectedRef = Database.database().reference(withPath: ".info/connected")
-        connectedRef.observe(.value, with: { snapshot in
+        connectedRef.observeSingleEvent(of: .value, with: { snapshot in
             if let connected = snapshot.value as? Bool {
                 completion(connected)
             } else {

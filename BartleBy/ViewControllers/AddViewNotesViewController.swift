@@ -69,8 +69,11 @@ class AddViewNotesViewController: UIViewController {
                     self.templateType = Template.freeWrite
                 }
                 
-                
-                self.readNote()
+                if self.newNote {
+                    self.alertLeaveMessage(title: "Not connected to internet", message: "You are not connected to the internet, you cannot at a note at the moment.", cancel: false)
+                } else {
+                    self.readNote()
+                }
             }
         })
         
@@ -327,6 +330,10 @@ class AddViewNotesViewController: UIViewController {
     func saveNotes(note: String, dateCreated: String, id: String) {
         notes.append(Note(note: note, dateCreated: dateCreated, id: id, templateType: templateType.rawValue))
     }
+    
+    /**
+     Dimisses the VC if it is presented after 'Okay' button is tapped.
+     */
     
     func alertLeaveMessage(title: String, message: String, cancel: Bool) {
         let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
