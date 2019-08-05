@@ -103,7 +103,7 @@ class AddViewNotesViewController: UIViewController {
         
         self.view.addSubview(beforeButton)
         beforeButton.snp.makeConstraints({ make in
-            make.width.equalToSuperview().dividedBy(2.2)
+//            make.width.equalToSuperview().dividedBy(2.2)
             make.height.equalTo(66)
             make.left.equalToSuperview().inset(10)
             make.top.equalTo(topLayoutGuide.snp.bottom)
@@ -116,7 +116,7 @@ class AddViewNotesViewController: UIViewController {
         
         self.view.addSubview(nextDoneButton)
         nextDoneButton.snp.makeConstraints({ make in
-            make.width.equalToSuperview().dividedBy(2.2)
+//            make.width.equalToSuperview().dividedBy(2.2)
             make.height.equalTo(66)
             make.right.equalToSuperview().inset(10)
             make.left.equalTo(beforeButton.snp.right).inset(5)
@@ -264,8 +264,6 @@ class AddViewNotesViewController: UIViewController {
      */
     
     fileprivate func addNote() {
-        print(self.answerTextView.text == placeHolderText)
-        print(self.answerTextView.text)
         let note = self.answerTextView.text == placeHolderText ? "" : self.answerTextView.text ?? "no notes"
         
         notes.indices.contains(currentNumber) ? notes[currentNumber].note = note : saveNotes(note: note, dateCreated: Helper.sharedInstance.getCurrentDate(), id: (ref?.childByAutoId().key)!)
@@ -296,7 +294,6 @@ class AddViewNotesViewController: UIViewController {
     }
     
     @objc func updateTimer() {
-        print(seconds)
         if seconds < 1 {
             timer?.invalidate()
             alertLeaveMessage(title: "Times up!", message: "Time is up for your free write! You can no longer edit this message!", cancel: false)

@@ -13,12 +13,14 @@ class Note: NSObject, NSCoding {
     var dateCreated: String
     var id: String
     var templateType: String
+    var isLocked: Bool
     
-    init(note: String, dateCreated: String, id: String, templateType: String) {
+    init(note: String, dateCreated: String, id: String, templateType: String, isLocked: Bool = false) {
         self.note = note
         self.dateCreated = dateCreated
         self.id = id
         self.templateType = templateType
+        self.isLocked = isLocked
     }
 
     
@@ -27,6 +29,7 @@ class Note: NSObject, NSCoding {
         aCoder.encode(self.dateCreated, forKey: "dateCreated")
         aCoder.encode(self.id, forKey: "noteId")
         aCoder.encode(self.templateType, forKey: "noteTemplateType")
+        aCoder.encode(self.isLocked, forKey: "noteIsLocked")
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -34,7 +37,8 @@ class Note: NSObject, NSCoding {
         guard let dateCreated = aDecoder.decodeObject(forKey: "dateCreated") as? String else { return nil }
         guard let id = aDecoder.decodeObject(forKey: "noteId") as? String else { return nil }
         guard let templateType = aDecoder.decodeObject(forKey: "noteTemplateType") as? String else { return nil }
+        guard let isLocked = aDecoder.decodeObject(forKey: "noteIsLocked") as? Bool else { return nil }
         
-        self.init(note: note, dateCreated: dateCreated, id: id, templateType: templateType)
+        self.init(note: note, dateCreated: dateCreated, id: id, templateType: templateType, isLocked: isLocked)
     }
 }

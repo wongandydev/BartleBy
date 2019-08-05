@@ -130,7 +130,6 @@ class NotesViewController: UIViewController {
                 if let noteMonthYear = calendar.date(from: componenets),
                     let indexFromMonthOfNotes = monthsOfNotes.index(of: noteMonthYear) {
                     
-                    print(indexFromMonthOfNotes)
                     //If the array doesn't have that index, add it.
                     if !sortedNotes.indices.contains(indexFromMonthOfNotes) {
                         sortedNotes.append([])
@@ -198,7 +197,9 @@ class NotesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        readNotes()
+        if notes.isEmpty {
+            readNotes()
+        }
     }
     
     func setupBannerAd() {
@@ -331,7 +332,6 @@ class NotesViewController: UIViewController {
 
 extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        print(sortedNotes.count)
         return sortedNotes.count
     }
     
@@ -372,14 +372,60 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.notesTableView.deselectRow(at: indexPath, animated: true)
         
+        var note = sortedNotes[indexPath.section][indexPath.row]
+        
         let viewNoteViewController = AddViewNotesViewController()
-        viewNoteViewController.notes = [sortedNotes[indexPath.section][indexPath.row]]
+        viewNoteViewController.notes = [note]
         viewNoteViewController.sameDay = sortedNotes[indexPath.section][indexPath.row].dateCreated.components(separatedBy: " ")[0] == Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0]
         
-        self.navigationController?.pushViewController(viewNoteViewController, animated: true)
+        if note.isLocked {
+            AuthenticationManager.authenticateUser({ isSucess in
+                if isSucess {
+                    DispatchQueue.main.async {
+                        self.navigationController?.pushViewController(viewNoteViewController, animated: true)
+                    }
+                }
+            })
+        } else {
+            self.navigationController?.pushViewController(viewNoteViewController, animated: true)
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 83
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let note =  self.sortedNotes[indexPath.section][indexPath.row]
+        var lockAction: UITableViewRowAction!
+        
+        if AuthenticationManager.getUserAvailableBiometricType() != "" { //nil
+            if note.isLocked {
+                lockAction = UITableViewRowAction(style: .normal, title: "Unlock", handler: { action, indexPath in
+                    if AuthenticationManager.userAllowsAuthentication {
+                        note.isLocked = false
+                        self.stockAlertMessage(title: "", message: "Unlocked Note")
+                    } else {
+                        self.alertMessage(title: "FaceID not on.", message: "We cannot lock note unless \(AuthenticationManager.getUserAvailableBiometricType()) is on.")
+                    }
+                    
+                })
+            } else {
+                lockAction = UITableViewRowAction(style: .normal, title: "Lock", handler: { action, indexPath in
+                    if AuthenticationManager.userAllowsAuthentication {
+                        note.isLocked = true
+                        self.stockAlertMessage(title: "", message: "Locked Note")
+                    } else {
+                        self.alertMessage(title: "FaceID not on.", message: "We cannot lock note unless \(AuthenticationManager.getUserAvailableBiometricType()) is on.")
+                    }
+                    
+                })
+            }
+            
+            
+            return [lockAction]
+        } else {
+            return nil
+        }
     }
 }
