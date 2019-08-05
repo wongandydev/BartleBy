@@ -292,7 +292,13 @@ class NotesViewController: UIViewController {
                                 let answerNote = value["note"] as? String,
                                 let dateCreated = value["dateCreated"] as? String,
                                 let templateType = value["templateType"] as? String{
-                                self.notes.append(Note(note: answerNote, dateCreated: dateCreated, id: note.key, templateType: templateType))
+                                
+                                if let isLocked = value["isLocked"] as? Bool {
+                                    self.notes.append(Note(note: answerNote, dateCreated: dateCreated, id: note.key, templateType: templateType, isLocked: isLocked))
+                                } else {
+                                    self.notes.append(Note(note: answerNote, dateCreated: dateCreated, id: note.key, templateType: templateType))
+                                }
+                                
                             }
                         }
                     }
@@ -378,7 +384,7 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
         viewNoteViewController.notes = [note]
         viewNoteViewController.sameDay = sortedNotes[indexPath.section][indexPath.row].dateCreated.components(separatedBy: " ")[0] == Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0]
         
-        if note.isLocked {
+        if note.isLocked && AuthenticationManager.userAllowsAuthentication {
             AuthenticationManager.authenticateUser({ isSucess in
                 if isSucess {
                     DispatchQueue.main.async {
@@ -404,6 +410,9 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
                 lockAction = UITableViewRowAction(style: .normal, title: "Unlock", handler: { action, indexPath in
                     if AuthenticationManager.userAllowsAuthentication {
                         note.isLocked = false
+                        if let userId = UserDefaults.standard.value(forKey: Constants.userId) as? String {
+                            FirebaseNetworkingService.postDataToFirebase(path: "users/\(userId)/notes/\(note.id)", value: ["isLocked": false])
+                        }
                         self.stockAlertMessage(title: "", message: "Unlocked Note")
                     } else {
                         self.alertMessage(title: "FaceID not on.", message: "We cannot lock note unless \(AuthenticationManager.getUserAvailableBiometricType()) is on.")
@@ -414,6 +423,9 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
                 lockAction = UITableViewRowAction(style: .normal, title: "Lock", handler: { action, indexPath in
                     if AuthenticationManager.userAllowsAuthentication {
                         note.isLocked = true
+                        if let userId = UserDefaults.standard.value(forKey: Constants.userId) as? String {
+                            FirebaseNetworkingService.postDataToFirebase(path: "users/\(userId)/notes/\(note.id)", value: ["isLocked": true])
+                        }
                         self.stockAlertMessage(title: "", message: "Locked Note")
                     } else {
                         self.alertMessage(title: "FaceID not on.", message: "We cannot lock note unless \(AuthenticationManager.getUserAvailableBiometricType()) is on.")
