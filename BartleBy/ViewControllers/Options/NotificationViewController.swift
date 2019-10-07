@@ -109,9 +109,8 @@ class NotificationViewController: UIViewController {
                 
                 let content = UNMutableNotificationContent()
                 
-                content.title = "Another day of writing!"
-                content.subtitle = "This is daily message"
-                content.body = "Have a good day"
+                content.title = "Remember to jot down what you are grateful for today!"
+                content.body = "Regardless of how your day is... remember to jot your thoughts down. Have a good day!"
                 content.sound = UNNotificationSound.default
                 
                 let setTime = Helper.sharedInstance.timeToString(date: changeNotifcationDatePicker.date)
