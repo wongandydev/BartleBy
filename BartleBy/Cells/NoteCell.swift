@@ -16,10 +16,18 @@ class NoteCell: UICollectionViewCell {
         super.init(frame: frame)
         
         setupContentView()
+        self.backgroundColor = .backgroundColorReversed
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.layer.cornerRadius = 10
     }
     
     private func setupContentView() {
         dateLabel = UILabel()
+        dateLabel.textColor = .backgroundColor
         self.contentView.addSubview(dateLabel)
         
         dateLabel.snp.makeConstraints({ make in

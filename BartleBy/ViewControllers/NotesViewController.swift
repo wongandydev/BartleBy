@@ -147,7 +147,7 @@ class NotesViewController: UIViewController {
     
     fileprivate func layoutSubviews() {
         self.edgesForExtendedLayout = .init(rawValue: 0)
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .backgroundColor
         
         notesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         notesCollectionView.backgroundColor = .clear
@@ -419,7 +419,7 @@ extension NotesViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 83)
+        return CGSize(width: collectionView.frame.width - 20, height: 83)
     }
     
 //    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
