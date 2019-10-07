@@ -97,6 +97,7 @@ class NotesViewController: UIViewController {
     
     fileprivate func registerCells() {
         notesCollectionView.register(NoteCell.self, forCellWithReuseIdentifier: "noteCell")
+        notesCollectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "notesHeader")
     }
     
     fileprivate func setupNavbar() {
@@ -150,6 +151,7 @@ class NotesViewController: UIViewController {
         
         notesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         notesCollectionView.backgroundColor = .clear
+        
         notesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         setupTableView()
         
@@ -354,23 +356,39 @@ extension NotesViewController: UICollectionViewDelegate, UICollectionViewDataSou
         return sortedNotes[section].count
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 55)
+    }
     
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        if let sectionLatestNote = sortedNotes[section].first?.dateCreated,
-//            let sectionLatestNoteDateStrng = sectionLatestNote.components(separatedBy: " ").first as? String,
-//            let sectionLatestNoteDate = Helper.sharedInstance.stringToDate(date: sectionLatestNoteDateStrng) as? Date {
-//            let calendar = Calendar.current
-//            let componenets = calendar.dateComponents([.month, .year], from: sectionLatestNoteDate)
-//
-//            //Converting string date to just month year format.
-//            if let date = calendar.date(from: componenets) {
-//                return Helper.sharedInstance.setMonthYearToString(date: date)
-//            }
-//
-//        }
-//
-//        return nil
-//    }
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        var title = ""
+        let aView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "notesHeader", for: indexPath) as! UICollectionReusableView
+        
+        
+        if let sectionLatestNote = sortedNotes[indexPath.section].first?.dateCreated,
+            let sectionLatestNoteDateStrng = sectionLatestNote.components(separatedBy: " ").first as? String,
+            let sectionLatestNoteDate = Helper.sharedInstance.stringToDate(date: sectionLatestNoteDateStrng) as? Date {
+            let calendar = Calendar.current
+            let componenets = calendar.dateComponents([.month, .year], from: sectionLatestNoteDate)
+
+            //Converting string date to just month year format.
+            if let date = calendar.date(from: componenets) {
+                title = Helper.sharedInstance.setMonthYearToString(date: date)
+            }
+
+            let titleLabel = UILabel()
+            titleLabel.text = title
+            titleLabel.numberOfLines = 0
+            
+            aView.addSubview(titleLabel)
+            titleLabel.snp.makeConstraints({ make in
+                make.top.left.bottom.equalToSuperview().inset(10)
+            })
+            
+        }
+        
+        return aView
+    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "noteCell", for: indexPath) as! NoteCell
