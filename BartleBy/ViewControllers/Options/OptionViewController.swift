@@ -197,8 +197,11 @@ extension OptionViewController: UICollectionViewDelegate, UICollectionViewDataSo
             case 1:
                 BartleByNotificationCenter.getUserAuthorizationStatus { status in
                     if status == .notDetermined {
-                        let introNotificationVC = IntroNotificationViewController()
-                        self.present(introNotificationVC, animated: true, completion: nil)
+                        DispatchQueue.main.async {
+
+                            let introNotificationVC = IntroNotificationViewController()
+                            self.present(introNotificationVC, animated: true, completion: nil)
+                        }
                     } else if status == .denied {
                         self.goTosettingsmessage(title: "Notifications off", message: "Notifications are turned off for BartleBy. Go to settings to turn it back on?")
                     } else {

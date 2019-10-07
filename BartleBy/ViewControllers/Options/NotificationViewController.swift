@@ -112,16 +112,27 @@ class NotificationViewController: UIViewController {
         content.sound = UNNotificationSound.default
         
         let setTime = Helper.sharedInstance.timeToString(date: changeNotifcationDatePicker.date)
-        var date = DateComponents()
-        date.hour = Int(setTime.components(separatedBy: ":")[0])
-        date.minute = Int(setTime.components(separatedBy: ":")[1])
         
-        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        notificationCenter.removeAllPendingNotificationRequests()
-        notificationCenter.add(request)
-        UserDefaults.standard.set(Helper.sharedInstance.convert24toAM(date: changeNotifcationDatePicker.date), forKey: "notificationSetting")
-        currentNotificationSettingLabel.text = UserDefaults.standard.object(forKey: "notificationSetting") as? String
+        
+        if let hour = Int(setTime.components(separatedBy: ":")[0]),
+            let minute = Int(setTime.components(separatedBy: ":")[1]) {
+            
+            var date = DateComponents()
+            
+            date.hour = hour
+            date.minute = hour
+            
+            let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            notificationCenter.removeAllPendingNotificationRequests()
+            notificationCenter.add(request)
+            UserDefaults.standard.set(Helper.sharedInstance.convert24toAM(date: changeNotifcationDatePicker.date), forKey: "notificationSetting")
+            currentNotificationSettingLabel.text = UserDefaults.standard.object(forKey: "notificationSetting") as? String
+            
+            self.alertMessage(title: "Sucess", message: "You notification has been saved for: \(Helper.sharedInstance.convert24toAM(date: changeNotifcationDatePicker.date))")
+        }
+        
+        
     }
     
     

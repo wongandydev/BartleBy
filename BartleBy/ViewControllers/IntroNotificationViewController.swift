@@ -81,7 +81,9 @@ class IntroNotificationViewController: UIViewController {
     
     @objc func setNotification() {
         BartleByNotificationCenter.stockAskForNotificationPermission { granted in
-            self.dismiss(animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
     
