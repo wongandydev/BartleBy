@@ -15,7 +15,7 @@ import Mixpanel
 
 class NotesViewController: UIViewController {
     
-    var notesTableView: UITableView!
+    var notesCollectionView: UICollectionView!
     private var bannerAdView: GADBannerView!
     
 //    private let refreshControl = UIRefreshControl()
@@ -96,7 +96,7 @@ class NotesViewController: UIViewController {
     }
     
     fileprivate func registerCells() {
-        notesTableView.register(NoteCell.self, forCellReuseIdentifier: "noteCell")
+        notesCollectionView.register(NoteCell.self, forCellWithReuseIdentifier: "noteCell")
     }
     
     fileprivate func setupNavbar() {
@@ -109,9 +109,8 @@ class NotesViewController: UIViewController {
     }
     
     fileprivate func setupTableView() {
-        notesTableView.delegate = self
-        notesTableView.dataSource = self
-        notesTableView.tableFooterView = UIView()
+        notesCollectionView.delegate = self
+        notesCollectionView.dataSource = self
         registerCells()
     }
     
@@ -142,15 +141,16 @@ class NotesViewController: UIViewController {
         }
         
         Spinner.stop()
-        self.notesTableView.reloadData()
+        self.notesCollectionView.reloadData()
     }
     
     fileprivate func layoutSubviews() {
         self.edgesForExtendedLayout = .init(rawValue: 0)
         self.view.backgroundColor = .white
         
-        notesTableView = UITableView()
-        notesTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        notesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        notesCollectionView.backgroundColor = .clear
+        notesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         setupTableView()
         
 //        //Add Pull to refresh
@@ -172,8 +172,8 @@ class NotesViewController: UIViewController {
             make.height.equalTo(50)
         })
         
-        self.view.addSubview(notesTableView)
-        notesTableView.snp.makeConstraints({ make in
+        self.view.addSubview(notesCollectionView)
+        notesCollectionView.snp.makeConstraints({ make in
             make.top.left.right.equalToSuperview()
             make.bottom.equalTo(bannerAdView.snp.top)
         })
@@ -197,9 +197,10 @@ class NotesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if notes.isEmpty {
+//        if notes.isEmpty {
             readNotes()
-        }
+//        }
+        
     }
     
     func setupBannerAd() {
@@ -263,7 +264,7 @@ class NotesViewController: UIViewController {
         backgroundLabel.numberOfLines = 0
         backgroundLabel.font = UIFont.systemFont(ofSize: 22)
         
-        self.notesTableView.backgroundView = backgroundLabel
+        self.notesCollectionView.backgroundView = backgroundLabel
         
         backgroundLabel.snp.makeConstraints({ make in
             make.center.equalToSuperview()
@@ -311,21 +312,22 @@ class NotesViewController: UIViewController {
 
     
     @objc func addNote() {
-        if notes == [] || notes[0].dateCreated.components(separatedBy: " ")[0] != Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0] {
+//        if notes == [] || notes[0].dateCreated.components(separatedBy: " ")[0] != Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0] {
             if !Reachability.isConnectedToNetwork() {
                 stockAlertMessage(title: "Not connected to the internet", message: "You are not connected to the internet. Please try again.")
             } else {
                 let addNoteViewController = AddViewNotesViewController()
+                addNoteViewController.modalPresentationStyle = .fullScreen
                 addNoteViewController.newNote = true
                 Analytics.logEvent("User created new note", parameters: nil)
                 Mixpanel.mainInstance().track(event: "User created new note")
                 self.present(addNoteViewController, animated: true, completion: nil)
             }
-        } else {
-            alertMessage(title: "Already written note today", message: "Hi, it is great you want to keep writing today. But you already did today. Come back tomorrow to write again!")
-            Analytics.logEvent("User attempted to create another note", parameters: nil)
-            Mixpanel.mainInstance().track(event: "User attempted to create another note")
-        }
+//        } else {
+//            alertMessage(title: "Already written note today", message: "Hi, it is great you want to keep writing today. But you already did today. Come back tomorrow to write again!")
+//            Analytics.logEvent("User attempted to create another note", parameters: nil)
+//            Mixpanel.mainInstance().track(event: "User attempted to create another note")
+//        }
     }
     
 //    @objc func refreshNoteData() {
@@ -336,47 +338,48 @@ class NotesViewController: UIViewController {
     
 }
 
-extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+extension NotesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return sortedNotes.count
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if notes.count == 0 {
             addBackgroundView()
         } else {
-            self.notesTableView.backgroundView = nil
+            self.notesCollectionView.backgroundView = nil
         }
         
         
         return sortedNotes[section].count
     }
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let sectionLatestNote = sortedNotes[section].first?.dateCreated,
-            let sectionLatestNoteDateStrng = sectionLatestNote.components(separatedBy: " ").first as? String,
-            let sectionLatestNoteDate = Helper.sharedInstance.stringToDate(date: sectionLatestNoteDateStrng) as? Date {
-            let calendar = Calendar.current
-            let componenets = calendar.dateComponents([.month, .year], from: sectionLatestNoteDate)
-            
-            //Converting string date to just month year format.
-            if let date = calendar.date(from: componenets) {
-                return Helper.sharedInstance.setMonthYearToString(date: date)
-            }
-            
-        }
-        
-        return nil
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "noteCell", for: indexPath) as! NoteCell
+    
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        if let sectionLatestNote = sortedNotes[section].first?.dateCreated,
+//            let sectionLatestNoteDateStrng = sectionLatestNote.components(separatedBy: " ").first as? String,
+//            let sectionLatestNoteDate = Helper.sharedInstance.stringToDate(date: sectionLatestNoteDateStrng) as? Date {
+//            let calendar = Calendar.current
+//            let componenets = calendar.dateComponents([.month, .year], from: sectionLatestNoteDate)
+//
+//            //Converting string date to just month year format.
+//            if let date = calendar.date(from: componenets) {
+//                return Helper.sharedInstance.setMonthYearToString(date: date)
+//            }
+//
+//        }
+//
+//        return nil
+//    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "noteCell", for: indexPath) as! NoteCell
         cell.dateLabel.text = sortedNotes[indexPath.section][indexPath.row].dateCreated.components(separatedBy: " ")[0]
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.notesTableView.deselectRow(at: indexPath, animated: true)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.notesCollectionView.deselectItem(at: indexPath, animated: true)
         
         var note = sortedNotes[indexPath.section][indexPath.row]
         
@@ -396,48 +399,48 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
             self.navigationController?.pushViewController(viewNoteViewController, animated: true)
         }
     }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 83
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 83)
     }
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let note =  self.sortedNotes[indexPath.section][indexPath.row]
-        var lockAction: UITableViewRowAction!
-        
-        if AuthenticationManager.getUserAvailableBiometricType() != "" { //nil
-            if note.isLocked {
-                lockAction = UITableViewRowAction(style: .normal, title: "Unlock", handler: { action, indexPath in
-                    if AuthenticationManager.userAllowsAuthentication {
-                        note.isLocked = false
-                        if let userId = UserDefaults.standard.value(forKey: Constants.userId) as? String {
-                            FirebaseNetworkingService.postDataToFirebase(path: "users/\(userId)/notes/\(note.id)", value: ["isLocked": false])
-                        }
-                        self.stockAlertMessage(title: "", message: "Unlocked Note")
-                    } else {
-                        self.alertMessage(title: "FaceID not on.", message: "We cannot lock note unless \(AuthenticationManager.getUserAvailableBiometricType()) is on.")
-                    }
-                    
-                })
-            } else {
-                lockAction = UITableViewRowAction(style: .normal, title: "Lock", handler: { action, indexPath in
-                    if AuthenticationManager.userAllowsAuthentication {
-                        note.isLocked = true
-                        if let userId = UserDefaults.standard.value(forKey: Constants.userId) as? String {
-                            FirebaseNetworkingService.postDataToFirebase(path: "users/\(userId)/notes/\(note.id)", value: ["isLocked": true])
-                        }
-                        self.stockAlertMessage(title: "", message: "Locked Note")
-                    } else {
-                        self.alertMessage(title: "FaceID not on.", message: "We cannot lock note unless \(AuthenticationManager.getUserAvailableBiometricType()) is on.")
-                    }
-                    
-                })
-            }
-            
-            
-            return [lockAction]
-        } else {
-            return nil
-        }
-    }
+//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//        let note =  self.sortedNotes[indexPath.section][indexPath.row]
+//        var lockAction: UITableViewRowAction!
+//
+//        if AuthenticationManager.getUserAvailableBiometricType() != "" { //nil
+//            if note.isLocked {
+//                lockAction = UITableViewRowAction(style: .normal, title: "Unlock", handler: { action, indexPath in
+//                    if AuthenticationManager.userAllowsAuthentication {
+//                        note.isLocked = false
+//                        if let userId = UserDefaults.standard.value(forKey: Constants.userId) as? String {
+//                            FirebaseNetworkingService.postDataToFirebase(path: "users/\(userId)/notes/\(note.id)", value: ["isLocked": false])
+//                        }
+//                        self.stockAlertMessage(title: "", message: "Unlocked Note")
+//                    } else {
+//                        self.alertMessage(title: "FaceID not on.", message: "We cannot lock note unless \(AuthenticationManager.getUserAvailableBiometricType()) is on.")
+//                    }
+//
+//                })
+//            } else {
+//                lockAction = UITableViewRowAction(style: .normal, title: "Lock", handler: { action, indexPath in
+//                    if AuthenticationManager.userAllowsAuthentication {
+//                        note.isLocked = true
+//                        if let userId = UserDefaults.standard.value(forKey: Constants.userId) as? String {
+//                            FirebaseNetworkingService.postDataToFirebase(path: "users/\(userId)/notes/\(note.id)", value: ["isLocked": true])
+//                        }
+//                        self.stockAlertMessage(title: "", message: "Locked Note")
+//                    } else {
+//                        self.alertMessage(title: "FaceID not on.", message: "We cannot lock note unless \(AuthenticationManager.getUserAvailableBiometricType()) is on.")
+//                    }
+//
+//                })
+//            }
+//
+//
+//            return [lockAction]
+//        } else {
+//            return nil
+//        }
+//    }
 }

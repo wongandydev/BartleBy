@@ -103,7 +103,7 @@ class AddViewNotesViewController: UIViewController {
         
         self.view.addSubview(beforeButton)
         beforeButton.snp.makeConstraints({ make in
-//            make.width.equalToSuperview().dividedBy(2.2)
+            make.width.equalToSuperview().dividedBy(2.2)
             make.height.equalTo(66)
             make.left.equalToSuperview().inset(10)
             make.top.equalTo(topLayoutGuide.snp.bottom)

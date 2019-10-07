@@ -34,9 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let window = self.window {
             let main = AllTabBarViewController()
-            let emailVC = EmailLoginViewController()
+//            let emailVC = EmailLoginViewController()
             
-            var navController: UIViewController = main
+            let navController: UIViewController = main
 
             window.rootViewController = navController
             window.makeKeyAndVisible()

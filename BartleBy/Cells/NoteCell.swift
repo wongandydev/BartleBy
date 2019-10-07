@@ -8,11 +8,12 @@
 
 import UIKit
 
-class NoteCell: UITableViewCell {
+class NoteCell: UICollectionViewCell {
     var dateLabel: UILabel!
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         setupContentView()
     }

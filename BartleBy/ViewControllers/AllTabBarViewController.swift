@@ -49,7 +49,7 @@ extension AllTabBarViewController: UITabBarControllerDelegate {
             if let navVC = viewController as? UINavigationController {
                 if let notesVC = navVC.viewControllers.first as? NotesViewController {
                     //At Home ViewController
-                    if notesVC.notesTableView.visibleCells != nil && (notesVC.view.window != nil) {
+                    if notesVC.notesCollectionView.visibleCells != nil && (notesVC.view.window != nil) {
                         //Make sure viewcontroller has cells and that there is a view.
                         notesVC.scrollToTop()
                     }
