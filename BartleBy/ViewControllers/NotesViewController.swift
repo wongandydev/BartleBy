@@ -102,11 +102,6 @@ class NotesViewController: UIViewController {
     
     fileprivate func setupNavbar() {
         self.navigationItem.title = "BartleBy"
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.tintColor = Constants.applicationAccentColor
-        self.navigationController?.navigationBar.barTintColor = Constants.lightestGray
-        self.navigationController?.navigationBar.backgroundColor = .white
-        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     fileprivate func setupTableView() {

@@ -40,23 +40,12 @@ class OptionViewController: UIViewController {
         super.viewDidLoad()
         ref = Database.database().reference()
         
-        setupNavbar()
-        
         layoutSubviews()
         getUsername()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    }
-    
-    
-    fileprivate func setupNavbar() {
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.tintColor = Constants.applicationAccentColor
-        self.navigationController?.navigationBar.barTintColor = Constants.lightestGray
-        self.navigationController?.navigationBar.backgroundColor = .white
-        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     private func layoutSubviews() {

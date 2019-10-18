@@ -18,6 +18,7 @@
 		A02B7AD621CC3D860062DDC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02B7AD421CC3D860062DDC5 /* LaunchScreen.storyboard */; };
 		A03752DC220DB4D200A784CC /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03752DB220DB4D200A784CC /* UIColor+Extension.swift */; };
 		A04FB3DF22BBE56200CD566C /* AllTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04FB3DE22BBE56200CD566C /* AllTabBarViewController.swift */; };
+		A057D0E6235A471C0067C7A8 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A057D0E5235A471C0067C7A8 /* CustomNavigationController.swift */; };
 		A05E0D3422BDA34500EC20F7 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05E0D3322BDA34500EC20F7 /* Reachability.swift */; };
 		A05E0D3622BDAB0C00EC20F7 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05E0D3522BDAB0C00EC20F7 /* EmailLoginViewController.swift */; };
 		A09E75FA22BD0C4F00AB62E6 /* FirebaseNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09E75F922BD0C4F00AB62E6 /* FirebaseNetworkingService.swift */; };
@@ -72,6 +73,7 @@
 		A02B7AD721CC3D860062DDC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A03752DB220DB4D200A784CC /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		A04FB3DE22BBE56200CD566C /* AllTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTabBarViewController.swift; sourceTree = "<group>"; };
+		A057D0E5235A471C0067C7A8 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		A05E0D3322BDA34500EC20F7 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		A05E0D3522BDAB0C00EC20F7 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
 		A09E75F922BD0C4F00AB62E6 /* FirebaseNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseNetworkingService.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				A02B7AD421CC3D860062DDC5 /* LaunchScreen.storyboard */,
 				A028098121CD3682009D7730 /* SignupSetupViewController.swift */,
 				A02B7ACA21CC3D850062DDC5 /* NotesViewController.swift */,
+				A057D0E5235A471C0067C7A8 /* CustomNavigationController.swift */,
 				A028098621CD4F64009D7730 /* AddViewNotesViewController.swift */,
 				A04FB3DE22BBE56200CD566C /* AllTabBarViewController.swift */,
 				A0B3265022D6BFE8006A170B /* BiometricViewController.swift */,
@@ -488,6 +491,7 @@
 				A0C7D5AA21D135EB003EC195 /* Template.swift in Sources */,
 				A05E0D3622BDAB0C00EC20F7 /* EmailLoginViewController.swift in Sources */,
 				A02B7ACB21CC3D850062DDC5 /* NotesViewController.swift in Sources */,
+				A057D0E6235A471C0067C7A8 /* CustomNavigationController.swift in Sources */,
 				A0E0FE6D22BF109F00DC3BF4 /* String+Extensions.swift in Sources */,
 				A0B4C30122C04DBA00A432CF /* BartleByNotificationCenter.swift in Sources */,
 				A0D138A421D3F9370021F424 /* HelpViewController.swift in Sources */,
