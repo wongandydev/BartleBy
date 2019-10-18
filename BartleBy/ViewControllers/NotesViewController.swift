@@ -92,16 +92,13 @@ class NotesViewController: UIViewController {
         }
         
         setupNavbar()
+        self.navigationItem.title = "BartleBy"
         layoutSubviews()
     }
     
     fileprivate func registerCells() {
         notesCollectionView.register(NoteCell.self, forCellWithReuseIdentifier: "noteCell")
         notesCollectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "notesHeader")
-    }
-    
-    fileprivate func setupNavbar() {
-        self.navigationItem.title = "BartleBy"
     }
     
     fileprivate func setupTableView() {
@@ -141,7 +138,6 @@ class NotesViewController: UIViewController {
     }
     
     fileprivate func layoutSubviews() {
-        self.edgesForExtendedLayout = .init(rawValue: 0)
         self.view.backgroundColor = .backgroundColor
         
         notesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())

@@ -40,6 +40,7 @@ class OptionViewController: UIViewController {
         super.viewDidLoad()
         ref = Database.database().reference()
         
+        setupNavbar()
         layoutSubviews()
         getUsername()
     }
@@ -49,7 +50,7 @@ class OptionViewController: UIViewController {
     }
     
     private func layoutSubviews() {
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .backgroundColor
         
 //        usernameLabel.alpha = 0.0
 //
@@ -159,6 +160,7 @@ extension OptionViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let label: UILabel = {
             let aLabel = UILabel()
             aLabel.frame = CGRect(x: 10, y: cell.layer.frame.height/2 - 30, width: cell.layer.frame.width - 10, height: cell.layer.frame.height)
+            aLabel.textColor = .backgroundColor
             return aLabel
         }()
 
@@ -171,7 +173,7 @@ extension OptionViewController: UICollectionViewDelegate, UICollectionViewDataSo
         cell.layer.shadowOffset = CGSize(width: 0, height: 2)
         cell.layer.shadowOpacity = 1
         cell.layer.shadowRadius = 5
-        cell.backgroundColor = .white
+        cell.backgroundColor = .backgroundColorReversed
         
 
         return cell

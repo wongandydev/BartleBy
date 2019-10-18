@@ -37,7 +37,7 @@ class StatsViewController: UIViewController {
     }
     
     fileprivate func layoutSubviews() {
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .backgroundColor
         
         let fullStackView = UIStackView()
         fullStackView.alignment = .center

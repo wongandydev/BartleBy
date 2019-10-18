@@ -204,6 +204,14 @@ extension UIViewController {
         scrollToTop(view: self.view)
     }
     
+    func setupNavbar() {
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.tintColor = Constants.applicationAccentColor
+        self.navigationController?.navigationBar.barTintColor = .backgroundColor
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
     @objc func dismissNavVC() {
         self.navigationController?.popViewController(animated: true)
     }

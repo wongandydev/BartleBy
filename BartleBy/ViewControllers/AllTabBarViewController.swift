@@ -19,10 +19,10 @@ class AllTabBarViewController: UITabBarController {
         
         self.delegate = self
         
-        firstVC = CustomNavigationController(rootViewController: NotesViewController())
+        firstVC = UINavigationController(rootViewController: NotesViewController())
         firstVC.tabBarItem = UITabBarItem(title: "Notes", image: UIImage(named: "notes"), selectedImage: UIImage(named: "notes-filled"))
         
-        secondVC = CustomNavigationController(rootViewController: OptionViewController())
+        secondVC = UINavigationController(rootViewController: OptionViewController())
         secondVC.tabBarItem = UITabBarItem(title: "Options", image: UIImage(named: "option"), selectedImage: UIImage(named: "option-filled"))
         
         listOfTabBars = [firstVC, secondVC]

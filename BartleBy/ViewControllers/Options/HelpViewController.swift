@@ -44,7 +44,7 @@ class HelpViewController: UIViewController, UITextFieldDelegate{
     }
     
     fileprivate func layoutSubviews() {
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .backgroundColor
         
         let scrollView = UIScrollView()
         scrollView.contentInsetAdjustmentBehavior = .never
@@ -122,7 +122,7 @@ class HelpViewController: UIViewController, UITextFieldDelegate{
         })
 
         nameTextField = UITextField()
-        nameTextField.backgroundColor = .white
+        nameTextField.backgroundColor = .backgroundColor
         nameTextField.borderStyle = .roundedRect
         nameTextField.placeholder = "Your Name*"
 
@@ -132,7 +132,7 @@ class HelpViewController: UIViewController, UITextFieldDelegate{
         })
 
         emailTextField = UITextField()
-        emailTextField.backgroundColor = .white
+        emailTextField.backgroundColor = .backgroundColor
         emailTextField.borderStyle = .roundedRect
         emailTextField.keyboardType = .emailAddress
         emailTextField.placeholder = "Email*"
@@ -143,7 +143,7 @@ class HelpViewController: UIViewController, UITextFieldDelegate{
         })
 
         subjectTextField = UITextField()
-        subjectTextField.backgroundColor = .white
+        subjectTextField.backgroundColor = .backgroundColor
         subjectTextField.borderStyle = .roundedRect
         subjectTextField.placeholder = "Subject"
 
@@ -155,10 +155,10 @@ class HelpViewController: UIViewController, UITextFieldDelegate{
         messageTextView = UITextView()
         messageTextView.textColor = .placeholderGray
         messageTextView.text = "Enter Message*"
-        messageTextView.layer.borderColor = UIColor.lightGray.cgColor
+        messageTextView.layer.borderColor = UIColor.gray.cgColor
         messageTextView.layer.cornerRadius = 7
-        messageTextView.layer.borderWidth = 0.3
-        messageTextView.backgroundColor = .white
+        messageTextView.layer.borderWidth = 0.15
+        messageTextView.backgroundColor = .backgroundColor
         messageTextView.font = UIFont.systemFont(ofSize: 16, weight: .light)
 
         formStackView.addArrangedSubview(messageTextView)

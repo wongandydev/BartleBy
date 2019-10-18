@@ -57,7 +57,7 @@ class ConfigViewController: UIViewController {
     }
     
     fileprivate func layoutSubviews() {
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .backgroundColor
         
         let scrollView = UIScrollView()
         scrollView.contentInsetAdjustmentBehavior = .never
@@ -142,7 +142,7 @@ class ConfigViewController: UIViewController {
         saveButton.backgroundColor = .green
         saveButton.setTitle("Save", for: .normal)
         saveButton.setTitleColor(.white, for: .normal)
-        saveButton.setTitleColor(.green, for: .highlighted)
+        saveButton.setTitleColor(.lighterGray, for: .highlighted)
         saveButton.addTarget(self, action: #selector(saveButtonTapped(_:)), for: .touchUpInside)
         
         containerView.addSubview(saveButton)

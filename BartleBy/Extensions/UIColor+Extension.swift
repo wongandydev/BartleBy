@@ -20,4 +20,5 @@ extension UIColor {
     static let lightestGray                         = UIColor(red: 244/255, green: 244/255, blue: 244/255, alpha: 1.0)  /* #F4F4F4 */
     static let lighterGray                          = UIColor(red: 220/255, green: 222/255, blue: 222/255, alpha: 1.0)
     static let snowWhite                            = UIColor(red: 255/255, green: 250/255, blue: 250/255, alpha: 1.0)  /* #FFFAFA */
+    static let textFieldDefaultBorderColor          = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha:1.0)
 }

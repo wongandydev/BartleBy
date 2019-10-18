@@ -21,7 +21,7 @@ class BiometricSetupViewController: UIViewController {
     }
     
     fileprivate func layoutSubviews() {
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .backgroundColor
         
         let allStackView = UIStackView()
         allStackView.alignment = .center

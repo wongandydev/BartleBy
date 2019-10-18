@@ -22,6 +22,7 @@ class NotificationViewController: UIViewController {
         super.viewDidLoad()
 
         setupNavbar()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Remove Notification", style: .plain, target: self, action: #selector(resetBarButtonItemTapped(_:)))
         layoutSubviews()
         
         BartleByNotificationCenter.stockAskForNotificationPermission()
@@ -51,18 +52,8 @@ class NotificationViewController: UIViewController {
         }
     }
     
-    fileprivate func setupNavbar() {
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.tintColor = Constants.applicationAccentColor
-        self.navigationController?.navigationBar.barTintColor = Constants.lightestGray
-        self.navigationController?.navigationBar.backgroundColor = .white
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Remove Notification", style: .plain, target: self, action: #selector(resetBarButtonItemTapped(_:)))
-    }
-    
     fileprivate func layoutSubviews() {
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .backgroundColor
         
         currentNotificationSettingLabel = UILabel()
         currentNotificationSettingLabel.textAlignment = .center
@@ -82,7 +73,7 @@ class NotificationViewController: UIViewController {
         })
         
         saveButton = UIButton()
-        saveButton.backgroundColor = .green
+        saveButton.backgroundColor = .lighterGray
         saveButton.setTitle("Save", for: .normal)
         saveButton.setTitleColor(.black, for: .highlighted)
         saveButton.addTarget(self, action: #selector(saveButtonTapped(_:)), for: .touchUpInside)

@@ -26,7 +26,7 @@ class AboutViewController: UIViewController {
     }
     
     fileprivate func layoutSubviews() {
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .backgroundColor
         self.edgesForExtendedLayout = .init(rawValue: 0)
         
         aboutTextView = UITextView()

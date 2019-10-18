@@ -74,12 +74,12 @@ class EmailLoginViewController: UIViewController {
     }
     
     fileprivate func layoutSubview() {
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .backgroundColor
         self.edgesForExtendedLayout = .init(rawValue: 0)
         defaultY = self.view.frame.origin.y
         
         registerEmailTextField = UITextField()
-        registerEmailTextField.backgroundColor = .white
+        registerEmailTextField.backgroundColor = .backgroundColor
         registerEmailTextField.borderStyle = .roundedRect
         registerEmailTextField.placeholder = "user@bartleby.com"
         registerEmailTextField.keyboardType = .emailAddress
@@ -109,7 +109,7 @@ class EmailLoginViewController: UIViewController {
         })
         
         registerPasswordTextField = UITextField()
-        registerPasswordTextField.backgroundColor = .white
+        registerPasswordTextField.backgroundColor = .backgroundColor
         registerPasswordTextField.borderStyle = .roundedRect
         registerPasswordTextField.placeholder = "Password"
         registerPasswordTextField.keyboardType = .default
@@ -144,8 +144,8 @@ class EmailLoginViewController: UIViewController {
         registerButton = UIButton()
         registerButton.setTitle("Register", for: .normal)
         registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        registerButton.setTitleColor(.black, for: .normal)
-        registerButton.setTitleColor(.white, for: .highlighted)
+        registerButton.setTitleColor(.backgroundColorReversed, for: .normal)
+        registerButton.setTitleColor(.backgroundColor, for: .highlighted)
         registerButton.addTarget(self, action: #selector(signUpSignIn), for: .touchUpInside)
         
         self.view.addSubview(registerButton)
@@ -158,8 +158,8 @@ class EmailLoginViewController: UIViewController {
         toggleSignInButton.setTitle("I have an account.", for: .normal)
         toggleSignInButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .light)
         toggleSignInButton.addTarget(self, action: #selector(toggleSignIn), for: .touchUpInside)
-        toggleSignInButton.setTitleColor(.black, for: .normal)
-        toggleSignInButton.setTitleColor(.white, for: .highlighted)
+        toggleSignInButton.setTitleColor(.backgroundColorReversed, for: .normal)
+        toggleSignInButton.setTitleColor(.backgroundColor, for: .highlighted)
         
         self.view.addSubview(toggleSignInButton)
         toggleSignInButton.snp.makeConstraints({ make in
@@ -172,8 +172,8 @@ class EmailLoginViewController: UIViewController {
         forgotPasswordButtion.isHidden = true
         forgotPasswordButtion.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .light)
         forgotPasswordButtion.addTarget(self, action: #selector(forgotPasswordTapped), for: .touchUpInside)
-        forgotPasswordButtion.setTitleColor(.black, for: .normal)
-        forgotPasswordButtion.setTitleColor(.white, for: .highlighted)
+        forgotPasswordButtion.setTitleColor(.backgroundColorReversed, for: .normal)
+        forgotPasswordButtion.setTitleColor(.backgroundColor, for: .highlighted)
         self.view.addSubview(forgotPasswordButtion)
         forgotPasswordButtion.snp.makeConstraints({ make in
             make.top.equalTo(registerButton.snp.bottom).offset(20)
