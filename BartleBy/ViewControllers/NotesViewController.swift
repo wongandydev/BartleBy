@@ -159,7 +159,7 @@ class NotesViewController: UIViewController {
         
         self.view.addSubview(bannerAdView)
         bannerAdView.snp.makeConstraints({ make in
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().inset(Constants.tabBarHeight + Constants.bottomPadding)
             make.centerX.equalToSuperview()
             make.width.equalTo(320)
             make.height.equalTo(50)
@@ -182,7 +182,8 @@ class NotesViewController: UIViewController {
         
         self.view.addSubview(addButton)
         addButton.snp.makeConstraints({ make in
-            make.right.bottom.equalToSuperview().inset(20)
+            make.right.equalToSuperview().inset(20)
+            make.bottom.equalToSuperview().inset(Constants.tabBarHeight + Constants.bottomPadding + 20)
             make.width.height.equalTo(60)
         })
     }
