@@ -419,7 +419,7 @@ extension AddViewNotesViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == placeHolderColor {
             textView.text = ""
-            textView.textColor = .black
+            textView.textColor = .backgroundColorReversed
         }
     }
     

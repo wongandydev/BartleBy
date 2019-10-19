@@ -338,7 +338,7 @@ class HelpViewController: UIViewController, UITextFieldDelegate{
 extension HelpViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == .placeholderGray {
-            textView.textColor = .black
+            textView.textColor = .backgroundColorReversed
             textView.text = ""
         }
     }
