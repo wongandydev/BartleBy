@@ -37,7 +37,7 @@ class NotesViewController: UIViewController {
             monthYearFormatter.timeZone = NSTimeZone.system
             
             notes.forEach({ note in
-                if let noteDate = monthYearFormatter.date(from: note.dateCreated) as? Date {
+                if let noteDate = monthYearFormatter.date(from: note.dateCreated) {
                     let calendar = Calendar.current
                     let componenets = calendar.dateComponents([.month, .year], from: noteDate)
                     
@@ -47,6 +47,11 @@ class NotesViewController: UIViewController {
                         }
                     }
                 }
+            })
+            
+            notes.forEach({ note in
+                print(note.id)
+                print(note.isLocked)
             })
             
             UserDefaults.standard.setValue(NSKeyedArchiver.archivedData(withRootObject: notes), forKey: "offlineNotes")
@@ -314,7 +319,7 @@ class NotesViewController: UIViewController {
     
     @objc func addNote() {
         //PRODUCTION: MAKE SURE NOTHING HERE IS COMMENTED OUT FOR ADDING NOTES. 
-//        if notes == [] || notes[0].dateCreated.components(separatedBy: " ")[0] != Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0] {
+        if notes == [] || notes[0].dateCreated.components(separatedBy: " ")[0] != Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0] {
             if !Reachability.isConnectedToNetwork() {
                 stockAlertMessage(title: "Not connected to the internet", message: "You are not connected to the internet. Please try again.")
             } else {
@@ -327,11 +332,11 @@ class NotesViewController: UIViewController {
                 Mixpanel.mainInstance().track(event: "User created new note")
                 self.present(addNoteViewController, animated: true, completion: nil)
             }
-//        } else {
-//            alertMessage(title: "Already written note today", message: "Hi, it is great you want to keep writing today. But you already did today. Come back tomorrow to write again!")
-//            Analytics.logEvent("User attempted to create another note", parameters: nil)
-//            Mixpanel.mainInstance().track(event: "User attempted to create another note")
-//        }
+        } else {
+            alertMessage(title: "Already written note today", message: "Hi, it is great you want to keep writing today. But you already did today. Come back tomorrow to write again!")
+            Analytics.logEvent("User attempted to create another note", parameters: nil)
+            Mixpanel.mainInstance().track(event: "User attempted to create another note")
+        }
     }
     
 //    @objc func refreshNoteData() {

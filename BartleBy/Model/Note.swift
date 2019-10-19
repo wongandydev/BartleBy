@@ -37,7 +37,7 @@ class Note: NSObject, NSCoding {
         guard let dateCreated = aDecoder.decodeObject(forKey: "dateCreated") as? String else { return nil }
         guard let id = aDecoder.decodeObject(forKey: "noteId") as? String else { return nil }
         guard let templateType = aDecoder.decodeObject(forKey: "noteTemplateType") as? String else { return nil }
-        guard let isLocked = aDecoder.decodeObject(forKey: "noteIsLocked") as? Bool else { return nil }
+        guard let isLocked = aDecoder.decodeBool(forKey: "noteIsLocked") as? Bool else { return nil }
         
         self.init(note: note, dateCreated: dateCreated, id: id, templateType: templateType, isLocked: isLocked)
     }
