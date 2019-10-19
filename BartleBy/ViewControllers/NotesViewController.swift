@@ -334,7 +334,7 @@ class NotesViewController: UIViewController {
                 self.present(addNoteViewController, animated: true, completion: nil)
             }
         } else {
-            alertMessage(title: "Already written note today", message: "Hi, it is great you want to keep writing today. But you already did today. Come back tomorrow to write again!")
+            alertMessage(title: "Already written note today", message: "Hi, it is great you want to keep writing today. But you have written today. Please come back tomorrow to write again!")
             Analytics.logEvent("User attempted to create another note", parameters: nil)
             Mixpanel.mainInstance().track(event: "User attempted to create another note")
         }
