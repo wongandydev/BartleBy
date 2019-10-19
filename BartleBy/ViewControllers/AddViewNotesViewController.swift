@@ -79,6 +79,14 @@ class AddViewNotesViewController: UIViewController {
             }
         })
         
+        if let note = notes.first {
+            if note.isLocked {
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Unlock Note", style: .done, target: self, action: #selector(toggleNoteLock))
+            } else {
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Lock Note", style: .done, target: self, action: #selector(toggleNoteLock))
+            }
+        }
+        
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
@@ -167,6 +175,39 @@ class AddViewNotesViewController: UIViewController {
 //        self.view.frame.origin.y = 0
         self.answerTextView.contentInset = UIEdgeInsets(top: 20, left: 10, bottom: 0, right: 10)
         self.answerTextView.scrollIndicatorInsets = self.answerTextView.contentInset
+    }
+    
+    @objc func toggleNoteLock() {
+        if AuthenticationManager.getUserAvailableBiometricType() != "" { //nil
+            if let note = notes.first {
+                if note.isLocked {
+                    if AuthenticationManager.userAllowsAuthentication {
+                        note.isLocked = false
+                        if let userId = UserDefaults.standard.value(forKey: Constants.userId) as? String {
+                            FirebaseNetworkingService.postDataToFirebase(path: "users/\(userId)/notes/\(note.id)", value: ["isLocked": false])
+                        }
+                        
+                        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Lock Note", style: .done, target: self, action: #selector(toggleNoteLock))
+                        self.stockAlertMessage(title: "", message: "Note not secured")
+                    } else {
+                        self.alertMessage(title: "FaceID not on.", message: "We cannot lock note unless \(AuthenticationManager.getUserAvailableBiometricType()) is on.")
+                    }
+                } else {
+                    if AuthenticationManager.userAllowsAuthentication {
+                        note.isLocked = true
+                        
+                        if let userId = UserDefaults.standard.value(forKey: Constants.userId) as? String {
+                            FirebaseNetworkingService.postDataToFirebase(path: "users/\(userId)/notes/\(note.id)", value: ["isLocked": true])
+                        }
+                        
+                        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Unlock Note", style: .done, target: self, action: #selector(toggleNoteLock))
+                        self.stockAlertMessage(title: "", message: "Note Secured")
+                    } else {
+                        self.alertMessage(title: "FaceID not on.", message: "We cannot lock note unless \(AuthenticationManager.getUserAvailableBiometricType()) is on.")
+                    }
+                }
+            }
+        }
     }
 
     func getSelectedNumber(completion: @escaping (Int) -> Void) {

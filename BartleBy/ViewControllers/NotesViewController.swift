@@ -147,6 +147,7 @@ class NotesViewController: UIViewController {
         
         notesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         notesCollectionView.backgroundColor = .clear
+        notesCollectionView.showsVerticalScrollIndicator = false
         
         notesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         setupTableView()
