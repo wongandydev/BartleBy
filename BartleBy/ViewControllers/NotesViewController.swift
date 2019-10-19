@@ -191,10 +191,9 @@ class NotesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        if notes.isEmpty {
+        if notes.isEmpty {
             readNotes()
-//        }
-        
+        }
     }
     
     func setupBannerAd() {
@@ -313,6 +312,8 @@ class NotesViewController: UIViewController {
                 let addNoteViewController = AddViewNotesViewController()
                 addNoteViewController.modalPresentationStyle = .fullScreen
                 addNoteViewController.newNote = true
+                addNoteViewController.delegate = self
+                
                 Analytics.logEvent("User created new note", parameters: nil)
                 Mixpanel.mainInstance().track(event: "User created new note")
                 self.present(addNoteViewController, animated: true, completion: nil)
@@ -396,6 +397,7 @@ extension NotesViewController: UICollectionViewDelegate, UICollectionViewDataSou
         let viewNoteViewController = AddViewNotesViewController()
         viewNoteViewController.notes = [note]
         viewNoteViewController.sameDay = sortedNotes[indexPath.section][indexPath.row].dateCreated.components(separatedBy: " ")[0] == Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0]
+        viewNoteViewController.delegate = self
         
         if note.isLocked && AuthenticationManager.userAllowsAuthentication {
             AuthenticationManager.authenticateUser({ isSucess in
@@ -453,4 +455,10 @@ extension NotesViewController: UICollectionViewDelegate, UICollectionViewDataSou
 //            return nil
 //        }
 //    }
+}
+
+extension NotesViewController: AddViewNotesViewControllerDelegate {
+    func completedNote() {
+         readNotes()
+    }
 }

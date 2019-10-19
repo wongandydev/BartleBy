@@ -32,6 +32,8 @@ class AddViewNotesViewController: UIViewController {
     let placeHolderText = "Enter Note"
     let placeHolderColor: UIColor = .placeholderGray
     
+    weak var delegate: AddViewNotesViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -214,6 +216,8 @@ class AddViewNotesViewController: UIViewController {
                                                                                              "dateCreated": notes[notes.count-1].dateCreated,
                                                                                              "id": notes[notes.count-1].id,
                                                                                              "templateType": notes[notes.count-1].templateType])
+                
+                delegate?.completedNote()
             } else {
                 self.ref.child("notes/\(notes[notes.count-1].id)").setValue(["note": notes[notes.count-1].note,
                                                                              "dateCreated": notes[notes.count-1].dateCreated,
@@ -224,6 +228,8 @@ class AddViewNotesViewController: UIViewController {
                                                                                                "dateCreated": notes[notes.count-1].dateCreated,
                                                                                                "id": notes[notes.count-1].id,
                                                                                                "templateType": notes[notes.count-1].templateType])
+                
+                delegate?.completedNote()
             }
         }
     }
@@ -423,4 +429,8 @@ extension AddViewNotesViewController: UITextViewDelegate {
             textView.textColor = placeHolderColor
         }
     }
+}
+
+protocol AddViewNotesViewControllerDelegate: class {
+    func completedNote()
 }
