@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 
 extension UIViewController {
     func stockAlertMessage(title: String, message: String) {
@@ -30,6 +31,44 @@ extension UIViewController {
         alertController.addAction(UIAlertAction(title: "Never mind", style: .default, handler: nil))
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func showRatingsReviewAlert() {
+        let alertController = UIAlertController(title: "Are you enjoying BartleBy", message: nil, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Yes, I am enjoying the app", style: .default, handler: { (action) in
+            SKStoreReviewController.requestReview()
+            UserDefaults.standard.setValue(true, forKey: Constants.hasSeenReviewAlert)
+        })
+        
+        let cancelAction = UIAlertAction(title: "No, I do not enjoy the app.", style: .cancel, handler: { (action) in
+            let alertController = UIAlertController(title: "Do you mind letting us know what we can do to help with your experience on the app?", message: nil, preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "Sure", style: .default, handler: { (action) in
+                // show HelpVC
+                let window = UIApplication.shared.keyWindow
+                
+                if let rootVC = window?.rootViewController as? UIViewController {
+                    let helpVC = HelpViewController()
+                    rootVC.present(helpVC, animated: true, completion: nil)
+                    UserDefaults.standard.setValue(true, forKey: Constants.hasSeenReviewAlert)
+                }
+            })
+            
+            let cancelAction = UIAlertAction(title: "Nope", style: .cancel, handler: { (action) in
+                
+            })
+            
+            alertController.addAction(cancelAction)
+            alertController.addAction(okAction)
+            
+            self.present(alertController, animated: true)
+        })
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        
+        self.present(alertController, animated: true)
     }
     
     func forgotPasswordAlert(title: String, message: String) {

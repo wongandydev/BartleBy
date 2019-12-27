@@ -13,7 +13,7 @@ class OptionViewController: UIViewController {
     private var bannerAdView: GADBannerView!
     private let userUID = UIDevice.current.identifierForVendor?.uuidString
     
-    var options: [String] = ["Manage type of writing", "Manage Notifications", "Stats", "Help", "About", "\(AuthenticationManager.userAllowsAuthentication ? "Turn off" : "Turn on") \(AuthenticationManager.getUserAvailableBiometricType())", "Sign Up/Sign In"]
+    var options: [String] = ["Manage type of writing", "Manage Notifications", "Stats","Help", "About", "\(AuthenticationManager.userAllowsAuthentication ? "Turn off" : "Turn on") \(AuthenticationManager.getUserAvailableBiometricType())", "Sign Up/Sign In"]
     
     let usernameLabel: UILabel = {
         let label = UILabel()
@@ -206,6 +206,11 @@ extension OptionViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 let statsVC = StatsViewController()
                 self.navigationController?.pushViewController(statsVC, animated: true)
                 break
+//            case:3
+////                let removeAdStoreVC = StoreViewController()
+////                self.navigationController?.pushViewController(removeAdStoreVC, animated: true)
+//                self.stockAlertMessage(title: "Coming Soon..", message: "You will be able to purchase items on this app to enhnace your experience.")
+//                break
             case 3:
                 let helpVC = HelpViewController()
                 self.navigationController?.pushViewController(helpVC, animated: true)

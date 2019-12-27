@@ -427,7 +427,25 @@ class AddViewNotesViewController: UIViewController {
             if self.templateType == Template.grateful && self.answerTextView.text != "" && self.answerTextView.text != placeHolderText && !notes.contains(where: { $0.note.isEmpty}) {
                 addNote()
                 compileNotes()
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true, completion: {
+                    // if has not seen the view alert.
+                    
+                    UserDefaults.standard.setValue(false, forKey: Constants.hasSeenReviewAlert)
+                    if !UserDefaults.standard.bool(forKey: Constants.hasSeenReviewAlert) {
+                        let randomNumber = Int.random(in: 1...10)
+                        print(randomNumber)
+                        print(randomNumber % 3 == 0)
+                        // and the random number is a divisible by 3; 3,6,9 then
+                        if randomNumber % 3 == 0 {
+                            // show alert
+                            let window = UIApplication.shared.keyWindow
+                            
+                            if let rootVC = window?.rootViewController as? UIViewController {
+                                rootVC.showRatingsReviewAlert()
+                            }
+                        }
+                    }
+                })
             } else {
                 alertMessage(title: "Empty Note", message: "Your note is empty!")
             }

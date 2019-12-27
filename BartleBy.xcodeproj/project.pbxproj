@@ -18,6 +18,7 @@
 		A02B7AD621CC3D860062DDC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02B7AD421CC3D860062DDC5 /* LaunchScreen.storyboard */; };
 		A03752DC220DB4D200A784CC /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03752DB220DB4D200A784CC /* UIColor+Extension.swift */; };
 		A04FB3DF22BBE56200CD566C /* AllTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04FB3DE22BBE56200CD566C /* AllTabBarViewController.swift */; };
+		A054A7B5239EB01C00301876 /* BartleByStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054A7B4239EB01C00301876 /* BartleByStore.swift */; };
 		A05E0D3422BDA34500EC20F7 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05E0D3322BDA34500EC20F7 /* Reachability.swift */; };
 		A05E0D3622BDAB0C00EC20F7 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05E0D3522BDAB0C00EC20F7 /* EmailLoginViewController.swift */; };
 		A09E75FA22BD0C4F00AB62E6 /* FirebaseNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09E75F922BD0C4F00AB62E6 /* FirebaseNetworkingService.swift */; };
@@ -33,6 +34,7 @@
 		A0C7D5AE21D1B345003EC195 /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C7D5AD21D1B345003EC195 /* OptionViewController.swift */; };
 		A0C7D5B221D316F4003EC195 /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C7D5B121D316F4003EC195 /* ConfigViewController.swift */; };
 		A0C7D5B421D31A9F003EC195 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C7D5B321D31A9F003EC195 /* NotificationViewController.swift */; };
+		A0C942E523A7CD41002EBA80 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C942E423A7CD41002EBA80 /* StoreViewController.swift */; };
 		A0D138A421D3F9370021F424 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D138A321D3F9370021F424 /* HelpViewController.swift */; };
 		A0D138A621D3FA7A0021F424 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D138A521D3FA7A0021F424 /* AboutViewController.swift */; };
 		A0DBBC8822E005F10049800D /* IntroNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DBBC8722E005F10049800D /* IntroNotificationViewController.swift */; };
@@ -72,6 +74,7 @@
 		A02B7AD721CC3D860062DDC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A03752DB220DB4D200A784CC /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		A04FB3DE22BBE56200CD566C /* AllTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTabBarViewController.swift; sourceTree = "<group>"; };
+		A054A7B4239EB01C00301876 /* BartleByStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartleByStore.swift; sourceTree = "<group>"; };
 		A05E0D3322BDA34500EC20F7 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		A05E0D3522BDAB0C00EC20F7 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
 		A09E75F922BD0C4F00AB62E6 /* FirebaseNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseNetworkingService.swift; sourceTree = "<group>"; };
@@ -88,6 +91,7 @@
 		A0C7D5AD21D1B345003EC195 /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
 		A0C7D5B121D316F4003EC195 /* ConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
 		A0C7D5B321D31A9F003EC195 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		A0C942E423A7CD41002EBA80 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		A0D138A321D3F9370021F424 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		A0D138A521D3FA7A0021F424 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		A0DBBC8722E005F10049800D /* IntroNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroNotificationViewController.swift; sourceTree = "<group>"; };
@@ -230,6 +234,7 @@
 				A0C7D5B321D31A9F003EC195 /* NotificationViewController.swift */,
 				A05E0D3522BDAB0C00EC20F7 /* EmailLoginViewController.swift */,
 				A0B3264E22D6A019006A170B /* BiometricSetupViewController.swift */,
+				A0C942E423A7CD41002EBA80 /* StoreViewController.swift */,
 			);
 			path = Options;
 			sourceTree = "<group>";
@@ -239,6 +244,7 @@
 			children = (
 				A09E75F922BD0C4F00AB62E6 /* FirebaseNetworkingService.swift */,
 				A05E0D3322BDA34500EC20F7 /* Reachability.swift */,
+				A054A7B4239EB01C00301876 /* BartleByStore.swift */,
 			);
 			path = "Networking ";
 			sourceTree = "<group>";
@@ -471,6 +477,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0C942E523A7CD41002EBA80 /* StoreViewController.swift in Sources */,
 				A0DBBC8822E005F10049800D /* IntroNotificationViewController.swift in Sources */,
 				A0B3264F22D6A019006A170B /* BiometricSetupViewController.swift in Sources */,
 				A028098221CD3682009D7730 /* SignupSetupViewController.swift in Sources */,
@@ -484,6 +491,7 @@
 				A0B3265122D6BFE8006A170B /* BiometricViewController.swift in Sources */,
 				A0A6EDCE21D6737100637C91 /* UIViewController+Extensions.swift in Sources */,
 				A04FB3DF22BBE56200CD566C /* AllTabBarViewController.swift in Sources */,
+				A054A7B5239EB01C00301876 /* BartleByStore.swift in Sources */,
 				A028098721CD4F64009D7730 /* AddViewNotesViewController.swift in Sources */,
 				A0C7D5AA21D135EB003EC195 /* Template.swift in Sources */,
 				A05E0D3622BDAB0C00EC20F7 /* EmailLoginViewController.swift in Sources */,

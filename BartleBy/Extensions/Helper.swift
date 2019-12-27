@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import StoreKit
 import UIKit
 
 class Helper {

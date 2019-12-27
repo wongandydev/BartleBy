@@ -320,10 +320,10 @@ class NotesViewController: UIViewController {
     
     @objc func addNote() {
         //PRODUCTION: MAKE SURE NOTHING HERE IS COMMENTED OUT FOR ADDING NOTES. 
-        if notes == [] || notes[0].dateCreated.components(separatedBy: " ")[0] != Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0] {
-            if !Reachability.isConnectedToNetwork() {
-                stockAlertMessage(title: "Not connected to the internet", message: "You are not connected to the internet. Please try again.")
-            } else {
+//        if notes == [] || notes[0].dateCreated.components(separatedBy: " ")[0] != Helper.sharedInstance.getCurrentDate().components(separatedBy: " ")[0] {
+//            if !Reachability.isConnectedToNetwork() {
+//                stockAlertMessage(title: "Not connected to the internet", message: "You are not connected to the internet. Please try again.")
+//            } else {
                 let addNoteViewController = AddViewNotesViewController()
                 addNoteViewController.modalPresentationStyle = .fullScreen
                 addNoteViewController.newNote = true
@@ -332,12 +332,12 @@ class NotesViewController: UIViewController {
                 Analytics.logEvent("User created new note", parameters: nil)
                 Mixpanel.mainInstance().track(event: "User created new note")
                 self.present(addNoteViewController, animated: true, completion: nil)
-            }
-        } else {
-            alertMessage(title: "Already written note today", message: "Hi, it is great you want to keep writing today. But you have written today. Please come back tomorrow to write again!")
-            Analytics.logEvent("User attempted to create another note", parameters: nil)
-            Mixpanel.mainInstance().track(event: "User attempted to create another note")
-        }
+//            }
+//        } else {
+//            alertMessage(title: "Already written note today", message: "Hi, it is great you want to keep writing today. But you have written today. Please come back tomorrow to write again!")
+//            Analytics.logEvent("User attempted to create another note", parameters: nil)
+//            Mixpanel.mainInstance().track(event: "User attempted to create another note")
+//        }
     }
     
 //    @objc func refreshNoteData() {
