@@ -429,8 +429,6 @@ class AddViewNotesViewController: UIViewController {
                 compileNotes()
                 self.dismiss(animated: true, completion: {
                     // if has not seen the view alert.
-                    
-                    UserDefaults.standard.setValue(false, forKey: Constants.hasSeenReviewAlert)
                     if !UserDefaults.standard.bool(forKey: Constants.hasSeenReviewAlert) {
                         let randomNumber = Int.random(in: 1...10)
                         print(randomNumber)
