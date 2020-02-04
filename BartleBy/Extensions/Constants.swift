@@ -30,6 +30,8 @@ class Constants {
     
     static let bottomButtonHeight       = 60
     
+    static let noAdIdentifier = "com.andywong.bartleBy.noAds"
+    
     static let userId                   = "userId"
     static let userHasLoggedIn          = "userHasLoggedIn"
     static let isFirstLaunch            = "isFirstLaunch"

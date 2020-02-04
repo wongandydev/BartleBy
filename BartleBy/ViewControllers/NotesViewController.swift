@@ -16,8 +16,7 @@ import Mixpanel
 class NotesViewController: UIViewController {
     
     var notesCollectionView: UICollectionView!
-    private var bannerAdView: GADBannerView!
-    
+    private var bannerAdView = GADBannerView()
 //    private let refreshControl = UIRefreshControl()
     
     var ref: DatabaseReference!
@@ -159,8 +158,6 @@ class NotesViewController: UIViewController {
 //            notesTableView.addSubview(refreshControl)
 //        }
 //        refreshControl.addTarget(self, action: #selector(refreshNoteData), for: .valueChanged)
-    
-        bannerAdView = GADBannerView()
         setupBannerAd()
         
         self.view.addSubview(bannerAdView)
@@ -199,6 +196,17 @@ class NotesViewController: UIViewController {
         
         if notes.isEmpty {
             readNotes()
+        }
+        
+        if UserDefaults.standard.bool(forKey: Constants.noAdIdentifier) == true { // no ads purchased
+            bannerAdView.isHidden = true
+            
+            bannerAdView.snp.remakeConstraints({ make in
+                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+                make.centerX.equalToSuperview()
+                make.width.equalTo(320)
+                make.height.equalTo(0)
+            })
         }
     }
     

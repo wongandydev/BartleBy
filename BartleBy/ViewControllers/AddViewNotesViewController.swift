@@ -251,24 +251,28 @@ class AddViewNotesViewController: UIViewController {
                 self.ref.child("notes/\(notes[notes.count-1].id)").setValue(["note": compiledNote,
                                                                            "dateCreated": notes[notes.count-1].dateCreated,
                                                                            "id": notes[notes.count-1].id,
-                                                                           "templateType": notes[notes.count-1].templateType])
+                                                                           "templateType": notes[notes.count-1].templateType,
+                                                                           "timestamp": Int().currentTimestamp()])
 
                 self.ref.child("users/\(userId)/notes/\(notes[notes.count-1].id)").setValue(["note": compiledNote,
                                                                                              "dateCreated": notes[notes.count-1].dateCreated,
                                                                                              "id": notes[notes.count-1].id,
-                                                                                             "templateType": notes[notes.count-1].templateType])
+                                                                                             "templateType": notes[notes.count-1].templateType,
+                                                                                             "timestamp": Int().currentTimestamp()])
                 
                 delegate?.completedNote()
             } else {
                 self.ref.child("notes/\(notes[notes.count-1].id)").setValue(["note": notes[notes.count-1].note,
                                                                              "dateCreated": notes[notes.count-1].dateCreated,
                                                                              "id": notes[notes.count-1].id,
-                                                                             "templateType": notes[notes.count-1].templateType])
+                                                                             "templateType": notes[notes.count-1].templateType,
+                                                                             "timestamp": Int().currentTimestamp()])
                 
                 self.ref.child("users/\(userId)/notes/\(notes[notes.count-1].id)").setValue(["note": notes[notes.count-1].note,
                                                                                                "dateCreated": notes[notes.count-1].dateCreated,
                                                                                                "id": notes[notes.count-1].id,
-                                                                                               "templateType": notes[notes.count-1].templateType])
+                                                                                               "templateType": notes[notes.count-1].templateType,
+                                                                                               "timestamp": Int().currentTimestamp()])
                 
                 delegate?.completedNote()
             }

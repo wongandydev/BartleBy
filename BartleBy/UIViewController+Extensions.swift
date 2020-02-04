@@ -33,6 +33,18 @@ extension UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    func dismissAfterOKActionAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: { action in
+            self.dismiss(animated: true, completion: nil)
+        })
+        
+        alertController.addAction(okAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     func showRatingsReviewAlert() {
         let alertController = UIAlertController(title: "Are you enjoying BartleBy", message: nil, preferredStyle: .alert)
         

@@ -10,10 +10,10 @@ import UIKit
 import Firebase
 
 class OptionViewController: UIViewController {
-    private var bannerAdView: GADBannerView!
+    private var bannerAdView = GADBannerView()
     private let userUID = UIDevice.current.identifierForVendor?.uuidString
     
-    var options: [String] = ["Manage type of writing", "Manage Notifications", "Stats","Help", "About", "\(AuthenticationManager.userAllowsAuthentication ? "Turn off" : "Turn on") \(AuthenticationManager.getUserAvailableBiometricType())", "Sign Up/Sign In"]
+    var options: [String] = ["Manage type of writing", "Manage Notifications", "Stats","Remove Ads", "Help", "About", "\(AuthenticationManager.userAllowsAuthentication ? "Turn off" : "Turn on") \(AuthenticationManager.getUserAvailableBiometricType())", "Sign Up/Sign In"]
     
     let usernameLabel: UILabel = {
         let label = UILabel()
@@ -47,6 +47,18 @@ class OptionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        
+        if UserDefaults.standard.bool(forKey: Constants.noAdIdentifier) == true { // no ads purchased
+//            bannerAdView.isHidden = true
+            
+            bannerAdView.snp.remakeConstraints({ make in
+                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+                make.centerX.equalToSuperview()
+                make.width.equalTo(320)
+                make.height.equalTo(0)
+            })
+        }
     }
     
     private func layoutSubviews() {
@@ -77,8 +89,6 @@ class OptionViewController: UIViewController {
 //            make.top.equalTo(usernameLabel.snp.bottom).offset(5)
 //        })
         
-        
-        bannerAdView = GADBannerView()
         setupBannerAd()
         
         view.addSubview(bannerAdView)
@@ -206,24 +216,24 @@ extension OptionViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 let statsVC = StatsViewController()
                 self.navigationController?.pushViewController(statsVC, animated: true)
                 break
-//            case:3
-////                let removeAdStoreVC = StoreViewController()
-////                self.navigationController?.pushViewController(removeAdStoreVC, animated: true)
-//                self.stockAlertMessage(title: "Coming Soon..", message: "You will be able to purchase items on this app to enhnace your experience.")
-//                break
             case 3:
+                let removeAdStoreVC = StoreViewController()
+                self.navigationController?.pushViewController(removeAdStoreVC, animated: true)
+//                self.stockAlertMessage(title: "Coming Soon..", message: "You will be able to purchase items on this app to enhnace your experience.")
+                break
+            case 4:
                 let helpVC = HelpViewController()
                 self.navigationController?.pushViewController(helpVC, animated: true)
                 break
-            case 4:
+            case 5:
                 let aboutVC = AboutViewController()
                 self.navigationController?.pushViewController(aboutVC, animated: true)
                 break
-            case 5:
+            case 6:
                 let bioVC = BiometricSetupViewController()
                 self.navigationController?.pushViewController(bioVC, animated: true)
                 break
-            case 6:
+            case 7:
                 if let hasLoggedIn = UserDefaults.standard.bool(forKey: Constants.userHasLoggedIn) as? Bool {
                     if hasLoggedIn {
                         stockAlertMessage(title: "", message: "You have already logged in.")

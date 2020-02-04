@@ -27,21 +27,18 @@ class FirebaseNetworkingService {
         let userID = Helper.generateUserID()
         UserDefaults.standard.set(userID, forKey: Constants.userId)
         
-        //sign up user with default
-        if let userID = userID as? String {
-            Database.database().reference().child("users/\(userID)/stats/streak").setValue(0)
-            Database.database().reference().child("users/\(userID)/stats/totalNotes").setValue(0)
-            Database.database().reference().child("users/\(userID)/template/templateNumber").setValue(5)
-            Database.database().reference().child("users/\(userID)/template/templateType").setValue(Template.grateful.rawValue)
-            Database.database().reference().child("users/\(userID)/userId").setValue("\(userID)")
-            
-            updateLoginActivity(userId: userID)
-            
-            Analytics.logEvent("newUserCreated", parameters: ["userID": userID])
-            Mixpanel.mainInstance().track(event: "newUserCreated", properties: ["userID": userID])
-            
-            UserDefaults.standard.synchronize()
-        }
+        Database.database().reference().child("users/\(userID)/stats/streak").setValue(0)
+        Database.database().reference().child("users/\(userID)/stats/totalNotes").setValue(0)
+        Database.database().reference().child("users/\(userID)/template/templateNumber").setValue(5)
+        Database.database().reference().child("users/\(userID)/template/templateType").setValue(Template.grateful.rawValue)
+        Database.database().reference().child("users/\(userID)/userId").setValue("\(userID)")
+        
+        updateLoginActivity(userId: userID)
+        
+        Analytics.logEvent("newUserCreated", parameters: ["userID": userID])
+        Mixpanel.mainInstance().track(event: "newUserCreated", properties: ["userID": userID])
+        
+        UserDefaults.standard.synchronize()
     }
     
     static func updateLoginActivity(userId: String) {
@@ -235,5 +232,41 @@ class FirebaseNetworkingService {
     static func getCurrentFirebaseUserUID() -> String {
         guard let firebaseUID = Auth.auth().currentUser?.uid else { return "" }
         return firebaseUID
+    }
+    
+    static func storePurchaseData(productId: String, currencyCode: String, price: Int, timestamp: Int, _ completion: @escaping (_ isCompleted: Bool) -> Void) {
+        if let userId = UserDefaults.standard.value(forKey: Constants.userId) as? String {
+            if let productIdNoDots = productId.components(separatedBy: ".").last {
+                ref.child("users/\(userId)/purchases").updateChildValues([productIdNoDots: ["productId": productId, "currency": currencyCode, "price": price, "timestamp": timestamp]], withCompletionBlock: { error, dataRef in
+                    print(error)
+                })
+            }
+            
+            
+            completion(true)
+        } else {
+            completion(false)
+        }
+    }
+    
+    static func getUserPurchaseDate(forProductIdentifier: String, _ completion: @escaping (_ isCompleted: Bool, _ date: Int)-> Void ) {
+        if let userId = UserDefaults.standard.value(forKey: Constants.userId) as? String {
+            ref.child("users/\(userId)/purchases").observeSingleEvent(of: .value, with: { snapshot in
+                guard let purchases = snapshot.value as? [String: AnyObject] else {
+                    completion(false, 0)
+                    return
+                }
+                
+                let purchase = purchases.filter({ $0.value["productId"] as? String == forProductIdentifier})
+                
+                if let originalPurchase = purchase.first,
+                    let originalPurchaseValue = originalPurchase.value as? [String: AnyObject],
+                    let time_purchased = originalPurchaseValue["timestamp"] as? Int{
+                    
+                    
+                    completion(true, time_purchased)
+                }
+            })
+        }
     }
 }

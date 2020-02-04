@@ -28,6 +28,20 @@ class Helper {
         return dateFormatter.string(from: date)
     }
     
+    static func dbStringToDate(timestamp: Int) -> Date {
+        let timeStampAsTimeInterval = TimeInterval(timestamp)
+        
+        return Date(timeIntervalSince1970: timeStampAsTimeInterval)
+    }
+    
+    static func dbDateToDisplayString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        dateFormatter.timeZone = TimeZone.current
+        
+        return dateFormatter.string(from: date)
+    }
+    
     /**
         Used to set stats.
      */
